@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>株式会社 A and K｜外国人材の受入れ支援</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- 欧文は Open Sans（参考にしたサイトと同じ）。和文はゴシックの端末書体に任せる。 -->
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* ===== 案B ─ 青とゴシックで明快に（Sky株式会社のサイトを参考） =====
+   案Aが「明朝・余白・金茶」なのに対し、こちらは「ゴシック・情報量・青」。
+   同じ内容を、迷わせず速く読ませる方向で組む。角は小さく、線は細く、
+   見出しの前に青い印を置いて視線の起点を作る。
+   参考にしたのは書体・配色・ヘッダーの型で、CSSは自前で書いている。 */
+:root{
+  --blue:#14a0dc; --blue-d:#008bd5; --blue-dd:#00689f; --blue-s:#e8f5fc; --blue-line:#bfe3f5;
+  --ink:#1f2733; --muted:#6b7683; --line:#dde4ea; --line-s:#eef2f6;
+  --bg:#fff; --panel:#f6fafd;
+  --sans:"Open Sans",-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN",
+         "Yu Gothic",Meiryo,"Noto Sans JP",sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans);
+  font-size:15px; line-height:1.85; -webkit-font-smoothing:antialiased}
+img{display:block; max-width:100%}
+a{color:inherit}
+.wrap{max-width:1160px; margin:0 auto; padding:0 24px}
+
+.note{position:fixed; left:0; right:0; bottom:0; z-index:80; background:rgba(0,104,159,.94);
+  color:#dff1fa; font-size:12px; text-align:center; padding:7px 12px}
+
+/* ---- ヘッダー（上段＝ロゴと問い合わせ／下段＝メニュー） ---- */
+.utility{border-bottom:1px solid var(--line-s)}
+.utility .wrap{display:flex; align-items:center; gap:18px; height:64px}
+.utility .co{flex:none; display:flex; align-items:center; line-height:0; min-height:44px}
+.utility .co img{height:34px; width:auto}
+.utility .seg{margin-left:auto; display:flex; gap:22px; font-size:12.5px}
+.utility .seg a{text-decoration:none; color:var(--muted); white-space:nowrap}
+.utility .seg a:hover{color:var(--blue-d)}
+.utility .en{color:var(--muted); font-size:12.5px; font-weight:700; text-decoration:none}
+.utility .en.off{color:var(--line); cursor:default}
+.pill{flex:none; display:inline-flex; align-items:center; background:var(--blue); color:#fff;
+  text-decoration:none; padding:9px 22px; border-radius:999px; font-size:13.5px; font-weight:700;
+  white-space:nowrap; min-height:44px}
+.pill:hover{background:var(--blue-d)}
+
+header{position:sticky; top:0; z-index:70; background:#fff; border-bottom:1px solid var(--line);
+  box-shadow:0 1px 0 rgba(20,160,220,.08)}
+.gnav-row{display:flex; align-items:center; justify-content:center; gap:0; padding:0 24px; position:relative}
+.gnav{display:flex}
+.gnav a{text-decoration:none; padding:16px 20px; font-size:14.5px; font-weight:600;
+  white-space:nowrap; border-bottom:3px solid transparent}
+.gnav a:hover{color:var(--blue-d); border-bottom-color:var(--blue)}
+.gnav a.on{color:var(--blue-d); border-bottom-color:var(--blue)}
+.logo-c{display:none}
+/* 指で押す的は44px角を下回らせない（38pxだった） */
+.hamburger{display:none; position:absolute; right:20px; top:50%; transform:translateY(-50%);
+  background:none; border:1px solid var(--line); font-size:19px; padding:5px 12px;
+  cursor:pointer; color:var(--ink); border-radius:4px;
+  min-width:44px; min-height:44px; line-height:1}
+
+/* スマホのメニュー。ボタンの真下に開くドロップダウン（全画面パネルにはしない） */
+.mnav{display:none; position:absolute; right:18px; top:calc(100% - 2px); z-index:75;
+  background:#fff; border:1px solid var(--line); min-width:246px; padding:6px 0;
+  box-shadow:0 14px 34px rgba(20,40,60,.16); border-radius:4px}
+.mnav a{display:block; padding:11px 20px; text-decoration:none; font-size:14px}
+.mnav a:hover{background:var(--blue-s); color:var(--blue-dd)}
+.mnav a.on{background:var(--blue-s); color:var(--blue-dd)}
+.mnav .grp{border-top:1px solid var(--line); margin-top:6px; padding-top:5px}
+.mnav .grp-t{padding:4px 20px 2px; font-size:11px; color:var(--blue-d); font-weight:700}
+
+/* ---- ヒーロー ---- */
+.hero{position:relative; background:var(--blue-s); overflow:hidden}
+.hero .bg{position:relative; height:clamp(320px,46vh,460px); height:clamp(320px,46svh,460px)}
+.hero .bg img{width:100%; height:100%; object-fit:cover; object-position:35% 78%}
+/* 左に白を寄せて文字の場所を作る。写真の右側（空と雲）はそのまま見せる。
+   ★かぶせが 56% で切れていたため、見出しの後半（画面の70%あたりまで伸びる）が
+   生の空に乗って読めなくなっていた。文字の右端まで白を届かせる。 */
+.hero .bg::after{content:""; position:absolute; inset:0;
+  background:linear-gradient(95deg,rgba(255,255,255,.95) 0%,rgba(255,255,255,.93) 38%,
+                             rgba(255,255,255,.86) 62%,rgba(255,255,255,.48) 78%,
+                             transparent 94%)}
+.hero-copy{position:absolute; inset:0; display:flex; align-items:center; z-index:2}
+.hero-copy .tag{display:inline-block; background:var(--blue); color:#fff; font-size:12px;
+  font-weight:700; padding:5px 14px; border-radius:3px; margin-bottom:16px}
+/* ★強調に --blue(#14a0dc) を使っていたが、白地に乗せても 2.96 しか出ない
+   （大きな文字の基準 3.0 に届かない）。地の色をいくら明るくしても成立しないので、
+   本文側を濃く、強調を青にして二段階の濃さを作る。 */
+.hero-copy h1{font-size:clamp(23px,3.6vw,40px); font-weight:700; line-height:1.5; margin:0 0 14px;
+  color:var(--ink)}
+.hero-copy h1 b{color:var(--blue-dd); font-weight:700}
+.hero-copy p{font-size:15px; color:var(--ink); margin:0 0 24px; max-width:34em}
+.hero-actions{display:flex; gap:12px; flex-wrap:wrap}
+.btn{display:inline-block; text-decoration:none; padding:13px 28px; font-size:14.5px;
+  font-weight:700; border-radius:3px; background:var(--blue); color:#fff; border:2px solid var(--blue)}
+.btn:hover{background:var(--blue-d); border-color:var(--blue-d)}
+.btn.ghost{background:#fff; color:var(--blue-d)}
+.btn.ghost:hover{background:var(--blue-s)}
+.btn-more{display:inline-block; text-decoration:none; padding:12px 34px; font-size:14px;
+  font-weight:700; border:2px solid var(--blue); color:var(--blue-d); border-radius:3px}
+.btn-more:hover{background:var(--blue); color:#fff}
+
+/* 登録番号などの帯 */
+.badges{background:var(--blue-dd); color:#fff}
+.badges .wrap{display:flex; gap:38px; flex-wrap:wrap; padding-top:14px; padding-bottom:14px; font-size:13px}
+.badges b{color:#fff; font-weight:700}
+.badges span{color:#bfe3f5}
+
+/* ---- お知らせ（枠で囲う） ---- */
+.newsband{padding:26px 0}
+.newsband .box{border:1px solid var(--blue-line); display:flex; gap:0; align-items:stretch}
+.newsband .ttl{flex:none; background:var(--blue-s); color:var(--blue-dd); font-weight:700;
+  font-size:13.5px; padding:18px 24px; display:flex; align-items:center}
+.newsband ul{list-style:none; margin:0; padding:14px 22px; flex:1; min-width:0; font-size:13.5px}
+.newsband li{display:flex; gap:16px; margin:4px 0}
+.newsband time{flex:none; color:var(--muted); font-variant-numeric:tabular-nums}
+.newsband a{color:var(--ink); text-decoration:none}
+.newsband a:hover{color:var(--blue-d); text-decoration:underline}
+.newsband .more-l{flex:none; display:flex; align-items:center; padding:0 22px;
+  border-left:1px solid var(--blue-line)}
+.newsband .more-l a{color:var(--blue-d); font-weight:700; font-size:13px; text-decoration:none; white-space:nowrap}
+
+/* ---- 節 ---- */
+section{padding:66px 0}
+section.alt{background:var(--panel); border-top:1px solid var(--line-s); border-bottom:1px solid var(--line-s)}
+.sec-head{margin-bottom:38px; border-left:5px solid var(--blue); padding-left:18px}
+.sec-head .en{font-size:11.5px; letter-spacing:.16em; color:var(--blue); font-weight:700; display:block}
+.sec-head h2{font-size:clamp(20px,2.7vw,27px); font-weight:700; margin:4px 0 8px}
+.sec-head p{color:var(--muted); font-size:14px; margin:0}
+
+/* 数字 */
+.stats{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:38px}
+.stat{background:#fff; border:1px solid var(--line); border-top:3px solid var(--blue);
+  text-align:center; padding:22px 14px}
+.stat .v{font-size:clamp(22px,3vw,34px); font-weight:700; color:var(--blue-dd); line-height:1.25;
+  font-variant-numeric:tabular-nums}
+.stat .v small{font-size:14px; margin-left:3px}
+.stat .l{font-size:12.5px; color:var(--muted); margin-top:6px}
+
+/* 在留資格 */
+.visas{display:grid; grid-template-columns:repeat(auto-fit,minmax(214px,1fr)); gap:14px}
+.visa{background:#fff; border:1px solid var(--line); padding:24px 22px; border-radius:3px}
+.visa:hover{border-color:var(--blue); box-shadow:0 6px 18px rgba(20,160,220,.1)}
+.visa .n{font-size:12px; color:#fff; background:var(--blue); font-weight:700;
+  display:inline-block; padding:2px 10px; border-radius:3px}
+.visa h3{font-size:17px; font-weight:700; margin:12px 0 10px; color:var(--blue-dd)}
+.visa p{font-size:13.5px; color:var(--muted); margin:0; line-height:1.85}
+
+/* 支援 */
+.support{display:grid; grid-template-columns:repeat(auto-fit,minmax(252px,1fr)); gap:10px}
+.sup{display:flex; gap:12px; align-items:flex-start; background:#fff; border:1px solid var(--line);
+  padding:14px 16px; font-size:14px; border-radius:3px}
+.sup .c{flex:none; width:26px; height:26px; background:var(--blue-s); color:var(--blue-dd);
+  font-size:12px; font-weight:700; display:flex; align-items:center; justify-content:center;
+  border-radius:3px; margin-top:2px}
+
+/* 流れ */
+.flow{display:grid; grid-template-columns:repeat(5,1fr); gap:12px}
+.step{background:#fff; border:1px solid var(--line); padding:20px 18px; border-radius:3px;
+  position:relative}
+.step .n{display:inline-block; background:var(--blue); color:#fff; font-size:12px; font-weight:700;
+  padding:3px 12px; border-radius:3px; margin-bottom:12px}
+.step h3{font-size:15px; font-weight:700; margin:0 0 8px; color:var(--blue-dd)}
+.step p{font-size:13px; color:var(--muted); margin:0; line-height:1.8}
+.step .d{margin-top:10px; font-size:11.5px; color:var(--blue-d); font-weight:700}
+
+/* 自社グループ／提携 */
+.group-lead{background:var(--blue-s); border:1px solid var(--blue-line); border-left:5px solid var(--blue);
+  padding:26px 30px; margin-bottom:20px}
+.group-lead .badge{display:inline-block; background:var(--blue); color:#fff; font-size:11.5px;
+  font-weight:700; padding:3px 12px; border-radius:3px; margin-bottom:10px}
+.group-lead h3{font-size:19px; font-weight:700; margin:0 0 10px; color:var(--blue-dd)}
+.group-lead p{margin:0; font-size:14px; color:var(--ink)}
+.partners{display:grid; grid-template-columns:repeat(auto-fit,minmax(262px,1fr)); gap:18px}
+.partner{background:#fff; border:1px solid var(--line); border-radius:3px; overflow:hidden}
+.partner .ph{height:150px; background:var(--panel); display:flex; align-items:center;
+  justify-content:center; color:var(--muted); font-size:12px; overflow:hidden}
+.partner .ph img{width:100%; height:100%; object-fit:cover}
+.partner h3{font-size:16px; font-weight:700; margin:16px 20px 4px; color:var(--blue-dd)}
+.partner .cc{font-size:11.5px; color:var(--blue); font-weight:700; margin:0 20px 8px}
+.partner p{font-size:13px; color:var(--muted); margin:0 20px 20px; line-height:1.85}
+
+/* 代表挨拶 */
+.greet{display:grid; grid-template-columns:280px 1fr; gap:40px; align-items:center}
+.greet .ph{aspect-ratio:4/5; background:var(--panel); border:1px solid var(--line);
+  display:flex; align-items:center; justify-content:center; color:var(--muted);
+  font-size:12px; text-align:center}
+.greet h3{font-size:clamp(18px,2.4vw,24px); font-weight:700; line-height:1.6; margin:0 0 18px;
+  color:var(--blue-dd)}
+.greet p{margin:0 0 14px; font-size:14.5px; color:var(--muted)}
+.greet .sign{margin-top:20px; padding-top:14px; border-top:1px solid var(--line); font-size:14px; color:var(--muted)}
+.greet .sign b{color:var(--ink); font-size:17px; margin-left:10px}
+
+/* FAQ */
+.faq details{background:#fff; border:1px solid var(--line); margin-bottom:8px; border-radius:3px}
+.faq summary{cursor:pointer; padding:16px 20px; font-weight:700; font-size:14.5px; list-style:none;
+  display:flex; gap:14px; align-items:flex-start}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::before{content:"Q"; flex:none; width:24px; height:24px; background:var(--blue);
+  color:#fff; font-size:12px; font-weight:700; display:flex; align-items:center;
+  justify-content:center; border-radius:3px}
+.faq .a{padding:0 20px 18px 58px; font-size:14px; color:var(--muted)}
+
+/* CTA */
+.cta{background:var(--blue-s); border-top:1px solid var(--blue-line); text-align:center; padding:62px 0}
+.cta h2{font-size:clamp(20px,2.7vw,26px); font-weight:700; margin:0 0 10px; color:var(--blue-dd)}
+.cta p{color:var(--muted); margin:0 0 26px; font-size:14.5px}
+.cta .row{display:flex; gap:26px; justify-content:center; align-items:center; flex-wrap:wrap}
+.cta .tel{text-align:left}
+.cta .tel .n{font-size:28px; font-weight:700; color:var(--blue-dd); line-height:1.3;
+  font-variant-numeric:tabular-nums}
+.cta .tel .h{font-size:12px; color:var(--muted)}
+
+/* フッター */
+footer{background:var(--blue-dd); color:#cfe8f5; font-size:13px; padding:44px 0 20px}
+footer .cols{display:grid; grid-template-columns:1.5fr 1fr 1fr; gap:38px; margin-bottom:30px}
+footer h4{color:#fff; font-size:14.5px; font-weight:700; margin:0 0 12px}
+footer ul{list-style:none; margin:0; padding:0}
+footer li{margin-bottom:8px}
+footer a{text-decoration:none}
+footer a:hover{color:#fff; text-decoration:underline}
+.copy{border-top:1px solid rgba(255,255,255,.2); padding-top:16px; font-size:11.5px; text-align:center}
+
+/* 下層ページとトップの「詳しく見る」 */
+.more{text-align:center; margin-top:34px}
+
+/* ★ヘッダーを畳む幅は、レイアウトの折返しと別の @media に分ける */
+@media (max-width:1080px){
+  .gnav{display:none}
+  .mnav.open{display:block}
+  .hamburger{display:block}
+  .gnav-row{justify-content:flex-start; min-height:52px}
+  .utility .seg{display:none}
+}
+@media (max-width:1000px){
+  .flow{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:860px){
+  /* 上段にロゴ・EN・問い合わせボタンが横一列で入りきらず、390pxで
+     ボタンがはみ出していた（A.pill）。折り返して2行にする。 */
+  .utility .wrap{height:auto; flex-wrap:wrap; padding-top:10px; padding-bottom:10px; gap:10px 14px}
+  .utility .en{margin-left:auto}
+  .pill{padding:8px 16px; font-size:13px; min-height:44px}
+}
+@media (max-width:760px){
+  section{padding:46px 0}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .flow{grid-template-columns:1fr}
+  .greet{grid-template-columns:1fr; gap:22px}
+  .greet .ph{max-width:220px}
+  .hero .bg::after{background:linear-gradient(180deg,rgba(255,255,255,.93) 0%,
+    rgba(255,255,255,.86) 52%,rgba(255,255,255,.5) 100%)}
+  .newsband .box{flex-direction:column}
+  .newsband .more-l{border-left:none; border-top:1px solid var(--blue-line); padding:12px 22px}
+  /* 1行25pxでは指で押しにくい。スマホだけ行に高さを持たせる */
+  .newsband li{margin:0; align-items:baseline}
+  .newsband li a{display:block; padding:9px 0}
+  .newsband .more-l a{display:block; padding:10px 0}
+  .badges .wrap{gap:8px 22px}
+  footer .cols{grid-template-columns:1fr; gap:22px}
+  .cta .row{flex-direction:column; gap:18px}
+  .cta .tel{text-align:center}
+}
+</style>
+</head>
+<body>
+
+<div class="utility">
+  <div class="wrap">
+    <a class="co" href="index.html" aria-label="株式会社 A and K トップへ"><img src="img/logo.png" alt="株式会社 A and K"></a>
+    <nav class="seg">
+      <a href="#visas">はじめて受入れをお考えの方</a>
+      <a href="#support">特定技能をお考えの方</a>
+      <a href="#partners">監理団体・組合の方</a>
+    </nav>
+    <span class="en off" title="英語版は今回の範囲外です">EN</span>
+    <a class="pill" href="#contact">お問い合わせ</a>
+  </div>
+</div>
+
+<header>
+  <div class="gnav-row">
+    <nav class="gnav">
+      <a href="#visas">ご紹介できる人材</a>
+      <a href="#support">支援内容</a>
+      <a href="#flow">受入れの流れ</a>
+    </nav>
+    <a class="logo-c" href="index.html"><img src="img/logo.png" alt="株式会社 A and K"></a>
+    <nav class="gnav">
+      <a href="#partners">提携機関</a>
+      <a href="#company">企業情報</a>
+      <a href="#contact">お問い合わせ</a>
+    </nav>
+    <button class="hamburger" type="button" id="menu-btn"
+            aria-label="メニューを開く" aria-expanded="false" aria-controls="mnav">☰</button>
+    <nav class="mnav" id="mnav">
+      <a href="#visas">ご紹介できる人材</a>
+      <a href="#support">支援内容</a>
+      <a href="#flow">受入れの流れ</a>
+      <a href="#partners">提携機関</a>
+      <a href="#company">企業情報</a>
+      <a href="news.html">過去のお知らせ</a>
+      <a href="#contact">お問い合わせ</a>
+      <div class="grp">
+        <div class="grp-t">目的からお探しの方</div>
+        <a href="#visas">はじめて受入れをお考えの方</a>
+        <a href="#support">特定技能をお考えの方</a>
+        <a href="#partners">監理団体・組合の方</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="bg"><img src="img/hero-sky.jpg" alt="青空と雲"></div>
+  <div class="hero-copy">
+    <div class="wrap">
+      <span class="tag">登録支援機関 19登-000975</span>
+      <h1>人と企業を、<b>国境を越えてつなぐ</b></h1>
+      <p>技能実習・特定技能・留学生・高度人材・日系人。就労ビザの取得が可能なすべての業種に対応します。</p>
+      <div class="hero-actions">
+        <a class="btn" href="#contact">無料で相談する</a>
+        <a class="btn ghost" href="#flow">受入れの流れを見る</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="badges">
+  <div class="wrap">
+    <span><b>出入国在留管理庁</b> 登録支援機関 19登-000975</span>
+    <span><b>提携送り出し機関</b> フィリピン・ベトナム</span>
+    <span><b>自社グループ</b> ブリッジング協同組合（監理団体）</span>
+  </div>
+</div>
+
+<div class="newsband">
+  <div class="wrap">
+    <div class="box">
+      <div class="ttl">News &amp; Topics</div>
+      <ul>
+        <li><time>2021.08.30</time><a href="news.html">ブリッジング協同組合が、ベトナムの送り出し機関 POLIMEX 国際人材株式会社と業務提携しました</a></li>
+        <li><time>2021.08.18</time><a href="news.html">愛知県知事の許可を受けてブリッジング協同組合を設立しました</a></li>
+        <li><time>2019.06.28</time><a href="news.html">出入国在留管理庁長官より、登録支援機関の登録通知書が交付されました</a></li>
+      </ul>
+      <div class="more-l"><a href="news.html">一覧を見る ＞</a></div>
+    </div>
+  </div>
+</div>
+
+<section id="visas">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="en">SERVICE</span>
+      <h2>ご紹介できる人材</h2>
+      <p>就労が可能な5つの在留資格すべてに対応しています。どの制度が合うかからご相談いただけます。<strong>介護の人材</strong>にも力を入れています。</p>
+    </div>
+    <div class="visas">
+      <div class="visa"><div class="n">01</div><h3>技能実習</h3>
+        <p>自社グループの監理団体を通じ、現地で選考した実習生をご紹介します。手続きの代行と、<strong>フィリピン国内での出国手続き</strong>までお手伝いします。</p></div>
+      <div class="visa"><div class="n">02</div><h3>特定技能</h3>
+        <p>登録支援機関として、受入れ後に義務づけられた支援も含めてお引き受けします。</p></div>
+      <div class="visa"><div class="n">03</div><h3>留学生</h3>
+        <p>資格外活動の許可を得た留学生のご紹介。<strong>特定技能試験に合格した留学生を、特定技能ビザへ資格変更してご紹介する</strong>こともできます。</p></div>
+      <div class="visa"><div class="n">04</div><h3>高度人材</h3>
+        <p>専門的な知識や技術を持つ人材を、職種と勤務内容に合わせてご紹介します。</p></div>
+      <div class="visa"><div class="n">05</div><h3>日系人・定住者</h3>
+        <p>就労に制限のない在留資格をお持ちの方のご紹介。すぐに働いていただけます。</p></div>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="v">○○<small>社</small></div><div class="l">受入企業さま</div></div>
+      <div class="stat"><div class="v">○○○<small>名</small></div><div class="l">累計ご紹介人数</div></div>
+      <div class="stat"><div class="v">○<small>か国</small></div><div class="l">対応国籍</div></div>
+      <div class="stat"><div class="v">19登-000975</div><div class="l">登録支援機関 登録番号</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="support">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="en">SUPPORT</span>
+      <h2>登録支援機関としての支援</h2>
+      <p>特定技能で義務づけられている支援です。以下はすべて弊社がお引き受けします。</p>
+    </div>
+    <div class="support">
+      <div class="sup"><span class="c">01</span>事前ガイダンスの実施</div>
+      <div class="sup"><span class="c">02</span>出入国する際の送迎</div>
+      <div class="sup"><span class="c">03</span>住居の確保・生活に必要な契約の支援</div>
+      <div class="sup"><span class="c">04</span>生活オリエンテーションの実施</div>
+      <div class="sup"><span class="c">05</span>公的手続などへの同行</div>
+      <div class="sup"><span class="c">06</span>日本語学習の機会の提供</div>
+      <div class="sup"><span class="c">07</span>相談・苦情への対応</div>
+      <div class="sup"><span class="c">08</span>日本人との交流促進</div>
+      <div class="sup"><span class="c">09</span>転職支援（人員整理などの場合）</div>
+      <div class="sup"><span class="c">10</span>定期的な面談・行政機関への通報</div>
+    </div>
+  </div>
+</section>
+
+<section id="flow">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="en">FLOW</span>
+      <h2>受入れまでの流れ</h2>
+      <p>ご相談から就労開始までの目安です。ご相談の段階では費用はいただきません。</p>
+    </div>
+    <div class="flow">
+      <div class="step"><div class="n">STEP 01</div><h3>ご相談</h3>
+        <p>職種・人数・時期をお伺いし、どの在留資格が適しているかをご提案します。</p><div class="d">無料</div></div>
+      <div class="step"><div class="n">STEP 02</div><h3>求人のお申込み</h3>
+        <p>条件を整理し、提携する現地の送り出し機関へ募集をかけます。</p><div class="d">約2週間</div></div>
+      <div class="step"><div class="n">STEP 03</div><h3>選考・面接</h3>
+        <p>現地での書類選考ののち、オンラインまたは現地で面接していただきます。</p><div class="d">約1か月</div></div>
+      <div class="step"><div class="n">STEP 04</div><h3>申請・手続き</h3>
+        <p>在留資格の認定申請から査証の取得まで、書類の作成を代行します。</p><div class="d">約3〜4か月</div></div>
+      <div class="step"><div class="n">STEP 05</div><h3>入国・就労開始</h3>
+        <p>空港へのお迎え、住まいの手配、生活の案内まで。就労後も定期的に面談します。</p><div class="d">継続</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="partners">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="en">GROUP &amp; PARTNERS</span>
+      <h2>自社グループと提携機関</h2>
+      <p>監理団体を自社で設立しているため、募集から入国、就労後の支援までを一貫してお引き受けできます。</p>
+    </div>
+    <div class="group-lead">
+      <div class="badge">自社グループ</div>
+      <h3>ブリッジング協同組合</h3>
+      <p>2021年8月、中小企業協同組合法にもとづき愛知県知事の許可を受けて弊社が設立した監理団体です。
+        技能実習生の受入れを、紹介から監理まで自社グループ内で完結できます。</p>
+    </div>
+    <div class="partners">
+      <div class="partner">
+        <div class="ph"><img src="img/training-1.jpg" alt="提携する送り出し機関での日本語授業の様子"></div>
+        <h3>プロデンシャルエンプロイメント</h3>
+        <div class="cc">PHILIPPINES</div>
+        <p>日本へ人材を送り出すリクルートメントエージェンシー。<strong>現地フィリピンで、企業さまご自身が面接を行っていただくこと</strong>もできます。</p>
+      </div>
+      <div class="partner">
+        <div class="ph"><img src="img/training-2.jpg" alt="送り出し機関の教室で学ぶ実習生の皆さん"></div>
+        <h3>POLIMEX 国際人材株式会社</h3>
+        <div class="cc">VIETNAM</div>
+        <p>2021年8月にブリッジング協同組合と業務提携。ベトナムとの手続きを早く進められます。</p>
+      </div>
+      <div class="partner">
+        <div class="ph">監理団体</div>
+        <h3>トラスト江南協同組合</h3>
+        <div class="cc">AICHI, JAPAN</div>
+        <p>2019年9月に業務提携。愛知・岐阜・三重の企業さまや介護施設さまへの受入れを支えています。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="company">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="en">MESSAGE</span>
+      <h2>代表ごあいさつ</h2>
+    </div>
+    <div class="greet">
+      <div class="ph">代表のお写真が<br>入ります</div>
+      <div>
+        <h3>「来てよかった」と言ってもらえる受入れを、企業さまと一緒に。</h3>
+        <p>（ここに代表ごあいさつの文章が入ります。創業の経緯、外国人材の受入れに取り組む理由、
+          受入企業さまと働く方の双方に対してどのような姿勢で臨んでいるか、といった内容を想定しています。）</p>
+        <p>弊社はグループで保育園と児童発達支援・放課後等デイサービスも運営し、外国にルーツのあるお子さまをお預かりしてきました。<strong>外国人の住民の方が地域の一員として暮らしていけるよう、多文化共生社会に貢献していきます。</strong></p>
+        <div class="sign">代表取締役<b>兼松 厚志</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt faq" id="faq">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="en">FAQ</span>
+      <h2>よくあるご質問</h2>
+      <p>費用や期間など、はじめてのご検討でよくいただくご質問です。</p>
+    </div>
+    <details open>
+      <summary>相談だけでも費用はかかりますか。</summary>
+      <div class="a">いいえ。ご相談とお見積りは無料です。制度の説明だけでもお気軽にお声がけください。</div>
+    </details>
+    <details>
+      <summary>受入れまでにどのくらいの期間がかかりますか。</summary>
+      <div class="a">在留資格によりますが、ご相談から就労開始までおおむね5〜6か月が目安です。</div>
+    </details>
+    <details>
+      <summary>費用はどのくらいかかりますか。</summary>
+      <div class="a">（受入れ人数や在留資格によって変わるため、考え方をここに記載します。）</div>
+    </details>
+    <details>
+      <summary>受入れの経験がない会社でも大丈夫ですか。</summary>
+      <div class="a">はじめての企業さまがほとんどです。社内の受入れ体制づくりからご一緒します。</div>
+    </details>
+  </div>
+</section>
+
+<div class="cta" id="contact">
+  <div class="wrap">
+    <h2>まずは、お話をお聞かせください</h2>
+    <p>ご相談・お見積りは無料です。制度の説明だけでも承ります。</p>
+    <div class="row">
+      <a class="btn" href="contact.html">お問い合わせにすすむ</a>
+      <div class="tel">
+        <div class="n">0574-66-3511</div>
+        <div class="h">平日 9:00〜18:00（土日休）／ info@aandkcorp.com</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h4>株式会社 A and K</h4>
+        <p style="margin:0 0 10px">〒509-0207 岐阜県可児市今渡3-11<br>
+          Tel 0574-66-3511／Fax 0574-66-7311<br>
+          E-mail <a href="mailto:info@aandkcorp.com">info@aandkcorp.com</a></p>
+        <p style="margin:0">可児今渡事務所<br>〒509-0207 岐阜県可児市今渡1149-1 2F<br>Tel・Fax 0574-50-5048</p>
+      </div>
+      <div>
+        <h4>サービス</h4>
+        <ul>
+          <li><a href="#visas">ご紹介できる人材</a></li>
+          <li><a href="#support">支援内容</a></li>
+          <li><a href="#flow">受入れの流れ</a></li>
+          <li><a href="#partners">提携機関</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>企業情報</h4>
+        <ul>
+          <li><a href="#company">会社案内</a></li>
+          <li><a href="news.html">お知らせ</a></li>
+          <li><a href="#faq">よくあるご質問</a></li>
+          <li><a href="privacy.html">プライバシーポリシー</a></li>
+          <li><a href="#contact">お問い合わせ</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copy">登録支援機関 登録番号 19登-000975　／　Copyright © 株式会社 A and K All rights reserved.</div>
+  </div>
+</footer>
+
+<div class="note">制作中の確認用ページです／数字・お写真の一部は仮のものです。この帯は公開時には出ません。</div>
+<script>
+// スマホのメニュー。外側を押す・Escを押す・項目を選ぶ、のどれでも閉じる。
+(function () {
+  var btn = document.getElementById('menu-btn');
+  var nav = document.getElementById('mnav');
+  if (!btn || !nav) return;
+  // ★style.display で開かないこと。インラインの指定はメディアクエリより強いので、
+  //   開いたまま画面を1080pxより広げるとドロワーが出たまま残る（案Aと同じclass方式にした）。
+  function setOpen(open) {
+    nav.classList.toggle('open', open);
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    btn.setAttribute('aria-label', open ? 'メニューを閉じる' : 'メニューを開く');
+  }
+  btn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    setOpen(!nav.classList.contains('open'));
+  });
+  nav.addEventListener('click', function (e) { if (e.target.tagName === 'A') setOpen(false); });
+  document.addEventListener('click', function (e) {
+    if (!nav.contains(e.target) && e.target !== btn) setOpen(false);
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setOpen(false); });
+})();
+</script>
+</body>
+</html>

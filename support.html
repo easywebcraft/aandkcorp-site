@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>登録支援機関としての支援｜株式会社 A and K</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- 欧文は Open Sans（参考にしたサイトと同じ）。和文はゴシックの端末書体に任せる。 -->
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* ===== 案B ─ 青とゴシックで明快に（Sky株式会社のサイトを参考） =====
+   案Aが「明朝・余白・金茶」なのに対し、こちらは「ゴシック・情報量・青」。
+   同じ内容を、迷わせず速く読ませる方向で組む。角は小さく、線は細く、
+   見出しの前に青い印を置いて視線の起点を作る。
+   参考にしたのは書体・配色・ヘッダーの型で、CSSは自前で書いている。 */
+:root{
+  --blue:#14a0dc; --blue-d:#008bd5; --blue-dd:#00689f; --blue-s:#e8f5fc; --blue-line:#bfe3f5;
+  --ink:#1f2733; --muted:#6b7683; --line:#dde4ea; --line-s:#eef2f6;
+  --bg:#fff; --panel:#f6fafd;
+  --sans:"Open Sans",-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN",
+         "Yu Gothic",Meiryo,"Noto Sans JP",sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans);
+  font-size:15px; line-height:1.85; -webkit-font-smoothing:antialiased}
+img{display:block; max-width:100%}
+a{color:inherit}
+.wrap{max-width:1160px; margin:0 auto; padding:0 24px}
+
+.note{position:fixed; left:0; right:0; bottom:0; z-index:80; background:rgba(0,104,159,.94);
+  color:#dff1fa; font-size:12px; text-align:center; padding:7px 12px}
+
+/* ---- ヘッダー（上段＝ロゴと問い合わせ／下段＝メニュー） ---- */
+.utility{border-bottom:1px solid var(--line-s)}
+.utility .wrap{display:flex; align-items:center; gap:18px; height:64px}
+.utility .co{flex:none; display:flex; align-items:center; line-height:0; min-height:44px}
+.utility .co img{height:34px; width:auto}
+.utility .seg{margin-left:auto; display:flex; gap:22px; font-size:12.5px}
+.utility .seg a{text-decoration:none; color:var(--muted); white-space:nowrap}
+.utility .seg a:hover{color:var(--blue-d)}
+.utility .en{color:var(--muted); font-size:12.5px; font-weight:700; text-decoration:none}
+.utility .en.off{color:var(--line); cursor:default}
+.pill{flex:none; display:inline-flex; align-items:center; background:var(--blue); color:#fff;
+  text-decoration:none; padding:9px 22px; border-radius:999px; font-size:13.5px; font-weight:700;
+  white-space:nowrap; min-height:44px}
+.pill:hover{background:var(--blue-d)}
+
+header{position:sticky; top:0; z-index:70; background:#fff; border-bottom:1px solid var(--line);
+  box-shadow:0 1px 0 rgba(20,160,220,.08)}
+.gnav-row{display:flex; align-items:center; justify-content:center; gap:0; padding:0 24px; position:relative}
+.gnav{display:flex}
+.gnav a{text-decoration:none; padding:16px 20px; font-size:14.5px; font-weight:600;
+  white-space:nowrap; border-bottom:3px solid transparent}
+.gnav a:hover{color:var(--blue-d); border-bottom-color:var(--blue)}
+.gnav a.on{color:var(--blue-d); border-bottom-color:var(--blue)}
+.logo-c{display:none}
+/* 指で押す的は44px角を下回らせない（38pxだった） */
+.hamburger{display:none; position:absolute; right:20px; top:50%; transform:translateY(-50%);
+  background:none; border:1px solid var(--line); font-size:19px; padding:5px 12px;
+  cursor:pointer; color:var(--ink); border-radius:4px;
+  min-width:44px; min-height:44px; line-height:1}
+
+/* スマホのメニュー。ボタンの真下に開くドロップダウン（全画面パネルにはしない） */
+.mnav{display:none; position:absolute; right:18px; top:calc(100% - 2px); z-index:75;
+  background:#fff; border:1px solid var(--line); min-width:246px; padding:6px 0;
+  box-shadow:0 14px 34px rgba(20,40,60,.16); border-radius:4px}
+.mnav a{display:block; padding:11px 20px; text-decoration:none; font-size:14px}
+.mnav a:hover{background:var(--blue-s); color:var(--blue-dd)}
+.mnav a.on{background:var(--blue-s); color:var(--blue-dd)}
+.mnav .grp{border-top:1px solid var(--line); margin-top:6px; padding-top:5px}
+.mnav .grp-t{padding:4px 20px 2px; font-size:11px; color:var(--blue-d); font-weight:700}
+
+/* ---- ヒーロー ---- */
+.hero{position:relative; background:var(--blue-s); overflow:hidden}
+.hero .bg{position:relative; height:clamp(320px,46vh,460px); height:clamp(320px,46svh,460px)}
+.hero .bg img{width:100%; height:100%; object-fit:cover; object-position:35% 78%}
+/* 左に白を寄せて文字の場所を作る。写真の右側（空と雲）はそのまま見せる。
+   ★かぶせが 56% で切れていたため、見出しの後半（画面の70%あたりまで伸びる）が
+   生の空に乗って読めなくなっていた。文字の右端まで白を届かせる。 */
+.hero .bg::after{content:""; position:absolute; inset:0;
+  background:linear-gradient(95deg,rgba(255,255,255,.95) 0%,rgba(255,255,255,.93) 38%,
+                             rgba(255,255,255,.86) 62%,rgba(255,255,255,.48) 78%,
+                             transparent 94%)}
+.hero-copy{position:absolute; inset:0; display:flex; align-items:center; z-index:2}
+.hero-copy .tag{display:inline-block; background:var(--blue); color:#fff; font-size:12px;
+  font-weight:700; padding:5px 14px; border-radius:3px; margin-bottom:16px}
+/* ★強調に --blue(#14a0dc) を使っていたが、白地に乗せても 2.96 しか出ない
+   （大きな文字の基準 3.0 に届かない）。地の色をいくら明るくしても成立しないので、
+   本文側を濃く、強調を青にして二段階の濃さを作る。 */
+.hero-copy h1{font-size:clamp(23px,3.6vw,40px); font-weight:700; line-height:1.5; margin:0 0 14px;
+  color:var(--ink)}
+.hero-copy h1 b{color:var(--blue-dd); font-weight:700}
+.hero-copy p{font-size:15px; color:var(--ink); margin:0 0 24px; max-width:34em}
+.hero-actions{display:flex; gap:12px; flex-wrap:wrap}
+.btn{display:inline-block; text-decoration:none; padding:13px 28px; font-size:14.5px;
+  font-weight:700; border-radius:3px; background:var(--blue); color:#fff; border:2px solid var(--blue)}
+.btn:hover{background:var(--blue-d); border-color:var(--blue-d)}
+.btn.ghost{background:#fff; color:var(--blue-d)}
+.btn.ghost:hover{background:var(--blue-s)}
+.btn-more{display:inline-block; text-decoration:none; padding:12px 34px; font-size:14px;
+  font-weight:700; border:2px solid var(--blue); color:var(--blue-d); border-radius:3px}
+.btn-more:hover{background:var(--blue); color:#fff}
+
+/* 登録番号などの帯 */
+.badges{background:var(--blue-dd); color:#fff}
+.badges .wrap{display:flex; gap:38px; flex-wrap:wrap; padding-top:14px; padding-bottom:14px; font-size:13px}
+.badges b{color:#fff; font-weight:700}
+.badges span{color:#bfe3f5}
+
+/* ---- お知らせ（枠で囲う） ---- */
+.newsband{padding:26px 0}
+.newsband .box{border:1px solid var(--blue-line); display:flex; gap:0; align-items:stretch}
+.newsband .ttl{flex:none; background:var(--blue-s); color:var(--blue-dd); font-weight:700;
+  font-size:13.5px; padding:18px 24px; display:flex; align-items:center}
+.newsband ul{list-style:none; margin:0; padding:14px 22px; flex:1; min-width:0; font-size:13.5px}
+.newsband li{display:flex; gap:16px; margin:4px 0}
+.newsband time{flex:none; color:var(--muted); font-variant-numeric:tabular-nums}
+.newsband a{color:var(--ink); text-decoration:none}
+.newsband a:hover{color:var(--blue-d); text-decoration:underline}
+.newsband .more-l{flex:none; display:flex; align-items:center; padding:0 22px;
+  border-left:1px solid var(--blue-line)}
+.newsband .more-l a{color:var(--blue-d); font-weight:700; font-size:13px; text-decoration:none; white-space:nowrap}
+
+/* ---- 節 ---- */
+section{padding:66px 0}
+section.alt{background:var(--panel); border-top:1px solid var(--line-s); border-bottom:1px solid var(--line-s)}
+.sec-head{margin-bottom:38px; border-left:5px solid var(--blue); padding-left:18px}
+.sec-head .en{font-size:11.5px; letter-spacing:.16em; color:var(--blue); font-weight:700; display:block}
+.sec-head h2{font-size:clamp(20px,2.7vw,27px); font-weight:700; margin:4px 0 8px}
+.sec-head p{color:var(--muted); font-size:14px; margin:0}
+
+/* 数字 */
+.stats{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:38px}
+.stat{background:#fff; border:1px solid var(--line); border-top:3px solid var(--blue);
+  text-align:center; padding:22px 14px}
+.stat .v{font-size:clamp(22px,3vw,34px); font-weight:700; color:var(--blue-dd); line-height:1.25;
+  font-variant-numeric:tabular-nums}
+.stat .v small{font-size:14px; margin-left:3px}
+.stat .l{font-size:12.5px; color:var(--muted); margin-top:6px}
+
+/* 在留資格 */
+.visas{display:grid; grid-template-columns:repeat(auto-fit,minmax(214px,1fr)); gap:14px}
+.visa{background:#fff; border:1px solid var(--line); padding:24px 22px; border-radius:3px}
+.visa:hover{border-color:var(--blue); box-shadow:0 6px 18px rgba(20,160,220,.1)}
+.visa .n{font-size:12px; color:#fff; background:var(--blue); font-weight:700;
+  display:inline-block; padding:2px 10px; border-radius:3px}
+.visa h3{font-size:17px; font-weight:700; margin:12px 0 10px; color:var(--blue-dd)}
+.visa p{font-size:13.5px; color:var(--muted); margin:0; line-height:1.85}
+
+/* 支援 */
+.support{display:grid; grid-template-columns:repeat(auto-fit,minmax(252px,1fr)); gap:10px}
+.sup{display:flex; gap:12px; align-items:flex-start; background:#fff; border:1px solid var(--line);
+  padding:14px 16px; font-size:14px; border-radius:3px}
+.sup .c{flex:none; width:26px; height:26px; background:var(--blue-s); color:var(--blue-dd);
+  font-size:12px; font-weight:700; display:flex; align-items:center; justify-content:center;
+  border-radius:3px; margin-top:2px}
+
+/* 流れ */
+.flow{display:grid; grid-template-columns:repeat(5,1fr); gap:12px}
+.step{background:#fff; border:1px solid var(--line); padding:20px 18px; border-radius:3px;
+  position:relative}
+.step .n{display:inline-block; background:var(--blue); color:#fff; font-size:12px; font-weight:700;
+  padding:3px 12px; border-radius:3px; margin-bottom:12px}
+.step h3{font-size:15px; font-weight:700; margin:0 0 8px; color:var(--blue-dd)}
+.step p{font-size:13px; color:var(--muted); margin:0; line-height:1.8}
+.step .d{margin-top:10px; font-size:11.5px; color:var(--blue-d); font-weight:700}
+
+/* 自社グループ／提携 */
+.group-lead{background:var(--blue-s); border:1px solid var(--blue-line); border-left:5px solid var(--blue);
+  padding:26px 30px; margin-bottom:20px}
+.group-lead .badge{display:inline-block; background:var(--blue); color:#fff; font-size:11.5px;
+  font-weight:700; padding:3px 12px; border-radius:3px; margin-bottom:10px}
+.group-lead h3{font-size:19px; font-weight:700; margin:0 0 10px; color:var(--blue-dd)}
+.group-lead p{margin:0; font-size:14px; color:var(--ink)}
+.partners{display:grid; grid-template-columns:repeat(auto-fit,minmax(262px,1fr)); gap:18px}
+.partner{background:#fff; border:1px solid var(--line); border-radius:3px; overflow:hidden}
+.partner .ph{height:150px; background:var(--panel); display:flex; align-items:center;
+  justify-content:center; color:var(--muted); font-size:12px; overflow:hidden}
+.partner .ph img{width:100%; height:100%; object-fit:cover}
+.partner h3{font-size:16px; font-weight:700; margin:16px 20px 4px; color:var(--blue-dd)}
+.partner .cc{font-size:11.5px; color:var(--blue); font-weight:700; margin:0 20px 8px}
+.partner p{font-size:13px; color:var(--muted); margin:0 20px 20px; line-height:1.85}
+
+/* 代表挨拶 */
+.greet{display:grid; grid-template-columns:280px 1fr; gap:40px; align-items:center}
+.greet .ph{aspect-ratio:4/5; background:var(--panel); border:1px solid var(--line);
+  display:flex; align-items:center; justify-content:center; color:var(--muted);
+  font-size:12px; text-align:center}
+.greet h3{font-size:clamp(18px,2.4vw,24px); font-weight:700; line-height:1.6; margin:0 0 18px;
+  color:var(--blue-dd)}
+.greet p{margin:0 0 14px; font-size:14.5px; color:var(--muted)}
+.greet .sign{margin-top:20px; padding-top:14px; border-top:1px solid var(--line); font-size:14px; color:var(--muted)}
+.greet .sign b{color:var(--ink); font-size:17px; margin-left:10px}
+
+/* FAQ */
+.faq details{background:#fff; border:1px solid var(--line); margin-bottom:8px; border-radius:3px}
+.faq summary{cursor:pointer; padding:16px 20px; font-weight:700; font-size:14.5px; list-style:none;
+  display:flex; gap:14px; align-items:flex-start}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::before{content:"Q"; flex:none; width:24px; height:24px; background:var(--blue);
+  color:#fff; font-size:12px; font-weight:700; display:flex; align-items:center;
+  justify-content:center; border-radius:3px}
+.faq .a{padding:0 20px 18px 58px; font-size:14px; color:var(--muted)}
+
+/* CTA */
+.cta{background:var(--blue-s); border-top:1px solid var(--blue-line); text-align:center; padding:62px 0}
+.cta h2{font-size:clamp(20px,2.7vw,26px); font-weight:700; margin:0 0 10px; color:var(--blue-dd)}
+.cta p{color:var(--muted); margin:0 0 26px; font-size:14.5px}
+.cta .row{display:flex; gap:26px; justify-content:center; align-items:center; flex-wrap:wrap}
+.cta .tel{text-align:left}
+.cta .tel .n{font-size:28px; font-weight:700; color:var(--blue-dd); line-height:1.3;
+  font-variant-numeric:tabular-nums}
+.cta .tel .h{font-size:12px; color:var(--muted)}
+
+/* フッター */
+footer{background:var(--blue-dd); color:#cfe8f5; font-size:13px; padding:44px 0 20px}
+footer .cols{display:grid; grid-template-columns:1.5fr 1fr 1fr; gap:38px; margin-bottom:30px}
+footer h4{color:#fff; font-size:14.5px; font-weight:700; margin:0 0 12px}
+footer ul{list-style:none; margin:0; padding:0}
+footer li{margin-bottom:8px}
+footer a{text-decoration:none}
+footer a:hover{color:#fff; text-decoration:underline}
+.copy{border-top:1px solid rgba(255,255,255,.2); padding-top:16px; font-size:11.5px; text-align:center}
+
+/* 下層ページとトップの「詳しく見る」 */
+.more{text-align:center; margin-top:34px}
+
+/* ★ヘッダーを畳む幅は、レイアウトの折返しと別の @media に分ける */
+@media (max-width:1080px){
+  .gnav{display:none}
+  .mnav.open{display:block}
+  .hamburger{display:block}
+  .gnav-row{justify-content:flex-start; min-height:52px}
+  .utility .seg{display:none}
+}
+@media (max-width:1000px){
+  .flow{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:860px){
+  /* 上段にロゴ・EN・問い合わせボタンが横一列で入りきらず、390pxで
+     ボタンがはみ出していた（A.pill）。折り返して2行にする。 */
+  .utility .wrap{height:auto; flex-wrap:wrap; padding-top:10px; padding-bottom:10px; gap:10px 14px}
+  .utility .en{margin-left:auto}
+  .pill{padding:8px 16px; font-size:13px; min-height:44px}
+}
+@media (max-width:760px){
+  section{padding:46px 0}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .flow{grid-template-columns:1fr}
+  .greet{grid-template-columns:1fr; gap:22px}
+  .greet .ph{max-width:220px}
+  .hero .bg::after{background:linear-gradient(180deg,rgba(255,255,255,.93) 0%,
+    rgba(255,255,255,.86) 52%,rgba(255,255,255,.5) 100%)}
+  .newsband .box{flex-direction:column}
+  .newsband .more-l{border-left:none; border-top:1px solid var(--blue-line); padding:12px 22px}
+  /* 1行25pxでは指で押しにくい。スマホだけ行に高さを持たせる */
+  .newsband li{margin:0; align-items:baseline}
+  .newsband li a{display:block; padding:9px 0}
+  .newsband .more-l a{display:block; padding:10px 0}
+  .badges .wrap{gap:8px 22px}
+  footer .cols{grid-template-columns:1fr; gap:22px}
+  .cta .row{flex-direction:column; gap:18px}
+  .cta .tel{text-align:center}
+}
+
+/* ---- 下層ページの見出し（build.py が差し込む） ---- */
+.page-head{padding:64px 0 0; text-align:center}
+.page-head .en{font-family:var(--serif); font-weight:300; color:var(--gold);
+  font-size:12px; letter-spacing:.28em; display:block; margin-bottom:14px}
+.page-head h1{font-family:var(--serif); font-weight:300; font-size:clamp(23px,3.2vw,31px);
+  letter-spacing:.16em; margin:0 0 14px}
+.page-head p{color:var(--muted); font-size:14px; margin:0; letter-spacing:.04em}
+.crumb{font-size:12px; color:var(--muted); letter-spacing:.06em; padding:16px 0 0}
+.crumb a{text-decoration:none}
+.crumb a:hover{color:var(--gold)}
+/* 下層では節の見出しを重ねて出さない（ページ見出しと二重になる） */
+.sub .sec-head{display:none}
+.sub section{padding:44px 0 86px}
+/* トップの各節に付ける「詳しく見る」 */
+.more{text-align:center; margin-top:40px}
+
+/* ---- トップの要約（説明は下層ページに置く） ---- */
+.chips{display:flex; flex-wrap:wrap; gap:10px; justify-content:center}
+.chip{border:1px solid var(--line); background:#fff; padding:11px 20px;
+  font-size:14.5px; letter-spacing:.06em; white-space:nowrap}
+.chips .num{color:var(--gold,#b39861); font-size:12px; margin-right:8px;
+  font-variant-numeric:tabular-nums}
+.chips-note{text-align:center; color:var(--muted); font-size:13px; margin:16px 0 0;
+  letter-spacing:.04em}
+.tsteps{display:flex; flex-wrap:wrap; gap:10px; justify-content:center;
+  list-style:none; margin:0; padding:0}
+.tstep{border:1px solid var(--line); background:#fff; padding:14px 18px; text-align:center;
+  flex:1 1 150px; max-width:230px}
+.tstep .num{display:block; color:var(--gold,#b39861); font-size:11.5px; letter-spacing:.14em;
+  margin-bottom:6px; font-variant-numeric:tabular-nums}
+.tstep b{display:block; font-weight:400; font-size:15px; letter-spacing:.05em}
+.tstep span{display:block; color:var(--muted); font-size:12px; margin-top:6px}
+.qlist{list-style:none; margin:0; padding:0; max-width:760px; margin-inline:auto}
+.qlist li{border-bottom:1px solid var(--line)}
+.qlist a{display:block; padding:18px 4px; text-decoration:none; font-size:14.5px;
+  letter-spacing:.04em}
+.qlist a:hover{color:var(--gold,#b39861)}
+/* トップのごあいさつは見出しと署名だけなので、お写真と高さが揃わない */
+.top-greet{align-items:center}
+.top-greet .ph{aspect-ratio:4/5}
+
+/* ---- 過去のお知らせ ---- */
+.nlist{padding:52px 0 86px}
+.nitem{display:grid; grid-template-columns:140px 1fr; gap:34px;
+  padding:32px 0; border-bottom:1px solid var(--line)}
+.nitem:first-child{border-top:1px solid var(--line)}
+/* ★グリッドの子は既定で min-width:auto。中に長い英数字があると列が縮まず、
+   320pxで箱からはみ出す（案Cのお知らせで実際に出た）。 */
+.nitem > *{min-width:0}
+.nitem time{font-family:var(--serif); color:var(--gold-d); font-size:15px;
+  letter-spacing:.08em; font-variant-numeric:tabular-nums; padding-top:2px}
+.nbody p{margin:0 0 10px; font-size:14.5px; letter-spacing:.02em;
+  overflow-wrap:break-word}
+.nbody p:first-child{font-family:var(--serif); font-weight:400; font-size:17px;
+  letter-spacing:.08em; line-height:1.8; margin-bottom:14px}
+.nbody p:last-child{margin-bottom:0}
+.ngal{display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+  gap:12px; margin-top:18px}
+.ngal img{width:100%; height:170px; object-fit:cover}
+
+/* ---- 会社概要の表 ---- */
+.outline{width:100%; border-collapse:collapse; margin-top:56px; font-size:14px}
+.outline th,.outline td{text-align:left; padding:16px 18px; border-bottom:1px solid var(--line);
+  vertical-align:top; letter-spacing:.02em}
+.outline th{width:190px; font-family:var(--serif); font-weight:400; color:var(--gold-d);
+  letter-spacing:.1em; white-space:nowrap}
+
+/* ---- グループの事業 ---- */
+.gcards{display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:18px}
+.gcard{background:#fff; border:1px solid var(--line); padding:22px 24px}
+.gcard h3{font-size:16.5px; margin:0 0 6px}
+.gcard .gtag{font-size:11.5px; color:var(--gold,#b39861); margin-bottom:8px; letter-spacing:.06em}
+.gcard p{font-size:13.5px; color:var(--muted); margin:0; line-height:1.9}
+
+/* ---- お問い合わせ ---- */
+.contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:48px; margin-top:20px}
+.contact-box{border:1px solid var(--line); padding:34px 32px}
+.contact-box h3{font-family:var(--serif); font-weight:400; font-size:18px;
+  letter-spacing:.12em; margin:0 0 14px}
+.contact-box .big{font-family:var(--serif); font-size:29px; letter-spacing:.06em; line-height:1.4}
+/* メールアドレスは1語なので、狭い幅では折り返せず箱からはみ出す（390pxで
+   scrollW 421 になった）。長い語を折り返させ、字送りも詰める。 */
+.contact-box .big.mail{font-size:21px; letter-spacing:.02em; overflow-wrap:anywhere; word-break:break-all}
+.contact-box p{font-size:13.5px; color:var(--muted); margin:8px 0 0}
+.plain{font-size:14px; letter-spacing:.02em}
+
+@media (max-width:760px){
+  /* 「住居の確保・生活に必要な契約の支援」は390pxで1行に収まらない */
+  .chip{padding:9px 15px; font-size:13.5px; white-space:normal}
+  .tstep{flex:1 1 128px; padding:12px 10px}
+  .nitem{grid-template-columns:1fr; gap:10px; padding:24px 0}
+  .nlist{padding:32px 0 56px}
+  .outline th{width:auto; display:block; border-bottom:none; padding-bottom:0}
+  .outline td{display:block; padding-top:4px}
+  .contact-grid{grid-template-columns:1fr; gap:26px}
+  .sub section{padding:28px 0 56px}
+}
+</style>
+
+<!-- ============ 開いたときの動き（前半：先に隠す） ============
+     ★<head> に置くこと。ページの一番下に置くと、いったん普通に描かれてから
+     隠れるので、一瞬ちらついてから動き出す。
+     ・動かすのは透明度と位置だけ（レイアウトは動かさない）
+     ・「動きを減らす」設定と印刷のときは動かさない                        -->
+<style>
+@keyframes rise   { from{opacity:0; transform:translateY(14px)} to{opacity:1; transform:none} }
+@keyframes riseSp { from{opacity:0; transform:translateY(9px)}  to{opacity:1; transform:none} }
+@keyframes zoomOut{ from{transform:scale(1.06)} to{transform:none} }
+
+/* ヒーローとお知らせ帯はJSを使わずCSSだけで動かす。JSがクラスを付けるのを
+   待つと、待っている間に文字が見えてしまう（環境が遅いほど長く見える）。 */
+.hero .bg img{animation:zoomOut 1.8s cubic-bezier(.2,.7,.3,1) both}
+.hero-copy .wrap > *{animation:rise .7s cubic-bezier(.2,.7,.3,1) both}
+.hero-copy .wrap > *:nth-child(1){animation-delay:.15s}
+.hero-copy .wrap > *:nth-child(2){animation-delay:.30s}
+.hero-copy .wrap > *:nth-child(3){animation-delay:.45s}
+.hero-copy .wrap > *:nth-child(4){animation-delay:.60s}
+.hero-copy .wrap > *:nth-child(5){animation-delay:.75s}
+.newsband{animation:rise .7s cubic-bezier(.2,.7,.3,1) .55s both}
+.badges{animation:rise .7s cubic-bezier(.2,.7,.3,1) .45s both}
+
+/* スクロールで出てくる分だけ、JSがあるとき（.anim）に隠しておく */
+.anim section > .wrap > *:not(.visas):not(.support):not(.flow):not(.partners):not(.chips):not(.tsteps):not(.qlist):not(.gcards):not(.stats):not(.contact-grid),
+.anim .visas > *,
+.anim .support > *,
+.anim .flow > *,
+.anim .partners > *,
+.anim .chips > *,
+.anim .tsteps > *,
+.anim .qlist > *,
+.anim .gcards > *,
+.anim .stats > *,
+.anim .contact-grid > *,
+.anim .nlist > .wrap > *,
+.anim .cta > .wrap > *{opacity:0}
+.anim .on{animation:rise .7s cubic-bezier(.2,.7,.3,1) both}
+
+@media (max-width:700px){ .anim .on{animation-name:riseSp} }
+
+@media (prefers-reduced-motion:reduce){
+  .anim section > .wrap > *:not(.visas):not(.support):not(.flow):not(.partners):not(.chips):not(.tsteps):not(.qlist):not(.gcards):not(.stats):not(.contact-grid),
+.anim .visas > *,
+.anim .support > *,
+.anim .flow > *,
+.anim .partners > *,
+.anim .chips > *,
+.anim .tsteps > *,
+.anim .qlist > *,
+.anim .gcards > *,
+.anim .stats > *,
+.anim .contact-grid > *,
+.anim .nlist > .wrap > *,
+.anim .cta > .wrap > *{opacity:1}
+  .anim .on, .hero .bg img, .hero-copy .wrap > *, .newsband, .badges{animation:none}
+}
+@media print{
+  .anim section > .wrap > *:not(.visas):not(.support):not(.flow):not(.partners):not(.chips):not(.tsteps):not(.qlist):not(.gcards):not(.stats):not(.contact-grid),
+.anim .visas > *,
+.anim .support > *,
+.anim .flow > *,
+.anim .partners > *,
+.anim .chips > *,
+.anim .tsteps > *,
+.anim .qlist > *,
+.anim .gcards > *,
+.anim .stats > *,
+.anim .contact-grid > *,
+.anim .nlist > .wrap > *,
+.anim .cta > .wrap > *{opacity:1 !important}
+  .anim .on, .hero .bg img, .hero-copy .wrap > *, .newsband, .badges{animation:none !important}
+}
+</style>
+<script>
+// 最初の描画より前に付ける（あとから付けると、見えていたものが消えてから動く）
+document.documentElement.classList.add('anim');
+// 保険: 下のJSが動かなかったときは、隠したままにしない
+setTimeout(function(){
+  if(!window.__animReady){ document.documentElement.classList.remove('anim'); }
+}, 4000);
+</script>
+</head>
+<body>
+
+<div class="utility">
+  <div class="wrap">
+    <a class="co" href="index.html" aria-label="株式会社 A and K トップへ"><img src="img/logo.png" alt="株式会社 A and K"></a>
+    <nav class="seg">
+      <a href="service.html">はじめて受入れをお考えの方</a>
+      <a href="support.html">特定技能をお考えの方</a>
+      <a href="partners.html">監理団体・組合の方</a>
+    </nav>
+    <span class="en off" title="英語版は今回の範囲外です">EN</span>
+    <a class="pill" href="contact.html">お問い合わせ</a>
+  </div>
+</div>
+
+<header>
+  <div class="gnav-row">
+    <nav class="gnav"><a href="service.html">ご紹介できる人材</a><a href="support.html" class="on">支援内容</a><a href="flow.html">受入れの流れ</a></nav>
+    <a class="logo-c" href="index.html"><img src="img/logo.png" alt="株式会社 A and K"></a>
+    <nav class="gnav"><a href="partners.html">提携機関</a><a href="company.html">企業情報</a><a href="contact.html">お問い合わせ</a></nav>
+    <button class="hamburger" type="button" id="menu-btn"
+            aria-label="メニューを開く" aria-expanded="false" aria-controls="mnav">☰</button>
+    <nav class="mnav" id="mnav">
+      <a href="service.html">ご紹介できる人材</a>
+      <a href="support.html">支援内容</a>
+      <a href="flow.html">受入れの流れ</a>
+      <a href="partners.html">提携機関</a>
+      <a href="company.html">企業情報</a>
+      <a href="news.html">過去のお知らせ</a>
+      <a href="contact.html">お問い合わせ</a>
+      <div class="grp">
+        <div class="grp-t">目的からお探しの方</div>
+        <a href="service.html">はじめて受入れをお考えの方</a>
+        <a href="support.html">特定技能をお考えの方</a>
+        <a href="partners.html">監理団体・組合の方</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<div class="sub"><div class="crumb"><div class="wrap"><a href="index.html">ホーム</a> ／ 登録支援機関としての支援</div></div>
+<div class="page-head"><div class="wrap"><span class="en">SUPPORT</span><h1>登録支援機関としての支援</h1><p>特定技能で義務づけられている支援です。以下はすべて弊社がお引き受けします。</p></div></div>
+<section class="alt" id="support">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="en">SUPPORT</span>
+      <h2>登録支援機関としての支援</h2>
+      <p>特定技能で義務づけられている支援です。以下はすべて弊社がお引き受けします。</p>
+    </div>
+    <div class="support">
+      <div class="sup"><span class="c">01</span>事前ガイダンスの実施</div>
+      <div class="sup"><span class="c">02</span>出入国する際の送迎</div>
+      <div class="sup"><span class="c">03</span>住居の確保・生活に必要な契約の支援</div>
+      <div class="sup"><span class="c">04</span>生活オリエンテーションの実施</div>
+      <div class="sup"><span class="c">05</span>公的手続などへの同行</div>
+      <div class="sup"><span class="c">06</span>日本語学習の機会の提供</div>
+      <div class="sup"><span class="c">07</span>相談・苦情への対応</div>
+      <div class="sup"><span class="c">08</span>日本人との交流促進</div>
+      <div class="sup"><span class="c">09</span>転職支援（人員整理などの場合）</div>
+      <div class="sup"><span class="c">10</span>定期的な面談・行政機関への通報</div>
+    </div>
+  </div>
+</section>
+
+</div><div class="cta" id="contact">
+  <div class="wrap">
+    <h2>まずは、お話をお聞かせください</h2>
+    <p>ご相談・お見積りは無料です。制度の説明だけでも承ります。</p>
+    <div class="row">
+      <a class="btn" href="contact.html">お問い合わせにすすむ</a>
+      <div class="tel">
+        <div class="n">0574-66-3511</div>
+        <div class="h">平日 9:00〜18:00（土日休）／ info@aandkcorp.com</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h4>株式会社 A and K</h4>
+        <p style="margin:0 0 10px">〒509-0207 岐阜県可児市今渡3-11<br>
+          Tel 0574-66-3511／Fax 0574-66-7311<br>
+          E-mail <a href="mailto:info@aandkcorp.com">info@aandkcorp.com</a></p>
+        <p style="margin:0">可児今渡事務所<br>〒509-0207 岐阜県可児市今渡1149-1 2F<br>Tel・Fax 0574-50-5048</p>
+      </div>
+      <div>
+        <h4>サービス</h4>
+        <ul>
+          <li><a href="service.html">ご紹介できる人材</a></li>
+          <li><a href="support.html">支援内容</a></li>
+          <li><a href="flow.html">受入れの流れ</a></li>
+          <li><a href="partners.html">提携機関</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>企業情報</h4>
+        <ul>
+          <li><a href="company.html">会社案内</a></li>
+          <li><a href="news.html">お知らせ</a></li>
+          <li><a href="faq.html">よくあるご質問</a></li>
+          <li><a href="privacy.html">プライバシーポリシー</a></li>
+          <li><a href="contact.html">お問い合わせ</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copy">登録支援機関 登録番号 19登-000975　／　Copyright © 株式会社 A and K All rights reserved.</div>
+  </div>
+</footer>
+
+<div class="note">制作中の確認用ページです／数字・お写真の一部は仮のものです。この帯は公開時には出ません。</div>
+<script>
+// スマホのメニュー。外側を押す・Escを押す・項目を選ぶ、のどれでも閉じる。
+(function () {
+  var btn = document.getElementById('menu-btn');
+  var nav = document.getElementById('mnav');
+  if (!btn || !nav) return;
+  // ★style.display で開かないこと。インラインの指定はメディアクエリより強いので、
+  //   開いたまま画面を1080pxより広げるとドロワーが出たまま残る（案Aと同じclass方式にした）。
+  function setOpen(open) {
+    nav.classList.toggle('open', open);
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    btn.setAttribute('aria-label', open ? 'メニューを閉じる' : 'メニューを開く');
+  }
+  btn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    setOpen(!nav.classList.contains('open'));
+  });
+  nav.addEventListener('click', function (e) { if (e.target.tagName === 'A') setOpen(false); });
+  document.addEventListener('click', function (e) {
+    if (!nav.contains(e.target) && e.target !== btn) setOpen(false);
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setOpen(false); });
+})();
+</script>
+</body>
+</html>
+
+<!-- ============ 開いたときの動き（後半：順に出す） ============
+     隠す指定と対象の並びは <head> 側にある。ここでは出す順番だけを決める。 -->
+<script>
+(function () {
+  // ★ここの並びは <head> の隠す指定と必ず同じにすること
+  var ANIM_SEL = 'section > .wrap > *:not(.visas):not(.support):not(.flow):not(.partners):not(.chips):not(.tsteps):not(.qlist):not(.gcards):not(.stats):not(.contact-grid),.visas > *,.support > *,.flow > *,.partners > *,.chips > *,.tsteps > *,.qlist > *,.gcards > *,.stats > *,.contact-grid > *,.nlist > .wrap > *,.cta > .wrap > *';
+  var units = [].slice.call(document.querySelectorAll(ANIM_SEL));
+
+  function sweep() {
+    var vh = window.innerHeight || document.documentElement.clientHeight;
+    var shown = [];
+    for (var i = units.length - 1; i >= 0; i--) {
+      var r = units[i].getBoundingClientRect();
+      if (r.top < vh * 0.92 && r.bottom > 0) {
+        shown.push(units[i]);
+        units.splice(i, 1);                            // 一度出したら見張らない
+      }
+    }
+    if (!shown.length) { return; }
+    shown.sort(function (a, b) {
+      return a.getBoundingClientRect().top - b.getBoundingClientRect().top;
+    }).forEach(function (el, i) {
+      el.style.animationDelay = (i * 0.06) + 's';      // 並んでいるものは少しずつずらす
+      el.classList.add('on');
+    });
+    if (!units.length) {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+    }
+  }
+
+  var waiting = false;
+  function onScroll() {
+    if (waiting) { return; }
+    waiting = true;
+    requestAnimationFrame(function () { waiting = false; sweep(); });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  sweep();                                             // 最初から見えている分
+  window.addEventListener('load', sweep);              // 画像が入って位置が確定したあと
+
+  window.__animReady = true;                           // <head> の保険に「動いた」と伝える
+
+  // 保険: スクロールを拾えない環境でも、中身が消えたままにはしない
+  setTimeout(function () {
+    units.forEach(function (el) { el.classList.add('on'); });
+    units.length = 0;
+  }, 5000);
+})();
+</script>

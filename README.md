@@ -1,0 +1,53 @@
+# aandkcorp-site — 株式会社 A and K コーポレートサイト（本番）
+
+`www.aandkcorp.com` のリニューアル。**デザインは案B**（[aandk-design](https://github.com/easywebcraft/aandk-design) の b/・2026-09-18 決定）。
+案A・Cは比較用にそのまま残し、以後の作業はこのリポジトリで行う。
+
+- 確認用URL（公開まで noindex）: https://easywebcraft.github.io/aandkcorp-site/
+- 公開後: https://www.aandkcorp.com/（GitHub Pages ＋ 独自ドメイン）
+
+## 生成のしくみ
+
+**原本は `src/site.html`（1枚もの）。生成物（*.html）を直接編集しないこと。**
+
+```bash
+cd ~/aandkcorp-site && python3 build.py
+```
+
+原本と生成物は必ず一緒にコミットする。お知らせは `src/news.json` から。
+
+## 公開までにやること
+
+### お客さまからもらうもの
+
+**必須（無いと仮のまま公開できない）**
+- [ ] ロゴデータ（AI/SVG/高解像度PNG）
+- [ ] 代表挨拶の文章と顔写真（文章のみでも可）
+- [ ] **有料職業紹介事業の許可番号**（人材紹介をしているなら必須。無い場合は「紹介」の表現を変える）
+- [ ] お問い合わせフォームの送信先メールアドレス
+
+**あると良い**
+- [ ] 実績の数字（受入企業数・累計紹介人数・対応国籍）
+- [ ] 提携3社（プロデンシャルエンプロイメント／POLIMEX／ブリッジング協同組合）のロゴ掲載可否
+- [ ] 事務所・スタッフの写真
+- [ ] 沿革
+
+**公開時に必要**
+- [ ] ドメイン aandkcorp.com の管理先（レジストラ）とログイン情報
+- [ ] 現サーバーの契約先と解約の可否
+- [ ] 現行サイトの制作者・保守契約の有無
+
+### 作業
+
+- [ ] もらった素材を原本に差し込む
+- [ ] フォームを Formspree に接続（送信先＝お客さま指定のアドレス）
+- [ ] お客さま確認 → 修正
+- [ ] `build.py` の `NOINDEX = False` にして再生成
+- [ ] `CNAME` に `www.aandkcorp.com` を置き、Pages の Custom domain を設定
+- [ ] DNS: `www` を CNAME で `easywebcraft.github.io` へ、ルートは A で GitHub Pages の4つのIPへ
+- [ ] https が有効になったら旧サーバーを解約
+
+## 守ること
+
+- 写真は仮のものが入っている（`img/`）。公開前にお客さまの写真か、ライセンスの明確な素材に差し替える
+- 「制作中の確認用ページです」の帯（`.note`）は公開時に外す
