@@ -262,6 +262,28 @@ section.alt{background:var(--panel); border-top:1px solid var(--line-s); border-
 .greet p{margin:0 0 14px; font-size:14.5px; color:var(--muted)}
 .greet .sign{margin-top:20px; padding-top:14px; border-top:1px solid var(--line); font-size:14px; color:var(--muted)}
 .greet .sign b{color:var(--ink); font-size:17px; margin-left:10px}
+/* 下層（企業情報ページ）：代表メッセージを薄い青の面にして、会社概要（白）と分ける */
+.msg-label{display:none}
+.sub #company{background:#f5fafd; padding:56px 0 72px}
+.sub .msg-label{display:flex; align-items:baseline; gap:12px; margin-bottom:18px}
+.sub .msg-label .en{font-size:11px; font-weight:700; letter-spacing:.16em; color:var(--blue-dd)}
+.sub .msg-label span:last-child{font-size:13px; color:var(--muted)}
+.sub .greet{grid-template-columns:340px 1fr; gap:56px; align-items:start}
+.sub .greet .ph{aspect-ratio:3/4; background:#fff; border:1px solid var(--line); border-radius:4px}
+.sub .greet h3{font-size:clamp(22px,2.6vw,30px); line-height:1.55; color:var(--ink); margin:0 0 26px; letter-spacing:.01em}
+.sub .greet h3 span{display:inline-block}
+.sub .greet p{font-size:15px; line-height:2; color:#4a5866}
+.sub .greet p strong{color:var(--blue-dd)}
+.sub .greet .sign{margin-top:36px; padding-top:20px; border-top:1px solid var(--line); display:flex; align-items:baseline; gap:4px; flex-wrap:wrap}
+.sub .greet .sign span{flex-basis:100%; font-size:12.5px; color:var(--muted); margin-bottom:2px}
+.sub .greet .sign b{font-size:20px; letter-spacing:.08em}
+@media (max-width:760px){
+  .sub #company{padding:40px 0 52px}
+  .sub .greet{grid-template-columns:1fr; gap:24px}
+  .sub .greet .ph{max-width:200px}
+  .sub .greet h3{font-size:21px}
+  .sub .greet h3 span{display:inline}
+}
 
 /* FAQ */
 .faq details{background:#fff; border:1px solid var(--line); margin-bottom:8px; border-radius:3px}
@@ -580,18 +602,19 @@ setTimeout(function(){
     </div>
     <div class="greet">
       <div class="ph">代表のお写真が<br>入ります</div>
-      <div>
-        <h3>「来てよかった」と言ってもらえる受入れを、企業さまと一緒に。</h3>
+      <div class="greet-body">
+        <div class="msg-label"><span class="en">MESSAGE</span><span>代表メッセージ</span></div>
+        <h3><span>「来てよかった」と言ってもらえる受入れを、</span><span>企業さまと一緒に。</span></h3>
         <p>（ここに代表ごあいさつの文章が入ります。創業の経緯、外国人材の受入れに取り組む理由、
           受入企業さまと働く方の双方に対してどのような姿勢で臨んでいるか、といった内容を想定しています。）</p>
         <p>弊社はグループで保育園と児童発達支援・放課後等デイサービスも運営し、外国にルーツのあるお子さまをお預かりしてきました。<strong>外国人の住民の方が地域の一員として暮らしていけるよう、多文化共生社会に貢献していきます。</strong></p>
-        <div class="sign">代表取締役<b>兼松 厚志</b></div>
+        <div class="sign"><span>株式会社 A and K</span>代表取締役<b>兼松 厚志</b></div>
       </div>
     </div>
   </div>
 </section>
 
-<section><div class="wrap"><div class="sec-head" style="display:block"><span class="en">OUTLINE</span><h2>会社概要</h2></div><table class="outline"><tr><th>会社名</th><td>株式会社 A and K</td></tr><tr><th>本社所在地</th><td>〒509-0207 岐阜県可児市今渡3-11<br>Tel 0574-66-3511／Fax 0574-66-7311</td></tr><tr><th>可児今渡事務所</th><td>〒509-0207 岐阜県可児市今渡1149-1 2F<br>Tel・Fax 0574-50-5048</td></tr><tr><th>代表者</th><td>代表取締役　兼松 厚志</td></tr><tr><th>E-mail</th><td><a href="mailto:info@aandkcorp.com">info@aandkcorp.com</a></td></tr><tr><th>営業時間</th><td>9:00〜18:00</td></tr><tr><th>定休日</th><td>土曜日、日曜日</td></tr><tr><th>許可</th><td>登録支援機関 登録番号 19登-000975</td></tr><tr><th>事業内容</th><td>・技能実習生の紹介及び手続き代行業務<br>・外国人留学生の紹介業務<br>・特定技能登録支援機関<br>・外国籍児童の保育園経営<br>・内閣府所管企業主導型保育園経営<br>・認可保育園経営<br>・児童発達支援事業・放課後デイサービス事業</td></tr><tr><th>取引銀行</th><td>岐阜商工信用組合 可児支店<br>十六銀行 西可児支店<br>東濃信用金庫 西可児支店</td></tr><tr><th>顧問</th><td>高橋法律事務所<br>各務税理士事務所<br>NAKA社会保険労務士事務所</td></tr></table></div></section><section class="alt"><div class="wrap"><div class="sec-head" style="display:block"><span class="en">GROUP</span><h2>グループの事業</h2><p>外国人材の受入れ支援のほか、保育園と児童発達支援・放課後等デイサービスを運営しています。</p></div><div class="gcards"><div class="gcard"><h3>かみのて保育園</h3><div class="gtag">こども家庭庁所管 企業主導型保育事業</div><p>2022年7月開園。外国にルーツのあるお子さまをお預かりしています。</p><p style="margin-top:8px"><a href="https://www.kaminote-hoikuen.com/" target="_blank" rel="noopener">サイトを見る</a></p></div><div class="gcard"><h3>かみのて今渡保育園</h3><div class="gtag">可児市 小規模認可保育園</div><p>2023年10月開園。可児市の待機児童の解消と、地域の子育て支援に取り組んでいます。</p></div><div class="gcard"><h3>かみのてKIDS・かみのてSMILE</h3><div class="gtag">児童発達支援・放課後等デイサービス</div><p>2025年6月にかみのてKIDSが新築移転し、受け入れ人数を増やしました。</p></div><div class="gcard"><h3>一時預かり事業</h3><p>新社屋の2階で、一時預かりも行っています。</p></div></div></div></section></div><div class="cta" id="contact">
+<section><div class="wrap"><div class="sec-head" style="display:block"><span class="en">COMPANY PROFILE</span><h2>会社概要</h2></div><table class="outline"><tr><th>会社名</th><td>株式会社 A and K</td></tr><tr><th>本社所在地</th><td>〒509-0207 岐阜県可児市今渡3-11<br>Tel 0574-66-3511／Fax 0574-66-7311</td></tr><tr><th>可児今渡事務所</th><td>〒509-0207 岐阜県可児市今渡1149-1 2F<br>Tel・Fax 0574-50-5048</td></tr><tr><th>代表者</th><td>代表取締役　兼松 厚志</td></tr><tr><th>E-mail</th><td><a href="mailto:info@aandkcorp.com">info@aandkcorp.com</a></td></tr><tr><th>営業時間</th><td>9:00〜18:00</td></tr><tr><th>定休日</th><td>土曜日、日曜日</td></tr><tr><th>許可</th><td>登録支援機関 登録番号 19登-000975</td></tr><tr><th>事業内容</th><td>・技能実習生の紹介及び手続き代行業務<br>・外国人留学生の紹介業務<br>・特定技能登録支援機関<br>・外国籍児童の保育園経営<br>・内閣府所管企業主導型保育園経営<br>・認可保育園経営<br>・児童発達支援事業・放課後デイサービス事業</td></tr><tr><th>取引銀行</th><td>岐阜商工信用組合 可児支店<br>十六銀行 西可児支店<br>東濃信用金庫 西可児支店</td></tr><tr><th>顧問</th><td>高橋法律事務所<br>各務税理士事務所<br>NAKA社会保険労務士事務所</td></tr></table></div></section><section class="alt"><div class="wrap"><div class="sec-head" style="display:block"><span class="en">GROUP</span><h2>グループの事業</h2><p>外国人材の受入れ支援のほか、保育園と児童発達支援・放課後等デイサービスを運営しています。</p></div><div class="gcards"><div class="gcard"><h3>かみのて保育園</h3><div class="gtag">こども家庭庁所管 企業主導型保育事業</div><p>2022年7月開園。外国にルーツのあるお子さまをお預かりしています。</p><p style="margin-top:8px"><a href="https://www.kaminote-hoikuen.com/" target="_blank" rel="noopener">サイトを見る</a></p></div><div class="gcard"><h3>かみのて今渡保育園</h3><div class="gtag">可児市 小規模認可保育園</div><p>2023年10月開園。可児市の待機児童の解消と、地域の子育て支援に取り組んでいます。</p></div><div class="gcard"><h3>かみのてKIDS・かみのてSMILE</h3><div class="gtag">児童発達支援・放課後等デイサービス</div><p>2025年6月にかみのてKIDSが新築移転し、受け入れ人数を増やしました。</p></div><div class="gcard"><h3>一時預かり事業</h3><p>新社屋の2階で、一時預かりも行っています。</p></div></div></div></section></div><div class="cta" id="contact">
   <div class="wrap">
     <h2>まずは、お話をお聞かせください</h2>
     <p>ご相談・お見積りは無料です。制度の説明だけでも承ります。</p>

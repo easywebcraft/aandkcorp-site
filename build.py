@@ -636,7 +636,7 @@ def outline_table():
     ]
     tr = "".join(f"<tr><th>{k}</th><td>{v}</td></tr>" for k, v in rows)
     return ('<section><div class="wrap"><div class="sec-head" style="display:block">'
-            '<span class="en">OUTLINE</span><h2>会社概要</h2></div>'
+            '<span class="en">COMPANY PROFILE</span><h2>会社概要</h2></div>'
             f'<table class="outline">{tr}</table></div></section>')
 
 

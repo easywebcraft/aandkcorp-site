@@ -262,6 +262,28 @@ section.alt{background:var(--panel); border-top:1px solid var(--line-s); border-
 .greet p{margin:0 0 14px; font-size:14.5px; color:var(--muted)}
 .greet .sign{margin-top:20px; padding-top:14px; border-top:1px solid var(--line); font-size:14px; color:var(--muted)}
 .greet .sign b{color:var(--ink); font-size:17px; margin-left:10px}
+/* 下層（企業情報ページ）：代表メッセージを薄い青の面にして、会社概要（白）と分ける */
+.msg-label{display:none}
+.sub #company{background:#f5fafd; padding:56px 0 72px}
+.sub .msg-label{display:flex; align-items:baseline; gap:12px; margin-bottom:18px}
+.sub .msg-label .en{font-size:11px; font-weight:700; letter-spacing:.16em; color:var(--blue-dd)}
+.sub .msg-label span:last-child{font-size:13px; color:var(--muted)}
+.sub .greet{grid-template-columns:340px 1fr; gap:56px; align-items:start}
+.sub .greet .ph{aspect-ratio:3/4; background:#fff; border:1px solid var(--line); border-radius:4px}
+.sub .greet h3{font-size:clamp(22px,2.6vw,30px); line-height:1.55; color:var(--ink); margin:0 0 26px; letter-spacing:.01em}
+.sub .greet h3 span{display:inline-block}
+.sub .greet p{font-size:15px; line-height:2; color:#4a5866}
+.sub .greet p strong{color:var(--blue-dd)}
+.sub .greet .sign{margin-top:36px; padding-top:20px; border-top:1px solid var(--line); display:flex; align-items:baseline; gap:4px; flex-wrap:wrap}
+.sub .greet .sign span{flex-basis:100%; font-size:12.5px; color:var(--muted); margin-bottom:2px}
+.sub .greet .sign b{font-size:20px; letter-spacing:.08em}
+@media (max-width:760px){
+  .sub #company{padding:40px 0 52px}
+  .sub .greet{grid-template-columns:1fr; gap:24px}
+  .sub .greet .ph{max-width:200px}
+  .sub .greet h3{font-size:21px}
+  .sub .greet h3 span{display:inline}
+}
 
 /* FAQ */
 .faq details{background:#fff; border:1px solid var(--line); margin-bottom:8px; border-radius:3px}
@@ -641,7 +663,7 @@ setTimeout(function(){
 <section id="company">
   <div class="wrap">
     <div class="sec-head"><span class="en">MESSAGE</span><h2>代表ごあいさつ</h2></div>
-    <div class="greet top-greet"><div class="ph">代表のお写真が<br>入ります</div><div><h3>「来てよかった」と言ってもらえる受入れを、企業さまと一緒に。</h3><div class="sign">代表取締役<b>兼松 厚志</b></div></div></div>
+    <div class="greet top-greet"><div class="ph">代表のお写真が<br>入ります</div><div><h3><span>「来てよかった」と言ってもらえる受入れを、</span><span>企業さまと一緒に。</span></h3><div class="sign"><span>株式会社 A and K</span>代表取締役<b>兼松 厚志</b></div></div></div>
     <div class="more"><a class="btn-more" href="company.html"><span>詳しく見る</span></a></div>
   </div>
 </section>
