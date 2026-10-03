@@ -105,10 +105,21 @@ EXTRA_CSS = """
   font-variant-numeric:tabular-nums}
 .chips-note{text-align:center; color:var(--muted); font-size:13px; margin:16px 0 0;
   letter-spacing:.04em}
-.tsteps{display:flex; flex-wrap:wrap; gap:10px; justify-content:center;
+.tsteps{display:grid; grid-template-columns:repeat(5,1fr); gap:28px; position:relative;
   list-style:none; margin:0; padding:0}
-.tstep{border:1px solid var(--line); background:#fff; padding:14px 18px; text-align:center;
-  flex:1 1 150px; max-width:230px}
+.tsteps::before{content:""; position:absolute; left:16px; right:16px; top:50%; height:1px; background:#cfdbe5}
+.tstep{position:relative; border:1px solid var(--line); background:#fff; padding:16px 14px; text-align:center; border-radius:6px}
+.tstep:not(:last-child)::after{content:""; position:absolute; right:-18px; top:calc(50% - 4px); width:7px; height:7px;
+  border-top:1.5px solid #9fb4c6; border-right:1.5px solid #9fb4c6; transform:rotate(45deg)}
+@media (max-width:860px){
+  .tsteps{grid-template-columns:1fr; gap:10px; padding-left:20px}
+  .tsteps::before{left:5px; right:auto; top:12px; bottom:12px; width:1px; height:auto}
+  .tstep{text-align:left; display:grid; grid-template-columns:auto 1fr auto; gap:12px; align-items:baseline; padding:12px 16px}
+  .tstep::before{content:""; position:absolute; left:-19px; top:calc(50% - 4px); width:8px; height:8px; border-radius:50%; background:var(--blue)}
+  .tstep:not(:last-child)::after{display:none}
+  .tstep .num{margin:0}
+  .tstep span{margin:0}
+}
 .tstep .num{display:block; color:var(--gold,#b39861); font-size:11.5px; letter-spacing:.14em;
   margin-bottom:6px; font-variant-numeric:tabular-nums}
 .tstep b{display:block; font-weight:400; font-size:15px; letter-spacing:.05em}
@@ -118,6 +129,17 @@ EXTRA_CSS = """
 .qlist a{display:block; padding:18px 4px; text-decoration:none; font-size:14.5px;
   letter-spacing:.04em}
 .qlist a:hover{color:var(--gold,#b39861)}
+.qlist a, .qa-a{position:relative; padding-left:34px !important}
+.qlist a b, .qa-a b{position:absolute; left:8px; font-weight:700; color:var(--blue-dd,#0a5a8c)}
+.qlist li.open{background:var(--panel,#f6fafd); border-radius:4px; border-bottom-color:transparent; margin-bottom:2px}
+.qlist li.open a{font-weight:700}
+.qa-a{margin:0; padding:0 14px 18px; font-size:14px; color:var(--muted); line-height:1.9}
+.more-r{text-align:right; margin-top:28px}
+.top-consult{margin:22px auto 0; text-align:center; font-size:14px; color:var(--ink,#16273a);
+  display:flex; justify-content:center; align-items:center; gap:6px 18px; flex-wrap:wrap}
+.top-greet.no-photo{grid-template-columns:1fr; max-width:820px}
+.top-greet.no-photo h3{font-size:clamp(20px,2.4vw,26px)}
+.greet .sign span{display:block; font-size:12.5px; color:var(--muted)}
 /* トップのごあいさつは見出しと署名だけなので、お写真と高さが揃わない */
 .top-greet{align-items:center}
 .top-greet .ph{aspect-ratio:4/5}
@@ -414,6 +436,12 @@ def div_block(frag, marker):
     raise ValueError(marker)
 
 
+MORE_LABEL = {
+    "visas": "ご紹介できる人材を見る", "support": "全10項目を見る", "flow": "流れを詳しく見る",
+    "partners": "提携機関を見る", "company": "代表メッセージを読む", "faq": "よくあるご質問をすべて見る",
+}
+
+
 def top_section(frag, sec_id, inner, more_href):
     """トップ用の節。見出しと要約だけを置き、説明は下層ページに任せる。"""
     en, h2, _ = sec_head(frag)
@@ -423,8 +451,8 @@ def top_section(frag, sec_id, inner, more_href):
             f'    <div class="sec-head"><span class="en">{en}</span><h2>{h2}</h2>'
             f'{f"<p>{lead}</p>" if lead else ""}</div>\n'
             f"    {inner}\n"
-            f'    <div class="more"><a class="btn-more" href="{more_href}">'
-            f"<span>詳しく見る</span></a></div>\n  </div>\n</section>\n\n")
+            f'    <div class="more-r"><a class="txt-link" href="{more_href}">'
+            f'{MORE_LABEL.get(sec_id, "詳しく見る")} <span aria-hidden="true">→</span></a></div>\n  </div>\n</section>\n\n')
 
 
 def chips(items):
@@ -441,8 +469,11 @@ def digest(secs):
     # 在留資格は名前だけ。実績の数字はトップだけに置く（下層からは外す）。
     f = secs["visas"]
     names = re.findall(r'<div class="visa">.*?<h3>(.*?)</h3>', f, re.S)
-    out["visas"] = top_section(f, "visas", chips(names) + div_block(f, '<div class="stats">'),
-                               "service.html")
+    # ★実績の数字（受入企業数・累計紹介人数・対応国籍）は、お客さまから実数が届くまで出さない
+    #   （○○ のままだと作りかけに見える）。届いたら div_block(f, '<div class="stats">') を足す。
+    consult = ('<p class="top-consult">どの制度が合うか分からなくても、ご相談いただけます。'
+               '<a class="txt-link" href="contact.html">制度選びから相談する <span aria-hidden="true">→</span></a></p>')
+    out["visas"] = top_section(f, "visas", chips(names) + consult, "service.html")
 
     # 支援は代表的な4つだけ挙げ、10項目の中身は support.html で説明する。
     f = secs["support"]
@@ -478,18 +509,26 @@ def digest(secs):
     h3 = re.search(r'<div class="greet">.*?<h3>(.*?)</h3>', f, re.S)
     photo = div_block(f, '<div class="ph">')
     sign = div_block(f, '<div class="sign">')
+    if "入ります" in photo:          # 仮の写真枠（お写真が届くまで）
+        photo = ""
     out["company"] = top_section(
         f, "company",
-        f'<div class="greet top-greet">{photo}<div><h3>{h3.group(1)}</h3>{sign}</div></div>',
+        f'<div class="greet top-greet{"" if photo else " no-photo"}">{photo}<div><h3>{h3.group(1)}</h3>{sign}</div></div>',
         "company.html")
 
     # よくあるご質問は質問だけ。答えは faq.html に置く。
     f = secs["faq"]
-    qs = re.findall(r"<summary>(.*?)</summary>", f, re.S)
+    qa = re.findall(r'<summary>(.*?)</summary>\s*<div class="a">(.*?)</div>', f, re.S)
+    items = []
+    for i, (q, a) in enumerate(qa):
+        if i == 0:
+            items.append(f'<li class="open"><a href="faq.html"><b>Q</b>{q.strip()}</a>'
+                         f'<p class="qa-a"><b>A</b>{a.strip()}</p></li>')
+        else:
+            items.append(f'<li><a href="faq.html"><b>Q</b>{q.strip()}</a></li>')
     out["faq"] = top_section(
         f, "faq",
-        '<ul class="qlist">' + "".join(
-            f'<li><a href="faq.html">{q.strip()}</a></li>' for q in qs) + "</ul>",
+        '<ul class="qlist">' + "".join(items) + "</ul>",
         "faq.html")
     return out
 

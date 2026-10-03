@@ -120,7 +120,7 @@ header{position:sticky; top:0; z-index:70; background:#fff; border-bottom:1px so
 .badges small{font-size:12.5px; color:var(--muted)}
 
 /* ---- お知らせ：見出しを上に、日付／タイトル／矢印の1行リスト ---- */
-.newsband{padding:56px 0 16px}
+.newsband{padding:44px 0 4px}
 .nb-head{display:flex; align-items:baseline; gap:14px; margin-bottom:14px}
 .nb-head .en{font-size:12px; font-weight:700; letter-spacing:.16em; color:var(--blue-dd)}
 .nb-head h2{margin:0; font-size:18px; font-weight:700; color:var(--ink)}
@@ -297,14 +297,24 @@ section.alt{background:var(--panel); border-top:1px solid var(--line-s); border-
 .faq .a{padding:0 20px 18px 58px; font-size:14px; color:var(--muted)}
 
 /* CTA */
-.cta{background:var(--blue-s); border-top:1px solid var(--blue-line); text-align:center; padding:62px 0}
-.cta h2{font-size:clamp(20px,2.7vw,26px); font-weight:700; margin:0 0 10px; color:var(--blue-dd)}
-.cta p{color:var(--muted); margin:0 0 26px; font-size:14.5px}
-.cta .row{display:flex; gap:26px; justify-content:center; align-items:center; flex-wrap:wrap}
-.cta .tel{text-align:left}
-.cta .tel .n{font-size:28px; font-weight:700; color:var(--blue-dd); line-height:1.3;
-  font-variant-numeric:tabular-nums}
-.cta .tel .h{font-size:12px; color:var(--muted)}
+.cta{background:var(--blue-s); border-top:1px solid var(--blue-line); text-align:center; padding:76px 0}
+.cta h2 span{display:inline-block}
+.cta h2{font-size:clamp(23px,3vw,32px); font-weight:700; margin:0 0 12px; color:var(--ink)}
+.cta p{color:var(--muted); margin:0 0 34px; font-size:15.5px}
+.cta-ways{display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:16px; max-width:980px; margin:0 auto; text-align:left}
+.cw{position:relative; display:flex; flex-direction:column; gap:4px; padding:24px 26px; background:#fff; border:1px solid var(--blue-line);
+  border-radius:6px; text-decoration:none; color:var(--ink); transition:box-shadow .2s, transform .2s}
+.cw:hover{box-shadow:0 8px 22px rgba(10,60,100,.1); transform:translateY(-2px)}
+.cw-k{font-size:12px; font-weight:700; color:var(--blue-dd); letter-spacing:.04em}
+.cw b{font-size:22px; font-weight:700; color:var(--blue-dd); letter-spacing:.02em; line-height:1.4}
+.cw b.mail{font-size:17px; overflow-wrap:anywhere}
+.cw small{font-size:12px; color:var(--muted)}
+.cw-form{background:var(--blue); border-color:var(--blue); color:#fff; justify-content:center}
+.cw-form .cw-k{color:#d8ecf8}
+.cw-form b{color:#fff; font-size:19px}
+.cw-form i{position:absolute; right:24px; top:50%; transform:translateY(-50%); font-style:normal; font-size:20px}
+.cw-form:hover{background:var(--blue-d)}
+@media (max-width:860px){ .cta-ways{grid-template-columns:1fr} .cta{padding:56px 0} }
 
 /* フッター */
 footer{background:var(--blue-dd); color:#cfe8f5; font-size:13px; padding:44px 0 20px}
@@ -333,8 +343,6 @@ footer a:hover{color:#fff; text-decoration:underline}
   .hdr .co img{height:28px}
   .pill{padding:8px 16px; font-size:13px; min-height:44px}
 }
-  .pill{padding:8px 16px; font-size:13px; min-height:44px}
-}
 @media (max-width:760px){
   section{padding:46px 0}
   .stats{grid-template-columns:repeat(2,1fr)}
@@ -356,8 +364,6 @@ footer a:hover{color:#fff; text-decoration:underline}
   .hero .bg{position:absolute; inset:0}
   .hero-copy .lead br{display:none}
   footer .cols{grid-template-columns:1fr; gap:22px}
-  .cta .row{flex-direction:column; gap:18px}
-  .cta .tel{text-align:center}
 }
 </style>
 </head>
@@ -403,7 +409,6 @@ footer a:hover{color:#fff; text-decoration:underline}
         <a class="btn" href="#contact">無料で相談する</a>
         <a class="txt-link" href="#flow">受入れの流れを見る <span aria-hidden="true">→</span></a>
       </div>
-      <p class="trust">出入国在留管理庁 登録支援機関　登録番号 19登-000975</p>
     </div>
   </div>
 </div>
@@ -594,14 +599,12 @@ footer a:hover{color:#fff; text-decoration:underline}
 
 <div class="cta" id="contact">
   <div class="wrap">
-    <h2>まずは、お話をお聞かせください</h2>
+    <h2><span>まずは、</span><span>お話をお聞かせください</span></h2>
     <p>ご相談・お見積りは無料です。制度の説明だけでも承ります。</p>
-    <div class="row">
-      <a class="btn" href="contact.html">お問い合わせにすすむ</a>
-      <div class="tel">
-        <div class="n">0574-66-3511</div>
-        <div class="h">平日 9:00〜18:00（土日休）／ info@aandkcorp.com</div>
-      </div>
+    <div class="cta-ways">
+      <a class="cw cw-form" href="contact.html"><span class="cw-k">フォームで相談する</span><b>お問い合わせにすすむ</b><i aria-hidden="true">→</i></a>
+      <a class="cw" href="tel:0574663511"><span class="cw-k">お電話で</span><b>0574-66-3511</b><small>平日 9:00〜18:00（土日休）</small></a>
+      <a class="cw" href="mailto:info@aandkcorp.com"><span class="cw-k">メールで</span><b class="mail">info@aandkcorp.com</b><small>24時間受付</small></a>
     </div>
   </div>
 </div>
