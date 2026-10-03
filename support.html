@@ -16,8 +16,8 @@
    見出しの前に青い印を置いて視線の起点を作る。
    参考にしたのは書体・配色・ヘッダーの型で、CSSは自前で書いている。 */
 :root{
-  --blue:#14a0dc; --blue-d:#008bd5; --blue-dd:#00689f; --blue-s:#e8f5fc; --blue-line:#bfe3f5;
-  --ink:#1f2733; --muted:#6b7683; --line:#dde4ea; --line-s:#eef2f6;
+  --blue:#0a7fc2; --blue-d:#086ba4; --blue-dd:#0a5a8c; --blue-s:#eef6fb; --blue-line:#d6e8f3;
+  --ink:#16273a; --muted:#6b7683; --line:#dde4ea; --line-s:#eef2f6;
   --bg:#fff; --panel:#f6fafd;
   --sans:"Open Sans",-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN",
          "Yu Gothic",Meiryo,"Noto Sans JP",sans-serif;
@@ -73,56 +73,66 @@ header{position:sticky; top:0; z-index:70; background:#fff; border-bottom:1px so
 .mnav .grp{border-top:1px solid var(--line); margin-top:6px; padding-top:5px}
 .mnav .grp-t{padding:4px 20px 2px; font-size:11px; color:var(--blue-d); font-weight:700}
 
-/* ---- ヒーロー ---- */
+/* ---- ヒーロー（2026-10-03 見直し：コピーを主役に。登録番号はコピーの下の信頼情報へ） ---- */
 .hero{position:relative; background:var(--blue-s); overflow:hidden}
-.hero .bg{position:relative; height:clamp(320px,46vh,460px); height:clamp(320px,46svh,460px)}
+.hero .bg{position:relative; height:clamp(500px,68vh,640px); height:clamp(500px,68svh,640px)}
 .hero .bg img{width:100%; height:100%; object-fit:cover; object-position:35% 78%}
-/* 左に白を寄せて文字の場所を作る。写真の右側（空と雲）はそのまま見せる。
-   ★かぶせが 56% で切れていたため、見出しの後半（画面の70%あたりまで伸びる）が
-   生の空に乗って読めなくなっていた。文字の右端まで白を届かせる。 */
+/* 左に白を寄せて文字の場所を作る。写真の右側（空と雲）はそのまま見せる */
 .hero .bg::after{content:""; position:absolute; inset:0;
-  background:linear-gradient(95deg,rgba(255,255,255,.95) 0%,rgba(255,255,255,.93) 38%,
-                             rgba(255,255,255,.86) 62%,rgba(255,255,255,.48) 78%,
-                             transparent 94%)}
+  background:linear-gradient(95deg,rgba(255,255,255,.96) 0%,rgba(255,255,255,.94) 40%,
+                             rgba(255,255,255,.82) 60%,rgba(255,255,255,.35) 80%,transparent 96%)}
 .hero-copy{position:absolute; inset:0; display:flex; align-items:center; z-index:2}
-.hero-copy .tag{display:inline-block; background:var(--blue); color:#fff; font-size:12px;
-  font-weight:700; padding:5px 14px; border-radius:3px; margin-bottom:16px}
-/* ★強調に --blue(#14a0dc) を使っていたが、白地に乗せても 2.96 しか出ない
-   （大きな文字の基準 3.0 に届かない）。地の色をいくら明るくしても成立しないので、
-   本文側を濃く、強調を青にして二段階の濃さを作る。 */
-.hero-copy h1{font-size:clamp(23px,3.6vw,40px); font-weight:700; line-height:1.5; margin:0 0 14px;
-  color:var(--ink)}
+.hero-copy .wrap{width:100%}
+/* ★強調の青は白地で 4.5 以上出る濃さ（--blue-dd）にする */
+.hero-copy h1{font-size:clamp(30px,4.6vw,54px); font-weight:700; line-height:1.38; margin:0 0 22px;
+  letter-spacing:.02em; color:var(--ink)}
 .hero-copy h1 b{color:var(--blue-dd); font-weight:700}
-.hero-copy p{font-size:15px; color:var(--ink); margin:0 0 24px; max-width:34em}
-.hero-actions{display:flex; gap:12px; flex-wrap:wrap}
-.btn{display:inline-block; text-decoration:none; padding:13px 28px; font-size:14.5px;
-  font-weight:700; border-radius:3px; background:var(--blue); color:#fff; border:2px solid var(--blue)}
+.hero-copy h1 span, .hero-copy h1 b{display:inline-block}
+.hero-copy .lead{font-size:16px; line-height:1.9; color:var(--ink); margin:0 0 18px}
+.visa-list{list-style:none; margin:0 0 30px; padding:0; display:flex; flex-wrap:wrap; gap:4px 0; font-size:13.5px; color:var(--muted)}
+.visa-list li{white-space:nowrap}
+.visa-list{gap:6px 18px}
+.visa-list li{position:relative}
+.visa-list li + li::before{content:"/"; position:absolute; left:-12px; color:#c3ccd5}
+.hero-actions{display:flex; align-items:center; gap:26px; flex-wrap:wrap}
+.hero-copy .trust{margin:28px 0 0; padding-top:16px; border-top:1px solid var(--line); max-width:30em;
+  font-size:12.5px; color:var(--muted); letter-spacing:.02em}
+.btn{display:inline-block; text-decoration:none; padding:14px 30px; font-size:14.5px;
+  font-weight:700; border-radius:4px; background:var(--blue); color:#fff; border:2px solid var(--blue)}
 .btn:hover{background:var(--blue-d); border-color:var(--blue-d)}
 .btn.ghost{background:#fff; color:var(--blue-d)}
 .btn.ghost:hover{background:var(--blue-s)}
+.txt-link{color:var(--blue-dd); font-weight:700; font-size:14px; text-decoration:none; white-space:nowrap}
+.txt-link span{display:inline-block; transition:transform .2s}
+.txt-link:hover span{transform:translateX(4px)}
 .btn-more{display:inline-block; text-decoration:none; padding:12px 34px; font-size:14px;
-  font-weight:700; border:2px solid var(--blue); color:var(--blue-d); border-radius:3px}
+  font-weight:700; border:2px solid var(--blue); color:var(--blue-d); border-radius:4px}
 .btn-more:hover{background:var(--blue); color:#fff}
 
-/* 登録番号などの帯 */
-.badges{background:var(--blue-dd); color:#fff}
-.badges .wrap{display:flex; gap:38px; flex-wrap:wrap; padding-top:14px; padding-bottom:14px; font-size:13px}
-.badges b{color:#fff; font-weight:700}
-.badges span{color:#bfe3f5}
+/* 信頼情報：3カラム（見出し＋補足）。青の面はやめて白地に線で区切る */
+.badges{background:#fff; border-bottom:1px solid var(--line)}
+.badges .wrap{display:grid; grid-template-columns:repeat(3,1fr)}
+.badges .bd{display:flex; flex-direction:column; gap:2px; padding:22px 26px; border-left:1px solid var(--line)}
+.badges .bd:first-child{border-left:0; padding-left:0}
+.bd-k{font-size:11.5px; font-weight:700; color:var(--blue-dd); letter-spacing:.06em}
+.badges b{font-size:15.5px; color:var(--ink)}
+.badges small{font-size:12.5px; color:var(--muted)}
 
-/* ---- お知らせ（枠で囲う） ---- */
-.newsband{padding:26px 0}
-.newsband .box{border:1px solid var(--blue-line); display:flex; gap:0; align-items:stretch}
-.newsband .ttl{flex:none; background:var(--blue-s); color:var(--blue-dd); font-weight:700;
-  font-size:13.5px; padding:18px 24px; display:flex; align-items:center}
-.newsband ul{list-style:none; margin:0; padding:14px 22px; flex:1; min-width:0; font-size:13.5px}
-.newsband li{display:flex; gap:16px; margin:4px 0}
-.newsband time{flex:none; color:var(--muted); font-variant-numeric:tabular-nums}
-.newsband a{color:var(--ink); text-decoration:none}
-.newsband a:hover{color:var(--blue-d); text-decoration:underline}
-.newsband .more-l{flex:none; display:flex; align-items:center; padding:0 22px;
-  border-left:1px solid var(--blue-line)}
-.newsband .more-l a{color:var(--blue-d); font-weight:700; font-size:13px; text-decoration:none; white-space:nowrap}
+/* ---- お知らせ：見出しを上に、日付／タイトル／矢印の1行リスト ---- */
+.newsband{padding:56px 0 16px}
+.nb-head{display:flex; align-items:baseline; gap:14px; margin-bottom:14px}
+.nb-head .en{font-size:12px; font-weight:700; letter-spacing:.16em; color:var(--blue-dd)}
+.nb-head h2{margin:0; font-size:18px; font-weight:700; color:var(--ink)}
+.nb-head .txt-link{margin-left:auto; font-size:13px}
+.newsband ul{list-style:none; margin:0; padding:0; border-top:1px solid var(--line)}
+.newsband li{border-bottom:1px solid var(--line)}
+.newsband li a{display:grid; grid-template-columns:110px 1fr 20px; gap:20px; align-items:center;
+  padding:16px 6px; color:var(--ink); text-decoration:none; font-size:14.5px; transition:background-color .2s}
+.newsband li a:hover{background:var(--blue-s)}
+.newsband li span{overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.newsband time{color:var(--muted); font-variant-numeric:tabular-nums; font-size:13.5px}
+.newsband i{font-style:normal; color:var(--blue-dd); transition:transform .2s}
+.newsband li a:hover i{transform:translateX(4px)}
 
 /* ---- 節 ---- */
 section{padding:66px 0}
@@ -254,13 +264,18 @@ footer a:hover{color:#fff; text-decoration:underline}
   .greet .ph{max-width:220px}
   .hero .bg::after{background:linear-gradient(180deg,rgba(255,255,255,.93) 0%,
     rgba(255,255,255,.86) 52%,rgba(255,255,255,.5) 100%)}
-  .newsband .box{flex-direction:column}
-  .newsband .more-l{border-left:none; border-top:1px solid var(--blue-line); padding:12px 22px}
-  /* 1行25pxでは指で押しにくい。スマホだけ行に高さを持たせる */
-  .newsband li{margin:0; align-items:baseline}
-  .newsband li a{display:block; padding:9px 0}
-  .newsband .more-l a{display:block; padding:10px 0}
-  .badges .wrap{gap:8px 22px}
+  .newsband{padding:40px 0 8px}
+  .newsband li a{grid-template-columns:1fr 18px; gap:2px 12px; padding:14px 2px}
+  .newsband time{grid-column:1}
+  .newsband li span{grid-column:1; white-space:normal}
+  .newsband i{grid-column:2; grid-row:1 / 3}
+  .badges .wrap{grid-template-columns:1fr}
+  .badges .bd{border-left:0; border-top:1px solid var(--line); padding:14px 0}
+  .badges .bd:first-child{border-top:0}
+  .hero .bg{height:auto; min-height:560px}
+  .hero-copy{position:relative; padding:40px 0 44px}
+  .hero .bg{position:absolute; inset:0}
+  .hero-copy .lead br{display:none}
   footer .cols{grid-template-columns:1fr; gap:22px}
   .cta .row{flex-direction:column; gap:18px}
   .cta .tel{text-align:center}
@@ -461,9 +476,9 @@ setTimeout(function(){
   <div class="wrap">
     <a class="co" href="index.html" aria-label="株式会社 A and K トップへ"><img src="img/logo.png" alt="株式会社 A and K"></a>
     <nav class="seg">
-      <a href="service.html">はじめて受入れをお考えの方</a>
-      <a href="support.html">特定技能をお考えの方</a>
-      <a href="partners.html">監理団体・組合の方</a>
+      <a href="service.html">はじめての方</a>
+      <a href="support.html">特定技能</a>
+      <a href="partners.html">監理団体・組合</a>
     </nav>
     <span class="en off" title="英語版は今回の範囲外です">EN</span>
     <a class="pill" href="contact.html">お問い合わせ</a>
@@ -472,9 +487,9 @@ setTimeout(function(){
 
 <header>
   <div class="gnav-row">
-    <nav class="gnav"><a href="service.html">ご紹介できる人材</a><a href="support.html" class="on">支援内容</a><a href="flow.html">受入れの流れ</a></nav>
+    <nav class="gnav"><a href="service.html">人材紹介</a><a href="support.html" class="on">支援内容</a><a href="flow.html">受入れの流れ</a></nav>
     <a class="logo-c" href="index.html"><img src="img/logo.png" alt="株式会社 A and K"></a>
-    <nav class="gnav"><a href="partners.html">提携機関</a><a href="company.html">企業情報</a><a href="contact.html">お問い合わせ</a></nav>
+    <nav class="gnav"><a href="partners.html">提携機関</a><a href="company.html">企業情報</a></nav>
     <button class="hamburger" type="button" id="menu-btn"
             aria-label="メニューを開く" aria-expanded="false" aria-controls="mnav">☰</button>
     <nav class="mnav" id="mnav">

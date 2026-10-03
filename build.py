@@ -69,8 +69,9 @@ TOP_LEAD = {
 }
 
 # メニューの並び（左3つ／ロゴ／右3つ）
-NAV_L = [("service.html", "ご紹介できる人材"), ("support.html", "支援内容"), ("flow.html", "受入れの流れ")]
-NAV_R = [("partners.html", "提携機関"), ("company.html", "企業情報"), ("contact.html", "お問い合わせ")]
+NAV_L = [("service.html", "人材紹介"), ("support.html", "支援内容"), ("flow.html", "受入れの流れ")]
+# お問い合わせはヘッダー上段右端のボタン1つにする（上下で重複していた）
+NAV_R = [("partners.html", "提携機関"), ("company.html", "企業情報")]
 
 # 節id → 出力ファイル。原本のアンカーをページへの参照に張り替えるのに使う
 ANCHOR = {sec: out for out, (sec, *_ ) in PAGES.items()}
@@ -495,8 +496,8 @@ def fill_newsband(hero, n=3):
     原本に直接書くと更新のたびに2案とも直すことになり、実際そのまま
     2021年で止まっていた。見出しだけを出し、本文と写真は news.html に置く。"""
     items = json.loads((SRC / "news.json").read_text(encoding="utf-8"))[:n]
-    li = "".join(f'<li><time>{it["date"]}</time>'
-                 f'<a href="news.html">{html.escape(it["title"])}</a></li>' for it in items)
+    li = "".join(f'<li><a href="news.html"><time>{it["date"]}</time>'
+                 f'<span>{html.escape(it["title"])}</span><i aria-hidden="true">→</i></a></li>' for it in items)
     band = hero[hero.index('<div class="newsband">'):]
     old = band[band.index("<ul>"): band.index("</ul>") + 5]
     return hero.replace(old, f"<ul>{li}</ul>")
