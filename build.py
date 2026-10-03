@@ -135,6 +135,24 @@ EXTRA_CSS = """
 .qlist li.open a{font-weight:700}
 .qa-a{margin:0; padding:0 14px 18px; font-size:14px; color:var(--muted); line-height:1.9}
 .more-r{text-align:right; margin-top:28px}
+.sec-head .lead-strong{font-size:clamp(16px,1.8vw,19px); font-weight:700; color:var(--ink,#16273a)}
+.vchips{display:grid; grid-template-columns:repeat(6,1fr); gap:14px; max-width:860px; margin:0 auto}
+.vchip{grid-column:span 2; display:flex; align-items:center; justify-content:center; min-height:64px; background:#fff;
+  border:1px solid var(--line); border-radius:6px; font-size:16px; font-weight:700; color:var(--ink,#16273a)}
+.vchip:nth-child(4){grid-column:2 / span 2}
+.pnet{display:grid; grid-template-columns:repeat(4,1fr); gap:14px}
+.pn{display:flex; flex-direction:column; gap:4px; padding:20px 20px 22px; background:#fff; border:1px solid var(--line); border-radius:6px}
+.pn-own{background:var(--blue-s,#eef6fb); border-color:var(--blue-line,#d6e8f3)}
+.pnet{max-width:100%}
+.tstep .num, .chips .num{color:var(--blue-dd,#0a5a8c) !important; font-weight:700}
+.pn-k{font-size:11px; font-weight:700; letter-spacing:.12em; color:var(--blue-dd,#0a5a8c)}
+.pn b{font-size:14.5px; letter-spacing:0; color:var(--ink,#16273a); line-height:1.5}
+.pn small{font-size:12px; color:var(--muted)}
+@media (max-width:860px){
+  .vchips{grid-template-columns:repeat(2,1fr); gap:10px} .vchip, .vchip:nth-child(4){grid-column:auto; min-height:52px; font-size:15px}
+  .vchip:last-child{grid-column:1 / -1}
+  .pnet{grid-template-columns:1fr; gap:10px}
+}
 .top-consult{margin:22px auto 0; text-align:center; font-size:14px; color:var(--ink,#16273a);
   display:flex; justify-content:center; align-items:center; gap:6px 18px; flex-wrap:wrap}
 .top-greet.no-photo{grid-template-columns:1fr; max-width:820px}
@@ -443,13 +461,21 @@ MORE_LABEL = {
 
 
 def top_section(frag, sec_id, inner, more_href):
+    """（トップで強みとして大きく見せる一文は TOP_LEAD_BIG に入れる）"""
+    return _top_section(frag, sec_id, inner, more_href)
+
+
+TOP_LEAD_BIG = {"support", "partners"}
+
+
+def _top_section(frag, sec_id, inner, more_href):
     """トップ用の節。見出しと要約だけを置き、説明は下層ページに任せる。"""
     en, h2, _ = sec_head(frag)
     alt = ' class="alt"' if 'class="alt' in frag[: frag.index(">") + 1] else ""
     lead = TOP_LEAD.get(sec_id, "")
     return (f'<section{alt} id="{sec_id}">\n  <div class="wrap">\n'
             f'    <div class="sec-head"><span class="en">{en}</span><h2>{h2}</h2>'
-            f'{f"<p>{lead}</p>" if lead else ""}</div>\n'
+            f'{(f"<p class=" + chr(34) + "lead-strong" + chr(34) + f">{lead}</p>" if sec_id in TOP_LEAD_BIG else f"<p>{lead}</p>") if lead else ""}</div>\n'
             f"    {inner}\n"
             f'    <div class="more-r"><a class="txt-link" href="{more_href}">'
             f'{MORE_LABEL.get(sec_id, "詳しく見る")} <span aria-hidden="true">→</span></a></div>\n  </div>\n</section>\n\n')
@@ -473,7 +499,8 @@ def digest(secs):
     #   （○○ のままだと作りかけに見える）。届いたら div_block(f, '<div class="stats">') を足す。
     consult = ('<p class="top-consult">どの制度が合うか分からなくても、ご相談いただけます。'
                '<a class="txt-link" href="contact.html">制度選びから相談する <span aria-hidden="true">→</span></a></p>')
-    out["visas"] = top_section(f, "visas", chips(names) + consult, "service.html")
+    vcards = '<div class="vchips">' + "".join(f'<span class="vchip">{n}</span>' for n in names) + '</div>'
+    out["visas"] = top_section(f, "visas", vcards + consult, "service.html")
 
     # 支援は代表的な4つだけ挙げ、10項目の中身は support.html で説明する。
     f = secs["support"]
@@ -499,10 +526,12 @@ def digest(secs):
     f = secs["partners"]
     grp = re.search(r'<div class="group-lead">.*?<h3>(.*?)</h3>', f, re.S)
     prs = re.findall(r'<div class="partner">.*?<h3>(.*?)</h3>\s*<div class="cc">(.*?)</div>', f, re.S)
-    cards = [f'<span class="chip"><span class="num">自社グループ</span>{grp.group(1)}</span>'] if grp else []
-    cards += [f'<span class="chip"><span class="num">{cc}</span>{nm}</span>' for nm, cc in prs]
-    out["partners"] = top_section(f, "partners", '<div class="chips">' + "".join(cards) + "</div>",
-                                  "partners.html")
+    roles = dict(re.findall(r'<div class="partner">.*?<h3>(.*?)</h3>.*?<div class="role">(.*?)</div>', f, re.S))
+    cells = []
+    if grp:
+        cells.append(f'<div class="pn pn-own"><span class="pn-k">自社グループ</span><b>{grp.group(1)}</b><small>監理団体</small></div>')
+    cells += [f'<div class="pn"><span class="pn-k">{cc}</span><b>{nm}</b><small>{roles.get(nm, "")}</small></div>' for nm, cc in prs]
+    out["partners"] = top_section(f, "partners", '<div class="pnet">' + "".join(cells) + "</div>", "partners.html")
 
     # ごあいさつはお写真と見出しだけ。本文は company.html で読んでいただく。
     f = secs["company"]
