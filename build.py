@@ -204,12 +204,12 @@ ANIM_HEAD = """
 
 /* ヒーローとお知らせ帯はJSを使わずCSSだけで動かす。JSがクラスを付けるのを
    待つと、待っている間に文字が見えてしまう（環境が遅いほど長く見える）。 */
-.hero-copy > *{animation:rise .7s cubic-bezier(.2,.7,.3,1) both}
-.hero-copy > *:nth-child(2){animation-delay:.08s}
-.hero-copy > *:nth-child(3){animation-delay:.16s}
-.hero-copy > *:nth-child(4), .hero-copy > *:nth-child(5){animation-delay:.24s}
-.hero-copy > *:nth-child(6){animation-delay:.32s}
-.hero-ph{animation:rise .9s cubic-bezier(.2,.7,.3,1) .2s both}
+.hero .bg img{animation:zoomOut 1.8s cubic-bezier(.2,.7,.3,1) both}
+.hero-copy .wrap > *{animation:rise .7s cubic-bezier(.2,.7,.3,1) both}
+.hero-copy .wrap > *:nth-child(1){animation-delay:.15s}
+.hero-copy .wrap > *:nth-child(2){animation-delay:.30s}
+.hero-copy .wrap > *:nth-child(3){animation-delay:.45s}
+.hero-copy .wrap > *:nth-child(4){animation-delay:.60s}
 .trust{animation:rise .7s cubic-bezier(.2,.7,.3,1) .4s both}
 
 /* スクロールで出てくる分だけ、JSがあるとき（.anim）に隠しておく */
@@ -220,11 +220,11 @@ __SEL__{opacity:0}
 
 @media (prefers-reduced-motion:reduce){
   __SEL__{opacity:1}
-  .anim .on, .hero-ph, .hero-copy > *, .trust{animation:none}
+  .anim .on, .hero .bg img, .hero-copy .wrap > *, .trust{animation:none}
 }
 @media print{
   __SEL__{opacity:1 !important}
-  .anim .on, .hero-ph, .hero-copy > *, .trust{animation:none !important}
+  .anim .on, .hero .bg img, .hero-copy .wrap > *, .trust{animation:none !important}
 }
 </style>
 <script>

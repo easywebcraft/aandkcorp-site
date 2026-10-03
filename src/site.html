@@ -86,25 +86,34 @@ header{position:sticky; top:0; z-index:70; background:#fff; border-bottom:1px so
   border-radius:50%; border:1px solid var(--blue-line); background:#fff; color:var(--blue-dd)}
 .ic svg{width:24px; height:24px; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round}
 
-/* ---- ファーストビュー：左にコピー、右に写真 ---- */
-.hero{background:#fff}
-.hero-in{display:grid; grid-template-columns:minmax(0,1.1fr) minmax(0,1fr); gap:56px; align-items:center;
-  padding-top:72px; padding-bottom:80px}
-.brand-msg{display:flex; align-items:center; gap:12px; margin:0 0 20px; font-size:13.5px; font-weight:700;
-  letter-spacing:.08em; color:var(--blue-dd)}
-.brand-msg::before{content:""; width:28px; height:1px; background:var(--blue)}
-.hero h1{font-size:clamp(29px,3.7vw,46px); font-weight:700; line-height:1.42; margin:0 0 22px; letter-spacing:.02em; color:var(--ink)}
-.hero h1 span{display:inline-block}
-.hero h1 em{font-style:normal; color:var(--blue-dd)}
-.hero .lead{font-size:17px; line-height:1.95; color:var(--ink); margin:0 0 30px}
+/* ---- ファーストビュー（2026-10-03 のご指示で、組み直し前のまま） ---- */
+.hero{position:relative; background:var(--blue-s); overflow:hidden}
+.hero .bg{position:relative; height:clamp(500px,68vh,640px); height:clamp(500px,68svh,640px)}
+.hero .bg img{width:100%; height:100%; object-fit:cover; object-position:35% 78%}
+/* 左に白を寄せて文字の場所を作る。写真の右側（空と雲）はそのまま見せる */
+.hero .bg::after{content:""; position:absolute; inset:0;
+  background:linear-gradient(95deg,rgba(255,255,255,.96) 0%,rgba(255,255,255,.94) 40%,
+                             rgba(255,255,255,.82) 60%,rgba(255,255,255,.35) 80%,transparent 96%)}
+.hero-copy{position:absolute; inset:0; display:flex; align-items:center; z-index:2}
+.hero-copy .wrap{width:100%}
+/* ★強調の青は白地で 4.5 以上出る濃さ（--blue-dd）にする */
+.hero-copy h1{font-size:clamp(30px,4.6vw,54px); font-weight:700; line-height:1.38; margin:0 0 22px;
+  letter-spacing:.02em; color:var(--ink)}
+.hero-copy h1 b{color:var(--blue-dd); font-weight:700}
+.hero-copy h1 span, .hero-copy h1 b{display:inline-block}
+.hero-copy .lead{font-size:16px; line-height:1.9; color:var(--ink); margin:0 0 18px}
+.visa-list{list-style:none; margin:0 0 30px; padding:0; display:flex; flex-wrap:wrap; gap:4px 0; font-size:13.5px; color:var(--muted)}
+.visa-list li{white-space:nowrap}
+.visa-list{gap:6px 18px}
+.visa-list li{position:relative}
+.visa-list li + li::before{content:"/"; position:absolute; left:-12px; color:#c3ccd5}
+.hero-actions{display:flex; align-items:center; gap:26px; flex-wrap:wrap}
+.hero-copy .trust{margin:28px 0 0; padding-top:16px; border-top:1px solid var(--line); max-width:30em;
+  font-size:12.5px; color:var(--muted); letter-spacing:.02em}
 .tags-k{margin:0 0 10px; font-size:12.5px; font-weight:700; color:var(--muted); letter-spacing:.04em}
 .tags{list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:8px}
 .tags li{font-size:14px; font-weight:700; color:var(--blue-dd); background:var(--blue-s); border:1px solid var(--blue-line);
   padding:6px 14px; border-radius:4px; line-height:1.5; white-space:nowrap}
-.hero .tags{margin-bottom:36px}
-.hero-actions{display:flex; align-items:center; gap:16px 28px; flex-wrap:wrap}
-.hero-ph{margin:0; border-radius:6px; overflow:hidden; aspect-ratio:5/4; background:var(--panel)}
-.hero-ph img{width:100%; height:100%; object-fit:cover; object-position:70% 60%}
 
 .btn{display:inline-block; text-decoration:none; padding:15px 32px; font-size:15px; text-align:center;
   font-weight:700; border-radius:4px; background:var(--blue); color:#fff; border:2px solid var(--blue)}
@@ -390,8 +399,6 @@ footer a:hover{color:#fff; text-decoration:underline}
   .pill{margin-left:auto}
 }
 @media (max-width:1000px){
-  .hero-in{grid-template-columns:1fr; gap:36px; padding-top:48px; padding-bottom:56px}
-  .hero-ph{aspect-ratio:16/9}
   .trust-grid, .feats{grid-template-columns:1fr}
   .vcards{grid-template-columns:repeat(2,1fr)}
   .stages{grid-template-columns:1fr; gap:40px}
@@ -416,13 +423,12 @@ footer a:hover{color:#fff; text-decoration:underline}
   section{padding:64px 0}
   section.topnews, section#groupbiz{padding:52px 0}
   .sec-head{margin-bottom:32px; padding-left:16px}
-  .hero-in{padding-top:36px; padding-bottom:44px; gap:30px}
-  .brand-msg{font-size:12.5px; margin-bottom:14px}
-  .hero h1{font-size:clamp(27px,7.6vw,34px)}
-  .hero .lead{font-size:15.5px}
-  .hero .lead br{display:none}
-  .hero .tags{margin-bottom:28px}
-  .hero-actions .btn{width:100%}
+  .hero .bg::after{background:linear-gradient(180deg,rgba(255,255,255,.93) 0%,
+    rgba(255,255,255,.86) 52%,rgba(255,255,255,.5) 100%)}
+  .hero .bg{height:auto; min-height:560px}
+  .hero-copy{position:relative; padding:40px 0 44px}
+  .hero .bg{position:absolute; inset:0}
+  .hero-copy .lead br{display:none}
   .trust{padding:24px 0}
   .tc{padding:20px}
   .feat{padding:26px 22px 24px}
@@ -485,21 +491,19 @@ footer a:hover{color:#fff; text-decoration:underline}
   </div>
 </header>
 
-<!-- ===== 01 ファーストビュー：見ただけで「外国人材の採用支援の会社」と分かるように ===== -->
+<!-- ===== 01 ファーストビュー（組み直し前のまま） ===== -->
 <div class="hero">
-  <div class="wrap hero-in">
-    <div class="hero-copy">
-      <p class="brand-msg">人と企業を、国境を越えてつなぐ。</p>
-      <h1><span>外国人材の採用から、</span><em><span>入国・定着支援まで。</span></em></h1>
-      <p class="lead">技能実習・特定技能をはじめ、<br>企業の外国人材受入れを一貫してサポートします。</p>
-      <p class="tags-k">ご紹介できる人材（5種類）</p>
-      <ul class="tags"><li>技能実習</li><li>特定技能</li><li>留学生</li><li>高度人材</li><li>日系人・定住者</li></ul>
+  <div class="bg"><img src="img/hero-sky.jpg" alt="青空と雲"></div>
+  <div class="hero-copy">
+    <div class="wrap">
+      <h1><span>人と企業を、</span><br><b>国境を越えて</b><b>つなぐ。</b></h1>
+      <p class="lead">外国人材の採用から定着まで、<br>企業の受入れを一貫して支援します。</p>
+      <ul class="visa-list" aria-label="ご紹介できる在留資格"><li>技能実習</li><li>特定技能</li><li>留学生</li><li>高度人材</li><li>日系人</li></ul>
       <div class="hero-actions">
         <a class="btn" href="#contact">無料で相談する</a>
         <a class="txt-link" href="#flow">受入れの流れを見る <span aria-hidden="true">→</span></a>
       </div>
     </div>
-    <figure class="hero-ph"><img src="img/hero-sky.jpg" alt="青空と雲"></figure>
   </div>
 </div>
 
