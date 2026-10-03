@@ -19,7 +19,7 @@
   faq.html      よくあるご質問
   news.html     過去のお知らせ（src/news.json から。旧サイトの全24件）
   contact.html  お問い合わせ
-  privacy.html  プライバシーポリシー（旧サイトの本文を入れるまでは枠だけ）
+  privacy.html  プライバシーポリシー（旧サイトの本文を src/old/policy.txt から）
 """
 import html
 import json
@@ -162,6 +162,14 @@ EXTRA_CSS = """
 .contact-box .big.mail{font-size:21px; letter-spacing:.02em; overflow-wrap:anywhere; word-break:break-all}
 .contact-box p{font-size:13.5px; color:var(--muted); margin:8px 0 0}
 .plain{font-size:14px; letter-spacing:.02em}
+.pp{max-width:760px}
+.pp h2{font-size:17px; font-weight:700; margin:40px 0 0; padding-bottom:10px; border-bottom:1px solid var(--line)}
+.pp > p:first-child{margin-top:0}
+.pp p, .pp li{font-size:15px; line-height:2}
+.pp p{margin:14px 0 0}
+.pp ul{margin:12px 0 0; padding-left:1.4em}
+.pp-contact{margin-top:20px; padding:22px 26px; background:var(--panel); border-left:3px solid var(--gold)}
+.pp-contact p{margin:0; line-height:1.9}
 
 @media (max-width:760px){
   /* 「住居の確保・生活に必要な契約の支援」は390pxで1行に収まらない */
@@ -591,8 +599,10 @@ def group_section():
     for name, tag, desc, url in cards:
         link = (f'<p style="margin-top:8px"><a href="{url}" target="_blank" rel="noopener">'
                 f'サイトを見る</a></p>' if url else "")
+        # f文字列の中にバックスラッシュを書くと Python 3.11 以前で動かないので外に出す
+        gtag = f'<div class="gtag">{tag}</div>' if tag else ""
         items += (f'<div class="gcard"><h3>{name}</h3>'
-                  f'{f"<div class=\"gtag\">{tag}</div>" if tag else ""}'
+                  f'{gtag}'
                   f'<p>{desc}</p>{link}</div>')
     return ('<section class="alt"><div class="wrap">'
             '<div class="sec-head" style="display:block"><span class="en">GROUP</span>'
@@ -658,13 +668,34 @@ def contact_body():
 
 
 def privacy_body():
+    """旧サイトのプライバシーポリシー（src/old/policy.txt。2026-10-03 取得）をそのまま引き継ぐ。
+    ★旧サイトの問い合わせ窓口の住所は「〒509-0255 岐阜県可児市光陽台2-87」で、今の本社（今渡3-11）と違う。
+      窓口は本社の連絡先にしてあるので、お客さまに確認すること（README の「確認すること」）。"""
+    lines = [l for l in (SRC / "old" / "policy.txt").read_text(encoding="utf-8").splitlines() if l.strip()]
+    start = lines.index("プライバシーポリシー（個人情報保護方針）") + 1
+    end = next(i for i, l in enumerate(lines) if l.startswith("７．"))
+    out, ul = [], []
+    def flush():
+        if ul:
+            out.append("<ul>" + "".join(f"<li>{html.escape(x)}</li>" for x in ul) + "</ul>")
+            ul.clear()
+    for l in lines[start:end + 2]:                     # 「７．お問い合わせ窓口」と、その説明文まで
+        if l.startswith("・"):
+            ul.append(l[1:]); continue
+        flush()
+        if re.match(r"^[１-９]．", l):
+            out.append(f"<h2>{html.escape(l)}</h2>")
+        else:
+            out.append(f"<p>{html.escape(l)}</p>")
+    flush()
+    out.append('<div class="pp-contact"><p><b>株式会社 A and K</b></p>'
+               '<p>〒509-0207 岐阜県可児市今渡3-11</p>'
+               '<p>Tel 0574-66-3511／Fax 0574-66-7311</p>'
+               '<p>E-mail <a href="mailto:info@aandkcorp.com">info@aandkcorp.com</a></p></div>')
     return ('<div class="crumb"><div class="wrap"><a href="index.html">ホーム</a> ／ プライバシーポリシー</div></div>\n'
             '<div class="page-head"><div class="wrap"><span class="en">PRIVACY POLICY</span>'
-            '<h1>プライバシーポリシー</h1></div></div>\n'
-            '<section><div class="wrap"><p class="plain">'
-            '現在のホームページに掲載されているプライバシーポリシーの本文を、そのまま引き継ぎます。'
-            '（この見本では枠だけご用意しています。）</p></div></section>\n')
-
+            '<h1>プライバシーポリシー</h1><p>個人情報保護方針</p></div></div>\n'
+            '<section><div class="wrap"><div class="pp">' + "\n".join(out) + '</div></div></section>\n')
 
 if __name__ == "__main__":
     main()
