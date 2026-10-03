@@ -380,7 +380,7 @@ def parts(src_name, key=""):
     s = (SRC / src_name).read_text(encoding="utf-8")
     head = s[: s.index("</head>")]
     head = head.replace("</style>", EXTRA_CSS + PLAN_CSS.get(key, "") + "</style>")
-    header = s[s.index('<div class="utility">'): s.index('<div class="hero">')]
+    header = s[s.index('<header>'): s.index('<div class="hero">')]
     hero = s[s.index('<div class="hero">'): s.index('<section id="visas">')]
     cta = s[s.index('<div class="cta" id="contact">'): s.index("<footer>")]
     footer = s[s.index("<footer>"): s.index('<div class="note">')]

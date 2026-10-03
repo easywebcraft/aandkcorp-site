@@ -45,35 +45,24 @@ a{color:inherit}
 .note{position:fixed; left:0; right:0; bottom:0; z-index:80; background:rgba(0,104,159,.94);
   color:#dff1fa; font-size:12px; text-align:center; padding:7px 12px}
 
-/* ---- ヘッダー（上段＝ロゴと問い合わせ／下段＝メニュー） ---- */
-.utility{border-bottom:1px solid var(--line-s)}
-.utility .wrap{display:flex; align-items:center; gap:18px; height:64px}
-.utility .co{flex:none; display:flex; align-items:center; line-height:0; min-height:44px}
-.utility .co img{height:34px; width:auto}
-.utility .seg{margin-left:auto; display:flex; gap:22px; font-size:12.5px}
-.utility .seg a{text-decoration:none; color:var(--muted); white-space:nowrap}
-.utility .seg a:hover{color:var(--blue-d)}
-.utility .en{margin-left:auto; color:var(--muted); font-size:12.5px; font-weight:700; text-decoration:none}
-.utility .en.off{color:var(--line); cursor:default}
-.pill{flex:none; display:inline-flex; align-items:center; background:var(--blue); color:#fff;
+/* ---- ヘッダー（1列：ロゴ／メニュー／お問い合わせ。2026-10-03 に2段から変更） ---- */
+header{position:sticky; top:0; z-index:70; background:#fff; border-bottom:1px solid var(--line)}
+.hdr{display:flex; align-items:center; gap:20px; height:76px; position:relative}
+.hdr .co{flex:none; display:flex; align-items:center; line-height:0; min-height:44px}
+.hdr .co img{height:34px; width:auto}
+.gnavs{margin-left:auto; display:flex; align-self:stretch}
+.gnav{display:flex}
+.gnav a{display:flex; align-items:center; text-decoration:none; padding:0 16px; font-size:14.5px; font-weight:600;
+  white-space:nowrap; border-bottom:3px solid transparent; border-top:3px solid transparent}
+.gnav a:hover{color:var(--blue-d); border-bottom-color:var(--blue)}
+.gnav a.on{color:var(--blue-d); border-bottom-color:var(--blue)}
+.pill{flex:none; display:inline-flex; align-items:center; background:var(--blue); color:#fff; margin-left:8px;
   text-decoration:none; padding:9px 22px; border-radius:999px; font-size:13.5px; font-weight:700;
   white-space:nowrap; min-height:44px}
 .pill:hover{background:var(--blue-d)}
-
-header{position:sticky; top:0; z-index:70; background:#fff; border-bottom:1px solid var(--line);
-  box-shadow:0 1px 0 rgba(20,160,220,.08)}
-.gnav-row{display:flex; align-items:center; justify-content:center; gap:0; padding:0 24px; position:relative}
-.gnav{display:flex}
-.gnav a{text-decoration:none; padding:16px 20px; font-size:14.5px; font-weight:600;
-  white-space:nowrap; border-bottom:3px solid transparent}
-.gnav a:hover{color:var(--blue-d); border-bottom-color:var(--blue)}
-.gnav a.on{color:var(--blue-d); border-bottom-color:var(--blue)}
-.logo-c{display:none}
 /* 指で押す的は44px角を下回らせない（38pxだった） */
-.hamburger{display:none; position:absolute; right:20px; top:50%; transform:translateY(-50%);
-  background:none; border:1px solid var(--line); font-size:19px; padding:5px 12px;
-  cursor:pointer; color:var(--ink); border-radius:4px;
-  min-width:44px; min-height:44px; line-height:1}
+.hamburger{display:none; flex:none; background:none; border:1px solid var(--line); font-size:19px; padding:5px 12px;
+  cursor:pointer; color:var(--ink); border-radius:4px; min-width:44px; min-height:44px; line-height:1}
 
 /* スマホのメニュー。ボタンの真下に開くドロップダウン（全画面パネルにはしない） */
 .mnav{display:none; position:absolute; right:18px; top:calc(100% - 2px); z-index:75;
@@ -332,19 +321,18 @@ footer a:hover{color:#fff; text-decoration:underline}
 
 /* ★ヘッダーを畳む幅は、レイアウトの折返しと別の @media に分ける */
 @media (max-width:1080px){
-  .gnav{display:none}
+  .gnavs{display:none}
   .mnav.open{display:block}
   .hamburger{display:block}
-  .gnav-row{justify-content:flex-start; min-height:52px}
-  .utility .seg{display:none}
+  .pill{margin-left:auto}
 }
 @media (max-width:1000px){
 }
 @media (max-width:860px){
-  /* 上段にロゴ・EN・問い合わせボタンが横一列で入りきらず、390pxで
-     ボタンがはみ出していた（A.pill）。折り返して2行にする。 */
-  .utility .wrap{height:auto; flex-wrap:wrap; padding-top:10px; padding-bottom:10px; gap:10px 14px}
-  .utility .en{margin-left:auto}
+  .hdr{height:64px; gap:10px}
+  .hdr .co img{height:28px}
+  .pill{padding:8px 16px; font-size:13px; min-height:44px}
+}
   .pill{padding:8px 16px; font-size:13px; min-height:44px}
 }
 @media (max-width:760px){
@@ -566,19 +554,14 @@ setTimeout(function(){
 </head>
 <body>
 
-<div class="utility">
-  <div class="wrap">
-    <a class="co" href="index.html" aria-label="株式会社 A and K トップへ"><img src="img/logo.png" alt="株式会社 A and K"></a>
-    <span class="en off" title="英語版は今回の範囲外です">EN</span>
-    <a class="pill" href="contact.html">お問い合わせ</a>
-  </div>
-</div>
-
 <header>
-  <div class="gnav-row">
-    <nav class="gnav"><a href="service.html">人材紹介</a><a href="support.html">支援内容</a><a href="flow.html">受入れの流れ</a></nav>
-    <a class="logo-c" href="index.html"><img src="img/logo.png" alt="株式会社 A and K"></a>
-    <nav class="gnav"><a href="partners.html">提携機関</a><a href="company.html" class="on">企業情報</a></nav>
+  <div class="wrap hdr">
+    <a class="co" href="index.html" aria-label="株式会社 A and K トップへ"><img src="img/logo.png" alt="株式会社 A and K"></a>
+    <div class="gnavs">
+      <nav class="gnav"><a href="service.html">人材紹介</a><a href="support.html">支援内容</a><a href="flow.html">受入れの流れ</a></nav>
+      <nav class="gnav"><a href="partners.html">提携機関</a><a href="company.html" class="on">企業情報</a></nav>
+    </div>
+    <a class="pill" href="contact.html">お問い合わせ</a>
     <button class="hamburger" type="button" id="menu-btn"
             aria-label="メニューを開く" aria-expanded="false" aria-controls="mnav">☰</button>
     <nav class="mnav" id="mnav">
