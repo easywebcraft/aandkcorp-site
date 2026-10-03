@@ -455,8 +455,8 @@ def digest(secs):
 
     # 流れは手順名と期間だけ。各手順の説明は flow.html で行う。
     f = secs["flow"]
-    steps = re.findall(r'<div class="step">.*?<div class="n">(.*?)</div>\s*<h3>(.*?)</h3>'
-                       r'.*?<div class="d">(.*?)</div>', f, re.S)
+    steps = re.findall(r'<li class="step">.*?<div class="n">(.*?)</div>\s*<h3>(.*?)</h3>'
+                       r'.*?<div class="d"><span class="dk">.*?</span>(.*?)</div>', f, re.S)
     out["flow"] = top_section(
         f, "flow",
         '<ol class="tsteps">' + "".join(

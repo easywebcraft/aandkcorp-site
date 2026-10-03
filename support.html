@@ -192,15 +192,27 @@ section.alt{background:var(--panel); border-top:1px solid var(--line-s); border-
 @media (max-width:900px){ .sgrp{grid-template-columns:1fr; gap:16px} }
 @media (max-width:640px){ .sups{grid-template-columns:1fr} .sup-cta{padding:24px 20px} .sup-cta .btn{width:100%; text-align:center} }
 
-/* 流れ */
-.flow{display:grid; grid-template-columns:repeat(5,1fr); gap:12px}
-.step{background:#fff; border:1px solid var(--line); padding:20px 18px; border-radius:3px;
-  position:relative}
-.step .n{display:inline-block; background:var(--blue); color:#fff; font-size:12px; font-weight:700;
-  padding:3px 12px; border-radius:3px; margin-bottom:12px}
-.step h3{font-size:15px; font-weight:700; margin:0 0 8px; color:var(--blue-dd)}
-.step p{font-size:13px; color:var(--muted); margin:0; line-height:1.8}
-.step .d{margin-top:10px; font-size:11.5px; color:var(--blue-d); font-weight:700}
+/* 流れ：5つのカードを線と小さな矢印でつなぎ、左から右へ読ませる */
+.flow{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(5,1fr); gap:30px; position:relative}
+.flow::before{content:""; position:absolute; left:20px; right:20px; top:31px; height:1px; background:#cfdbe5; z-index:0}
+.step{background:#fff; border:1px solid var(--line); padding:22px 20px 18px; border-radius:6px;
+  position:relative; z-index:1; display:flex; flex-direction:column}
+.step:not(:last-child)::after{content:""; position:absolute; right:-20px; top:27px; width:8px; height:8px;
+  border-top:1.5px solid #9fb4c6; border-right:1.5px solid #9fb4c6; transform:rotate(45deg); background:transparent}
+.step .n{font-size:11px; font-weight:700; letter-spacing:.12em; color:var(--blue-dd); margin-bottom:12px; line-height:1}
+.step h3{font-size:17px; font-weight:700; margin:0 0 8px; color:var(--ink); line-height:1.5}
+.step p{font-size:13px; color:var(--muted); margin:0 0 16px; line-height:1.8; flex:1}
+.step .d{border-top:1px solid var(--line); padding-top:12px; font-size:14px; font-weight:700; color:var(--blue-dd);
+  display:flex; flex-direction:column; gap:2px; line-height:1.4}
+.step .d .dk{font-size:11px; font-weight:400; color:var(--muted); letter-spacing:.04em}
+@media (max-width:1000px){
+  .flow{grid-template-columns:1fr; gap:16px; padding-left:22px}
+  .flow::before{left:6px; right:auto; top:24px; bottom:24px; width:1px; height:auto}
+  .step:not(:last-child)::after{right:auto; left:-20px; top:auto; bottom:-12px; transform:rotate(135deg)}
+  .step::before{content:""; position:absolute; left:-20px; top:24px; width:9px; height:9px; border-radius:50%; background:var(--blue)}
+  .step p{flex:none}
+  .step .d{flex-direction:row; gap:10px; align-items:baseline}
+}
 
 /* 自社グループ／提携 */
 .group-lead{background:var(--blue-s); border:1px solid var(--blue-line); border-left:5px solid var(--blue);
@@ -271,7 +283,6 @@ footer a:hover{color:#fff; text-decoration:underline}
   .utility .seg{display:none}
 }
 @media (max-width:1000px){
-  .flow{grid-template-columns:repeat(2,1fr)}
 }
 @media (max-width:860px){
   /* 上段にロゴ・EN・問い合わせボタンが横一列で入りきらず、390pxで
