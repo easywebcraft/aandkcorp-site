@@ -214,21 +214,43 @@ section.alt{background:var(--panel); border-top:1px solid var(--line-s); border-
   .step .d{flex-direction:row; gap:10px; align-items:baseline}
 }
 
-/* 自社グループ／提携 */
-.group-lead{background:var(--blue-s); border:1px solid var(--blue-line); border-left:5px solid var(--blue);
-  padding:26px 30px; margin-bottom:20px}
-.group-lead .badge{display:inline-block; background:var(--blue); color:#fff; font-size:11.5px;
-  font-weight:700; padding:3px 12px; border-radius:3px; margin-bottom:10px}
-.group-lead h3{font-size:19px; font-weight:700; margin:0 0 10px; color:var(--blue-dd)}
-.group-lead p{margin:0; font-size:14px; color:var(--ink)}
-.partners{display:grid; grid-template-columns:repeat(auto-fit,minmax(262px,1fr)); gap:18px}
-.partner{background:#fff; border:1px solid var(--line); border-radius:3px; overflow:hidden}
-.partner .ph{height:150px; background:var(--panel); display:flex; align-items:center;
-  justify-content:center; color:var(--muted); font-size:12px; overflow:hidden}
+/* 自社グループ／提携：01 自社グループ（薄い青）と 02 提携機関（白）を分けて見せる */
+.lead-big{display:block; font-size:clamp(18px,2.2vw,22px); font-weight:700; color:var(--ink); line-height:1.6; letter-spacing:.02em}
+.pt-block{display:grid; grid-template-columns:200px 1fr; gap:36px; padding:36px 0}
+.pt-block + .pt-block{border-top:1px solid var(--line)}
+.pt-label .en{display:block; font-size:11px; font-weight:700; letter-spacing:.14em; color:var(--blue-dd)}
+.pt-label .pt-ttl{font-size:20px; font-weight:700; color:var(--ink); margin:8px 0 0}
+.group-lead{background:var(--blue-s); border-radius:6px; padding:30px 32px; display:grid; grid-template-columns:1fr 1fr; gap:28px 40px}
+.group-lead .badge{display:inline-block; font-size:11px; font-weight:700; letter-spacing:.06em; color:var(--blue-dd);
+  border:1px solid var(--blue-line); background:#fff; padding:2px 10px; border-radius:3px; margin-bottom:10px}
+.group-lead h3{font-size:22px; font-weight:700; margin:0 0 12px; color:var(--ink)}
+.group-lead p{margin:0; font-size:14px; color:var(--ink); line-height:1.9}
+/* 自社グループで対応する範囲を、縦の流れで見せる */
+.gl-flow{list-style:none; margin:0; padding:0; counter-reset:gl}
+.gl-flow li{position:relative; padding:0 0 18px 30px; counter-increment:gl}
+.gl-flow li:last-child{padding-bottom:0}
+.gl-flow li::before{content:counter(gl); position:absolute; left:0; top:1px; width:20px; height:20px; border-radius:50%;
+  background:var(--blue); color:#fff; font-size:11px; font-weight:700; display:flex; align-items:center; justify-content:center}
+.gl-flow li:not(:last-child)::after{content:""; position:absolute; left:9.5px; top:24px; bottom:2px; width:1px; background:#a9cbe2}
+.gl-flow b{display:block; font-size:15px; color:var(--ink)}
+.gl-flow span{display:block; font-size:12.5px; color:var(--muted)}
+/* 提携機関：写真は16:9でそろえ、国名→機関名→役割の順で見せる */
+.partners{display:grid; grid-template-columns:repeat(3,1fr); gap:20px}
+.partner{background:#fff; border:1px solid var(--line); border-radius:6px; overflow:hidden; display:flex; flex-direction:column}
+.partner .ph{aspect-ratio:16/9; background:var(--panel); overflow:hidden; order:0}
 .partner .ph img{width:100%; height:100%; object-fit:cover}
-.partner h3{font-size:16px; font-weight:700; margin:16px 20px 4px; color:var(--blue-dd)}
-.partner .cc{font-size:11.5px; color:var(--blue); font-weight:700; margin:0 20px 8px}
-.partner p{font-size:13px; color:var(--muted); margin:0 20px 20px; line-height:1.85}
+.partner .ph-area{display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px;
+  background:linear-gradient(135deg,#e6f1f8 0%,#cfe3f0 100%); color:var(--blue-dd)}
+.partner .ph-area span{font-size:30px; font-weight:700; letter-spacing:.24em}
+.partner .ph-area small{font-size:11px; font-weight:700; letter-spacing:.2em; opacity:.7}
+.partner .cc{order:1; font-size:11px; letter-spacing:.14em; color:var(--blue-dd); font-weight:700; margin:18px 22px 4px}
+.partner h3{order:2; font-size:17px; font-weight:700; margin:0 22px 8px; color:var(--ink); line-height:1.5}
+.partner .role{order:3; align-self:flex-start; margin:0 22px 12px; font-size:11.5px; font-weight:700; color:var(--blue-dd);
+  background:var(--blue-s); padding:2px 10px; border-radius:3px}
+.partner p{order:4; font-size:13px; color:var(--muted); margin:0 22px 22px; line-height:1.85}
+.sub #partners{background:#fff}
+@media (max-width:1000px){ .pt-block{grid-template-columns:1fr; gap:16px} .group-lead{grid-template-columns:1fr} }
+@media (max-width:760px){ .partners{grid-template-columns:1fr} .group-lead{padding:24px 20px} }
 
 /* 代表挨拶 */
 .greet{display:grid; grid-template-columns:280px 1fr; gap:40px; align-items:center}
@@ -468,32 +490,51 @@ footer a:hover{color:#fff; text-decoration:underline}
     <div class="sec-head">
       <span class="en">GROUP &amp; PARTNERS</span>
       <h2>自社グループと提携機関</h2>
-      <p>監理団体を自社で設立しているため、募集から入国、就労後の支援までを一貫してお引き受けできます。</p>
+      <p><strong class="lead-big">自社グループで監理団体を運営。<br>募集から入国、就労後まで一貫対応。</strong><small class="note-s">監理団体を自社で設立しているため、募集から入国、就労後の支援までを一貫してお引き受けできます。</small></p>
     </div>
-    <div class="group-lead">
-      <div class="badge">自社グループ</div>
-      <h3>ブリッジング協同組合</h3>
-      <p>2021年8月、中小企業協同組合法にもとづき愛知県知事の許可を受けて弊社が設立した監理団体です。
-        技能実習生の受入れを、紹介から監理まで自社グループ内で完結できます。</p>
+
+    <div class="pt-block pt-group">
+      <div class="pt-label"><span class="en">01 / OUR GROUP</span><h3 class="pt-ttl">自社グループ</h3></div>
+      <div class="group-lead">
+        <div class="gl-text">
+          <div class="badge">監理団体</div>
+          <h3>ブリッジング協同組合</h3>
+          <p>2021年8月、中小企業協同組合法にもとづき愛知県知事の許可を受けて弊社が設立した監理団体です。
+            技能実習生の受入れを、紹介から監理まで自社グループ内で完結できます。</p>
+        </div>
+        <ol class="gl-flow" aria-label="自社グループで対応する範囲">
+          <li><b>募集・紹介</b><span>株式会社 A and K</span></li>
+          <li><b>監理</b><span>ブリッジング協同組合</span></li>
+          <li><b>入国の手続き・生活の支援</b><span>株式会社 A and K（登録支援機関）</span></li>
+          <li><b>就労後の支援</b><span>定期的な面談・相談</span></li>
+        </ol>
+      </div>
     </div>
-    <div class="partners">
-      <div class="partner">
-        <div class="ph"><img src="img/training-1.jpg" alt="提携する送り出し機関での日本語授業の様子"></div>
-        <h3>プロデンシャルエンプロイメント</h3>
-        <div class="cc">PHILIPPINES</div>
-        <p>日本へ人材を送り出すリクルートメントエージェンシー。<strong>現地フィリピンで、企業さまご自身が面接を行っていただくこと</strong>もできます。</p>
-      </div>
-      <div class="partner">
-        <div class="ph"><img src="img/training-2.jpg" alt="送り出し機関の教室で学ぶ実習生の皆さん"></div>
-        <h3>POLIMEX 国際人材株式会社</h3>
-        <div class="cc">VIETNAM</div>
-        <p>2021年8月にブリッジング協同組合と業務提携。ベトナムとの手続きを早く進められます。</p>
-      </div>
-      <div class="partner">
-        <div class="ph">監理団体</div>
-        <h3>トラスト江南協同組合</h3>
-        <div class="cc">AICHI, JAPAN</div>
-        <p>2019年9月に業務提携。愛知・岐阜・三重の企業さまや介護施設さまへの受入れを支えています。</p>
+
+    <div class="pt-block pt-partners">
+      <div class="pt-label"><span class="en">02 / PARTNERS</span><h3 class="pt-ttl">提携機関</h3></div>
+      <div class="partners">
+        <div class="partner">
+          <div class="ph"><img src="img/training-1.jpg" alt="提携する送り出し機関での日本語授業の様子"></div>
+          <h3>プロデンシャルエンプロイメント</h3>
+          <div class="cc">PHILIPPINES</div>
+          <div class="role">送り出し機関</div>
+          <p>日本へ人材を送り出すリクルートメントエージェンシー。<strong>現地フィリピンで、企業さまご自身が面接を行っていただくこと</strong>もできます。</p>
+        </div>
+        <div class="partner">
+          <div class="ph"><img src="img/training-2.jpg" alt="送り出し機関の教室で学ぶ実習生の皆さん"></div>
+          <h3>POLIMEX 国際人材株式会社</h3>
+          <div class="cc">VIETNAM</div>
+          <div class="role">送り出し機関</div>
+          <p>2021年8月にブリッジング協同組合と業務提携。ベトナムとの手続きを早く進められます。</p>
+        </div>
+        <div class="partner">
+          <div class="ph ph-area" aria-hidden="true"><span>AICHI</span><small>GIFU / MIE</small></div>
+          <h3>トラスト江南協同組合</h3>
+          <div class="cc">AICHI, JAPAN</div>
+          <div class="role">監理団体（提携）</div>
+          <p>2019年9月に業務提携。愛知・岐阜・三重の企業さまや介護施設さまへの受入れを支えています。</p>
+        </div>
       </div>
     </div>
   </div>
