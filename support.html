@@ -30,6 +30,18 @@ img{display:block; max-width:100%}
 a{color:inherit}
 .wrap{max-width:1160px; margin:0 auto; padding:0 24px}
 
+/* ページの先頭へ戻るボタン（右下。確認用の帯の上に出す） */
+.to-top{position:fixed; right:20px; bottom:52px; z-index:75; width:52px; height:52px; border-radius:50%;
+  background:#fff; border:1px solid var(--line); box-shadow:0 4px 14px rgba(10,60,100,.12);
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px;
+  font-size:10px; font-weight:700; letter-spacing:.08em; color:var(--blue-dd); text-decoration:none;
+  opacity:0; visibility:hidden; transform:translateY(8px); transition:opacity .25s, transform .25s, visibility .25s, background-color .2s}
+.to-top.show{opacity:1; visibility:visible; transform:none}
+.to-top:hover{background:var(--blue-s)}
+.to-top span{width:9px; height:9px; border-top:2px solid currentColor; border-left:2px solid currentColor; transform:rotate(45deg); margin-top:4px}
+@media print{ .to-top{display:none} }
+/* スマホは確認用の帯が2行になるので、その分上げる。帯を外すとき（公開時）は bottom を 20px に戻す */
+@media (max-width:760px){ .to-top{right:14px; bottom:74px; width:46px; height:46px} }
 .note{position:fixed; left:0; right:0; bottom:0; z-index:80; background:rgba(0,104,159,.94);
   color:#dff1fa; font-size:12px; text-align:center; padding:7px 12px}
 
@@ -659,6 +671,22 @@ setTimeout(function(){
 </footer>
 
 <div class="note">制作中の確認用ページです／数字・お写真の一部は仮のものです。この帯は公開時には出ません。</div>
+<a class="to-top" id="to-top" href="#" aria-label="ページの先頭へ戻る"><span aria-hidden="true"></span>TOP</a>
+<script>
+// ページの先頭へ戻るボタン。少しスクロールしたら出す
+(function () {
+  var b = document.getElementById('to-top');
+  if (!b) return;
+  function upd() { b.classList.toggle('show', window.scrollY > 480); }
+  window.addEventListener('scroll', upd, { passive: true });
+  upd();
+  b.addEventListener('click', function (e) {
+    e.preventDefault();
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+  });
+})();
+</script>
 <script>
 // スマホのメニュー。外側を押す・Escを押す・項目を選ぶ、のどれでも閉じる。
 (function () {
