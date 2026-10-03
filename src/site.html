@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow, noarchive">
 <title>株式会社 A and K｜外国人材の受入れ支援</title>
+<meta name="description" content="技能実習・特定技能をはじめ、外国人材の採用から入国・定着支援まで一貫してサポートします。登録支援機関（登録番号 19登-000975）。岐阜県可児市。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- 欧文は Open Sans（参考にしたサイトと同じ）。和文はゴシックの端末書体に任せる。 -->
@@ -18,7 +19,7 @@
 :root{
   --blue:#0a7fc2; --blue-d:#086ba4; --blue-dd:#0a5a8c; --blue-s:#eef6fb; --blue-line:#d6e8f3;
   --ink:#16273a; --muted:#6b7683; --line:#dde4ea; --line-s:#eef2f6;
-  --bg:#fff; --panel:#f6fafd;
+  --bg:#fff; --panel:#f5f7fa;
   --sans:"Open Sans",-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN",
          "Yu Gothic",Meiryo,"Noto Sans JP",sans-serif;
 }
@@ -74,135 +75,169 @@ header{position:sticky; top:0; z-index:70; background:#fff; border-bottom:1px so
 .mnav .grp{border-top:1px solid var(--line); margin-top:6px; padding-top:5px}
 .mnav .grp-t{padding:4px 20px 2px; font-size:11px; color:var(--blue-d); font-weight:700}
 
-/* ---- ヒーロー（2026-10-03 見直し：コピーを主役に。登録番号はコピーの下の信頼情報へ） ---- */
-.hero{position:relative; background:var(--blue-s); overflow:hidden}
-.hero .bg{position:relative; height:clamp(500px,68vh,640px); height:clamp(500px,68svh,640px)}
-.hero .bg img{width:100%; height:100%; object-fit:cover; object-position:35% 78%}
-/* 左に白を寄せて文字の場所を作る。写真の右側（空と雲）はそのまま見せる */
-.hero .bg::after{content:""; position:absolute; inset:0;
-  background:linear-gradient(95deg,rgba(255,255,255,.96) 0%,rgba(255,255,255,.94) 40%,
-                             rgba(255,255,255,.82) 60%,rgba(255,255,255,.35) 80%,transparent 96%)}
-.hero-copy{position:absolute; inset:0; display:flex; align-items:center; z-index:2}
-.hero-copy .wrap{width:100%}
-/* ★強調の青は白地で 4.5 以上出る濃さ（--blue-dd）にする */
-.hero-copy h1{font-size:clamp(30px,4.6vw,54px); font-weight:700; line-height:1.38; margin:0 0 22px;
-  letter-spacing:.02em; color:var(--ink)}
-.hero-copy h1 b{color:var(--blue-dd); font-weight:700}
-.hero-copy h1 span, .hero-copy h1 b{display:inline-block}
-.hero-copy .lead{font-size:16px; line-height:1.9; color:var(--ink); margin:0 0 18px}
-.visa-list{list-style:none; margin:0 0 30px; padding:0; display:flex; flex-wrap:wrap; gap:4px 0; font-size:13.5px; color:var(--muted)}
-.visa-list li{white-space:nowrap}
-.visa-list{gap:6px 18px}
-.visa-list li{position:relative}
-.visa-list li + li::before{content:"/"; position:absolute; left:-12px; color:#c3ccd5}
-.hero-actions{display:flex; align-items:center; gap:26px; flex-wrap:wrap}
-.hero-copy .trust{margin:28px 0 0; padding-top:16px; border-top:1px solid var(--line); max-width:30em;
-  font-size:12.5px; color:var(--muted); letter-spacing:.02em}
-.btn{display:inline-block; text-decoration:none; padding:14px 30px; font-size:14.5px;
+/* ===== 2026-10-03 トップを組み直し =====
+   「何の会社か」→「信頼の裏付け」→「特徴」→「人材」→「支援」→「流れ」→「連携」
+   の順に読ませる。保育・児童福祉とお知らせは後半に控えめに置く。
+   色は 白／淡いグレー（--panel）／ブランドの青 の3つだけ。グラデーションは使わない。
+   アイコンは線画（stroke）だけ。角丸は 6px まで（法人向けなので丸くしすぎない）。 */
+
+/* 線画アイコン（inline SVG に共通） */
+.ic{flex:none; display:inline-flex; align-items:center; justify-content:center; width:48px; height:48px;
+  border-radius:50%; border:1px solid var(--blue-line); background:#fff; color:var(--blue-dd)}
+.ic svg{width:24px; height:24px; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round}
+
+/* ---- ファーストビュー：左にコピー、右に写真 ---- */
+.hero{background:#fff}
+.hero-in{display:grid; grid-template-columns:minmax(0,1.1fr) minmax(0,1fr); gap:56px; align-items:center;
+  padding-top:72px; padding-bottom:80px}
+.brand-msg{display:flex; align-items:center; gap:12px; margin:0 0 20px; font-size:13.5px; font-weight:700;
+  letter-spacing:.08em; color:var(--blue-dd)}
+.brand-msg::before{content:""; width:28px; height:1px; background:var(--blue)}
+.hero h1{font-size:clamp(29px,3.7vw,46px); font-weight:700; line-height:1.42; margin:0 0 22px; letter-spacing:.02em; color:var(--ink)}
+.hero h1 span{display:inline-block}
+.hero h1 em{font-style:normal; color:var(--blue-dd)}
+.hero .lead{font-size:17px; line-height:1.95; color:var(--ink); margin:0 0 30px}
+.tags-k{margin:0 0 10px; font-size:12.5px; font-weight:700; color:var(--muted); letter-spacing:.04em}
+.tags{list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:8px}
+.tags li{font-size:14px; font-weight:700; color:var(--blue-dd); background:var(--blue-s); border:1px solid var(--blue-line);
+  padding:6px 14px; border-radius:4px; line-height:1.5; white-space:nowrap}
+.hero .tags{margin-bottom:36px}
+.hero-actions{display:flex; align-items:center; gap:16px 28px; flex-wrap:wrap}
+.hero-ph{margin:0; border-radius:6px; overflow:hidden; aspect-ratio:5/4; background:var(--panel)}
+.hero-ph img{width:100%; height:100%; object-fit:cover; object-position:22% 50%}
+
+.btn{display:inline-block; text-decoration:none; padding:15px 32px; font-size:15px; text-align:center;
   font-weight:700; border-radius:4px; background:var(--blue); color:#fff; border:2px solid var(--blue)}
 .btn:hover{background:var(--blue-d); border-color:var(--blue-d)}
 .btn.ghost{background:#fff; color:var(--blue-d)}
 .btn.ghost:hover{background:var(--blue-s)}
-.txt-link{color:var(--blue-dd); font-weight:700; font-size:14px; text-decoration:none; white-space:nowrap}
+.txt-link{color:var(--blue-dd); font-weight:700; font-size:14.5px; text-decoration:none; white-space:nowrap}
 .txt-link span{display:inline-block; transition:transform .2s}
 .txt-link:hover span{transform:translateX(4px)}
-.btn-more{display:inline-block; text-decoration:none; padding:12px 34px; font-size:14px;
-  font-weight:700; border:2px solid var(--blue); color:var(--blue-d); border-radius:4px}
-.btn-more:hover{background:var(--blue); color:#fff}
 
-/* 信頼情報：3カラム（見出し＋補足）。青の面はやめて白地に線で区切る */
-.badges{background:#fff; border-bottom:1px solid var(--line)}
-.badges .wrap{display:grid; grid-template-columns:repeat(3,1fr)}
-.badges .bd{display:flex; flex-direction:column; gap:2px; padding:22px 26px; border-left:1px solid var(--line)}
-.badges .bd:first-child{border-left:0; padding-left:0}
-.bd-k{font-size:11.5px; font-weight:700; color:var(--blue-dd); letter-spacing:.06em}
-.badges b{font-size:15.5px; color:var(--ink)}
-.badges small{font-size:12.5px; color:var(--muted)}
-
-/* ---- お知らせ：見出しを上に、日付／タイトル／矢印の1行リスト ---- */
-.newsband{padding:36px 0 0}
-.nb-head{display:flex; align-items:baseline; gap:14px; margin-bottom:10px}
-.nb-head .en{font-size:12px; font-weight:700; letter-spacing:.16em; color:var(--blue-dd)}
-.nb-head h2{margin:0; font-size:18px; font-weight:700; color:var(--ink)}
-.nb-head .txt-link{margin-left:auto; font-size:13px}
-.newsband ul{list-style:none; margin:0; padding:0; border-top:1px solid var(--line)}
-.newsband li{border-bottom:1px solid var(--line)}
-.newsband li a{display:grid; grid-template-columns:110px 1fr 20px; gap:20px; align-items:center;
-  padding:12px 6px; color:var(--ink); text-decoration:none; font-size:14px; transition:background-color .2s}
-.newsband li a:hover{background:var(--blue-s)}
-.newsband li span{overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
-.newsband time{color:var(--muted); font-variant-numeric:tabular-nums; font-size:13.5px}
-.newsband i{font-style:normal; color:var(--blue-dd); transition:transform .2s}
-.newsband li a:hover i{transform:translateX(4px)}
+/* ---- 信頼情報：FV直下に3枚 ---- */
+.trust{background:var(--panel); border-top:1px solid var(--line-s); border-bottom:1px solid var(--line-s); padding:36px 0}
+.trust-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
+.tc{display:flex; gap:18px; align-items:flex-start; background:#fff; border:1px solid var(--line); border-radius:6px; padding:24px 24px 22px}
+.tc-body{display:flex; flex-direction:column; min-width:0}
+.tc-en{font-size:10px; font-weight:700; letter-spacing:.14em; color:#9aa5b1; line-height:1.4}
+.tc-k{font-size:13px; font-weight:700; color:var(--blue-dd); margin-top:6px}
+.tc b{font-size:18px; font-weight:700; color:var(--ink); line-height:1.5; margin-top:2px}
+.tc small{font-size:12.5px; color:var(--muted); line-height:1.6; margin-top:4px}
 
 /* ---- 節 ---- */
-section{padding:66px 0}
+section{padding:100px 0}
 section.alt{background:var(--panel); border-top:1px solid var(--line-s); border-bottom:1px solid var(--line-s)}
-.sec-head{margin-bottom:38px; border-left:5px solid var(--blue); padding-left:18px}
-.sec-head .en{font-size:11.5px; letter-spacing:.16em; color:var(--blue); font-weight:700; display:block}
-.sec-head h2{font-size:clamp(20px,2.7vw,27px); font-weight:700; margin:4px 0 8px}
-.sec-head p{color:var(--muted); font-size:14px; margin:0}
+.sec-head{margin-bottom:48px; border-left:4px solid var(--blue); padding-left:20px}
+.sec-head .en{font-size:11px; letter-spacing:.18em; color:var(--blue); font-weight:700; display:block}
+.sec-head h2{font-size:clamp(23px,2.8vw,30px); font-weight:700; margin:6px 0 10px; line-height:1.45}
+.sec-head p{color:var(--muted); font-size:15px; margin:0}
+.sec-head .lead-strong{font-size:clamp(16px,1.8vw,19px); font-weight:700; color:var(--ink); line-height:1.7}
+.note-s{display:block; margin-top:10px; font-size:13px; color:var(--muted)}
+.more-r{text-align:right; margin-top:36px}
 
-/* 数字 */
-.stats{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:38px}
-.stat{background:#fff; border:1px solid var(--line); border-top:3px solid var(--blue);
-  text-align:center; padding:22px 14px}
-.stat .v{font-size:clamp(22px,3vw,34px); font-weight:700; color:var(--blue-dd); line-height:1.25;
-  font-variant-numeric:tabular-nums}
-.stat .v small{font-size:14px; margin-left:3px}
-.stat .l{font-size:12.5px; color:var(--muted); margin-top:6px}
+/* ---- A and K の特徴（3枚） ---- */
+.feats{display:grid; grid-template-columns:repeat(3,1fr); gap:24px}
+.feat{display:flex; flex-direction:column; background:#fff; border:1px solid var(--line); border-top:3px solid var(--blue);
+  border-radius:6px; padding:32px 30px 30px}
+.feat-top{display:flex; align-items:center; justify-content:space-between; margin-bottom:18px}
+.feat-n{font-size:11px; font-weight:700; letter-spacing:.16em; color:#9aa5b1}
+.feat h3{font-size:20px; font-weight:700; margin:0 0 12px; line-height:1.5; color:var(--ink)}
+.feat p{font-size:14.5px; color:#4a5866; margin:0 0 18px; line-height:1.9}
+.feat .tags{margin-top:auto}
+.feat .tags li{font-size:13px; padding:4px 11px}
+.checks{list-style:none; margin:auto 0 0; padding:0; border-top:1px solid var(--line)}
+.checks li{position:relative; padding:9px 0 9px 24px; border-bottom:1px solid var(--line-s); font-size:14px; line-height:1.6}
+.checks li::before{content:""; position:absolute; left:3px; top:14px; width:5px; height:9px;
+  border-right:1.8px solid var(--blue); border-bottom:1.8px solid var(--blue); transform:rotate(45deg)}
+.checks small{color:var(--muted); font-size:12.5px}
 
-/* 在留資格 */
-/* 5枚は 3列＋2列（中央寄せ）。6列のグリッドで1枚＝2列分にし、4枚目を2列目から置く */
+/* ---- ご紹介できる人材（下層：詳しいカード） ---- */
 .visas{display:grid; grid-template-columns:repeat(6,1fr); gap:24px 28px}
 .visa{grid-column:span 2; display:grid; grid-template-rows:auto auto auto 1fr; background:#fff;
-  border:1px solid var(--line); padding:28px 28px 30px; border-radius:4px; transition:border-color .2s, box-shadow .2s}
+  border:1px solid var(--line); padding:28px 28px 30px; border-radius:6px}
 .visa:nth-child(4){grid-column:2 / span 2}
-.visa:hover{border-color:var(--blue-line); box-shadow:0 8px 22px rgba(10,90,140,.07)}
 .visa .n{display:flex; align-items:center; gap:12px; font-size:12px; font-weight:700; letter-spacing:.06em; color:var(--blue-dd)}
 .visa .n::after{content:""; flex:1; height:1px; background:var(--line)}
 .visa h3{font-size:20px; font-weight:700; margin:14px 0 4px; color:var(--ink)}
-.visa .sum{font-size:13.5px; font-weight:700; color:var(--blue-dd); margin:0 0 14px; line-height:1.6}
-.visa p{font-size:13.5px; color:var(--muted); margin:0; line-height:1.85}
+.visa .sum{font-size:14px; font-weight:700; color:var(--blue-dd); margin:0 0 14px; line-height:1.6}
+.visa p{font-size:14px; color:var(--muted); margin:0; line-height:1.9}
 .visa p strong{color:var(--ink)}
-.note-s{display:block; margin-top:10px; font-size:12.5px; color:var(--muted)}
 @media (max-width:1000px){ .visas{grid-template-columns:repeat(2,1fr); gap:16px}
   .visa, .visa:nth-child(4){grid-column:auto} }
-@media (max-width:640px){ .visas{grid-template-columns:1fr} .visa{padding:22px 20px 24px} }
+@media (max-width:640px){ .visas{grid-template-columns:1fr} .visa{padding:24px 22px 26px} }
 
-/* 支援：受入れ前 → 生活・定着 → 就労継続・管理 の3段で、流れとして見せる */
+/* ---- ご紹介できる人材（トップ：5枚） ---- */
+.vcards{display:grid; grid-template-columns:repeat(5,1fr); gap:16px}
+.vcard{background:#fff; border:1px solid var(--line); border-radius:6px; padding:26px 22px 24px}
+.vcard .n{font-size:11.5px; font-weight:700; letter-spacing:.12em; color:var(--blue-dd)}
+.vcard h3{font-size:18px; font-weight:700; margin:8px 0 12px; padding-bottom:12px; border-bottom:1px solid var(--line); color:var(--ink); line-height:1.5}
+.vcard p{font-size:14px; color:#4a5866; margin:0; line-height:1.8}
+/* 相談の導線（人材の下・支援の下で使う） */
+.consult{margin-top:32px; background:#fff; border:1px solid var(--blue-line); border-left:4px solid var(--blue); border-radius:6px;
+  padding:26px 32px; display:flex; align-items:center; justify-content:space-between; gap:18px 32px; flex-wrap:wrap}
+.consult p{margin:0; font-size:17px; font-weight:700; color:var(--ink); line-height:1.6}
+.consult p small{display:block; font-size:14px; font-weight:400; color:var(--muted); margin-top:4px}
+
+/* ---- 支援（トップ：受入れ前 → 生活・定着 → 就労継続 の3段） ---- */
+.stages{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(3,1fr); gap:44px}
+.stage{position:relative; background:var(--panel); border:1px solid var(--line-s); border-radius:6px; padding:30px 28px 26px}
+.stage:not(:last-child)::after{content:""; position:absolute; right:-28px; top:50%; width:11px; height:11px;
+  border-top:1.8px solid var(--blue); border-right:1.8px solid var(--blue); transform:translateY(-50%) rotate(45deg)}
+.stage-h{display:flex; align-items:baseline; gap:12px}
+.stage-n{font-size:28px; font-weight:700; color:var(--blue-dd); line-height:1; font-variant-numeric:tabular-nums}
+.stage-en{font-size:10.5px; font-weight:700; letter-spacing:.16em; color:#9aa5b1}
+.stage h3{font-size:20px; font-weight:700; margin:12px 0 4px; color:var(--ink)}
+.stage > p{font-size:13.5px; color:var(--muted); margin:0 0 14px}
+.stage .checks{background:#fff; border:1px solid var(--line); border-radius:4px; padding:4px 16px}
+.stage .checks li:last-child{border-bottom:0}
+
+/* ---- 支援（下層：10項目） ---- */
 .sup-groups{display:grid; gap:0}
-.sgrp{display:grid; grid-template-columns:240px 1fr; gap:40px; padding:36px 0; border-top:1px solid var(--line)}
+.sgrp{display:grid; grid-template-columns:240px 1fr; gap:40px; padding:40px 0; border-top:1px solid var(--line)}
 .sgrp:first-child{border-top:0; padding-top:8px}
 .sgrp-h .sgrp-n{display:block; font-size:11px; font-weight:700; letter-spacing:.14em; color:var(--blue-dd)}
 .sgrp-h .en{display:block; font-size:11px; letter-spacing:.14em; color:var(--muted); margin-top:2px}
 .sgrp-h h3{font-size:21px; font-weight:700; color:var(--ink); margin:10px 0 6px}
-.sgrp-h p{font-size:13.5px; color:var(--muted); margin:0; line-height:1.8}
+.sgrp-h p{font-size:14px; color:var(--muted); margin:0; line-height:1.8}
 .sups{display:grid; grid-template-columns:repeat(2,1fr); gap:16px}
-.sup{background:#fff; border-radius:6px; padding:22px 24px 24px; box-shadow:0 1px 3px rgba(10,60,100,.05);
-  transition:transform .2s, box-shadow .2s}
-.sup:hover{transform:translateY(-2px); box-shadow:0 8px 20px rgba(10,60,100,.08)}
+.sup{background:#fff; border:1px solid var(--line); border-radius:6px; padding:22px 24px 24px}
 .sup .c{display:flex; align-items:center; gap:10px; font-size:12px; font-weight:700; letter-spacing:.06em; color:var(--blue-dd)}
 .sup .c::after{content:""; width:22px; height:1px; background:var(--blue-line)}
 .sup h4{font-size:16px; font-weight:700; color:var(--ink); margin:10px 0 6px; line-height:1.55}
-.sup p{font-size:13.5px; color:var(--muted); margin:0; line-height:1.85}
-.sup-cta{margin-top:40px; padding:30px 32px; background:#fff; border-radius:6px; display:flex; align-items:center;
-  justify-content:space-between; gap:20px 32px; flex-wrap:wrap; border-left:3px solid var(--blue)}
-.sup-cta p{margin:0; font-size:16px; color:var(--ink)}
-#support.alt, .sub #support{background:#f5fafd}
+.sup p{font-size:14px; color:var(--muted); margin:0; line-height:1.85}
 @media (max-width:900px){ .sgrp{grid-template-columns:1fr; gap:16px} }
-@media (max-width:640px){ .sups{grid-template-columns:1fr} .sup-cta{padding:24px 20px} .sup-cta .btn{width:100%; text-align:center} }
+@media (max-width:640px){ .sups{grid-template-columns:1fr} }
 
-/* 流れ：5つのカードを線と小さな矢印でつなぎ、左から右へ読ませる */
+/* ---- 受入れまでの流れ ---- */
+/* 期間の目安を大きく（トップと下層の両方で使う） */
+.flow-total{display:flex; align-items:center; flex-wrap:wrap; gap:8px 28px; background:#fff; border:1px solid var(--blue-line);
+  border-radius:6px; padding:26px 32px; margin-bottom:48px}
+.flow-total .k{font-size:16px; font-weight:700; color:var(--ink)}
+.flow-total .v{font-size:clamp(36px,4.6vw,50px); font-weight:700; color:var(--blue-dd); line-height:1.1; letter-spacing:.02em}
+.flow-total .v small{font-size:.42em; margin:0 2px}
+.flow-total .s{flex-basis:100%; font-size:13px; color:var(--muted)}
+/* トップ：丸い番号を線でつなぐ横のタイムライン */
+.tline{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(5,1fr); position:relative}
+.tline::before{content:""; position:absolute; left:10%; right:10%; top:25px; height:2px; background:var(--blue-line)}
+.tl{position:relative; text-align:center; padding:0 10px}
+.tl .dot{position:relative; z-index:1; width:52px; height:52px; margin:0 auto 16px; border-radius:50%; background:#fff;
+  border:2px solid var(--blue); color:var(--blue-dd); font-size:15px; font-weight:700; display:flex; align-items:center; justify-content:center}
+.tl:last-child .dot{background:var(--blue); color:#fff}
+.tl b{display:block; font-size:16.5px; color:var(--ink); line-height:1.5}
+.tl .d{display:inline-block; margin-top:8px; font-size:14px; font-weight:700; color:var(--blue-dd); background:#fff;
+  border:1px solid var(--line); border-radius:4px; padding:3px 12px}
+.tl .d small{font-size:11.5px; font-weight:400; color:var(--muted); margin-right:6px}
+/* 下層：5つのカードを線と小さな矢印でつなぐ */
 .flow{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(5,1fr); gap:30px; position:relative}
 .flow::before{content:""; position:absolute; left:20px; right:20px; top:31px; height:1px; background:#cfdbe5; z-index:0}
 .step{background:#fff; border:1px solid var(--line); padding:22px 20px 18px; border-radius:6px;
   position:relative; z-index:1; display:flex; flex-direction:column}
 .step:not(:last-child)::after{content:""; position:absolute; right:-20px; top:27px; width:8px; height:8px;
-  border-top:1.5px solid #9fb4c6; border-right:1.5px solid #9fb4c6; transform:rotate(45deg); background:transparent}
+  border-top:1.5px solid #9fb4c6; border-right:1.5px solid #9fb4c6; transform:rotate(45deg)}
 .step .n{font-size:11px; font-weight:700; letter-spacing:.12em; color:var(--blue-dd); margin-bottom:12px; line-height:1}
 .step h3{font-size:17px; font-weight:700; margin:0 0 8px; color:var(--ink); line-height:1.5}
-.step p{font-size:13px; color:var(--muted); margin:0 0 16px; line-height:1.8; flex:1}
+.step p{font-size:13.5px; color:var(--muted); margin:0 0 16px; line-height:1.8; flex:1}
 .step .d{border-top:1px solid var(--line); padding-top:12px; font-size:14px; font-weight:700; color:var(--blue-dd);
   display:flex; flex-direction:column; gap:2px; line-height:1.4}
 .step .d .dk{font-size:11px; font-weight:400; color:var(--muted); letter-spacing:.04em}
@@ -215,7 +250,26 @@ section.alt{background:var(--panel); border-top:1px solid var(--line-s); border-
   .step .d{flex-direction:row; gap:10px; align-items:baseline}
 }
 
-/* 自社グループ／提携：01 自社グループ（薄い青）と 02 提携機関（白）を分けて見せる */
+/* ---- グループ・提携機関（トップ：連携の図） ---- */
+.net{display:grid; grid-template-columns:1fr 1.2fr 1fr; gap:28px; align-items:stretch}
+.net-col{position:relative; background:#fff; border:1px solid var(--line); border-radius:6px; padding:24px 24px 18px}
+.net-own{background:var(--blue-s); border-color:var(--blue-line)}
+/* 中央（自社グループ）と左右（提携）を細い線でつなぐ */
+.net-own::before, .net-own::after{content:""; position:absolute; top:50%; width:28px; height:1px; background:var(--blue)}
+.net-own::before{left:-29px} .net-own::after{right:-29px}
+.net-k{display:flex; align-items:center; gap:8px; font-size:12.5px; font-weight:700; color:var(--blue-dd); letter-spacing:.04em; margin-bottom:6px}
+.net-k em{font-style:normal; font-size:10px; letter-spacing:.14em; color:#9aa5b1}
+.net-item{padding:14px 0; border-top:1px solid var(--line)}
+.net-k + .net-item{border-top:0}
+.net-own .net-item{border-top-color:var(--blue-line)}
+.net-item small{display:block; font-size:12px; font-weight:700; color:var(--muted)}
+.net-item b{display:block; font-size:16px; color:var(--ink); line-height:1.5}
+.net-item span{display:block; font-size:13px; color:#4a5866; line-height:1.7; margin-top:2px}
+.net-item .role{display:inline-block; font-size:11.5px; font-weight:700; color:var(--blue-dd); background:#fff;
+  border:1px solid var(--blue-line); border-radius:3px; padding:0 8px; margin:4px 0 0}
+.net-foot{margin:22px 0 0; font-size:14px; color:var(--muted); text-align:center}
+
+/* ---- グループ・提携機関（下層） ---- */
 .lead-big{display:block; font-size:clamp(18px,2.2vw,22px); font-weight:700; color:var(--ink); line-height:1.6; letter-spacing:.02em}
 .pt-block{display:grid; grid-template-columns:200px 1fr; gap:36px; padding:36px 0}
 .pt-block + .pt-block{border-top:1px solid var(--line)}
@@ -225,8 +279,7 @@ section.alt{background:var(--panel); border-top:1px solid var(--line-s); border-
 .group-lead .badge{display:inline-block; font-size:11px; font-weight:700; letter-spacing:.06em; color:var(--blue-dd);
   border:1px solid var(--blue-line); background:#fff; padding:2px 10px; border-radius:3px; margin-bottom:10px}
 .group-lead h3{font-size:22px; font-weight:700; margin:0 0 12px; color:var(--ink)}
-.group-lead p{margin:0; font-size:14px; color:var(--ink); line-height:1.9}
-/* 自社グループで対応する範囲を、縦の流れで見せる */
+.group-lead p{margin:0; font-size:14.5px; color:var(--ink); line-height:1.9}
 .gl-flow{list-style:none; margin:0; padding:0; counter-reset:gl}
 .gl-flow li{position:relative; padding:0 0 18px 30px; counter-increment:gl}
 .gl-flow li:last-child{padding-bottom:0}
@@ -234,90 +287,93 @@ section.alt{background:var(--panel); border-top:1px solid var(--line-s); border-
   background:var(--blue); color:#fff; font-size:11px; font-weight:700; display:flex; align-items:center; justify-content:center}
 .gl-flow li:not(:last-child)::after{content:""; position:absolute; left:9.5px; top:24px; bottom:2px; width:1px; background:#a9cbe2}
 .gl-flow b{display:block; font-size:15px; color:var(--ink)}
-.gl-flow span{display:block; font-size:12.5px; color:var(--muted)}
-/* 提携機関：写真は16:9でそろえ、国名→機関名→役割の順で見せる */
+.gl-flow span{display:block; font-size:13px; color:var(--muted)}
 .partners{display:grid; grid-template-columns:repeat(3,1fr); gap:20px}
 .partner{background:#fff; border:1px solid var(--line); border-radius:6px; overflow:hidden; display:flex; flex-direction:column}
 .partner .ph{aspect-ratio:16/9; background:var(--panel); overflow:hidden; order:0}
 .partner .ph img{width:100%; height:100%; object-fit:cover}
 .partner .ph-area{display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px;
-  background:linear-gradient(135deg,#e6f1f8 0%,#cfe3f0 100%); color:var(--blue-dd)}
+  background:var(--blue-s); color:var(--blue-dd)}
 .partner .ph-area span{font-size:30px; font-weight:700; letter-spacing:.24em}
 .partner .ph-area small{font-size:11px; font-weight:700; letter-spacing:.2em; opacity:.7}
 .partner .cc{order:1; font-size:11px; letter-spacing:.14em; color:var(--blue-dd); font-weight:700; margin:18px 22px 4px}
 .partner h3{order:2; font-size:17px; font-weight:700; margin:0 22px 8px; color:var(--ink); line-height:1.5}
 .partner .role{order:3; align-self:flex-start; margin:0 22px 12px; font-size:11.5px; font-weight:700; color:var(--blue-dd);
   background:var(--blue-s); padding:2px 10px; border-radius:3px}
-.partner p{order:4; font-size:13px; color:var(--muted); margin:0 22px 22px; line-height:1.85}
-.sub #partners{background:#fff}
+.partner p{order:4; font-size:13.5px; color:var(--muted); margin:0 22px 22px; line-height:1.85}
 @media (max-width:1000px){ .pt-block{grid-template-columns:1fr; gap:16px} .group-lead{grid-template-columns:1fr} }
 @media (max-width:760px){ .partners{grid-template-columns:1fr} .group-lead{padding:24px 20px} }
 
-/* 代表挨拶 */
-.greet{display:grid; grid-template-columns:280px 1fr; gap:40px; align-items:center}
-.greet .ph{aspect-ratio:4/5; background:var(--panel); border:1px solid var(--line);
-  display:flex; align-items:center; justify-content:center; color:var(--muted);
-  font-size:12px; text-align:center}
-.greet h3{font-size:clamp(18px,2.4vw,24px); font-weight:700; line-height:1.6; margin:0 0 18px;
-  color:var(--blue-dd)}
-.greet p{margin:0 0 14px; font-size:14.5px; color:var(--muted)}
-.greet .sign{margin-top:20px; padding-top:14px; border-top:1px solid var(--line); font-size:14px; color:var(--muted)}
-.greet .sign b{color:var(--ink); font-size:17px; margin-left:10px}
-/* 下層（企業情報ページ）：代表メッセージを薄い青の面にして、会社概要（白）と分ける */
-.msg-label{display:none}
-.sub #company{background:#f5fafd; padding:56px 0 72px}
-.sub .msg-label{display:flex; align-items:baseline; gap:12px; margin-bottom:18px}
-.sub .msg-label .en{font-size:11px; font-weight:700; letter-spacing:.16em; color:var(--blue-dd)}
-.sub .msg-label span:last-child{font-size:13px; color:var(--muted)}
-.sub .greet{grid-template-columns:340px 1fr; gap:56px; align-items:start}
-.sub .greet .ph{aspect-ratio:3/4; background:#fff; border:1px solid var(--line); border-radius:4px}
-.sub .greet h3{font-size:clamp(22px,2.6vw,30px); line-height:1.55; color:var(--ink); margin:0 0 26px; letter-spacing:.01em}
-.sub .greet h3 span{display:inline-block}
-.sub .greet p{font-size:15px; line-height:2; color:#4a5866}
-.sub .greet p strong{color:var(--blue-dd)}
-.sub .greet .sign{margin-top:36px; padding-top:20px; border-top:1px solid var(--line); display:flex; align-items:baseline; gap:4px; flex-wrap:wrap}
-.sub .greet .sign span{flex-basis:100%; font-size:12.5px; color:var(--muted); margin-bottom:2px}
-.sub .greet .sign b{font-size:20px; letter-spacing:.08em}
-@media (max-width:760px){
-  .sub #company{padding:40px 0 52px}
-  .sub .greet{grid-template-columns:1fr; gap:24px}
-  .sub .greet .ph{max-width:200px}
-  .sub .greet h3{font-size:21px}
-  .sub .greet h3 span{display:inline}
-}
+/* ---- 会社について ---- */
+.about{display:grid; grid-template-columns:1.1fr 1fr; gap:48px; align-items:start}
+.about p{margin:0; font-size:15.5px; line-height:2.05; color:#4a5866}
+.about p strong{color:var(--ink)}
+.about-dl{margin:0; background:#fff; border:1px solid var(--line); border-radius:6px; padding:8px 28px}
+.about-dl div{display:grid; grid-template-columns:120px 1fr; gap:12px; padding:14px 0; border-bottom:1px solid var(--line-s); font-size:14.5px}
+.about-dl div:last-child{border-bottom:0}
+.about-dl dt{color:var(--muted); font-size:13px; padding-top:1px}
+.about-dl dd{margin:0; color:var(--ink)}
 
-/* FAQ */
-.faq details{background:#fff; border:1px solid var(--line); margin-bottom:8px; border-radius:3px}
-.faq summary{cursor:pointer; padding:16px 20px; font-weight:700; font-size:14.5px; list-style:none;
-  display:flex; gap:14px; align-items:flex-start}
+/* ---- グループ事業（後半に控えめに） ---- */
+.sec-head.sm h2{font-size:clamp(19px,2.2vw,23px)}
+section#groupbiz{padding:76px 0}
+.gbiz{display:grid; grid-template-columns:repeat(2,1fr); gap:16px}
+.gb{background:#fff; border:1px solid var(--line); border-radius:6px; padding:22px 26px}
+.gb-k{display:block; font-size:12.5px; font-weight:700; color:var(--muted)}
+.gb b{display:block; font-size:16px; color:var(--ink); margin-top:4px; line-height:1.6}
+.gb small{display:block; font-size:13px; color:var(--muted); margin-top:4px}
+
+/* ---- お知らせ（後半。見出しは小さく、3件だけ） ---- */
+section.topnews{padding:72px 0}
+.nb-head{display:flex; align-items:baseline; gap:14px; margin-bottom:12px}
+.nb-head .en{font-size:11px; font-weight:700; letter-spacing:.18em; color:var(--blue)}
+.nb-head h2{margin:0; font-size:18px; font-weight:700; color:var(--ink)}
+.nb-head .txt-link{margin-left:auto; font-size:13.5px}
+.nlist-top{list-style:none; margin:0; padding:0; border-top:1px solid var(--line)}
+.nlist-top li{border-bottom:1px solid var(--line)}
+.nlist-top a{display:grid; grid-template-columns:110px 1fr 20px; gap:20px; align-items:center;
+  padding:14px 6px; color:var(--ink); text-decoration:none; font-size:14.5px}
+.nlist-top a:hover{background:var(--blue-s)}
+.nlist-top span{overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.nlist-top time{color:var(--muted); font-variant-numeric:tabular-nums; font-size:13.5px}
+.nlist-top i{font-style:normal; color:var(--blue-dd)}
+
+/* ---- よくあるご質問（アコーディオン） ---- */
+.faq-list{max-width:880px}
+.faq details{background:#fff; border:1px solid var(--line); margin-bottom:10px; border-radius:6px}
+.faq summary{cursor:pointer; padding:20px 56px 20px 22px; font-weight:700; font-size:15.5px; list-style:none;
+  display:flex; gap:14px; align-items:flex-start; position:relative; line-height:1.7}
 .faq summary::-webkit-details-marker{display:none}
-.faq summary::before{content:"Q"; flex:none; width:24px; height:24px; background:var(--blue);
-  color:#fff; font-size:12px; font-weight:700; display:flex; align-items:center;
-  justify-content:center; border-radius:3px}
-.faq .a{padding:0 20px 18px 58px; font-size:14px; color:var(--muted)}
+.faq summary::before{content:"Q"; flex:none; width:26px; height:26px; margin-top:1px; background:var(--blue);
+  color:#fff; font-size:12.5px; font-weight:700; display:flex; align-items:center; justify-content:center; border-radius:3px}
+/* 開閉の印（＋／−） */
+.faq summary::after{content:""; position:absolute; right:22px; top:50%; width:14px; height:14px; transform:translateY(-50%);
+  background:linear-gradient(var(--blue-dd),var(--blue-dd)) center/14px 2px no-repeat,
+             linear-gradient(var(--blue-dd),var(--blue-dd)) center/2px 14px no-repeat}
+.faq details[open] summary::after{background:linear-gradient(var(--blue-dd),var(--blue-dd)) center/14px 2px no-repeat}
+.faq .a{display:flex; gap:14px; padding:0 22px 22px; font-size:15px; color:#4a5866; line-height:1.9}
+.faq .a::before{content:"A"; flex:none; width:26px; height:26px; border:1px solid var(--blue); color:var(--blue-dd);
+  font-size:12.5px; font-weight:700; display:flex; align-items:center; justify-content:center; border-radius:3px}
 
-/* CTA */
-.cta{background:var(--blue-s); border-top:1px solid var(--blue-line); text-align:center; padding:76px 0}
+/* ---- 最後のお問い合わせ ---- */
+.cta{background:var(--blue-s); border-top:1px solid var(--blue-line); text-align:center; padding:96px 0}
+.cta .en{display:block; font-size:11px; font-weight:700; letter-spacing:.18em; color:var(--blue); margin-bottom:12px}
+.cta h2{font-size:clamp(24px,3.1vw,34px); font-weight:700; margin:0 0 18px; color:var(--ink); line-height:1.5}
 .cta h2 span{display:inline-block}
-.cta h2{font-size:clamp(23px,3vw,32px); font-weight:700; margin:0 0 12px; color:var(--ink)}
-.cta p{color:var(--muted); margin:0 0 34px; font-size:15.5px}
-.cta-ways{display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:16px; max-width:980px; margin:0 auto; text-align:left}
-.cw{position:relative; display:flex; flex-direction:column; gap:4px; padding:24px 26px; background:#fff; border:1px solid var(--blue-line);
-  border-radius:6px; text-decoration:none; color:var(--ink); transition:box-shadow .2s, transform .2s}
-.cw:hover{box-shadow:0 8px 22px rgba(10,60,100,.1); transform:translateY(-2px)}
-.cw-k{font-size:12px; font-weight:700; color:var(--blue-dd); letter-spacing:.04em}
-.cw b{font-size:26px; font-weight:700; color:var(--blue-dd); letter-spacing:.02em; line-height:1.4}
+.cta p{color:#4a5866; margin:0 0 36px; font-size:16px; line-height:1.95}
+.btn-lg{display:inline-flex; align-items:center; justify-content:center; gap:14px; min-width:360px; padding:22px 40px; font-size:18px; border-radius:6px}
+.btn-lg i{font-style:normal; font-size:20px}
+.cta-sub{display:flex; justify-content:center; flex-wrap:wrap; gap:14px; margin-top:32px}
+.cw{display:flex; flex-direction:column; align-items:flex-start; gap:2px; padding:16px 24px; min-width:280px; background:#fff;
+  border:1px solid var(--blue-line); border-radius:6px; text-decoration:none; color:var(--ink); text-align:left}
+.cw:hover{border-color:var(--blue)}
+.cw-k{font-size:12px; font-weight:700; color:var(--muted)}
+.cw b{font-size:22px; font-weight:700; color:var(--blue-dd); letter-spacing:.02em; line-height:1.4}
 .cw b.mail{font-size:17px; overflow-wrap:anywhere}
 .cw small{font-size:12px; color:var(--muted)}
-.cw-form{background:var(--blue); border-color:var(--blue); color:#fff; justify-content:center}
-.cw-form .cw-k{color:#d8ecf8}
-.cw-form b{color:#fff; font-size:19px}
-.cw-form i{position:absolute; right:24px; top:50%; transform:translateY(-50%); font-style:normal; font-size:20px}
-.cw-form:hover{background:var(--blue-d)}
-@media (max-width:860px){ .cta-ways{grid-template-columns:1fr} .cta{padding:56px 0} }
 
 /* フッター */
-footer{background:var(--blue-dd); color:#cfe8f5; font-size:13px; padding:44px 0 20px}
+footer{background:var(--blue-dd); color:#cfe8f5; font-size:13px; padding:48px 0 20px}
 footer .cols{display:grid; grid-template-columns:1.5fr 1fr 1fr; gap:38px; margin-bottom:30px}
 footer h4{color:#fff; font-size:14.5px; font-weight:700; margin:0 0 12px}
 footer ul{list-style:none; margin:0; padding:0}
@@ -325,9 +381,6 @@ footer li{margin-bottom:8px}
 footer a{text-decoration:none}
 footer a:hover{color:#fff; text-decoration:underline}
 .copy{border-top:1px solid rgba(255,255,255,.2); padding-top:16px; font-size:11.5px; text-align:center}
-
-/* 下層ページとトップの「詳しく見る」 */
-.more{text-align:center; margin-top:34px}
 
 /* ★ヘッダーを畳む幅は、レイアウトの折返しと別の @media に分ける */
 @media (max-width:1080px){
@@ -337,32 +390,65 @@ footer a:hover{color:#fff; text-decoration:underline}
   .pill{margin-left:auto}
 }
 @media (max-width:1000px){
+  .hero-in{grid-template-columns:1fr; gap:36px; padding-top:48px; padding-bottom:56px}
+  .hero-ph{aspect-ratio:16/9}
+  .trust-grid, .feats{grid-template-columns:1fr}
+  .vcards{grid-template-columns:repeat(2,1fr)}
+  .stages{grid-template-columns:1fr; gap:40px}
+  .stage:not(:last-child)::after{right:auto; left:50%; top:auto; bottom:-27px; transform:translateX(-50%) rotate(135deg)}
+  .net{grid-template-columns:1fr; gap:28px}
+  .net-own::before, .net-own::after{left:50%; right:auto; width:1px; height:28px; top:auto}
+  .net-own::before{top:-29px} .net-own::after{bottom:-29px}
+  .about{grid-template-columns:1fr; gap:28px}
 }
 @media (max-width:860px){
   .hdr{height:64px; gap:10px}
   .hdr .co img{height:28px}
   .pill{padding:8px 16px; font-size:13px; min-height:44px}
+  /* 流れは縦に：番号の丸を左に、線を縦に */
+  .tline{grid-template-columns:1fr; gap:14px}
+  .tline::before{left:25px; right:auto; top:26px; bottom:26px; width:2px; height:auto}
+  .tl{display:grid; grid-template-columns:52px 1fr; gap:4px 18px; align-items:center; text-align:left; padding:0}
+  .tl .dot{grid-row:1 / 3; margin:0}
+  .tl .d{justify-self:start; margin-top:0}
 }
 @media (max-width:760px){
-  section{padding:46px 0}
-  .stats{grid-template-columns:repeat(2,1fr)}
-  .flow{grid-template-columns:1fr}
-  .greet{grid-template-columns:1fr; gap:22px}
-  .greet .ph{max-width:220px}
-  .hero .bg::after{background:linear-gradient(180deg,rgba(255,255,255,.93) 0%,
-    rgba(255,255,255,.86) 52%,rgba(255,255,255,.5) 100%)}
-  .newsband{padding:40px 0 8px}
-  .newsband li a{grid-template-columns:1fr 18px; gap:2px 12px; padding:14px 2px}
-  .newsband time{grid-column:1}
-  .newsband li span{grid-column:1; white-space:normal}
-  .newsband i{grid-column:2; grid-row:1 / 3}
-  .badges .wrap{grid-template-columns:1fr}
-  .badges .bd{border-left:0; border-top:1px solid var(--line); padding:14px 0}
-  .badges .bd:first-child{border-top:0}
-  .hero .bg{height:auto; min-height:560px}
-  .hero-copy{position:relative; padding:40px 0 44px}
-  .hero .bg{position:absolute; inset:0}
-  .hero-copy .lead br{display:none}
+  section{padding:64px 0}
+  section.topnews, section#groupbiz{padding:52px 0}
+  .sec-head{margin-bottom:32px; padding-left:16px}
+  .hero-in{padding-top:36px; padding-bottom:44px; gap:30px}
+  .brand-msg{font-size:12.5px; margin-bottom:14px}
+  .hero h1{font-size:clamp(27px,7.6vw,34px)}
+  .hero .lead{font-size:15.5px}
+  .hero .lead br{display:none}
+  .hero .tags{margin-bottom:28px}
+  .hero-actions .btn{width:100%}
+  .trust{padding:24px 0}
+  .tc{padding:20px}
+  .feat{padding:26px 22px 24px}
+  .vcards{grid-template-columns:1fr; gap:12px}
+  .vcard{padding:20px 22px}
+  .vcard h3{margin-bottom:8px; padding-bottom:8px}
+  .consult{padding:22px 20px}
+  .consult p{font-size:16px}
+  .consult .btn{width:100%}
+  .stage{padding:24px 20px 20px}
+  .flow-total{padding:20px 22px; margin-bottom:36px}
+  .about-dl{padding:4px 20px}
+  .about-dl div{grid-template-columns:1fr; gap:0}
+  .gbiz{grid-template-columns:1fr}
+  .nlist-top a{grid-template-columns:1fr 18px; gap:2px 12px; padding:14px 2px}
+  .nlist-top time{grid-column:1}
+  .nlist-top span{grid-column:1; white-space:normal}
+  .nlist-top i{grid-column:2; grid-row:1 / 3}
+  .faq summary{padding:18px 48px 18px 16px; font-size:15px}
+  .faq summary::after{right:18px}
+  .faq .a{padding:0 16px 20px; font-size:14.5px}
+  .cta{padding:64px 0}
+  .cta p{font-size:15px}
+  .cta p br{display:none}
+  .btn-lg{min-width:0; width:100%; padding:20px 20px; font-size:17px}
+  .cw{min-width:0; width:100%}
   footer .cols{grid-template-columns:1fr; gap:22px}
 }
 </style>
@@ -390,47 +476,78 @@ footer a:hover{color:#fff; text-decoration:underline}
       <a href="#visas">ご紹介できる人材</a>
       <a href="#support">支援内容</a>
       <a href="#flow">受入れの流れ</a>
-      <a href="#partners">提携機関</a>
+      <a href="#partners">グループ・提携機関</a>
       <a href="#company">企業情報</a>
-      <a href="news.html">過去のお知らせ</a>
+      <a href="#faq">よくあるご質問</a>
+      <a href="news.html">お知らせ</a>
       <a href="#contact">お問い合わせ</a>
     </nav>
   </div>
 </header>
 
+<!-- ===== 01 ファーストビュー：見ただけで「外国人材の採用支援の会社」と分かるように ===== -->
 <div class="hero">
-  <div class="bg"><img src="img/hero-sky.jpg" alt="青空と雲"></div>
-  <div class="hero-copy">
-    <div class="wrap">
-      <h1><span>人と企業を、</span><br><b>国境を越えて</b><b>つなぐ。</b></h1>
-      <p class="lead">外国人材の採用から定着まで、<br>企業の受入れを一貫して支援します。</p>
-      <ul class="visa-list" aria-label="ご紹介できる在留資格"><li>技能実習</li><li>特定技能</li><li>留学生</li><li>高度人材</li><li>日系人</li></ul>
+  <div class="wrap hero-in">
+    <div class="hero-copy">
+      <p class="brand-msg">人と企業を、国境を越えてつなぐ。</p>
+      <h1><span>外国人材の採用から、</span><em><span>入国・定着支援まで。</span></em></h1>
+      <p class="lead">技能実習・特定技能をはじめ、<br>企業の外国人材受入れを一貫してサポートします。</p>
+      <p class="tags-k">ご紹介できる人材（5種類）</p>
+      <ul class="tags"><li>技能実習</li><li>特定技能</li><li>留学生</li><li>高度人材</li><li>日系人・定住者</li></ul>
       <div class="hero-actions">
         <a class="btn" href="#contact">無料で相談する</a>
         <a class="txt-link" href="#flow">受入れの流れを見る <span aria-hidden="true">→</span></a>
       </div>
     </div>
+    <figure class="hero-ph"><img src="img/hero-trainees.jpg" alt="教室で研修を受ける人たち"></figure>
   </div>
 </div>
 
-<div class="badges">
+<!-- ===== 02 信頼情報 ===== -->
+<div class="trust">
+  <div class="wrap trust-grid">
+    <div class="tc"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2"/><path d="M5.8 16c.6-1.4 1.8-2 3.2-2s2.6.6 3.2 2M14.5 10h4M14.5 13.5h4"/></svg></span>
+      <div class="tc-body"><span class="tc-en">REGISTERED SUPPORT ORGANIZATION</span><span class="tc-k">登録支援機関</span><b>登録番号 19登-000975</b><small>出入国在留管理庁</small></div></div>
+    <div class="tc"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V8.5L12 4l7 4.5V21M9.5 21v-4.5h5V21M9 11.5h.01M12 11.5h.01M15 11.5h.01"/></svg></span>
+      <div class="tc-body"><span class="tc-en">GROUP</span><span class="tc-k">自社グループの監理団体</span><b>ブリッジング協同組合</b><small>技能実習生の受入れを自社グループで</small></div></div>
+    <div class="tc"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.4 2.5 3.6 5.5 3.6 9s-1.2 6.5-3.6 9c-2.4-2.5-3.6-5.5-3.6-9S9.6 5.5 12 3z"/></svg></span>
+      <div class="tc-body"><span class="tc-en">PARTNER</span><span class="tc-k">海外の送り出し機関と連携</span><b>フィリピン／ベトナム</b><small>プロデンシャルエンプロイメント／POLIMEX</small></div></div>
+  </div>
+</div>
+
+<!-- ===== 03 A and K の特徴（トップだけに出す） ===== -->
+<section id="features">
   <div class="wrap">
-    <div class="bd"><span class="bd-k">登録支援機関</span><b>出入国在留管理庁</b><small>登録番号 19登-000975</small></div>
-    <div class="bd"><span class="bd-k">提携送り出し機関</span><b>フィリピン・ベトナム</b><small>プロデンシャルエンプロイメント／POLIMEX</small></div>
-    <div class="bd"><span class="bd-k">自社グループの監理団体</span><b>ブリッジング協同組合</b><small>技能実習生の受入れを自社グループで</small></div>
+    <div class="sec-head">
+      <span class="en">FEATURES</span>
+      <h2>A and K の特徴</h2>
+      <p>人材のご紹介だけでなく、入国の手続きや生活の支援、就労後の支援までお引き受けします。</p>
+    </div>
+    <div class="feats">
+      <div class="feat">
+        <div class="feat-top"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3.5 20c0-3.2 2.5-5.8 5.5-5.8s5.5 2.6 5.5 5.8"/><circle cx="17" cy="9" r="2.4"/><path d="M16.2 14.3c2.6.4 4.3 2.8 4.3 5.7"/></svg></span><span class="feat-n">FEATURE 01</span></div>
+        <h3>5つの在留資格・人材に対応</h3>
+        <p>職種・人数・時期をお伺いし、企業さまに合う在留資格をご提案します。どの制度が合うか分からない段階からご相談いただけます。</p>
+        <ul class="tags"><li>技能実習</li><li>特定技能</li><li>留学生</li><li>高度人材</li><li>日系人・定住者</li></ul>
+      </div>
+      <div class="feat">
+        <div class="feat-top"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5h16v10.5H10L5.5 19.5V15.5H4z"/><path d="M8 9h8M8 12h5"/></svg></span><span class="feat-n">FEATURE 02</span></div>
+        <h3>採用後まで一貫してサポート</h3>
+        <p>登録支援機関として、入国前の説明から日本での暮らし、就労後の面談まで、受入れに必要な支援をお引き受けします。</p>
+        <ul class="checks"><li>入国前の事前ガイダンス</li><li>住まい・生活に必要な契約の支援</li><li>日本語学習の機会の提供</li><li>仕事や暮らしの相談への対応</li><li>定期的な面談</li></ul>
+      </div>
+      <div class="feat">
+        <div class="feat-top"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg></span><span class="feat-n">FEATURE 03</span></div>
+        <h3>グループ・提携機関との連携</h3>
+        <p>自社グループで監理団体を運営し、フィリピン・ベトナムの送り出し機関と提携しています。</p>
+        <ul class="checks"><li>ブリッジング協同組合<small>（自社グループの監理団体）</small></li><li>フィリピンの送り出し機関<small>（プロデンシャルエンプロイメント）</small></li><li>ベトナムの送り出し機関<small>（POLIMEX）</small></li></ul>
+      </div>
+    </div>
   </div>
-</div>
+</section>
 
-<div class="newsband">
-  <div class="wrap">
-    <div class="nb-head"><span class="en">NEWS</span><h2>お知らせ</h2><a class="txt-link" href="news.html">一覧を見る <span aria-hidden="true">→</span></a></div>
-    <ul>
-      <li><a href="news.html"><time>2021.08.30</time><span>（news.json から差し込まれる）</span></a></li>
-    </ul>
-  </div>
-</div>
-
-<section id="visas">
+<!-- ===== 04 ご紹介できる人材（下層 service.html の本文。トップには名前と .sum だけを出す） ===== -->
+<section class="alt" id="visas">
   <div class="wrap">
     <div class="sec-head">
       <span class="en">TALENT</span>
@@ -438,27 +555,24 @@ footer a:hover{color:#fff; text-decoration:underline}
       <p>就労が可能な5つの在留資格に対応。<br>企業さまに合う制度選びからご相談いただけます。<small class="note-s">介護人材のご紹介にも力を入れています。</small></p>
     </div>
     <div class="visas">
-      <div class="visa"><div class="n">01</div><h3>技能実習</h3><p class="sum">自社グループの監理団体からご紹介</p>
+      <div class="visa"><div class="n">01</div><h3>技能実習</h3><p class="sum">自社グループの監理団体を通じてご紹介</p>
         <p>自社グループの監理団体を通じ、現地で選考した実習生をご紹介します。手続きの代行と、<strong>フィリピン国内での出国手続き</strong>までお手伝いします。</p></div>
-      <div class="visa"><div class="n">02</div><h3>特定技能</h3><p class="sum">受入れ後の支援までお引き受け</p>
+      <div class="visa"><div class="n">02</div><h3>特定技能</h3><p class="sum">受入れ後に必要な支援までお引き受け</p>
         <p>登録支援機関として、受入れ後に義務づけられた支援も含めてお引き受けします。</p></div>
       <div class="visa"><div class="n">03</div><h3>留学生</h3><p class="sum">特定技能への資格変更にも対応</p>
         <p>資格外活動の許可を得た留学生のご紹介。<strong>特定技能試験に合格した留学生を、特定技能ビザへ資格変更してご紹介する</strong>こともできます。</p></div>
       <div class="visa"><div class="n">04</div><h3>高度人材</h3><p class="sum">職種と勤務内容に合わせてご紹介</p>
         <p>専門的な知識や技術を持つ人材を、職種と勤務内容に合わせてご紹介します。</p></div>
-      <div class="visa"><div class="n">05</div><h3>日系人・定住者</h3><p class="sum">就労制限なし、すぐに働ける</p>
+      <div class="visa"><div class="n">05</div><h3>日系人・定住者</h3><p class="sum">就労に制限がなく、すぐに働ける</p>
         <p>就労に制限のない在留資格をお持ちの方のご紹介。すぐに働いていただけます。</p></div>
     </div>
-    <div class="stats">
-      <div class="stat"><div class="v">○○<small>社</small></div><div class="l">受入企業さま</div></div>
-      <div class="stat"><div class="v">○○○<small>名</small></div><div class="l">累計ご紹介人数</div></div>
-      <div class="stat"><div class="v">○<small>か国</small></div><div class="l">対応国籍</div></div>
-      <div class="stat"><div class="v">19登-000975</div><div class="l">登録支援機関 登録番号</div></div>
-    </div>
+    <!-- ★実績の数字（受入企業数・累計紹介人数・対応国籍）は、お客さまから実数が届くまで載せない -->
+    <div class="consult"><p>どの制度が自社に合うか分からない方も、ご相談ください。<small>職種・人数・時期をお伺いし、合う在留資格をご提案します。</small></p><a class="btn" href="#contact">制度選びから相談する</a></div>
   </div>
 </section>
 
-<section class="alt" id="support">
+<!-- ===== 05 登録支援機関としての支援（受入れ前 → 生活・定着 → 就労継続） ===== -->
+<section id="support">
   <div class="wrap">
     <div class="sec-head">
       <span class="en">SUPPORT</span>
@@ -468,19 +582,22 @@ footer a:hover{color:#fff; text-decoration:underline}
     <div class="sup-groups">
       <div class="sgrp"><div class="sgrp-h"><span class="sgrp-n">STEP 1</span><span class="en">BEFORE</span><h3>受入れ前</h3><p>入国前の説明から、住まいの準備まで</p></div><div class="sups"><div class="sup"><span class="c">01</span><h4>事前ガイダンスの実施</h4><p>雇用契約の内容や日本での仕事、入国の手続きなどを、入国前に本人が分かる言葉で説明します。</p></div><div class="sup"><span class="c">02</span><h4>出入国する際の送迎</h4><p>入国時は空港から事業所・住まいまで、帰国時は空港まで付き添います。</p></div><div class="sup"><span class="c">03</span><h4>住居の確保・生活に必要な契約の支援</h4><p>住まい探しと、銀行口座・携帯電話・電気ガス水道などの契約をお手伝いします。</p></div></div></div>
       <div class="sgrp"><div class="sgrp-h"><span class="sgrp-n">STEP 2</span><span class="en">LIFE</span><h3>生活・定着</h3><p>日本での暮らしに慣れ、安心して働けるように</p></div><div class="sups"><div class="sup"><span class="c">04</span><h4>生活オリエンテーションの実施</h4><p>日本の生活ルールやマナー、交通機関の使い方、災害時の行動などを説明します。</p></div><div class="sup"><span class="c">05</span><h4>公的手続などへの同行</h4><p>住民登録や社会保険・税などの手続きに付き添い、書類の作成を手伝います。</p></div><div class="sup"><span class="c">06</span><h4>日本語学習の機会の提供</h4><p>日本語教室や教材の情報をお伝えし、学ぶ機会をつくります。</p></div><div class="sup"><span class="c">07</span><h4>相談・苦情への対応</h4><p>仕事や暮らしの相談・苦情に、本人が分かる言葉で応じます。</p></div><div class="sup"><span class="c">08</span><h4>日本人との交流促進</h4><p>地域の行事などへの参加を案内し、日本の方との交流を後押しします。</p></div></div></div>
-      <div class="sgrp"><div class="sgrp-h"><span class="sgrp-n">STEP 3</span><span class="en">CONTINUE</span><h3>就労継続・管理</h3><p>働き続けられるように、定期的に確認</p></div><div class="sups"><div class="sup"><span class="c">09</span><h4>転職支援（人員整理などの場合）</h4><p>会社の都合で雇用が終わるときに、次の受入れ先探しをお手伝いします。</p></div><div class="sup"><span class="c">10</span><h4>定期的な面談・行政機関への通報</h4><p>本人や上司と定期的に面談し、法令違反などがあれば行政機関へ通報します。</p></div></div></div>
+      <div class="sgrp"><div class="sgrp-h"><span class="sgrp-n">STEP 3</span><span class="en">CONTINUE</span><h3>就労継続</h3><p>働き続けられるように、定期的に確認</p></div><div class="sups"><div class="sup"><span class="c">09</span><h4>転職支援（人員整理などの場合）</h4><p>会社の都合で雇用が終わるときに、次の受入れ先探しをお手伝いします。</p></div><div class="sup"><span class="c">10</span><h4>定期的な面談・行政機関への通報</h4><p>本人や上司と定期的に面談し、法令違反などがあれば行政機関へ通報します。</p></div></div></div>
     </div>
-    <div class="sup-cta"><p><b>登録支援機関として必要な支援を、まとめてお任せいただけます。</b></p><a class="btn" href="#contact">お問い合わせ</a></div>
+    <div class="consult"><p>登録支援機関として必要な支援を、まとめてお任せいただけます。</p><a class="btn" href="#contact">お問い合わせ</a></div>
   </div>
 </section>
 
-<section id="flow">
+<!-- ===== 06 受入れまでの流れ（期間は現サイトの数字だけを使う） ===== -->
+<section class="alt" id="flow">
   <div class="wrap">
     <div class="sec-head">
       <span class="en">FLOW</span>
       <h2>受入れまでの流れ</h2>
-      <p>ご相談から就労開始まで、5つのステップでサポートします。<small class="note-s">※ご相談の段階では費用はいただきません。</small></p>
+      <p>ご相談から就労開始まで、5つのステップでサポートします。</p>
     </div>
+    <div class="flow-total"><span class="k">ご相談から就労開始まで</span><span class="v"><small>約</small>5〜6<small>か月</small></span>
+      <span class="s">※在留資格によって異なります。ご相談の段階では費用はいただきません。</span></div>
     <ol class="flow">
       <li class="step"><div class="n">STEP 01</div><h3>ご相談</h3>
         <p>職種・人数・時期をお伺いし、合う在留資格をご提案します。</p><div class="d"><span class="dk">費用</span>無料</div></li>
@@ -496,12 +613,13 @@ footer a:hover{color:#fff; text-decoration:underline}
   </div>
 </section>
 
-<section class="alt" id="partners">
+<!-- ===== 07 グループ・提携機関 ===== -->
+<section id="partners">
   <div class="wrap">
     <div class="sec-head">
       <span class="en">GROUP &amp; PARTNERS</span>
       <h2>自社グループと提携機関</h2>
-      <p><strong class="lead-big">自社グループで監理団体を運営。<br>募集から入国、就労後まで一貫対応。</strong><small class="note-s">監理団体を自社で設立しているため、募集から入国、就労後の支援までを一貫してお引き受けできます。</small></p>
+      <p><strong class="lead-big">自社グループと提携機関で、<br>募集から就労後まで一貫して支援。</strong><small class="note-s">監理団体を自社で設立しているため、募集から入国、就労後の支援までを一貫してお引き受けできます。</small></p>
     </div>
 
     <div class="pt-block pt-group">
@@ -551,58 +669,81 @@ footer a:hover{color:#fff; text-decoration:underline}
   </div>
 </section>
 
-<section id="company">
+<!-- ===== 08 会社について =====
+     ★代表ごあいさつは、お客さまから正式な文章が届くまで載せない（仮の文章は作らない）。
+       届いたらこの節に戻す（見出し・本文・署名・お写真）。 -->
+<section class="alt" id="company">
   <div class="wrap">
     <div class="sec-head">
-      <span class="en">MESSAGE</span>
-      <h2>代表ごあいさつ</h2>
+      <span class="en">ABOUT</span>
+      <h2>会社について</h2>
     </div>
-    <div class="greet">
-      <div class="ph">代表のお写真が<br>入ります</div>
-      <div class="greet-body">
-        <div class="msg-label"><span class="en">MESSAGE</span><span>代表メッセージ</span></div>
-        <h3><span>「来てよかった」と言ってもらえる受入れを、</span><span>企業さまと一緒に。</span></h3>
-        <p>（ここに代表ごあいさつの文章が入ります。創業の経緯、外国人材の受入れに取り組む理由、
-          受入企業さまと働く方の双方に対してどのような姿勢で臨んでいるか、といった内容を想定しています。）</p>
-        <p>弊社はグループで保育園と児童発達支援・放課後等デイサービスも運営し、外国にルーツのあるお子さまをお預かりしてきました。<strong>外国人の住民の方が地域の一員として暮らしていけるよう、多文化共生社会に貢献していきます。</strong></p>
-        <div class="sign"><span>株式会社 A and K</span>代表取締役<b>兼松 厚志</b></div>
-      </div>
+    <div class="about">
+      <p>弊社はグループで保育園と児童発達支援・放課後等デイサービスも運営し、外国にルーツのあるお子さまをお預かりしてきました。<strong>外国人の住民の方が地域の一員として暮らしていけるよう、多文化共生社会に貢献していきます。</strong></p>
     </div>
   </div>
 </section>
 
-<section class="alt faq" id="faq">
+<!-- ===== 09 グループ事業（トップだけ。主役に見えないよう小さく。詳しくは企業情報へ） ===== -->
+<section id="groupbiz">
+  <div class="wrap">
+    <div class="sec-head sm">
+      <span class="en">WITH THE COMMUNITY</span>
+      <h2>地域とともに ─ グループ事業</h2>
+      <p>外国人材の受入れ支援のほか、地域で保育園と児童発達支援・放課後等デイサービスを運営しています。</p>
+    </div>
+    <div class="gbiz">
+      <div class="gb"><span class="gb-k">保育</span><b>かみのて保育園／かみのて今渡保育園</b><small>一時預かり事業も行っています。</small></div>
+      <div class="gb"><span class="gb-k">児童発達支援・放課後等デイサービス</span><b>かみのてKIDS／かみのてSMILE</b></div>
+    </div>
+    <div class="more-r"><a class="txt-link" href="company.html#group">グループの事業を詳しく見る <span aria-hidden="true">→</span></a></div>
+  </div>
+</section>
+
+<!-- ===== 10 お知らせ（build.py が news.json の最新3件を差し込む） ===== -->
+<section class="alt topnews" id="news">
+  <div class="wrap">
+    <div class="nb-head"><span class="en">NEWS</span><h2>お知らせ</h2><a class="txt-link" href="news.html">一覧を見る <span aria-hidden="true">→</span></a></div>
+    <ul class="nlist-top">
+      <li><a href="news.html"><time>2021.08.30</time><span>（news.json から差し込まれる）</span><i aria-hidden="true">→</i></a></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===== 11 よくあるご質問 ===== -->
+<section class="faq" id="faq">
   <div class="wrap">
     <div class="sec-head">
       <span class="en">FAQ</span>
       <h2>よくあるご質問</h2>
-      <p>費用や期間など、はじめてのご検討でよくいただくご質問です。</p>
+      <p>はじめてのご検討でよくいただくご質問です。</p>
     </div>
-    <details open>
-      <summary>相談だけでも費用はかかりますか。</summary>
-      <div class="a">いいえ。ご相談とお見積りは無料です。制度の説明だけでもお気軽にお声がけください。</div>
-    </details>
-    <details>
-      <summary>受入れまでにどのくらいの期間がかかりますか。</summary>
-      <div class="a">在留資格によりますが、ご相談から就労開始までおおむね5〜6か月が目安です。</div>
-    </details>
-    <details>
-      <summary>費用はどのくらいかかりますか。</summary>
-      <div class="a">（受入れ人数や在留資格によって変わるため、考え方をここに記載します。）</div>
-    </details>
-    <details>
-      <summary>受入れの経験がない会社でも大丈夫ですか。</summary>
-      <div class="a">はじめての企業さまがほとんどです。社内の受入れ体制づくりからご一緒します。</div>
-    </details>
+    <!-- ★「費用はどのくらいかかりますか」は、回答の文章がまだ無いので載せない（届いたら戻す） -->
+    <div class="faq-list">
+      <details>
+        <summary>相談だけでも費用はかかりますか。</summary>
+        <div class="a"><p style="margin:0">いいえ。ご相談とお見積りは無料です。制度の説明だけでもお気軽にお声がけください。</p></div>
+      </details>
+      <details>
+        <summary>受入れまでにどのくらいの期間がかかりますか。</summary>
+        <div class="a"><p style="margin:0">在留資格によりますが、ご相談から就労開始までおおむね5〜6か月が目安です。</p></div>
+      </details>
+      <details>
+        <summary>受入れの経験がない会社でも大丈夫ですか。</summary>
+        <div class="a"><p style="margin:0">はじめての企業さまがほとんどです。社内の受入れ体制づくりからご一緒します。</p></div>
+      </details>
+    </div>
   </div>
 </section>
 
+<!-- ===== 12 お問い合わせ ===== -->
 <div class="cta" id="contact">
   <div class="wrap">
-    <h2><span>まずは、</span><span>お話をお聞かせください</span></h2>
-    <p>ご相談・お見積りは無料です。制度の説明だけでも承ります。</p>
-    <div class="cta-ways">
-      <a class="cw cw-form" href="contact.html"><span class="cw-k">フォームで相談する</span><b>お問い合わせにすすむ</b><i aria-hidden="true">→</i></a>
+    <span class="en">CONTACT</span>
+    <h2><span>外国人材の採用について、</span><span>まずはご相談ください。</span></h2>
+    <p>ご相談・お見積りは無料です。制度の説明だけでも承ります。<br>どの制度が合うか分からない段階からでも、お気軽にお声がけください。</p>
+    <a class="btn btn-lg" href="contact.html">お問い合わせ・ご相談はこちら <i aria-hidden="true">→</i></a>
+    <div class="cta-sub">
       <a class="cw" href="tel:0574663511"><span class="cw-k">お電話で</span><b>0574-66-3511</b><small>平日 9:00〜18:00（土日休）</small></a>
       <a class="cw" href="mailto:info@aandkcorp.com"><span class="cw-k">メールで</span><b class="mail">info@aandkcorp.com</b><small>24時間受付</small></a>
     </div>
@@ -625,7 +766,7 @@ footer a:hover{color:#fff; text-decoration:underline}
           <li><a href="#visas">ご紹介できる人材</a></li>
           <li><a href="#support">支援内容</a></li>
           <li><a href="#flow">受入れの流れ</a></li>
-          <li><a href="#partners">提携機関</a></li>
+          <li><a href="#partners">グループ・提携機関</a></li>
         </ul>
       </div>
       <div>
@@ -643,7 +784,7 @@ footer a:hover{color:#fff; text-decoration:underline}
   </div>
 </footer>
 
-<div class="note">制作中の確認用ページです／数字・お写真の一部は仮のものです。この帯は公開時には出ません。</div>
+<div class="note">制作中の確認用ページです／お写真は仮のものです。この帯は公開時には出ません。</div>
 <a class="to-top" id="to-top" href="#" aria-label="ページの先頭へ戻る"><span aria-hidden="true"></span>TOP</a>
 <script>
 // ページの先頭へ戻るボタン。少しスクロールしたら出す

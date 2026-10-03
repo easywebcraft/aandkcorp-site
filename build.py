@@ -5,9 +5,13 @@
 生成物だけを git revert しても次のビルドで元に戻ってしまうため、
 原本と生成物は必ず一緒にコミットする（かみのてで踏んだ事故）。
 
-**説明はページに1回だけ。** トップは各節の要約（名前・数字・見出しだけ）に
+**説明はページに1回だけ。** トップは各節の要約（名前・期間・短い一文）に
 とどめ、中身の説明は下層ページで行う。原本の文章はどちらにも書かず、
-下層ページ用の原文から digest_* が抜き出して要約を組み立てる。
+下層ページ用の原文から digest() が抜き出して要約を組み立てる。
+
+トップの並び（2026-10-03 組み直し）:
+  FV → 信頼情報 → 特徴 → 人材 → 支援 → 流れ → 連携 → 会社 → グループ事業 → お知らせ → FAQ → お問い合わせ
+  「特徴」「グループ事業」「お知らせ」はトップだけの節（原本の features / groupbiz / news）。
 
 出力:
   index.html    トップ（各節の要約＋「詳しく見る」）
@@ -54,16 +58,17 @@ PAGES = {
     "partners.html": ("partners", "提携機関",       "自社グループと提携機関", "GROUP & PARTNERS",
                       "監理団体を自社で設立しているため、一貫してお引き受けできます。"),
     "company.html":  ("company",  "企業情報",       "企業情報", "COMPANY",
-                      "会社の概要と、代表からのごあいさつです。"),
+                      "会社の概要と、グループの事業をご紹介します。"),
     "faq.html":      ("faq",      "よくあるご質問", "よくあるご質問", "FAQ",
                       "費用や期間など、はじめてのご検討でよくいただくご質問です。"),
 }
 # トップに置く一行。**下層の導入文とは別の文にする**（同じ文を2回読ませない）。
+# ★「間に他社を挟みません」は使わない（提携機関を紹介しているので矛盾して読める）
 TOP_LEAD = {
-    "visas":    "在留資格ごとに、ご紹介できる人材が変わります。",
-    "support":  "義務づけられた10項目を、外部に出さず弊社で行います。",
-    "flow":     "ご相談から就労開始まで、おおむね5〜6か月です。",
-    "partners": "募集から就労後の支援まで、間に他社を挟みません。",
+    "visas":    "就労が可能な5つの在留資格・人材に対応しています。",
+    "support":  "特定技能で義務づけられている支援を、受入れ前・生活・就労継続の3段階でお引き受けします。",
+    "flow":     "ご相談から就労開始まで、5つのステップで進めます。",
+    "partners": "自社グループと提携機関で、募集から就労後まで一貫して支援。",
     "company":  "",
     "faq":      "",
 }
@@ -79,88 +84,24 @@ ANCHOR["contact"] = "contact.html"
 
 EXTRA_CSS = """
 /* ---- 下層ページの見出し（build.py が差し込む） ---- */
-.page-head{padding:52px 0 20px; text-align:center}
-.page-head .en{font-family:var(--serif); font-weight:300; color:var(--gold);
-  font-size:12px; letter-spacing:.28em; display:block; margin-bottom:14px}
-.page-head h1{font-family:var(--serif); font-weight:300; font-size:clamp(23px,3.2vw,31px);
-  letter-spacing:.16em; margin:0 0 14px}
-.page-head p{color:var(--muted); font-size:14px; margin:0; letter-spacing:.04em}
+.page-head{padding:44px 0 40px; background:var(--panel); border-bottom:1px solid var(--line-s)}
+.page-head .en{color:var(--blue); font-size:11px; font-weight:700; letter-spacing:.18em; display:block; margin-bottom:8px}
+.page-head h1{font-weight:700; font-size:clamp(25px,3.2vw,34px); line-height:1.4; margin:0 0 14px; color:var(--ink)}
+.page-head p{color:#4a5866; font-size:15px; margin:0; line-height:1.9; max-width:46em}
 .page-head h1 .count{display:inline-block; vertical-align:middle; margin-left:14px; padding:3px 10px;
-  border:1px solid var(--blue-line); border-radius:3px; font-family:var(--sans); font-size:11px;
+  border:1px solid var(--blue-line); border-radius:3px; font-size:11px;
   font-weight:700; letter-spacing:.14em; color:var(--blue-dd)}
-.crumb{font-size:12px; color:var(--muted); letter-spacing:.06em; padding:16px 0 0}
+.crumb{font-size:12px; color:var(--muted); letter-spacing:.06em; padding:16px 0 0; background:var(--panel)}
 .crumb a{text-decoration:none}
-.crumb a:hover{color:var(--gold)}
-/* 下層では節の見出しを重ねて出さない（ページ見出しと二重になる） */
-.sub .sec-head{display:none}
-.sub section{padding:44px 0 86px}
-/* トップの各節に付ける「詳しく見る」 */
-.more{text-align:center; margin-top:40px}
-
-/* ---- トップの要約（説明は下層ページに置く） ---- */
-.chips{display:flex; flex-wrap:wrap; gap:10px; justify-content:center}
-.chip{border:1px solid var(--line); background:#fff; padding:11px 20px;
-  font-size:14.5px; letter-spacing:.06em; white-space:nowrap}
-.chips .num{color:var(--gold,#b39861); font-size:12px; margin-right:8px;
-  font-variant-numeric:tabular-nums}
-.chips-note{text-align:center; color:var(--muted); font-size:13px; margin:16px 0 0;
-  letter-spacing:.04em}
-.tsteps{display:grid; grid-template-columns:repeat(5,1fr); gap:28px; position:relative;
-  list-style:none; margin:0; padding:0}
-.tsteps::before{content:""; position:absolute; left:16px; right:16px; top:50%; height:1px; background:#cfdbe5}
-.tstep{position:relative; border:1px solid var(--line); background:#fff; padding:16px 14px; text-align:center; border-radius:6px}
-.tstep:not(:last-child)::after{content:""; position:absolute; right:-18px; top:calc(50% - 4px); width:7px; height:7px;
-  border-top:1.5px solid #9fb4c6; border-right:1.5px solid #9fb4c6; transform:rotate(45deg)}
-@media (max-width:860px){
-  .tsteps{grid-template-columns:1fr; gap:10px; padding-left:20px}
-  .tsteps::before{left:5px; right:auto; top:12px; bottom:12px; width:1px; height:auto}
-  .tstep{text-align:left; display:grid; grid-template-columns:auto 1fr auto; gap:12px; align-items:baseline; padding:12px 16px}
-  .tstep::before{content:""; position:absolute; left:-19px; top:calc(50% - 4px); width:8px; height:8px; border-radius:50%; background:var(--blue)}
-  .tstep:not(:last-child)::after{display:none}
-  .tstep .num{margin:0}
-  .tstep span{margin:0}
-}
-.tstep .num{display:block; color:var(--gold,#b39861); font-size:11.5px; letter-spacing:.14em;
-  margin-bottom:6px; font-variant-numeric:tabular-nums}
-.tstep b{display:block; font-weight:400; font-size:15px; letter-spacing:.05em}
-.tstep span{display:block; color:var(--muted); font-size:12px; margin-top:6px}
-.qlist{list-style:none; margin:0; padding:0; max-width:760px; margin-inline:auto}
-.qlist li{border-bottom:1px solid var(--line)}
-.qlist a{display:block; padding:18px 4px; text-decoration:none; font-size:14.5px;
-  letter-spacing:.04em}
-.qlist a:hover{color:var(--gold,#b39861)}
-.qlist a, .qa-a{position:relative; padding-left:34px !important}
-.qlist a b, .qa-a b{position:absolute; left:8px; font-weight:700; color:var(--blue-dd,#0a5a8c)}
-.qlist li.open{background:var(--panel,#f6fafd); border-radius:4px; border-bottom-color:transparent; margin-bottom:2px}
-.qlist li.open a{font-weight:700}
-.qa-a{margin:0; padding:0 14px 18px; font-size:14px; color:var(--muted); line-height:1.9}
-.more-r{text-align:right; margin-top:28px}
-.sec-head .lead-strong{font-size:clamp(16px,1.8vw,19px); font-weight:700; color:var(--ink,#16273a)}
-.vchips{display:grid; grid-template-columns:repeat(6,1fr); gap:14px; max-width:860px; margin:0 auto}
-.vchip{grid-column:span 2; display:flex; align-items:center; justify-content:center; min-height:64px; background:#fff;
-  border:1px solid var(--line); border-radius:6px; font-size:16px; font-weight:700; color:var(--ink,#16273a)}
-.vchip:nth-child(4){grid-column:2 / span 2}
-.pnet{display:grid; grid-template-columns:repeat(4,1fr); gap:14px}
-.pn{display:flex; flex-direction:column; gap:4px; padding:20px 20px 22px; background:#fff; border:1px solid var(--line); border-radius:6px}
-.pn-own{background:var(--blue-s,#eef6fb); border-color:var(--blue-line,#d6e8f3)}
-.pnet{max-width:100%}
-.tstep .num, .chips .num{color:var(--blue-dd,#0a5a8c) !important; font-weight:700}
-.pn-k{font-size:11px; font-weight:700; letter-spacing:.12em; color:var(--blue-dd,#0a5a8c)}
-.pn b{font-size:14.5px; letter-spacing:0; color:var(--ink,#16273a); line-height:1.5}
-.pn small{font-size:12px; color:var(--muted)}
-@media (max-width:860px){
-  .vchips{grid-template-columns:repeat(2,1fr); gap:10px} .vchip, .vchip:nth-child(4){grid-column:auto; min-height:52px; font-size:15px}
-  .vchip:last-child{grid-column:1 / -1}
-  .pnet{grid-template-columns:1fr; gap:10px}
-}
-.top-consult{margin:22px auto 0; text-align:center; font-size:14px; color:var(--ink,#16273a);
-  display:flex; justify-content:center; align-items:center; gap:6px 18px; flex-wrap:wrap}
-.top-greet.no-photo{grid-template-columns:1fr; max-width:820px}
-.top-greet.no-photo h3{font-size:clamp(20px,2.4vw,26px)}
-.greet .sign span{display:block; font-size:12.5px; color:var(--muted)}
-/* トップのごあいさつは見出しと署名だけなので、お写真と高さが揃わない */
-.top-greet{align-items:center}
-.top-greet .ph{aspect-ratio:4/5}
+.crumb a:hover{color:var(--blue-dd)}
+/* 下層の本文は白地。節の見出しはページ見出しと重なるので、build.py が取り除いている */
+.sub section, .sub section.alt{padding:56px 0 96px; background:#fff; border:0}
+.sub section.gsec{background:var(--panel); padding:72px 0 88px}
+/* 企業情報：考え方の一文 → 会社概要 を続けて読ませる */
+.sub #company{padding-bottom:0}
+.sub .about{display:block; max-width:46em}
+.sub #company + section{padding-top:64px}
+.outline{margin-top:0}
 
 /* ---- 過去のお知らせ ---- */
 .nlist{padding:52px 0 86px}
@@ -185,19 +126,19 @@ EXTRA_CSS = """
 .outline{width:100%; border-collapse:collapse; margin-top:56px; font-size:14px}
 .outline th,.outline td{text-align:left; padding:16px 18px; border-bottom:1px solid var(--line);
   vertical-align:top; letter-spacing:.02em}
-.outline th{width:190px; font-family:var(--serif); font-weight:400; color:var(--gold-d);
+.outline th{width:190px; font-weight:700; color:var(--blue-dd);
   letter-spacing:.1em; white-space:nowrap}
 
 /* ---- グループの事業 ---- */
 .gcards{display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:18px}
-.gcard{background:#fff; border:1px solid var(--line); padding:22px 24px}
+.gcard{background:#fff; border:1px solid var(--line); border-radius:6px; padding:22px 24px}
 .gcard h3{font-size:16.5px; margin:0 0 6px}
-.gcard .gtag{font-size:11.5px; color:var(--gold,#b39861); margin-bottom:8px; letter-spacing:.06em}
+.gcard .gtag{font-size:12px; font-weight:700; color:var(--blue-dd); margin-bottom:8px}
 .gcard p{font-size:13.5px; color:var(--muted); margin:0; line-height:1.9}
 
 /* ---- お問い合わせ ---- */
 .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:48px; margin-top:20px}
-.contact-box{border:1px solid var(--line); padding:34px 32px}
+.contact-box{border:1px solid var(--line); border-radius:6px; padding:34px 32px}
 .contact-box h3{font-family:var(--serif); font-weight:400; font-size:18px;
   letter-spacing:.12em; margin:0 0 14px}
 .contact-box .big{font-family:var(--serif); font-size:29px; letter-spacing:.06em; line-height:1.4}
@@ -216,15 +157,14 @@ EXTRA_CSS = """
 .pp-contact p{margin:0; line-height:1.9}
 
 @media (max-width:760px){
-  /* 「住居の確保・生活に必要な契約の支援」は390pxで1行に収まらない */
-  .chip{padding:9px 15px; font-size:13.5px; white-space:normal}
-  .tstep{flex:1 1 128px; padding:12px 10px}
   .nitem{grid-template-columns:1fr; gap:10px; padding:24px 0}
   .nlist{padding:32px 0 56px}
   .outline th{width:auto; display:block; border-bottom:none; padding-bottom:0}
   .outline td{display:block; padding-top:4px}
   .contact-grid{grid-template-columns:1fr; gap:26px}
-  .sub section{padding:28px 0 56px}
+  .sub section, .sub section.alt{padding:36px 0 64px}
+  .sub section.gsec{padding:52px 0 60px}
+  .page-head{padding:28px 0 28px}
 }
 """
 
@@ -236,8 +176,8 @@ EXTRA_CSS = """
 #
 # 中身を先に出す箱（カードの並びなど）は、箱ごとではなく中身を1枚ずつ出す。
 # そのため箱自身は :not() で外す。ここも2つの並びで揃える。
-ANIM_BOXES = ["visas", "support", "flow", "partners", "chips", "tsteps",
-              "qlist", "gcards", "stats", "contact-grid"]
+ANIM_BOXES = ["visas", "feats", "vcards", "stages", "tline", "net", "flow", "partners",
+              "faq-list", "gbiz", "gcards", "contact-grid"]
 _NOT = "".join(f":not(.{c})" for c in ANIM_BOXES)
 _CHILDREN = ",\n".join(f".anim .{c} > *" for c in ANIM_BOXES)
 
@@ -264,15 +204,13 @@ ANIM_HEAD = """
 
 /* ヒーローとお知らせ帯はJSを使わずCSSだけで動かす。JSがクラスを付けるのを
    待つと、待っている間に文字が見えてしまう（環境が遅いほど長く見える）。 */
-.hero .bg img{animation:zoomOut 1.8s cubic-bezier(.2,.7,.3,1) both}
-.hero-copy .wrap > *{animation:rise .7s cubic-bezier(.2,.7,.3,1) both}
-.hero-copy .wrap > *:nth-child(1){animation-delay:.15s}
-.hero-copy .wrap > *:nth-child(2){animation-delay:.30s}
-.hero-copy .wrap > *:nth-child(3){animation-delay:.45s}
-.hero-copy .wrap > *:nth-child(4){animation-delay:.60s}
-.hero-copy .wrap > *:nth-child(5){animation-delay:.75s}
-.newsband{animation:rise .7s cubic-bezier(.2,.7,.3,1) .55s both}
-.badges{animation:rise .7s cubic-bezier(.2,.7,.3,1) .45s both}
+.hero-copy > *{animation:rise .7s cubic-bezier(.2,.7,.3,1) both}
+.hero-copy > *:nth-child(2){animation-delay:.08s}
+.hero-copy > *:nth-child(3){animation-delay:.16s}
+.hero-copy > *:nth-child(4), .hero-copy > *:nth-child(5){animation-delay:.24s}
+.hero-copy > *:nth-child(6){animation-delay:.32s}
+.hero-ph{animation:rise .9s cubic-bezier(.2,.7,.3,1) .2s both}
+.trust{animation:rise .7s cubic-bezier(.2,.7,.3,1) .4s both}
 
 /* スクロールで出てくる分だけ、JSがあるとき（.anim）に隠しておく */
 __SEL__{opacity:0}
@@ -282,11 +220,11 @@ __SEL__{opacity:0}
 
 @media (prefers-reduced-motion:reduce){
   __SEL__{opacity:1}
-  .anim .on, .hero .bg img, .hero-copy .wrap > *, .newsband, .badges{animation:none}
+  .anim .on, .hero-ph, .hero-copy > *, .trust{animation:none}
 }
 @media print{
   __SEL__{opacity:1 !important}
-  .anim .on, .hero .bg img, .hero-copy .wrap > *, .newsband, .badges{animation:none !important}
+  .anim .on, .hero-ph, .hero-copy > *, .trust{animation:none !important}
 }
 </style>
 <script>
@@ -420,8 +358,12 @@ def parts(src_name, key=""):
     s = (SRC / src_name).read_text(encoding="utf-8")
     head = s[: s.index("</head>")]
     head = head.replace("</style>", EXTRA_CSS + PLAN_CSS.get(key, "") + "</style>")
-    header = s[s.index('<header>'): s.index('<div class="hero">')]
-    hero = s[s.index('<div class="hero">'): s.index('<section id="visas">')]
+    header = s[s.index('<header>'): s.index('</header>') + len('</header>')] + "\n\n"
+    # ヒーロー＝ファーストビューと信頼情報（最初の <section> の手前まで）
+    h0 = s.index('<div class="hero">')
+    hero = s[h0: s.index('<section', h0)]
+    if hero.rstrip().endswith("-->"):                  # 次の節の説明コメントは持ってこない
+        hero = hero[: hero.rindex("<!--")].rstrip() + "\n\n"
     cta = s[s.index('<div class="cta" id="contact">'): s.index("<footer>")]
     footer = s[s.index("<footer>"): s.index('<div class="note">')]
     note = s[s.index('<div class="note">'):]
@@ -430,6 +372,130 @@ def parts(src_name, key=""):
         secs[m.group(1)] = m.group(0)
     return head, header, hero, cta, footer, note, secs
 
+MORE_LABEL = {
+    "visas": "人材ごとの説明を見る", "support": "支援内容を詳しく見る（全10項目）", "flow": "各ステップを詳しく見る",
+    "partners": "グループ・提携機関を詳しく見る", "company": "企業情報を見る",
+}
+
+# トップで強みとして大きく見せる一文
+TOP_LEAD_BIG = {"partners"}
+
+def top_section(frag, sec_id, inner, more_href=None):
+    """トップ用の節。見出しと要約だけを置き、説明は下層ページに任せる。"""
+    en, h2, _ = sec_head(frag)
+    alt = ' class="alt"' if 'class="alt' in frag[: frag.index(">") + 1] else ""
+    lead = TOP_LEAD.get(sec_id, "")
+    if lead:
+        cls = ' class="lead-strong"' if sec_id in TOP_LEAD_BIG else ""
+        lead = f"<p{cls}>{lead}</p>"
+    more = ""
+    if more_href:
+        more = (f'    <div class="more-r"><a class="txt-link" href="{more_href}">'
+                f'{MORE_LABEL.get(sec_id, "詳しく見る")} <span aria-hidden="true">→</span></a></div>\n')
+    return (f'<section{alt} id="{sec_id}">\n  <div class="wrap">\n'
+            f'    <div class="sec-head"><span class="en">{en}</span><h2>{h2}</h2>{lead}</div>\n'
+            f"    {inner}\n" + more + "  </div>\n</section>\n\n")
+
+# 会社概要。旧サイトの会社案内ページの内容をそのまま引き継ぐ（トップの要約にも使う）
+OUTLINE = [
+    ("会社名", "株式会社 A and K"),
+    ("本社所在地", "〒509-0207 岐阜県可児市今渡3-11<br>Tel 0574-66-3511／Fax 0574-66-7311"),
+    ("可児今渡事務所", "〒509-0207 岐阜県可児市今渡1149-1 2F<br>Tel・Fax 0574-50-5048"),
+    ("代表者", "代表取締役　兼松 厚志"),
+    ("E-mail", '<a href="mailto:info@aandkcorp.com">info@aandkcorp.com</a>'),
+    ("営業時間", "9:00〜18:00"),
+    ("定休日", "土曜日、日曜日"),
+    ("許可", "登録支援機関 登録番号 19登-000975"),
+    ("事業内容", "・技能実習生の紹介及び手続き代行業務<br>・外国人留学生の紹介業務<br>"
+                 "・特定技能登録支援機関<br>・外国籍児童の保育園経営<br>"
+                 "・内閣府所管企業主導型保育園経営<br>・認可保育園経営<br>"
+                 "・児童発達支援事業・放課後デイサービス事業"),
+    ("取引銀行", "岐阜商工信用組合 可児支店<br>十六銀行 西可児支店<br>東濃信用金庫 西可児支店"),
+    ("顧問", "高橋法律事務所<br>各務税理士事務所<br>NAKA社会保険労務士事務所"),
+]
+
+def digest(secs):
+    """トップに並べる要約を、下層ページ用の原文から組み立てる。
+    **原文をそのまま貼らない**（同じ説明が2ページに出てしまうため）。
+    **原本に無い事実（数字・役割・実績）をここで書き足さない。**"""
+    out = {}
+
+    # 人材：名前と一行（.sum）だけ。詳しい説明は service.html。
+    # ★実績の数字（受入企業数・累計紹介人数・対応国籍）は、お客さまから実数が届くまで出さない。
+    f = secs["visas"]
+    vs = re.findall(r'<div class="visa"><div class="n">(.*?)</div><h3>(.*?)</h3><p class="sum">(.*?)</p>', f, re.S)
+    cards = "".join(f'<div class="vcard"><span class="n">{n}</span><h3>{t}</h3><p>{d}</p></div>' for n, t, d in vs)
+    out["visas"] = top_section(f, "visas", f'<div class="vcards">{cards}</div>'
+                               + div_block(f, '<div class="consult">'), "service.html")
+
+    # 支援：3段階の名前と、各段階の項目名だけ。項目の説明は support.html。
+    f = secs["support"]
+    stages = []
+    for i, g in enumerate(f.split('<div class="sgrp">')[1:], 1):
+        en = re.search(r'<span class="en">(.*?)</span>', g).group(1)
+        h3 = re.search(r"<h3>(.*?)</h3>", g).group(1)
+        p = re.search(r'<div class="sgrp-h">.*?<p>(.*?)</p>', g, re.S).group(1)
+        items = "".join(f"<li>{x}</li>" for x in re.findall(r"<h4>(.*?)</h4>", g))
+        stages.append(f'<li class="stage"><div class="stage-h"><span class="stage-n">{i:02d}</span>'
+                      f'<span class="stage-en">{en}</span></div><h3>{h3}</h3><p>{p}</p>'
+                      f'<ul class="checks">{items}</ul></li>')
+    out["support"] = top_section(f, "support", '<ol class="stages">' + "".join(stages) + "</ol>"
+                                 + div_block(f, '<div class="consult">'), "support.html")
+
+    # 流れ：期間の目安（大きく）と、手順名・期間だけ。各手順の説明は flow.html。
+    f = secs["flow"]
+    steps = re.findall(r'<li class="step">.*?<h3>(.*?)</h3>.*?<span class="dk">(.*?)</span>(.*?)</div>', f, re.S)
+    tl = "".join(f'<li class="tl"><span class="dot">{i:02d}</span><b>{t}</b>'
+                 f'<span class="d"><small>{k}</small>{d}</span></li>' for i, (t, k, d) in enumerate(steps, 1))
+    out["flow"] = top_section(f, "flow", div_block(f, '<div class="flow-total">')
+                              + f'<ol class="tline">{tl}</ol>', "flow.html")
+
+    # グループ・提携機関：自社グループを中央に、海外・国内の提携機関を左右に置いて連携を見せる。
+    # 書いてよいのは partners 節（原本）にある事実だけ。
+    f = secs["partners"]
+    out["partners"] = top_section(f, "partners", (
+        '<div class="net">'
+        '<div class="net-col"><span class="net-k">海外の送り出し機関<em>PARTNER</em></span>'
+        '<div class="net-item"><small>フィリピン</small><b>プロデンシャルエンプロイメント</b>'
+        '<span>現地で企業さまご自身が面接を行うこともできます。</span></div>'
+        '<div class="net-item"><small>ベトナム</small><b>POLIMEX 国際人材株式会社</b>'
+        '<span>2021年8月にブリッジング協同組合と業務提携。</span></div></div>'
+        '<div class="net-col net-own"><span class="net-k">自社グループ<em>OUR GROUP</em></span>'
+        '<div class="net-item"><b>株式会社 A and K</b><span>募集・紹介／入国の手続き・生活の支援</span>'
+        '<span class="role">登録支援機関</span></div>'
+        '<div class="net-item"><b>ブリッジング協同組合</b><span>2021年8月に弊社が設立。技能実習生の受入れを、紹介から監理まで自社グループ内で。</span>'
+        '<span class="role">監理団体</span></div></div>'
+        '<div class="net-col"><span class="net-k">国内の提携監理団体<em>PARTNER</em></span>'
+        '<div class="net-item"><small>日本（愛知）</small><b>トラスト江南協同組合</b>'
+        '<span>2019年9月に業務提携。愛知・岐阜・三重の企業さまや介護施設さまへの受入れを支えています。</span></div></div>'
+        '</div>'
+        '<p class="net-foot">就労後も、定期的な面談・相談で支援を続けます。</p>'), "partners.html")
+
+    # 会社について：考え方の一文と、会社の基本情報だけ。全体は company.html。
+    f = secs["company"]
+    pick = dict(OUTLINE)
+    dl = "".join(f"<div><dt>{k}</dt><dd>{pick[k].split('<br>')[0]}</dd></div>"
+                 for k in ("会社名", "代表者", "本社所在地", "許可"))
+    about = div_block(f, '<div class="about">')
+    about = about[: about.rindex("</div>")] + f'<dl class="about-dl">{dl}</dl></div>'
+    out["company"] = top_section(f, "company", about, "company.html")
+    return out
+
+def fill_news(sec, n=3):
+    """お知らせの節を news.json の最新 n 件で埋める。
+    原本に直接書くと更新のたびに直すことになり、実際そのまま
+    2021年で止まっていた。見出しだけを出し、本文と写真は news.html に置く。"""
+    items = json.loads((SRC / "news.json").read_text(encoding="utf-8"))[:n]
+    li = "".join(f'<li><a href="news.html"><time>{it["date"]}</time>'
+                 f'<span>{html.escape(it["title"])}</span><i aria-hidden="true">→</i></a></li>' for it in items)
+    old = sec[sec.index('<ul class="nlist-top">'): sec.index("</ul>") + 5]
+    return sec.replace(old, f'<ul class="nlist-top">{li}</ul>')
+
+def strip_sec_head(frag):
+    """下層ページでは、節の見出し（英字ラベル・見出し・導入文）を取り除く。
+    ページ見出し（.page-head）と同じ題が2回続かないようにするため。
+    CSSで隠すだけだと、読み上げや検索には同じ題が二重に残る。"""
+    return frag.replace(div_block(frag, '<div class="sec-head">'), "", 1)
 
 def sec_head(frag):
     """節の見出し（英字ラベル・見出し・導入文）を取り出す。導入文は下層ページの
@@ -452,126 +518,6 @@ def div_block(frag, marker):
         if depth == 0:
             return frag[i: i + m.end()]
     raise ValueError(marker)
-
-
-MORE_LABEL = {
-    "visas": "ご紹介できる人材を見る", "support": "全10項目を見る", "flow": "流れを詳しく見る",
-    "partners": "提携機関を見る", "company": "代表メッセージを読む", "faq": "よくあるご質問をすべて見る",
-}
-
-
-def top_section(frag, sec_id, inner, more_href):
-    """（トップで強みとして大きく見せる一文は TOP_LEAD_BIG に入れる）"""
-    return _top_section(frag, sec_id, inner, more_href)
-
-
-TOP_LEAD_BIG = {"support", "partners"}
-
-
-def _top_section(frag, sec_id, inner, more_href):
-    """トップ用の節。見出しと要約だけを置き、説明は下層ページに任せる。"""
-    en, h2, _ = sec_head(frag)
-    alt = ' class="alt"' if 'class="alt' in frag[: frag.index(">") + 1] else ""
-    lead = TOP_LEAD.get(sec_id, "")
-    return (f'<section{alt} id="{sec_id}">\n  <div class="wrap">\n'
-            f'    <div class="sec-head"><span class="en">{en}</span><h2>{h2}</h2>'
-            f'{(f"<p class=" + chr(34) + "lead-strong" + chr(34) + f">{lead}</p>" if sec_id in TOP_LEAD_BIG else f"<p>{lead}</p>") if lead else ""}</div>\n'
-            f"    {inner}\n"
-            f'    <div class="more-r"><a class="txt-link" href="{more_href}">'
-            f'{MORE_LABEL.get(sec_id, "詳しく見る")} <span aria-hidden="true">→</span></a></div>\n  </div>\n</section>\n\n')
-
-
-def chips(items):
-    return ('<div class="chips">'
-            + "".join(f'<span class="chip">{n}</span>' for n in items)
-            + "</div>")
-
-
-def digest(secs):
-    """トップに並べる要約を、下層ページ用の原文から組み立てる。
-    **原文をそのまま貼らない**（同じ説明が2ページに出てしまうため）。"""
-    out = {}
-
-    # 在留資格は名前だけ。実績の数字はトップだけに置く（下層からは外す）。
-    f = secs["visas"]
-    names = re.findall(r'<div class="visa">.*?<h3>(.*?)</h3>', f, re.S)
-    # ★実績の数字（受入企業数・累計紹介人数・対応国籍）は、お客さまから実数が届くまで出さない
-    #   （○○ のままだと作りかけに見える）。届いたら div_block(f, '<div class="stats">') を足す。
-    consult = ('<p class="top-consult">どの制度が合うか分からなくても、ご相談いただけます。'
-               '<a class="txt-link" href="contact.html">制度選びから相談する <span aria-hidden="true">→</span></a></p>')
-    vcards = '<div class="vchips">' + "".join(f'<span class="vchip">{n}</span>' for n in names) + '</div>'
-    out["visas"] = top_section(f, "visas", vcards + consult, "service.html")
-
-    # 支援は代表的な4つだけ挙げ、10項目の中身は support.html で説明する。
-    f = secs["support"]
-    sups = re.findall(r'<div class="sup"><span class="c">\d+</span><h4>(.*?)</h4>', f, re.S)
-    pick = [sups[i] for i in (2, 3, 5, 6) if i < len(sups)]
-    out["support"] = top_section(
-        f, "support",
-        chips(pick) + f'<p class="chips-note">ほか、事前ガイダンスや送迎など全{len(sups)}項目。</p>',
-        "support.html")
-
-    # 流れは手順名と期間だけ。各手順の説明は flow.html で行う。
-    f = secs["flow"]
-    steps = re.findall(r'<li class="step">.*?<div class="n">(.*?)</div>\s*<h3>(.*?)</h3>'
-                       r'.*?<div class="d"><span class="dk">.*?</span>(.*?)</div>', f, re.S)
-    out["flow"] = top_section(
-        f, "flow",
-        '<ol class="tsteps">' + "".join(
-            f'<li class="tstep"><span class="num">{n}</span><b>{t}</b><span>{d}</span></li>'
-            for n, t, d in steps) + "</ol>",
-        "flow.html")
-
-    # 提携先は名称と国だけ。設立の経緯や写真は partners.html に置く。
-    f = secs["partners"]
-    grp = re.search(r'<div class="group-lead">.*?<h3>(.*?)</h3>', f, re.S)
-    prs = re.findall(r'<div class="partner">.*?<h3>(.*?)</h3>\s*<div class="cc">(.*?)</div>', f, re.S)
-    roles = dict(re.findall(r'<div class="partner">.*?<h3>(.*?)</h3>.*?<div class="role">(.*?)</div>', f, re.S))
-    cells = []
-    if grp:
-        cells.append(f'<div class="pn pn-own"><span class="pn-k">自社グループ</span><b>{grp.group(1)}</b><small>監理団体</small></div>')
-    cells += [f'<div class="pn"><span class="pn-k">{cc}</span><b>{nm}</b><small>{roles.get(nm, "")}</small></div>' for nm, cc in prs]
-    out["partners"] = top_section(f, "partners", '<div class="pnet">' + "".join(cells) + "</div>", "partners.html")
-
-    # ごあいさつはお写真と見出しだけ。本文は company.html で読んでいただく。
-    f = secs["company"]
-    h3 = re.search(r'<div class="greet">.*?<h3>(.*?)</h3>', f, re.S)
-    photo = div_block(f, '<div class="ph">')
-    sign = div_block(f, '<div class="sign">')
-    if "入ります" in photo:          # 仮の写真枠（お写真が届くまで）
-        photo = ""
-    out["company"] = top_section(
-        f, "company",
-        f'<div class="greet top-greet{"" if photo else " no-photo"}">{photo}<div><h3>{h3.group(1)}</h3>{sign}</div></div>',
-        "company.html")
-
-    # よくあるご質問は質問だけ。答えは faq.html に置く。
-    f = secs["faq"]
-    qa = re.findall(r'<summary>(.*?)</summary>\s*<div class="a">(.*?)</div>', f, re.S)
-    items = []
-    for i, (q, a) in enumerate(qa):
-        if i == 0:
-            items.append(f'<li class="open"><a href="faq.html"><b>Q</b>{q.strip()}</a>'
-                         f'<p class="qa-a"><b>A</b>{a.strip()}</p></li>')
-        else:
-            items.append(f'<li><a href="faq.html"><b>Q</b>{q.strip()}</a></li>')
-    out["faq"] = top_section(
-        f, "faq",
-        '<ul class="qlist">' + "".join(items) + "</ul>",
-        "faq.html")
-    return out
-
-
-def fill_newsband(hero, n=3):
-    """ヒーロー下のお知らせ帯を news.json の最新 n 件で埋める。
-    原本に直接書くと更新のたびに2案とも直すことになり、実際そのまま
-    2021年で止まっていた。見出しだけを出し、本文と写真は news.html に置く。"""
-    items = json.loads((SRC / "news.json").read_text(encoding="utf-8"))[:n]
-    li = "".join(f'<li><a href="news.html"><time>{it["date"]}</time>'
-                 f'<span>{html.escape(it["title"])}</span><i aria-hidden="true">→</i></a></li>' for it in items)
-    band = hero[hero.index('<div class="newsband">'):]
-    old = band[band.index("<ul>"): band.index("</ul>") + 5]
-    return hero.replace(old, f"<ul>{li}</ul>")
 
 
 def nav_html(current):
@@ -622,20 +568,21 @@ def build_plan(out_dir, src_name, key=""):
     head, header, hero, cta, footer, note, secs = parts(src_name, key)
     tail = fix_links(cta) + fix_links(footer) + note
 
+    # トップ：何の会社か（FV・信頼・特徴）→ 人材 → 支援 → 流れ → 連携 → 会社
+    #        → グループ事業 → お知らせ → FAQ。保育とお知らせは後半に控えめに置く。
     tops = digest(secs)
-    body = fix_links(fill_newsband(hero))
-    for out, (sec, _menu, _t, _en, _d) in PAGES.items():
+    body = fix_links(hero) + fix_links(secs["features"])
+    for sec in ("visas", "support", "flow", "partners", "company"):
         body += fix_links(tops[sec])
+    body += fix_links(secs["groupbiz"]) + fix_links(fill_news(secs["news"])) + fix_links(secs["faq"])
     (out_dir / "index.html").write_text(
         shell(head, header, tail, body, "index.html", "外国人材の受入れ支援"), encoding="utf-8")
 
     for out, (sec, _menu, ttl, en, desc) in PAGES.items():
         frag = secs[sec]
-        # 節の導入文はページ見出しに上げる（下層では sec-head を隠しているため、
-        # そのままだと本文が読まれない）。実績の数字はトップにだけ置く。
+        # 節の導入文はページ見出しに上げ、節の見出しそのものは取り除く（題の二重を防ぐ）
         lead = sec_head(frag)[2] or html.escape(desc)
-        if sec == "visas":
-            frag = frag.replace(div_block(frag, '<div class="stats">'), "")
+        frag = strip_sec_head(frag)
         ph = (f'<div class="crumb"><div class="wrap"><a href="index.html">ホーム</a> ／ {html.escape(ttl)}</div></div>\n'
               f'<div class="page-head"><div class="wrap"><span class="en">{html.escape(en)}</span>'
               f'<h1>{html.escape(ttl)}{"<span class=" + chr(34) + "count" + chr(34) + ">5 TYPES</span>" if sec == "visas" else ""}</h1>'
@@ -656,7 +603,8 @@ def build_plan(out_dir, src_name, key=""):
 def group_section():
     """グループの事業。旧サイトの h1 と事業内容に、児童福祉の記載があった。
     このサイトは外国人材に絞る方針だが、**落とすのではなく紹介にとどめ、
-    詳細はそれぞれのサイトへ渡す**（原則リニューアルをベースにするため）。"""
+    詳細はそれぞれのサイトへ渡す**（原則リニューアルをベースにするため）。
+    トップの「グループ事業」（原本の groupbiz）から、ここ（#group）へ案内する。"""
     cards = [
         ("かみのて保育園", "こども家庭庁所管 企業主導型保育事業",
          "2022年7月開園。外国にルーツのあるお子さまをお預かりしています。",
@@ -677,33 +625,17 @@ def group_section():
         items += (f'<div class="gcard"><h3>{name}</h3>'
                   f'{gtag}'
                   f'<p>{desc}</p>{link}</div>')
-    return ('<section class="alt"><div class="wrap">'
-            '<div class="sec-head" style="display:block"><span class="en">GROUP</span>'
+    return ('<section class="gsec" id="group"><div class="wrap">'
+            '<div class="sec-head"><span class="en">GROUP</span>'
             '<h2>グループの事業</h2>'
             '<p>外国人材の受入れ支援のほか、保育園と児童発達支援・放課後等デイサービスを運営しています。</p></div>'
             f'<div class="gcards">{items}</div></div></section>')
 
 
 def outline_table():
-    """会社概要。旧サイトの会社案内ページの内容をそのまま引き継ぐ。"""
-    rows = [
-        ("会社名", "株式会社 A and K"),
-        ("本社所在地", "〒509-0207 岐阜県可児市今渡3-11<br>Tel 0574-66-3511／Fax 0574-66-7311"),
-        ("可児今渡事務所", "〒509-0207 岐阜県可児市今渡1149-1 2F<br>Tel・Fax 0574-50-5048"),
-        ("代表者", "代表取締役　兼松 厚志"),
-        ("E-mail", '<a href="mailto:info@aandkcorp.com">info@aandkcorp.com</a>'),
-        ("営業時間", "9:00〜18:00"),
-        ("定休日", "土曜日、日曜日"),
-        ("許可", "登録支援機関 登録番号 19登-000975"),
-        ("事業内容", "・技能実習生の紹介及び手続き代行業務<br>・外国人留学生の紹介業務<br>"
-                     "・特定技能登録支援機関<br>・外国籍児童の保育園経営<br>"
-                     "・内閣府所管企業主導型保育園経営<br>・認可保育園経営<br>"
-                     "・児童発達支援事業・放課後デイサービス事業"),
-        ("取引銀行", "岐阜商工信用組合 可児支店<br>十六銀行 西可児支店<br>東濃信用金庫 西可児支店"),
-        ("顧問", "高橋法律事務所<br>各務税理士事務所<br>NAKA社会保険労務士事務所"),
-    ]
-    tr = "".join(f"<tr><th>{k}</th><td>{v}</td></tr>" for k, v in rows)
-    return ('<section><div class="wrap"><div class="sec-head" style="display:block">'
+    """会社概要（OUTLINE）。代表ごあいさつは正式な文章が届くまで載せないので、企業情報の中心になる。"""
+    tr = "".join(f"<tr><th>{k}</th><td>{v}</td></tr>" for k, v in OUTLINE)
+    return ('<section><div class="wrap"><div class="sec-head">'
             '<span class="en">COMPANY PROFILE</span><h2>会社概要</h2></div>'
             f'<table class="outline">{tr}</table></div></section>')
 
