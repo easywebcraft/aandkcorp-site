@@ -169,13 +169,28 @@ section.alt{background:var(--panel); border-top:1px solid var(--line-s); border-
   .visa, .visa:nth-child(4){grid-column:auto} }
 @media (max-width:640px){ .visas{grid-template-columns:1fr} .visa{padding:22px 20px 24px} }
 
-/* 支援 */
-.support{display:grid; grid-template-columns:repeat(auto-fit,minmax(252px,1fr)); gap:10px}
-.sup{display:flex; gap:12px; align-items:flex-start; background:#fff; border:1px solid var(--line);
-  padding:14px 16px; font-size:14px; border-radius:3px}
-.sup .c{flex:none; width:26px; height:26px; background:var(--blue-s); color:var(--blue-dd);
-  font-size:12px; font-weight:700; display:flex; align-items:center; justify-content:center;
-  border-radius:3px; margin-top:2px}
+/* 支援：受入れ前 → 生活・定着 → 就労継続・管理 の3段で、流れとして見せる */
+.sup-groups{display:grid; gap:0}
+.sgrp{display:grid; grid-template-columns:240px 1fr; gap:40px; padding:36px 0; border-top:1px solid var(--line)}
+.sgrp:first-child{border-top:0; padding-top:8px}
+.sgrp-h .sgrp-n{display:block; font-size:11px; font-weight:700; letter-spacing:.14em; color:var(--blue-dd)}
+.sgrp-h .en{display:block; font-size:11px; letter-spacing:.14em; color:var(--muted); margin-top:2px}
+.sgrp-h h3{font-size:21px; font-weight:700; color:var(--ink); margin:10px 0 6px}
+.sgrp-h p{font-size:13.5px; color:var(--muted); margin:0; line-height:1.8}
+.sups{display:grid; grid-template-columns:repeat(2,1fr); gap:16px}
+.sup{background:#fff; border-radius:6px; padding:22px 24px 24px; box-shadow:0 1px 3px rgba(10,60,100,.05);
+  transition:transform .2s, box-shadow .2s}
+.sup:hover{transform:translateY(-2px); box-shadow:0 8px 20px rgba(10,60,100,.08)}
+.sup .c{display:flex; align-items:center; gap:10px; font-size:12px; font-weight:700; letter-spacing:.06em; color:var(--blue-dd)}
+.sup .c::after{content:""; width:22px; height:1px; background:var(--blue-line)}
+.sup h4{font-size:16px; font-weight:700; color:var(--ink); margin:10px 0 6px; line-height:1.55}
+.sup p{font-size:13.5px; color:var(--muted); margin:0; line-height:1.85}
+.sup-cta{margin-top:40px; padding:30px 32px; background:#fff; border-radius:6px; display:flex; align-items:center;
+  justify-content:space-between; gap:20px 32px; flex-wrap:wrap; border-left:3px solid var(--blue)}
+.sup-cta p{margin:0; font-size:16px; color:var(--ink)}
+#support.alt, .sub #support{background:#f5fafd}
+@media (max-width:900px){ .sgrp{grid-template-columns:1fr; gap:16px} }
+@media (max-width:640px){ .sups{grid-template-columns:1fr} .sup-cta{padding:24px 20px} .sup-cta .btn{width:100%; text-align:center} }
 
 /* 流れ */
 .flow{display:grid; grid-template-columns:repeat(5,1fr); gap:12px}
@@ -291,7 +306,7 @@ footer a:hover{color:#fff; text-decoration:underline}
 }
 
 /* ---- 下層ページの見出し（build.py が差し込む） ---- */
-.page-head{padding:64px 0 0; text-align:center}
+.page-head{padding:52px 0 20px; text-align:center}
 .page-head .en{font-family:var(--serif); font-weight:300; color:var(--gold);
   font-size:12px; letter-spacing:.28em; display:block; margin-bottom:14px}
 .page-head h1{font-family:var(--serif); font-weight:300; font-size:clamp(23px,3.2vw,31px);

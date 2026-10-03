@@ -79,7 +79,7 @@ ANCHOR["contact"] = "contact.html"
 
 EXTRA_CSS = """
 /* ---- 下層ページの見出し（build.py が差し込む） ---- */
-.page-head{padding:64px 0 0; text-align:center}
+.page-head{padding:52px 0 20px; text-align:center}
 .page-head .en{font-family:var(--serif); font-weight:300; color:var(--gold);
   font-size:12px; letter-spacing:.28em; display:block; margin-bottom:14px}
 .page-head h1{font-family:var(--serif); font-weight:300; font-size:clamp(23px,3.2vw,31px);
@@ -446,7 +446,7 @@ def digest(secs):
 
     # 支援は代表的な4つだけ挙げ、10項目の中身は support.html で説明する。
     f = secs["support"]
-    sups = re.findall(r'<div class="sup"><span class="c">\d+</span>(.*?)</div>', f, re.S)
+    sups = re.findall(r'<div class="sup"><span class="c">\d+</span><h4>(.*?)</h4>', f, re.S)
     pick = [sups[i] for i in (2, 3, 5, 6) if i < len(sups)]
     out["support"] = top_section(
         f, "support",

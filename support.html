@@ -169,13 +169,28 @@ section.alt{background:var(--panel); border-top:1px solid var(--line-s); border-
   .visa, .visa:nth-child(4){grid-column:auto} }
 @media (max-width:640px){ .visas{grid-template-columns:1fr} .visa{padding:22px 20px 24px} }
 
-/* 支援 */
-.support{display:grid; grid-template-columns:repeat(auto-fit,minmax(252px,1fr)); gap:10px}
-.sup{display:flex; gap:12px; align-items:flex-start; background:#fff; border:1px solid var(--line);
-  padding:14px 16px; font-size:14px; border-radius:3px}
-.sup .c{flex:none; width:26px; height:26px; background:var(--blue-s); color:var(--blue-dd);
-  font-size:12px; font-weight:700; display:flex; align-items:center; justify-content:center;
-  border-radius:3px; margin-top:2px}
+/* 支援：受入れ前 → 生活・定着 → 就労継続・管理 の3段で、流れとして見せる */
+.sup-groups{display:grid; gap:0}
+.sgrp{display:grid; grid-template-columns:240px 1fr; gap:40px; padding:36px 0; border-top:1px solid var(--line)}
+.sgrp:first-child{border-top:0; padding-top:8px}
+.sgrp-h .sgrp-n{display:block; font-size:11px; font-weight:700; letter-spacing:.14em; color:var(--blue-dd)}
+.sgrp-h .en{display:block; font-size:11px; letter-spacing:.14em; color:var(--muted); margin-top:2px}
+.sgrp-h h3{font-size:21px; font-weight:700; color:var(--ink); margin:10px 0 6px}
+.sgrp-h p{font-size:13.5px; color:var(--muted); margin:0; line-height:1.8}
+.sups{display:grid; grid-template-columns:repeat(2,1fr); gap:16px}
+.sup{background:#fff; border-radius:6px; padding:22px 24px 24px; box-shadow:0 1px 3px rgba(10,60,100,.05);
+  transition:transform .2s, box-shadow .2s}
+.sup:hover{transform:translateY(-2px); box-shadow:0 8px 20px rgba(10,60,100,.08)}
+.sup .c{display:flex; align-items:center; gap:10px; font-size:12px; font-weight:700; letter-spacing:.06em; color:var(--blue-dd)}
+.sup .c::after{content:""; width:22px; height:1px; background:var(--blue-line)}
+.sup h4{font-size:16px; font-weight:700; color:var(--ink); margin:10px 0 6px; line-height:1.55}
+.sup p{font-size:13.5px; color:var(--muted); margin:0; line-height:1.85}
+.sup-cta{margin-top:40px; padding:30px 32px; background:#fff; border-radius:6px; display:flex; align-items:center;
+  justify-content:space-between; gap:20px 32px; flex-wrap:wrap; border-left:3px solid var(--blue)}
+.sup-cta p{margin:0; font-size:16px; color:var(--ink)}
+#support.alt, .sub #support{background:#f5fafd}
+@media (max-width:900px){ .sgrp{grid-template-columns:1fr; gap:16px} }
+@media (max-width:640px){ .sups{grid-template-columns:1fr} .sup-cta{padding:24px 20px} .sup-cta .btn{width:100%; text-align:center} }
 
 /* 流れ */
 .flow{display:grid; grid-template-columns:repeat(5,1fr); gap:12px}
@@ -291,7 +306,7 @@ footer a:hover{color:#fff; text-decoration:underline}
 }
 
 /* ---- 下層ページの見出し（build.py が差し込む） ---- */
-.page-head{padding:64px 0 0; text-align:center}
+.page-head{padding:52px 0 20px; text-align:center}
 .page-head .en{font-family:var(--serif); font-weight:300; color:var(--gold);
   font-size:12px; letter-spacing:.28em; display:block; margin-bottom:14px}
 .page-head h1{font-family:var(--serif); font-weight:300; font-size:clamp(23px,3.2vw,31px);
@@ -523,26 +538,20 @@ setTimeout(function(){
 </header>
 
 <div class="sub"><div class="crumb"><div class="wrap"><a href="index.html">ホーム</a> ／ 登録支援機関としての支援</div></div>
-<div class="page-head"><div class="wrap"><span class="en">SUPPORT</span><h1>登録支援機関としての支援</h1><p>特定技能で義務づけられている支援です。以下はすべて弊社がお引き受けします。</p></div></div>
+<div class="page-head"><div class="wrap"><span class="en">SUPPORT</span><h1>登録支援機関としての支援</h1><p>特定技能人材の受入れに必要な支援を、<br>入国前から定着後まで一貫して対応します。<small class="note-s">特定技能で義務づけられている支援は、すべて弊社がお引き受けします。</small></p></div></div>
 <section class="alt" id="support">
   <div class="wrap">
     <div class="sec-head">
       <span class="en">SUPPORT</span>
       <h2>登録支援機関としての支援</h2>
-      <p>特定技能で義務づけられている支援です。以下はすべて弊社がお引き受けします。</p>
+      <p>特定技能人材の受入れに必要な支援を、<br>入国前から定着後まで一貫して対応します。<small class="note-s">特定技能で義務づけられている支援は、すべて弊社がお引き受けします。</small></p>
     </div>
-    <div class="support">
-      <div class="sup"><span class="c">01</span>事前ガイダンスの実施</div>
-      <div class="sup"><span class="c">02</span>出入国する際の送迎</div>
-      <div class="sup"><span class="c">03</span>住居の確保・生活に必要な契約の支援</div>
-      <div class="sup"><span class="c">04</span>生活オリエンテーションの実施</div>
-      <div class="sup"><span class="c">05</span>公的手続などへの同行</div>
-      <div class="sup"><span class="c">06</span>日本語学習の機会の提供</div>
-      <div class="sup"><span class="c">07</span>相談・苦情への対応</div>
-      <div class="sup"><span class="c">08</span>日本人との交流促進</div>
-      <div class="sup"><span class="c">09</span>転職支援（人員整理などの場合）</div>
-      <div class="sup"><span class="c">10</span>定期的な面談・行政機関への通報</div>
+    <div class="sup-groups">
+      <div class="sgrp"><div class="sgrp-h"><span class="sgrp-n">STEP 1</span><span class="en">BEFORE</span><h3>受入れ前</h3><p>入国前の説明から、住まいの準備まで</p></div><div class="sups"><div class="sup"><span class="c">01</span><h4>事前ガイダンスの実施</h4><p>雇用契約の内容や日本での仕事、入国の手続きなどを、入国前に本人が分かる言葉で説明します。</p></div><div class="sup"><span class="c">02</span><h4>出入国する際の送迎</h4><p>入国時は空港から事業所・住まいまで、帰国時は空港まで付き添います。</p></div><div class="sup"><span class="c">03</span><h4>住居の確保・生活に必要な契約の支援</h4><p>住まい探しと、銀行口座・携帯電話・電気ガス水道などの契約をお手伝いします。</p></div></div></div>
+      <div class="sgrp"><div class="sgrp-h"><span class="sgrp-n">STEP 2</span><span class="en">LIFE</span><h3>生活・定着</h3><p>日本での暮らしに慣れ、安心して働けるように</p></div><div class="sups"><div class="sup"><span class="c">04</span><h4>生活オリエンテーションの実施</h4><p>日本の生活ルールやマナー、交通機関の使い方、災害時の行動などを説明します。</p></div><div class="sup"><span class="c">05</span><h4>公的手続などへの同行</h4><p>住民登録や社会保険・税などの手続きに付き添い、書類の作成を手伝います。</p></div><div class="sup"><span class="c">06</span><h4>日本語学習の機会の提供</h4><p>日本語教室や教材の情報をお伝えし、学ぶ機会をつくります。</p></div><div class="sup"><span class="c">07</span><h4>相談・苦情への対応</h4><p>仕事や暮らしの相談・苦情に、本人が分かる言葉で応じます。</p></div><div class="sup"><span class="c">08</span><h4>日本人との交流促進</h4><p>地域の行事などへの参加を案内し、日本の方との交流を後押しします。</p></div></div></div>
+      <div class="sgrp"><div class="sgrp-h"><span class="sgrp-n">STEP 3</span><span class="en">CONTINUE</span><h3>就労継続・管理</h3><p>働き続けられるように、定期的に確認</p></div><div class="sups"><div class="sup"><span class="c">09</span><h4>転職支援（人員整理などの場合）</h4><p>会社の都合で雇用が終わるときに、次の受入れ先探しをお手伝いします。</p></div><div class="sup"><span class="c">10</span><h4>定期的な面談・行政機関への通報</h4><p>本人や上司と定期的に面談し、法令違反などがあれば行政機関へ通報します。</p></div></div></div>
     </div>
+    <div class="sup-cta"><p><b>登録支援機関として必要な支援を、まとめてお任せいただけます。</b></p><a class="btn" href="contact.html">お問い合わせ</a></div>
   </div>
 </section>
 
