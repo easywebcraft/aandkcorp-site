@@ -45,7 +45,7 @@ NOINDEX = True
 # 説明は、原本の節に導入文があればそちらを優先する（節の導入文は下層でしか
 # 出さないため。トップには TOP_LEAD の短い文を置く）。
 PAGES = {
-    "service.html":  ("visas",    "ご紹介できる人材", "ご紹介できる人材", "SERVICE",
+    "service.html":  ("visas",    "人材紹介", "ご紹介できる人材", "TALENT",
                       "就労が可能な5つの在留資格すべてに対応しています。"),
     "support.html":  ("support",  "支援内容",       "登録支援機関としての支援", "SUPPORT",
                       "特定技能で義務づけられている支援です。"),
@@ -85,6 +85,9 @@ EXTRA_CSS = """
 .page-head h1{font-family:var(--serif); font-weight:300; font-size:clamp(23px,3.2vw,31px);
   letter-spacing:.16em; margin:0 0 14px}
 .page-head p{color:var(--muted); font-size:14px; margin:0; letter-spacing:.04em}
+.page-head h1 .count{display:inline-block; vertical-align:middle; margin-left:14px; padding:3px 10px;
+  border:1px solid var(--blue-line); border-radius:3px; font-family:var(--sans); font-size:11px;
+  font-weight:700; letter-spacing:.14em; color:var(--blue-dd)}
 .crumb{font-size:12px; color:var(--muted); letter-spacing:.06em; padding:16px 0 0}
 .crumb a{text-decoration:none}
 .crumb a:hover{color:var(--gold)}
@@ -567,7 +570,8 @@ def build_plan(out_dir, src_name, key=""):
             frag = frag.replace(div_block(frag, '<div class="stats">'), "")
         ph = (f'<div class="crumb"><div class="wrap"><a href="index.html">ホーム</a> ／ {html.escape(ttl)}</div></div>\n'
               f'<div class="page-head"><div class="wrap"><span class="en">{html.escape(en)}</span>'
-              f'<h1>{html.escape(ttl)}</h1><p>{lead}</p></div></div>\n')
+              f'<h1>{html.escape(ttl)}{"<span class=" + chr(34) + "count" + chr(34) + ">5 TYPES</span>" if sec == "visas" else ""}</h1>'
+              f'<p>{lead}</p></div></div>\n')
         extra = (outline_table() + group_section()) if out == "company.html" else ""
         (out_dir / out).write_text(
             shell(head, header, tail, '<div class="sub">' + ph + fix_links(frag) + extra + "</div>",

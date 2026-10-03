@@ -152,13 +152,22 @@ section.alt{background:var(--panel); border-top:1px solid var(--line-s); border-
 .stat .l{font-size:12.5px; color:var(--muted); margin-top:6px}
 
 /* 在留資格 */
-.visas{display:grid; grid-template-columns:repeat(auto-fit,minmax(214px,1fr)); gap:14px}
-.visa{background:#fff; border:1px solid var(--line); padding:24px 22px; border-radius:3px}
-.visa:hover{border-color:var(--blue); box-shadow:0 6px 18px rgba(20,160,220,.1)}
-.visa .n{font-size:12px; color:#fff; background:var(--blue); font-weight:700;
-  display:inline-block; padding:2px 10px; border-radius:3px}
-.visa h3{font-size:17px; font-weight:700; margin:12px 0 10px; color:var(--blue-dd)}
+/* 5枚は 3列＋2列（中央寄せ）。6列のグリッドで1枚＝2列分にし、4枚目を2列目から置く */
+.visas{display:grid; grid-template-columns:repeat(6,1fr); gap:24px 28px}
+.visa{grid-column:span 2; display:grid; grid-template-rows:auto auto auto 1fr; background:#fff;
+  border:1px solid var(--line); padding:28px 28px 30px; border-radius:4px; transition:border-color .2s, box-shadow .2s}
+.visa:nth-child(4){grid-column:2 / span 2}
+.visa:hover{border-color:var(--blue-line); box-shadow:0 8px 22px rgba(10,90,140,.07)}
+.visa .n{display:flex; align-items:center; gap:12px; font-size:12px; font-weight:700; letter-spacing:.06em; color:var(--blue-dd)}
+.visa .n::after{content:""; flex:1; height:1px; background:var(--line)}
+.visa h3{font-size:20px; font-weight:700; margin:14px 0 4px; color:var(--ink)}
+.visa .sum{font-size:13.5px; font-weight:700; color:var(--blue-dd); margin:0 0 14px; line-height:1.6}
 .visa p{font-size:13.5px; color:var(--muted); margin:0; line-height:1.85}
+.visa p strong{color:var(--ink)}
+.note-s{display:block; margin-top:10px; font-size:12.5px; color:var(--muted)}
+@media (max-width:1000px){ .visas{grid-template-columns:repeat(2,1fr); gap:16px}
+  .visa, .visa:nth-child(4){grid-column:auto} }
+@media (max-width:640px){ .visas{grid-template-columns:1fr} .visa{padding:22px 20px 24px} }
 
 /* 支援 */
 .support{display:grid; grid-template-columns:repeat(auto-fit,minmax(252px,1fr)); gap:10px}
@@ -288,6 +297,9 @@ footer a:hover{color:#fff; text-decoration:underline}
 .page-head h1{font-family:var(--serif); font-weight:300; font-size:clamp(23px,3.2vw,31px);
   letter-spacing:.16em; margin:0 0 14px}
 .page-head p{color:var(--muted); font-size:14px; margin:0; letter-spacing:.04em}
+.page-head h1 .count{display:inline-block; vertical-align:middle; margin-left:14px; padding:3px 10px;
+  border:1px solid var(--blue-line); border-radius:3px; font-family:var(--sans); font-size:11px;
+  font-weight:700; letter-spacing:.14em; color:var(--blue-dd)}
 .crumb{font-size:12px; color:var(--muted); letter-spacing:.06em; padding:16px 0 0}
 .crumb a{text-decoration:none}
 .crumb a:hover{color:var(--gold)}
@@ -511,24 +523,24 @@ setTimeout(function(){
 </header>
 
 <div class="sub"><div class="crumb"><div class="wrap"><a href="index.html">ホーム</a> ／ ご紹介できる人材</div></div>
-<div class="page-head"><div class="wrap"><span class="en">SERVICE</span><h1>ご紹介できる人材</h1><p>就労が可能な5つの在留資格すべてに対応しています。どの制度が合うかからご相談いただけます。<strong>介護の人材</strong>にも力を入れています。</p></div></div>
+<div class="page-head"><div class="wrap"><span class="en">TALENT</span><h1>ご紹介できる人材<span class="count">5 TYPES</span></h1><p>就労が可能な5つの在留資格に対応。<br>企業さまに合う制度選びからご相談いただけます。<small class="note-s">介護人材のご紹介にも力を入れています。</small></p></div></div>
 <section id="visas">
   <div class="wrap">
     <div class="sec-head">
-      <span class="en">SERVICE</span>
+      <span class="en">TALENT</span>
       <h2>ご紹介できる人材</h2>
-      <p>就労が可能な5つの在留資格すべてに対応しています。どの制度が合うかからご相談いただけます。<strong>介護の人材</strong>にも力を入れています。</p>
+      <p>就労が可能な5つの在留資格に対応。<br>企業さまに合う制度選びからご相談いただけます。<small class="note-s">介護人材のご紹介にも力を入れています。</small></p>
     </div>
     <div class="visas">
-      <div class="visa"><div class="n">01</div><h3>技能実習</h3>
+      <div class="visa"><div class="n">01</div><h3>技能実習</h3><p class="sum">自社グループの監理団体からご紹介</p>
         <p>自社グループの監理団体を通じ、現地で選考した実習生をご紹介します。手続きの代行と、<strong>フィリピン国内での出国手続き</strong>までお手伝いします。</p></div>
-      <div class="visa"><div class="n">02</div><h3>特定技能</h3>
+      <div class="visa"><div class="n">02</div><h3>特定技能</h3><p class="sum">受入れ後の支援までお引き受け</p>
         <p>登録支援機関として、受入れ後に義務づけられた支援も含めてお引き受けします。</p></div>
-      <div class="visa"><div class="n">03</div><h3>留学生</h3>
+      <div class="visa"><div class="n">03</div><h3>留学生</h3><p class="sum">特定技能への資格変更にも対応</p>
         <p>資格外活動の許可を得た留学生のご紹介。<strong>特定技能試験に合格した留学生を、特定技能ビザへ資格変更してご紹介する</strong>こともできます。</p></div>
-      <div class="visa"><div class="n">04</div><h3>高度人材</h3>
+      <div class="visa"><div class="n">04</div><h3>高度人材</h3><p class="sum">職種と勤務内容に合わせてご紹介</p>
         <p>専門的な知識や技術を持つ人材を、職種と勤務内容に合わせてご紹介します。</p></div>
-      <div class="visa"><div class="n">05</div><h3>日系人・定住者</h3>
+      <div class="visa"><div class="n">05</div><h3>日系人・定住者</h3><p class="sum">就労制限なし、すぐに働ける</p>
         <p>就労に制限のない在留資格をお持ちの方のご紹介。すぐに働いていただけます。</p></div>
     </div>
     
