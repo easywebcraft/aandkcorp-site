@@ -81,9 +81,10 @@ HR_PAGES = [("service.html", "ご紹介できる人材"), ("support.html", "支�
 # ============ 運営する施設（2026-10-18） ============
 # 出典は かみのての現行サイト（~/kaminote-design/DATA.md、2026-08-02 取得）と、このサイトの お知らせ（news.json）。
 # ★時間・定員・料金は変わりやすく、各施設のサイトと二重になるので載せない。名前・種別・開設・所在地・電話まで。
-# ★かみのての新しい2サイト（保育園／放課後等デイ）が独自ドメインで公開されたら、URL をそちらに替える。
-#   今は、全施設が載っている今のサイトへ案内する（旧 www.kaminote-hoikuen.com はハイフン付きで開けなかった）。
-KAMINOTE_URL = "https://www.kaminotehoikuen.com/"
+# リンク先は かみのての新しい2サイト（2026-10-18 松本さん「リンク先は今の新しいHPのURLにして」）。
+# ★独自ドメインに切り替わったら、この2つを替えるだけで全ページのリンクが替わる。
+NURSERY_URL = "https://easywebcraft.github.io/kaminote-design/"      # 保育園サイト
+DAY_URL = "https://easywebcraft.github.io/kaminote-day-design/"      # 放課後等デイサイト
 CARE_GROUPS = [
     ("nursery", "CHILDCARE", "保育事業", "img/care/yard.jpg", "砂場とすべり台のある園庭"),
     ("dev", "CHILD DEVELOPMENT", "児童発達支援・放課後等デイサービス", "img/care/craft.jpg", "画用紙とクレヨンが広がる工作の机"),
@@ -91,19 +92,19 @@ CARE_GROUPS = [
 CARE = [
     {"grp": "nursery", "id": "f-kaminote", "kind": "企業主導型保育園", "name": "かみのて保育園", "since": "2022年7月開園",
      "desc": "こども家庭庁所管の企業主導型保育事業です。看護師が常駐し、園内で病児保育も行っています。",
-     "addr": "岐阜県可児市今渡3番5", "tel": "0574-50-1211", "url": KAMINOTE_URL},
+     "addr": "岐阜県可児市今渡3番5", "tel": "0574-50-1211", "url": NURSERY_URL + "park-kaminote.html"},
     {"grp": "nursery", "id": "f-imawatari", "kind": "小規模認可保育園（可児市）", "name": "かみのて今渡保育園", "since": "2023年10月開園",
      "desc": "可児市の待機児童の解消と、地域の子育て支援に取り組んでいます。入園のお申し込みは可児市役所の保育課です。一時預かりも行っています。",
-     "addr": "岐阜県可児市今渡3-11", "tel": "0574-66-3512", "url": KAMINOTE_URL},
-    {"grp": "nursery", "id": "f-hog", "kind": "認可外保育園", "name": "ハンズオブガッド今渡保育園", "since": "HANDS OF GOD KINDERGARTEN",
+     "addr": "岐阜県可児市今渡3-11", "tel": "0574-66-3512", "url": NURSERY_URL + "park-imawatari.html"},
+    {"grp": "nursery", "id": "f-hog", "kind": "認可外保育園", "name": "ハンズオブガッド保育園", "since": "HANDS OF GOD KINDERGARTEN",
      "desc": "フィリピン・ブラジル・ベトナム・ペルーなどにルーツをもつお子さまが通う保育園です。年少・年中は英語、年長は日本語のレッスンがあります。",
-     "addr": "岐阜県可児市今渡1149-1", "tel": "0574-66-3511", "url": KAMINOTE_URL},
+     "addr": "岐阜県可児市今渡1149-1", "tel": "0574-66-3511", "url": NURSERY_URL + "park-handsofgod.html"},
     {"grp": "dev", "id": "f-kids", "kind": "児童発達支援・放課後等デイサービス", "name": "かみのてKIDS", "since": "2023年10月開所／2025年6月 新築移転",
      "desc": "通訳スタッフがいて、支援が必要な外国籍のお子さまも通訳を通じて療育しています。",
-     "addr": "岐阜県可児市土田2569-2", "tel": "0574-66-3513", "url": KAMINOTE_URL},
+     "addr": "岐阜県可児市土田2569-2", "tel": "0574-66-3513", "url": DAY_URL + "offices.html#kids"},
     {"grp": "dev", "id": "f-smile", "kind": "児童発達支援・放課後等デイサービス", "name": "かみのてSMILE", "since": "",
      "desc": "かみのてKIDSと同じ支援プログラムで、お子さま一人ひとりの成長を支えています。",
-     "addr": "岐阜県可児市今渡2452-1", "tel": "0574-66-3513", "url": KAMINOTE_URL},
+     "addr": "岐阜県可児市今渡2452-1", "tel": "0574-66-3513", "url": DAY_URL + "offices.html#smile"},
 ]
 # 外国人材のページの最後のお問い合わせは、外国人材向けの見出し・ボタンにする（原本は全ページ共通の文言）
 CTA_BASE_H2 = '<h2><span>ご質問・ご相談は</span><br><span>お気軽にお問い合わせください</span></h2>'
@@ -1329,10 +1330,10 @@ def company_body(secs):
             '<div class="cp-gb-b"><div class="tn-head"><span class="tn-n">01</span><div><span class="tn-en">CHILDCARE</span><h3 class="t">保育事業</h3></div></div>'
             '<ul><li><b>かみのて保育園</b><small>こども家庭庁所管 企業主導型保育事業</small>'
             '<span>2022年7月開園。外国にルーツのあるお子さまをお預かりしています。</span>'
-            f'<a href="{KAMINOTE_URL}" target="_blank" rel="noopener">サイトを見る →</a></li>'
+            f'<a href="{NURSERY_URL}park-kaminote.html" target="_blank" rel="noopener">サイトを見る →</a></li>'
             '<li><b>かみのて今渡保育園</b><small>可児市 小規模認可保育園</small>'
             '<span>2023年10月開園。可児市の待機児童の解消と、地域の子育て支援に取り組んでいます。</span></li>'
-            '<li><b>ハンズオブガッド今渡保育園</b><small>認可外保育園</small>'
+            '<li><b>ハンズオブガッド保育園</b><small>認可外保育園</small>'
             '<span>フィリピン・ブラジル・ベトナム・ペルーなどにルーツをもつお子さまが通っています。</span></li>'
             '<li><b>一時預かり事業</b><span>新社屋の2階で、一時預かりも行っています。</span></li></ul>'
             '<p style="margin-top:14px"><a href="childcare.html">保育・児童福祉の事業を詳しく見る →</a></p></div></div>'
@@ -1342,7 +1343,8 @@ def company_body(secs):
             '<h3 class="t">児童発達支援・放課後等デイサービス</h3></div></div>'
             '<ul><li><b>かみのてKIDS</b><span>2023年10月開園。2025年6月に新築の建物へ移転し、受け入れ人数を増やしました。'
             '支援が必要な外国籍のお子さまも、通訳を通じて療育しています。</span></li>'
-            '<li><b>かみのてSMILE</b><small>児童発達支援・放課後等デイサービス</small></li></ul></div></div>'
+            '<li><b>かみのてSMILE</b><small>児童発達支援・放課後等デイサービス</small></li></ul>'
+            f'<p style="margin-top:14px"><a href="{DAY_URL}" target="_blank" rel="noopener">放課後等デイのサイトを見る →</a></p></div></div>'
             '</div></div></section>\n')
 
     half = (len(OUTLINE) + 1) // 2
@@ -1384,11 +1386,11 @@ def group_section():
     cards = [
         ("かみのて保育園", "こども家庭庁所管 企業主導型保育事業",
          "2022年7月開園。外国にルーツのあるお子さまをお預かりしています。",
-         KAMINOTE_URL),
+         NURSERY_URL),
         ("かみのて今渡保育園", "可児市 小規模認可保育園",
          "2023年10月開園。可児市の待機児童の解消と、地域の子育て支援に取り組んでいます。", None),
         ("かみのてKIDS・かみのてSMILE", "児童発達支援・放課後等デイサービス",
-         "2025年6月にかみのてKIDSが新築移転し、受け入れ人数を増やしました。", None),
+         "2025年6月にかみのてKIDSが新築移転し、受け入れ人数を増やしました。", DAY_URL),
         ("一時預かり事業", "",
          "新社屋の2階で、一時預かりも行っています。", None),
     ]
