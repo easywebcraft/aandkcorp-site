@@ -408,7 +408,8 @@ footer a:hover{color:#fff; text-decoration:underline}
   .cta{padding:64px 0}
   .cta p{font-size:15px}
   .cta p br{display:none}
-  .btn-lg{min-width:0; width:100%; padding:20px 20px; font-size:17px}
+  .btn-lg{min-width:0; width:100%; padding:20px 16px; font-size:15.5px; gap:10px}
+  .cta h2{font-size:clamp(20px,5.8vw,25px)}
   .cw{min-width:0; width:100%}
   footer .cols{grid-template-columns:1fr; gap:22px}
 }
@@ -549,6 +550,107 @@ footer a:hover{color:#fff; text-decoration:underline}
   .ncards{grid-template-columns:1fr; gap:18px}
 }
 
+/* ===== 支援内容ページ（2026-10-18 改善案。build.py の support_body が組む） =====
+   FV（紺＋写真）→ 登録番号の帯 → 3ステップの全体図 → STEP01〜03 → WHY A and K → FAQ。
+   写真は会社の実際のものだけ。合う写真が無い段（生活・就労継続）は写真なしで組む。 */
+.sp-hero{display:grid; grid-template-columns:45fr 55fr; min-height:450px; background:var(--navy); color:#fff}
+.sp-hero-t{display:flex; flex-direction:column; justify-content:center;
+  padding:40px 56px 56px max(24px, calc((100vw - 1248px) / 2 + 24px))}
+.sp-crumb{margin-bottom:30px; font-size:12.5px; color:rgba(255,255,255,.72)}
+.sp-crumb a{text-decoration:none}
+.sp-crumb a:hover{color:#fff}
+.sp-en{font-family:var(--en); font-weight:600; font-size:14px; letter-spacing:.24em; color:var(--gold-l)}
+.sp-k{margin:8px 0 0; font-size:14px; font-weight:700; color:rgba(255,255,255,.86); letter-spacing:.06em}
+.sp-hero h1{margin:16px 0 20px; font-size:clamp(30px,3.4vw,46px); line-height:1.45; letter-spacing:.06em; color:#fff}
+.sp-hero h1 span{display:inline-block}
+.sp-hero .lead{margin:0 0 30px; max-width:34em; font-size:15px; line-height:2; color:rgba(255,255,255,.86)}
+.sp-hero .btn{align-self:flex-start}
+.sp-hero-ph{position:relative; margin:0; min-height:300px}
+.sp-hero-ph img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:saturate(.85)}
+.sp-hero-ph::before{content:""; position:absolute; inset:0; z-index:1; background:linear-gradient(90deg,var(--navy) 0%,rgba(16,42,67,0) 24%)}
+.sp-hero-ph figcaption{position:absolute; z-index:2; right:14px; bottom:12px; padding:2px 10px; font-size:12px; color:#fff; background:rgba(16,42,67,.6)}
+.sp-reg{background:var(--navy); color:#fff; border-top:1px solid rgba(255,255,255,.12); padding:22px 0}
+.sp-reg .wrap{display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:8px 22px; text-align:center}
+.sp-reg .wrap::before, .sp-reg .wrap::after{content:""; flex:0 1 72px; height:1px; background:rgba(182,154,104,.65)}
+.sp-reg .en{font-family:var(--en); font-weight:600; font-size:13px; letter-spacing:.2em; color:var(--gold-l)}
+.sp-reg b{font-size:16px; letter-spacing:.04em}
+
+/* 3ステップの全体図（押すと各段へ） */
+.stl{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(3,1fr)}
+.stl a{display:block; padding-right:32px; text-decoration:none; color:inherit}
+.stl-top{display:flex; align-items:center; gap:14px; margin-bottom:18px}
+.stl-n{flex:none; width:64px; height:64px; border-radius:50%; background:var(--gold); color:#fff; display:flex; align-items:center;
+  justify-content:center; font-family:var(--en); font-weight:500; font-size:28px}
+.stl-ic svg, .si-ic svg{fill:none; stroke:var(--navy); stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round}
+.stl-ic svg{width:36px; height:36px}
+.stl li:not(:last-child) .stl-top::after{content:""; flex:1; height:1px; margin-left:6px;
+  background:linear-gradient(90deg,var(--gold),var(--gold)) left center/100% 1px no-repeat}
+.stl-en{display:block; font-family:var(--en); font-weight:600; font-size:13px; letter-spacing:.2em; color:var(--muted)}
+.stl b{display:block; margin:4px 0 6px; font-size:20px; color:var(--ink); transition:color .2s}
+.stl small{display:block; font-size:14px; line-height:1.8; color:var(--text)}
+.stl em{display:inline-block; margin-top:12px; padding:1px 10px; border:1px solid var(--gold); font-style:normal;
+  font-size:12.5px; font-weight:700; color:var(--gold-d)}
+.stl a:hover b{color:var(--blue)}
+
+/* STEP01〜03 */
+.top section.sp-step{padding:96px 0; scroll-margin-top:76px}
+.top section.sp-s2{background:var(--panel)}
+.sp-step-in{display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center}
+.sp-step-in.noph{grid-template-columns:minmax(240px,.75fr) 1.6fr; align-items:start}
+.sp-ph{margin:0}
+.sp-ph img{width:100%; aspect-ratio:4/3; object-fit:cover; filter:saturate(.9)}
+.sp-ph figcaption{margin-top:10px; font-size:12.5px; color:var(--muted)}
+.sp-step-n{font-family:var(--en); font-weight:600; font-size:14px; letter-spacing:.2em; color:var(--gold-d)}
+.sp-step-n b{margin-left:6px; font-size:46px; font-weight:500; letter-spacing:0; color:var(--gold); vertical-align:-5px}
+.sp-step-h .en{display:block; margin-top:6px; font-family:var(--en); font-weight:600; font-size:13px; letter-spacing:.22em; color:var(--muted)}
+.sp-step-h h2{margin:10px 0 0; font-size:clamp(24px,2.6vw,32px); color:var(--ink); letter-spacing:.06em; line-height:1.5}
+.sitems{list-style:none; margin:28px 0 0; padding:0; border-top:1px solid var(--line)}
+.noph .sitems{margin-top:0}
+.sitems li{display:grid; grid-template-columns:36px 44px 1fr; gap:4px 14px; align-items:start; padding:20px 0; border-bottom:1px solid var(--line)}
+.si-ic svg{width:30px; height:30px; margin-top:2px}
+.si-n{font-family:var(--en); font-weight:500; font-size:28px; line-height:1.05; color:var(--gold)}
+.sitems h3{margin:0 0 4px; font-size:16.5px; line-height:1.55; color:var(--ink)}
+.sitems p{margin:0; font-size:14px; line-height:1.85}
+.si-tag{display:inline-block; font-style:normal; margin-left:8px; padding:0 8px; border:1px solid var(--line); font-size:11.5px; font-weight:700;
+  color:var(--muted); vertical-align:2px}
+
+/* WHY A and K（紺の地に薄い地図） */
+.top section.sp-why{position:relative; overflow:hidden; background:var(--navy); color:#fff}
+.sp-why-map{position:absolute; right:-40px; top:50%; width:min(620px,58vw); transform:translateY(-50%); opacity:.22; pointer-events:none}
+.sp-why-map text{display:none}
+.sp-why .wrap{position:relative}
+.top .sp-why .sec-head .en{color:var(--gold-l)}
+.top .sp-why .sec-head h2{color:#fff}
+.why3{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid rgba(255,255,255,.18)}
+.why3 li{padding:30px 32px 4px; border-left:1px solid rgba(255,255,255,.14)}
+.why3 li:first-child{padding-left:0; border-left:0}
+.why3 .ic{border-color:rgba(182,154,104,.55); background:transparent; color:var(--gold-l)}
+.why3 h3{margin:16px 0 8px; font-size:18px; color:#fff}
+.why3 p{margin:0; font-size:14px; line-height:1.9; color:rgba(255,255,255,.8)}
+.top .sp-why .txt-link{color:var(--gold-l)}
+
+@media (max-width:900px){
+  .sp-hero{grid-template-columns:1fr; min-height:0}
+  .sp-hero-t{padding:32px 24px 40px}
+  .sp-hero-ph{min-height:240px}
+  .sp-hero-ph::before{background:linear-gradient(180deg,var(--navy) 0%,rgba(16,42,67,0) 30%)}
+  .stl{grid-template-columns:1fr; gap:26px}
+  .stl li .stl-top::after{display:none}
+  .stl a{padding-right:0}
+  .sp-step-in, .sp-step-in.noph{grid-template-columns:1fr; gap:28px}
+  .why3{grid-template-columns:1fr}
+  .why3 li{padding:24px 0 4px; border-left:0; border-top:1px solid rgba(255,255,255,.14)}
+  .why3 li:first-child{border-top:0}
+  .sp-why-map{width:90vw; right:-30vw; opacity:.3}
+}
+@media (max-width:760px){
+  .sp-hero .btn{align-self:stretch}
+  .top section.sp-step{padding:60px 0}
+  .sitems li{grid-template-columns:30px 36px 1fr; gap:4px 10px; padding:16px 0}
+  .si-n{font-size:24px}
+  .sp-reg .wrap::before, .sp-reg .wrap::after{display:none}
+}
+
 /* ---- 下層ページの見出し（build.py が差し込む） ---- */
 .page-head{padding:44px 0 40px; background:var(--panel); border-bottom:1px solid var(--line-s)}
 .page-head .en{color:var(--blue); font-size:11px; font-weight:700; letter-spacing:.18em; display:block; margin-bottom:8px}
@@ -661,10 +763,12 @@ footer a:hover{color:#fff; text-decoration:underline}
 .trust{animation:rise .7s cubic-bezier(.2,.7,.3,1) .4s both}
 
 /* スクロールで出てくる分だけ、JSがあるとき（.anim）に隠しておく */
-.anim section > .wrap > *:not(.visas):not(.rsn):not(.fcards):not(.vcards):not(.stages):not(.tline):not(.flow):not(.partners):not(.faq-list):not(.ncards):not(.gcards):not(.contact-grid),
+.anim section > .wrap > *:not(.visas):not(.rsn):not(.fcards):not(.stl):not(.why3):not(.vcards):not(.stages):not(.tline):not(.flow):not(.partners):not(.faq-list):not(.ncards):not(.gcards):not(.contact-grid),
 .anim .visas > *,
 .anim .rsn > *,
 .anim .fcards > *,
+.anim .stl > *,
+.anim .why3 > *,
 .anim .vcards > *,
 .anim .stages > *,
 .anim .tline > *,
@@ -681,10 +785,12 @@ footer a:hover{color:#fff; text-decoration:underline}
 @media (max-width:700px){ .anim .on{animation-name:riseSp} }
 
 @media (prefers-reduced-motion:reduce){
-  .anim section > .wrap > *:not(.visas):not(.rsn):not(.fcards):not(.vcards):not(.stages):not(.tline):not(.flow):not(.partners):not(.faq-list):not(.ncards):not(.gcards):not(.contact-grid),
+  .anim section > .wrap > *:not(.visas):not(.rsn):not(.fcards):not(.stl):not(.why3):not(.vcards):not(.stages):not(.tline):not(.flow):not(.partners):not(.faq-list):not(.ncards):not(.gcards):not(.contact-grid),
 .anim .visas > *,
 .anim .rsn > *,
 .anim .fcards > *,
+.anim .stl > *,
+.anim .why3 > *,
 .anim .vcards > *,
 .anim .stages > *,
 .anim .tline > *,
@@ -699,10 +805,12 @@ footer a:hover{color:#fff; text-decoration:underline}
   .anim .on, .hero .bg img, .hero-copy .wrap > *, .trust{animation:none}
 }
 @media print{
-  .anim section > .wrap > *:not(.visas):not(.rsn):not(.fcards):not(.vcards):not(.stages):not(.tline):not(.flow):not(.partners):not(.faq-list):not(.ncards):not(.gcards):not(.contact-grid),
+  .anim section > .wrap > *:not(.visas):not(.rsn):not(.fcards):not(.stl):not(.why3):not(.vcards):not(.stages):not(.tline):not(.flow):not(.partners):not(.faq-list):not(.ncards):not(.gcards):not(.contact-grid),
 .anim .visas > *,
 .anim .rsn > *,
 .anim .fcards > *,
+.anim .stl > *,
+.anim .why3 > *,
 .anim .vcards > *,
 .anim .stages > *,
 .anim .tline > *,
@@ -765,9 +873,9 @@ setTimeout(function(){
 <section><div class="wrap"><div class="sec-head"><span class="en">COMPANY PROFILE</span><h2>会社概要</h2></div><table class="outline"><tr><th>会社名</th><td>株式会社 A and K</td></tr><tr><th>本社所在地</th><td>〒509-0207 岐阜県可児市今渡3-11<br>Tel 0574-66-3511／Fax 0574-66-7311</td></tr><tr><th>可児今渡事務所</th><td>〒509-0207 岐阜県可児市今渡1149-1 2F<br>Tel・Fax 0574-50-5048</td></tr><tr><th>代表者</th><td>代表取締役　兼松 厚志</td></tr><tr><th>E-mail</th><td><a href="mailto:info@aandkcorp.com">info@aandkcorp.com</a></td></tr><tr><th>営業時間</th><td>9:00〜18:00</td></tr><tr><th>定休日</th><td>土曜日、日曜日</td></tr><tr><th>許可</th><td>登録支援機関 登録番号 19登-000975</td></tr><tr><th>事業内容</th><td>・技能実習生の紹介及び手続き代行業務<br>・外国人留学生の紹介業務<br>・特定技能登録支援機関<br>・外国籍児童の保育園経営<br>・内閣府所管企業主導型保育園経営<br>・認可保育園経営<br>・児童発達支援事業・放課後デイサービス事業</td></tr><tr><th>取引銀行</th><td>岐阜商工信用組合 可児支店<br>十六銀行 西可児支店<br>東濃信用金庫 西可児支店</td></tr><tr><th>顧問</th><td>高橋法律事務所<br>各務税理士事務所<br>NAKA社会保険労務士事務所</td></tr></table></div></section><section class="gsec" id="group"><div class="wrap"><div class="sec-head"><span class="en">GROUP</span><h2>グループの事業</h2><p>外国人材の受入れ支援のほか、保育園と児童発達支援・放課後等デイサービスを運営しています。</p></div><div class="gcards"><div class="gcard"><h3>かみのて保育園</h3><div class="gtag">こども家庭庁所管 企業主導型保育事業</div><p>2022年7月開園。外国にルーツのあるお子さまをお預かりしています。</p><p style="margin-top:8px"><a href="https://www.kaminote-hoikuen.com/" target="_blank" rel="noopener">サイトを見る</a></p></div><div class="gcard"><h3>かみのて今渡保育園</h3><div class="gtag">可児市 小規模認可保育園</div><p>2023年10月開園。可児市の待機児童の解消と、地域の子育て支援に取り組んでいます。</p></div><div class="gcard"><h3>かみのてKIDS・かみのてSMILE</h3><div class="gtag">児童発達支援・放課後等デイサービス</div><p>2025年6月にかみのてKIDSが新築移転し、受け入れ人数を増やしました。</p></div><div class="gcard"><h3>一時預かり事業</h3><p>新社屋の2階で、一時預かりも行っています。</p></div></div></div></section></div><div class="cta" id="contact">
   <div class="wrap">
     <span class="en">CONTACT</span>
-    <h2><span>外国人材の採用について</span><br><span>まずはご相談ください</span></h2>
-    <p>ご相談・お見積りは無料です。制度の説明だけでも承ります。<br>どの制度が合うか分からない段階からでも、お気軽にお声がけください。</p>
-    <a class="btn btn-lg" href="contact.html">お問い合わせ・ご相談はこちら <i aria-hidden="true">→</i></a>
+    <h2><span>外国人材の受入れについて</span><br><span>まずはお気軽にご相談ください</span></h2>
+    <p>制度のご説明から、受入れに関するご相談まで。<br>企業さまの状況に合わせてご案内します。ご相談・お見積りは無料です。</p>
+    <a class="btn btn-lg" href="contact.html">外国人材の受入れについて相談する <i aria-hidden="true">→</i></a>
     <div class="cta-sub">
       <a class="cw" href="tel:0574663511"><span class="cw-k">お電話で</span><b>0574-66-3511</b><small>平日 9:00〜18:00（土日休）</small></a>
       <a class="cw" href="mailto:info@aandkcorp.com"><span class="cw-k">メールで</span><b class="mail">info@aandkcorp.com</b><small>24時間受付</small></a>
@@ -858,7 +966,7 @@ setTimeout(function(){
 <script>
 (function () {
   // ★ここの並びは <head> の隠す指定と必ず同じにすること
-  var ANIM_SEL = 'section > .wrap > *:not(.visas):not(.rsn):not(.fcards):not(.vcards):not(.stages):not(.tline):not(.flow):not(.partners):not(.faq-list):not(.ncards):not(.gcards):not(.contact-grid),.visas > *,.rsn > *,.fcards > *,.vcards > *,.stages > *,.tline > *,.flow > *,.partners > *,.faq-list > *,.ncards > *,.gcards > *,.contact-grid > *,.nlist > .wrap > *,.cta > .wrap > *';
+  var ANIM_SEL = 'section > .wrap > *:not(.visas):not(.rsn):not(.fcards):not(.stl):not(.why3):not(.vcards):not(.stages):not(.tline):not(.flow):not(.partners):not(.faq-list):not(.ncards):not(.gcards):not(.contact-grid),.visas > *,.rsn > *,.fcards > *,.stl > *,.why3 > *,.vcards > *,.stages > *,.tline > *,.flow > *,.partners > *,.faq-list > *,.ncards > *,.gcards > *,.contact-grid > *,.nlist > .wrap > *,.cta > .wrap > *';
   var units = [].slice.call(document.querySelectorAll(ANIM_SEL));
 
   function sweep() {

@@ -177,7 +177,7 @@ EXTRA_CSS = """
 #
 # 中身を先に出す箱（カードの並びなど）は、箱ごとではなく中身を1枚ずつ出す。
 # そのため箱自身は :not() で外す。ここも2つの並びで揃える。
-ANIM_BOXES = ["visas", "rsn", "fcards", "vcards", "stages", "tline", "flow", "partners",
+ANIM_BOXES = ["visas", "rsn", "fcards", "stl", "why3", "vcards", "stages", "tline", "flow", "partners",
               "faq-list", "ncards", "gcards", "contact-grid"]
 _NOT = "".join(f":not(.{c})" for c in ANIM_BOXES)
 _CHILDREN = ",\n".join(f".anim .{c} > *" for c in ANIM_BOXES)
@@ -613,12 +613,135 @@ def build_plan(out_dir, src_name, key=""):
             shell(head, header, tail, '<div class="sub">' + ph + fix_links(frag) + extra + "</div>",
                   out, ttl), encoding="utf-8")
 
+    # 支援内容は専用の組み方（2026-10-18 改善案）で上書きする
+    (out_dir / "support.html").write_text(
+        shell(head, header, tail, support_body(secs), "support.html", "登録支援機関としての支援"), encoding="utf-8")
+
     (out_dir / "news.html").write_text(
         shell(head, header, tail, news_body(), "news.html", "過去のお知らせ"), encoding="utf-8")
     (out_dir / "contact.html").write_text(
         shell(head, header, fix_links(footer) + note, contact_body(), "contact.html", "お問い合わせ"), encoding="utf-8")
     (out_dir / "privacy.html").write_text(
         shell(head, header, tail, privacy_body(), "privacy.html", "プライバシーポリシー"), encoding="utf-8")
+
+
+# ============ 支援内容ページ（2026-10-18 改善案） ============
+# 支援10項目の文言は原本の #support から取る（二重に書かない）。ここで足すのは見せ方と、
+# 原本・partners 節にある事実から書いた「WHY A and K」「FAQ」だけ。
+# ★費用・対応言語・トラブル時の具体的な体制は、お客さまに確認できるまで書かない。
+SUP_EN = {"BEFORE": "BEFORE ARRIVAL", "LIFE": "DAILY LIFE SUPPORT", "CONTINUE": "CONTINUOUS SUPPORT"}
+# 写真は会社の実際のもの（旧サイトのお知らせ）だけ。合う写真が無い段は None（写真なしで組む）
+SUP_PHOTO = {
+    "hero": ("img/news/20190725-3.jpg", "フィリピンの送り出し機関を訪問したときの様子", "2019年 フィリピンの送り出し機関にて"),
+    1: ("img/news/20221108-2.jpeg", "フィリピンの送り出し機関の教室を訪ねたときの様子", "2022年 フィリピンの送り出し機関にて"),
+    2: None,
+    3: None,
+}
+_SV = '<svg viewBox="0 0 24 24" aria-hidden="true">{}</svg>'
+SUP_ICON = {
+    "01": '<path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M9.5 11h6M9.5 14.5h6M9.5 18h4"/>',
+    "02": '<path d="M2.5 13.5l19-7-5 15-4-6.5z"/><path d="M12.5 15l9-8.5"/>',
+    "03": '<path d="M3.5 11L12 4l8.5 7"/><path d="M5.5 9.5V20h13V9.5M10 20v-5.5h4V20"/>',
+    "04": '<path d="M4 5.5C6.5 4.5 9.5 4.5 12 6c2.5-1.5 5.5-1.5 8-.5V19c-2.5-1-5.5-1-8 .5-2.5-1.5-5.5-1.5-8-.5z"/><path d="M12 6v13.5"/>',
+    "05": '<path d="M3 20h18M5 20V10M19 20V10M9 20v-6h6v6M3 10l9-6 9 6z"/>',
+    "06": '<path d="M4 5h16v11H9l-5 4z"/><path d="M8.5 9h7M8.5 12h4.5"/>',
+    "07": '<path d="M5 13a7 7 0 0 1 14 0v4"/><path d="M5 13v4h3v-5H5M19 13v4h-3v-5h3M19 17c0 2-2 3-5 3"/>',
+    "08": '<circle cx="8" cy="8" r="3"/><circle cx="16.5" cy="9" r="2.5"/><path d="M2.5 20c.5-3.5 2.8-5.5 5.5-5.5s5 2 5.5 5.5M14 14.6c3.2-.4 6 1.5 6.5 5.4"/>',
+    "09": '<path d="M4 8h13l-3-3M20 16H7l3 3"/>',
+    "10": '<rect x="3.5" y="5" width="17" height="15" rx="1.5"/><path d="M3.5 9.5h17M8 3v4M16 3v4M8.5 14.5l2.2 2.2 4.8-4.7"/>',
+}
+STL_ICON = {1: "02", 2: "08", 3: "10"}
+WHY_ICON = {
+    "net": '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.4 2.5 3.6 5.5 3.6 9s-1.2 6.5-3.6 9c-2.4-2.5-3.6-5.5-3.6-9S9.6 5.5 12 3z"/></svg>',
+    "one": '<svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3.5 20c0-3.2 2.5-5.8 5.5-5.8s5.5 2.6 5.5 5.8"/><circle cx="17" cy="9" r="2.4"/><path d="M16.2 14.3c2.6.4 4.3 2.8 4.3 5.7"/></svg>',
+    "local": '<svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V8.5L12 4l7 4.5V21M9.5 21v-4.5h5V21M9 11.5h.01M12 11.5h.01M15 11.5h.01"/></svg>',
+}
+SUP_FAQ = [
+    ("登録支援機関には、どこまで委託できますか。",
+     "特定技能で義務づけられている支援（このページの10項目）の実施を、登録支援機関としてお引き受けします。"
+     "なお、支援を委託した場合も、受入れ企業さまご自身が行う届出などがあります。"),
+    ("外国人材を初めて受け入れる企業でも相談できますか。",
+     "はじめての企業さまがほとんどです。どの制度が合うか分からない段階から、社内の受入れ体制づくりまでご一緒します。"),
+    ("外国人材との言葉の問題にはどう対応しますか。",
+     "入国前の事前ガイダンスや、仕事・暮らしの相談への対応は、本人が分かる言葉で行います。日本語学習の機会もご案内します。"),
+    ("受入れ後にトラブルが発生した場合はどうなりますか。",
+     "仕事や暮らしの相談・苦情に、本人が分かる言葉で応じます。法令違反などがあれば行政機関へ通報します。"
+     "会社の都合で雇用が終わるときは、次の受入れ先探しをお手伝いします。"),
+]
+
+
+def support_body(secs):
+    f = secs["support"]
+    groups = []
+    for g in f.split('<div class="sgrp">')[1:]:
+        en = re.search(r'<span class="en">(.*?)</span>', g).group(1)
+        h3 = re.search(r"<h3>(.*?)</h3>", g).group(1)
+        p = re.search(r'<div class="sgrp-h">.*?<p>(.*?)</p>', g, re.S).group(1)
+        items = re.findall(r'<div class="sup"><span class="c">(\d+)</span><h4>(.*?)</h4><p>(.*?)</p></div>', g)
+        groups.append((en, h3, p, items))
+    assert [len(x[3]) for x in groups] == [3, 5, 2], [len(x[3]) for x in groups]
+    nwmap = re.search(r'<svg class="nw-map".*?</svg>', secs["partners"], re.S).group(0)
+
+    src, alt, cap = SUP_PHOTO["hero"]
+    out = ('<div class="sp-hero"><div class="sp-hero-t">'
+           '<div class="sp-crumb"><a href="index.html">ホーム</a> ／ 支援内容</div>'
+           '<span class="sp-en">TOTAL HUMAN RESOURCE SUPPORT</span>'
+           '<p class="sp-k">登録支援機関としての支援</p>'
+           '<h1><span>国境を越えた挑戦に</span><br><span>途切れない安心を</span></h1>'
+           '<p class="lead">外国人材の受入れ準備から、日本での暮らし、就労後の定着まで。<br>'
+           'A and K は登録支援機関として、企業と外国人材の双方に寄り添い、安心して働き続けられる環境づくりを支えます。</p>'
+           '<a class="btn gold" href="contact.html">ご相談・お問い合わせ <span aria-hidden="true">→</span></a></div>'
+           f'<figure class="sp-hero-ph"><img src="{src}" alt="{alt}"><figcaption>{cap}</figcaption></figure></div>\n'
+           '<div class="sp-reg"><div class="wrap"><span class="en">REGISTERED SUPPORT ORGANIZATION</span>'
+           '<b>登録支援機関　登録番号 19登-000975</b></div></div>\n')
+
+    li = ""
+    for i, (en, h3, p, items) in enumerate(groups, 1):
+        ic = _SV.format(SUP_ICON[STL_ICON[i]])
+        li += (f'<li><a href="#step{i}"><div class="stl-top"><span class="stl-n">{i:02d}</span><span class="stl-ic">{ic}</span></div>'
+               f'<span class="stl-en">{SUP_EN.get(en, en)}</span><b>{h3}</b><small>{p}</small><em>{len(items)}項目</em></a></li>')
+    out += ('<section id="total"><div class="wrap">'
+            '<div class="sec-head"><span class="en">TOTAL SUPPORT</span><h2>受入れから定着まで<br>安心をつなぐ3つのステップ</h2></div>'
+            f'<ol class="stl">{li}</ol></div></section>\n')
+
+    for i, (en, h3, p, items) in enumerate(groups, 1):
+        rows = ""
+        for n, t, d in items:
+            tag = '<em class="si-tag">必要な場合のみ</em>' if n == "09" else ""
+            rows += (f'<li><span class="si-ic">{_SV.format(SUP_ICON[n])}</span><span class="si-n">{n}</span>'
+                     f'<div><h3>{t}{tag}</h3><p>{d}</p></div></li>')
+        head = (f'<div class="sp-step-h"><span class="sp-step-n">STEP<b>{i:02d}</b></span>'
+                f'<span class="en">{SUP_EN.get(en, en)}</span><h2>{h3}</h2></div>')
+        ph = SUP_PHOTO.get(i)
+        if ph:
+            fig = f'<figure class="sp-ph"><img src="{ph[0]}" alt="{ph[1]}" loading="lazy"><figcaption>{ph[2]}</figcaption></figure>'
+            body = fig + f'<div class="sp-step-b">{head}<ol class="sitems">{rows}</ol></div>'
+            cls = "sp-step-in"
+        else:
+            body = f'<div class="sp-step-b">{head}</div><ol class="sitems">{rows}</ol>'
+            cls = "sp-step-in noph"
+        out += f'<section class="sp-step sp-s{i}" id="step{i}"><div class="wrap {cls}">{body}</div></section>\n'
+
+    out += ('<section class="sp-why"><div class="sp-why-map" aria-hidden="true">' + nwmap + '</div><div class="wrap">'
+            '<div class="sec-head"><span class="en">WHY A and K</span><h2>制度への対応だけでなく<br>人と企業に寄り添う支援を</h2></div>'
+            '<ul class="why3">'
+            f'<li><span class="ic" aria-hidden="true">{WHY_ICON["net"]}</span><h3>国内外のネットワーク</h3>'
+            '<p>グループ内の監理団体ブリッジング協同組合と、フィリピン・ベトナムの送り出し機関が連携しています。</p></li>'
+            f'<li><span class="ic" aria-hidden="true">{WHY_ICON["one"]}</span><h3>一貫した支援体制</h3>'
+            '<p>監理団体を自社で設立しているため、募集から入国、就労後の支援までを一貫してお引き受けできます。</p></li>'
+            f'<li><span class="ic" aria-hidden="true">{WHY_ICON["local"]}</span><h3>地域に根ざした活動</h3>'
+            '<p>岐阜県可児市が拠点です。グループで保育園や児童発達支援・放課後等デイサービスを運営し、外国にルーツのあるお子さまをお預かりしてきました。</p></li>'
+            '</ul><div class="more-r"><a class="txt-link" href="partners.html">グループ・提携機関を見る <span aria-hidden="true">→</span></a></div>'
+            '</div></section>\n')
+
+    qs = "".join(f'<details><summary>{q}</summary><div class="a"><p style="margin:0">{a}</p></div></details>'
+                 for q, a in SUP_FAQ)
+    out += ('<section class="faq"><div class="wrap">'
+            '<div class="sec-head"><span class="en">FAQ</span><h2>よくあるご質問</h2></div>'
+            f'<div class="faq-list">{qs}</div>'
+            '<div class="more-r"><a class="txt-link" href="faq.html">すべてのご質問を見る <span aria-hidden="true">→</span></a></div>'
+            '</div></section>\n')
+    return '<div class="top sp">\n' + out + '</div>\n'
 
 
 def group_section():
