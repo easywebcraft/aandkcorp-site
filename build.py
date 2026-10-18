@@ -613,6 +613,12 @@ def build_plan(out_dir, src_name, key=""):
             shell(head, header, tail, '<div class="sub">' + ph + fix_links(frag) + extra + "</div>",
                   out, ttl), encoding="utf-8")
 
+    # グループ・提携機関も専用の組み方（2026-10-18 改善案）。最後のお問い合わせの見出しもこのページ向けに
+    pn_tail = tail.replace('<h2><span>外国人材の受入れについて</span><br><span>まずはお気軽にご相談ください</span></h2>',
+                           '<h2><span>国境を越えた人材採用を</span><br><span>信頼できるパートナーと</span></h2>', 1)
+    assert pn_tail != tail
+    (out_dir / "partners.html").write_text(
+        shell(head, header, pn_tail, partners_body(secs), "partners.html", "自社グループと提携機関"), encoding="utf-8")
     # 受入れの流れも専用の組み方（2026-10-18 改善案）で上書きする
     (out_dir / "flow.html").write_text(
         shell(head, header, tail, flow_body(secs), "flow.html", "受入れまでの流れ"), encoding="utf-8")
@@ -1017,6 +1023,133 @@ def flow_body(secs):
             '<div class="more-r"><a class="txt-link" href="faq.html">すべてのご質問を見る <span aria-hidden="true">→</span></a></div>'
             '</div></section>\n')
     return '<div class="top sp fl">\n' + out + '</div>\n'
+
+
+# ============ グループ・提携機関ページ（2026-10-18 改善案） ============
+# 書くのは原本の partners 節と、お知らせ（news.json）にある事実だけ。
+# ★ブリッジング協同組合の所在地・許可番号・育成就労への対応、「自社グループ内で完結」という表現は、
+#   お客さまに確認できるまで書かない。年表も、お知らせにある日付だけ。
+PN_HIST = [
+    ("2019年3月", "フィリピンの職業訓練庁（TESDA）を訪問"),
+    ("2019年6月", "出入国在留管理庁長官から、登録支援機関の登録通知書が届く"),
+    ("2019年9月", "トラスト江南協同組合と業務提携"),
+    ("2019年10月", "トラスト江南協同組合の理事長とフィリピンへ。送り出し機関との委託契約に同行"),
+    ("2020年1月", "ベトナムで、企業さまと実習生の面接"),
+    ("2021年8月", "ブリッジング協同組合を設立（愛知県知事の許可）"),
+    ("2021年8月", "ブリッジング協同組合が、ベトナムの POLIMEX 国際人材株式会社と業務提携"),
+    ("2022年10月", "フィリピンの送り出し機関、プロデンシャルエンプロイメントエージェンシーと契約"),
+]
+
+
+def _dl(rows):
+    return '<dl class="pn-dl">' + "".join(f"<div><dt>{k}</dt><dd>{v}</dd></div>" for k, v in rows) + "</dl>"
+
+
+def partners_body(secs):
+    nwmap = re.search(r'<svg class="nw-map".*?</svg>', secs["partners"], re.S).group(0)
+    nwmap = nwmap.replace('class="nw-map"', 'class="nw-map light"', 1)
+    out = ('<div class="sp-hero"><div class="sp-hero-t">'
+           '<div class="sp-crumb"><a href="index.html">ホーム</a> ／ グループ・提携機関</div>'
+           '<span class="sp-en">GLOBAL PARTNERSHIP NETWORK</span>'
+           '<p class="sp-k">自社グループと提携機関</p>'
+           '<h1><span>国境を越えた信頼が</span><br><span>人と企業の未来をつなぐ</span></h1>'
+           '<p class="lead">フィリピン・ベトナムの送り出し機関と、国内のグループ・提携機関。'
+           'それぞれの専門性を活かした連携で、外国人材の受入れを支えます。</p>'
+           '<a class="btn gold" href="#pn-network">ネットワークについて見る <span aria-hidden="true">→</span></a></div>'
+           '<div class="pn-collage">'
+           '<figure><img src="img/hero-trainees.jpg" alt="提携する送り出し機関での日本語授業の様子"><figcaption>提携する送り出し機関での日本語授業</figcaption></figure>'
+           '<figure><img src="img/news/20190725-3.jpg" alt="フィリピンの送り出し機関を訪問したときの様子"><figcaption>2019年7月 フィリピン</figcaption></figure>'
+           '<figure><img src="img/news/20200122-1.jpg" alt="ベトナムでの実習生の面接の様子"><figcaption>2020年1月 ベトナム</figcaption></figure>'
+           '</div></div>\n')
+
+    out += ('<section id="pn-network"><div class="wrap"><div class="pn-net"><div class="pn-net-t">'
+            '<div class="sec-head"><span class="en">GLOBAL NETWORK</span><h2>アジアと日本をつなぐ<br>確かなネットワーク</h2></div>'
+            '<p>A and K は、国内のグループ・提携機関に加え、フィリピン・ベトナムの送り出し機関と連携しています。</p></div>'
+            f'<div>{nwmap}</div></div>'
+            '<ul class="why3 light pn-cty">'
+            '<li><span class="k">JAPAN</span><h3>国内のグループ・提携機関</h3><p>ブリッジング協同組合（自社グループ）／トラスト江南協同組合</p>'
+            '<a href="#pn-group">国内の連携体制 →</a></li>'
+            '<li><span class="k">PHILIPPINES</span><h3>海外の送り出し機関</h3><p>プロデンシャルエンプロイメント</p>'
+            '<a href="#pn-ph">フィリピンの提携機関 →</a></li>'
+            '<li><span class="k">VIETNAM</span><h3>海外の送り出し機関</h3><p>POLIMEX 国際人材株式会社</p>'
+            '<a href="#pn-vn">ベトナムの提携機関 →</a></li>'
+            '</ul></div></section>\n')
+
+    out += ('<section class="alt" id="pn-group"><div class="wrap pn-group"><div>'
+            '<div class="sec-head"><span class="en">OUR GROUP</span><h2>国内の連携体制が<br>外国人材の受入れを支える</h2></div>'
+            '<ol class="pn-org" aria-label="組織の関係（概略）">'
+            '<li class="own"><b>株式会社 A and K</b><small>募集・紹介／登録支援機関として入国の手続き・生活の支援</small></li>'
+            '<li class="grp"><b>ブリッジング協同組合</b><small>技能実習における監理（監理団体）</small></li>'
+            '<li><b>受入れ企業さま</b><small>外国人材の受入れ・雇用</small></li></ol>'
+            '<p class="pn-org-note">※関係をつかむための概略図です。それぞれが担う役割は、在留資格・制度によって異なります。</p></div>'
+            '<div><span class="tn-en">OUR GROUP</span><h2 class="pn-name">ブリッジング協同組合<span class="pn-tag">監理団体</span></h2>'
+            + _dl([("設立", "2021年8月"),
+                   ("根拠", "中小企業協同組合法にもとづき、愛知県知事の許可を受けて設立"),
+                   ("役割", "技能実習生の受入れにおける監理"),
+                   ("A and K との関係", "弊社が設立した、自社グループの監理団体")])
+            + '<p class="tn-body" style="margin:0">設立にあわせて、外国人技能実習生の受入れ事業を事業目的に加えました。'
+              '2021年8月には、ベトナムの送り出し機関 POLIMEX 国際人材株式会社と業務提携しています。</p>'
+            '</div></div></section>\n')
+
+    # フィリピン
+    out += ('<section class="tn-big" id="pn-ph"><div class="wrap tn-big-in"><div class="tn-vis">'
+            '<figure style="margin:0"><img src="img/hero-trainees.jpg" alt="提携する送り出し機関での日本語授業の様子" loading="lazy">'
+            '<figcaption>PHILIPPINES　提携する送り出し機関での日本語授業</figcaption></figure>'
+            '<div class="pn-sub"><figure><img src="img/news/20221108-2.jpeg" alt="2022年のフィリピン出張で教室を訪ねたときの様子" loading="lazy"><figcaption>2022年10月 フィリピン出張</figcaption></figure>'
+            '<figure><img src="img/news/20190725-3.jpg" alt="フィリピンの送り出し機関を訪問したときの様子" loading="lazy"><figcaption>2019年7月 送り出し機関を訪問</figcaption></figure></div></div>'
+            '<div class="tn-body"><span class="tn-en">GLOBAL PARTNER 01</span>'
+            '<h2 class="pn-name">プロデンシャルエンプロイメント<span class="pn-tag">フィリピン</span></h2>'
+            '<h3 class="tn-catch">フィリピンから日本の企業へ</h3>'
+            '<p>日本へ人材を送り出すリクルートメントエージェンシーです。現地フィリピンで、企業さまご自身が面接を行っていただくこともできます。</p>'
+            + _dl([("所在国", "フィリピン"), ("区分", "海外の送り出し機関"),
+                   ("契約", "2022年10月（フィリピン出張の際に契約）"), ("特徴", "企業さまご自身による現地での面接にも対応")])
+            + '</div></div></section>\n')
+
+    # ベトナム
+    out += ('<section class="tn-big rev alt" id="pn-vn"><div class="wrap tn-big-in"><div class="tn-vis">'
+            '<div class="pn-sub" style="margin-top:0"><figure><img src="img/news/20200122-1.jpg" alt="ベトナムでの実習生の面接の様子" loading="lazy"><figcaption>2020年1月 ベトナムでの面接</figcaption></figure>'
+            '<figure><img src="img/news/20200122-3.jpg" alt="ベトナムでの面接のあとの集合写真" loading="lazy"><figcaption>2020年1月 ベトナム出張</figcaption></figure></div>'
+            '<p class="pn-cap">※写真は、POLIMEX との提携（2021年8月）より前のベトナム出張のものです。</p></div>'
+            '<div class="tn-body"><span class="tn-en">GLOBAL PARTNER 02</span>'
+            '<h2 class="pn-name">POLIMEX 国際人材株式会社<span class="pn-tag">ベトナム</span></h2>'
+            '<h3 class="tn-catch">ベトナムと日本をつなぐ</h3>'
+            '<p>2021年8月に、自社グループのブリッジング協同組合と業務提携しました。ベトナムとの手続きを早く進められます。</p>'
+            + _dl([("所在国", "ベトナム"), ("区分", "海外の送り出し機関"),
+                   ("提携", "2021年8月"), ("提携先", "ブリッジング協同組合")])
+            + '</div></div></section>\n')
+
+    # 国内の提携機関
+    out += ('<section class="tn-big" id="pn-jp"><div class="wrap tn-big-in">'
+            '<div class="tn-vis tn-panel" aria-hidden="true"><span class="pn-panel-area">AICHI</span>'
+            '<span class="meta">愛知・岐阜・三重の企業さまや介護施設さまへの受入れ</span></div>'
+            '<div class="tn-body"><span class="tn-en">DOMESTIC PARTNER</span>'
+            '<h2 class="pn-name">トラスト江南協同組合<span class="pn-tag">日本・愛知</span></h2>'
+            '<h3 class="tn-catch">地域に根ざした連携で企業の受入れを支える</h3>'
+            '<p>2019年9月に業務提携した、技能実習生の受入れを行う監理団体です。愛知・岐阜・三重の企業さまや介護施設さまへの受入れを支えています。</p>'
+            + _dl([("所在地", "愛知県江南市"), ("区分", "監理団体（提携）"), ("提携", "2019年9月")])
+            + '</div></div></section>\n')
+
+    # 連携の仕組み
+    out += ('<section class="pn-collab"><div class="wrap">'
+            '<div class="sec-head"><span class="en">OUR COLLABORATION</span><h2>それぞれの専門性を活かし<br>受入れまでをスムーズに</h2></div>'
+            '<ol class="pn-flow">'
+            '<li><span class="n">01</span><b>海外での募集・選考</b><small>フィリピン・ベトナムの送り出し機関と連携</small></li>'
+            '<li><span class="n">02</span><b>監理</b><small>ブリッジング協同組合（技能実習の場合）</small></li>'
+            '<li><span class="n">03</span><b>入国の手続き・生活の支援</b><small>株式会社 A and K（登録支援機関。特定技能の場合）</small></li>'
+            '<li><span class="n">04</span><b>就労後の支援</b><small>定期的な面談・相談</small></li></ol>'
+            '<p class="pn-flow-note">※実施する機関や支援の内容は、在留資格・制度によって異なります。技能実習制度は、2027年4月1日から育成就労制度へ移行する予定です。</p>'
+            '</div></section>\n')
+
+    # これまでの歩み
+    li = "".join(f"<li><time>{d}</time><span>{t}</span></li>" for d, t in PN_HIST)
+    out += ('<section class="alt"><div class="wrap pn-hist"><div>'
+            '<p class="pn-hist-en" aria-hidden="true">Our<br><em>History</em></p>'
+            '<div class="sec-head"><span class="en">PARTNERSHIP HISTORY</span><h2>積み重ねてきた連携が<br>信頼をつくる</h2></div></div>'
+            f'<div><ol class="pn-tl">{li}</ol>'
+            '<p class="pn-tl-note">※旧サイトのお知らせに掲載した内容から作成しています。</p>'
+            '<div class="more-r" style="text-align:left"><a class="txt-link" href="news.html">お知らせを見る <span aria-hidden="true">→</span></a></div></div>'
+            '</div></section>\n')
+    return '<div class="top sp pn">\n' + out + '</div>\n'
 
 
 def group_section():

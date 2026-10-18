@@ -851,6 +851,87 @@ footer a:hover{color:#fff; text-decoration:underline}
   .fl-card{padding:22px 20px}
   .fl-big{padding:26px 24px}
 }
+
+/* ===== グループ・提携機関ページ（2026-10-18 改善案。build.py の partners_body が組む） =====
+   FV（写真3枚）→ GLOBAL NETWORK（白地に地図）→ OUR GROUP（組織の図）→ 提携機関（フィリピン・ベトナム）
+   → 国内の提携機関 → 連携の仕組み → これまでの歩み。書くのは原本とお知らせにある事実だけ。 */
+.pn-collage{display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1.5fr 1fr; gap:6px; min-height:100%; background:var(--navy)}
+.pn-collage figure{position:relative; margin:0; overflow:hidden; min-height:140px}
+.pn-collage figure:first-child{grid-column:1 / 3}
+.pn-collage img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:saturate(.85)}
+.pn-collage figcaption{position:absolute; right:8px; bottom:8px; padding:1px 8px; font-size:11.5px; color:#fff; background:rgba(16,42,67,.65)}
+.pn-net{display:grid; grid-template-columns:1fr 1.1fr; gap:48px; align-items:center}
+.pn-net-t p{margin:0; font-size:15.5px; line-height:2}
+.nw-map.light .nw-land{stroke:rgba(16,42,67,.2)}
+.nw-map.light .nw-pin text{fill:var(--navy)}
+.nw-map.light .nw-jp circle{fill:var(--navy)}
+.pn-cty{margin-top:48px}
+.pn-cty .k{display:block; font-family:var(--en); font-weight:600; font-size:20px; letter-spacing:.2em; color:var(--gold-d)}
+.pn-cty h3{margin:6px 0 6px}
+.pn-cty a{display:inline-block; margin-top:12px; font-size:14px; font-weight:700; color:var(--blue); text-decoration:none}
+.pn-group{display:grid; grid-template-columns:.9fr 1.1fr; gap:64px; align-items:start}
+.pn-org{list-style:none; margin:0; padding:24px; background:var(--panel)}
+.pn-org li{position:relative; padding:18px 20px; background:#fff; border:1px solid var(--line); text-align:center}
+.pn-org li + li{margin-top:34px}
+.pn-org li + li::before{content:""; position:absolute; left:50%; top:-27px; width:10px; height:10px; margin-left:-5px;
+  border-right:1.5px solid var(--gold); border-bottom:1.5px solid var(--gold); transform:rotate(45deg)}
+.pn-org li.own{background:var(--navy); border-color:var(--navy); color:#fff}
+.pn-org li.grp{background:#fff; border:2px solid var(--gold)}
+.pn-org b{display:block; font-size:16.5px}
+.pn-org li.own b{color:#fff}
+.pn-org small{display:block; margin-top:2px; font-size:13px; color:var(--muted)}
+.pn-org li.own small{color:var(--gold-l)}
+.pn-org-note{margin:12px 0 0; font-size:12.5px; color:var(--muted)}
+.pn-tag{display:inline-block; margin-left:12px; padding:1px 10px; border:1px solid var(--line); font-size:12.5px; font-weight:700;
+  color:var(--navy); vertical-align:6px; letter-spacing:.04em}
+.pn .sp-hero h1{font-size:clamp(28px,3vw,42px)}
+.pn-name .pn-tag{display:table; margin:10px 0 0; vertical-align:baseline}
+.pn-name{margin:10px 0 0; font-size:clamp(24px,2.6vw,32px); color:var(--ink); letter-spacing:.04em; line-height:1.4}
+.pn-dl{margin:20px 0 24px; border-top:1px solid var(--line)}
+.pn-dl div{display:grid; grid-template-columns:8.5em 1fr; gap:12px; padding:12px 0; border-bottom:1px solid var(--line); font-size:14.5px}
+.pn-dl dt{font-weight:700; color:var(--muted); font-size:13.5px}
+.pn-dl dd{margin:0; color:var(--ink)}
+.pn-sub{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:10px}
+.pn-sub img{width:100%; aspect-ratio:4/3; object-fit:cover; filter:saturate(.9)}
+.pn-sub figure{margin:0}
+.pn-sub figcaption, .tn-vis .pn-cap{margin-top:6px; font-size:12px; color:var(--muted)}
+.pn-panel-area{font-family:var(--en); font-weight:600; font-size:clamp(40px,5vw,64px); letter-spacing:.24em; line-height:1}
+.top section.pn-collab{background:radial-gradient(ellipse 70% 80% at 25% 40%,#1b4468 0%,var(--navy) 60%); color:#fff}
+.top .pn-collab .sec-head .en{color:var(--gold-l)}
+.top .pn-collab .sec-head h2{color:#fff}
+.pn-flow{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(4,1fr); gap:28px}
+.pn-flow li{position:relative; padding:24px 22px; border:1px solid rgba(255,255,255,.22)}
+.pn-flow li:not(:last-child)::after{content:""; position:absolute; right:-19px; top:50%; width:9px; height:9px; margin-top:-5px;
+  border-top:1.5px solid var(--gold); border-right:1.5px solid var(--gold); transform:rotate(45deg)}
+.pn-flow .n{font-family:var(--en); font-weight:500; font-size:30px; line-height:1; color:var(--gold-l)}
+.pn-flow b{display:block; margin-top:12px; font-size:16.5px; color:#fff}
+.pn-flow small{display:block; margin-top:6px; font-size:13px; line-height:1.7; color:rgba(255,255,255,.78)}
+.pn-flow-note{margin:22px 0 0; font-size:13px; color:rgba(255,255,255,.72)}
+.pn-hist{display:grid; grid-template-columns:.8fr 1.2fr; gap:64px; align-items:start}
+.pn-hist-en{margin:0 0 18px; font-family:var(--en); font-weight:500; font-size:clamp(44px,5vw,72px); line-height:1; color:var(--navy)}
+.pn-hist-en em{font-style:italic; color:var(--gold)}
+.pn-tl{list-style:none; margin:0; padding:0 0 0 22px; border-left:1px solid var(--gold)}
+.pn-tl li{position:relative; display:grid; grid-template-columns:7.5em 1fr; gap:14px; padding:12px 0}
+.pn-tl li::before{content:""; position:absolute; left:-27px; top:20px; width:9px; height:9px; border-radius:50%; background:var(--gold)}
+.pn-tl time{font-weight:700; color:var(--gold-d)}
+.pn-tl span{font-size:14.5px; line-height:1.8}
+.pn-tl-note{margin:16px 0 0; font-size:12.5px; color:var(--muted)}
+@media (max-width:1000px){
+  .pn-net, .pn-group, .pn-hist{grid-template-columns:1fr; gap:32px}
+  .pn-flow{grid-template-columns:1fr 1fr}
+  .pn-flow li:nth-child(2)::after{display:none}
+}
+@media (max-width:760px){
+  .pn-collage{min-height:320px}
+  .pn-flow{grid-template-columns:1fr; gap:22px}
+  .pn-flow li:not(:last-child)::after{right:auto; left:50%; top:auto; bottom:-15px; transform:rotate(135deg)}
+  .pn-flow li:nth-child(2)::after{display:block}
+  .pn-dl div{grid-template-columns:1fr; gap:2px}
+  .pn-tl li{grid-template-columns:1fr; gap:0}
+  .pn-tag{vertical-align:3px}
+  .pn-name{font-size:clamp(19px,5.6vw,24px)}
+  .pn .tn-catch{font-size:16.5px}
+}
 </style>
 </head>
 <body>
