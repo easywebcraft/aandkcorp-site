@@ -177,7 +177,7 @@ EXTRA_CSS = """
 #
 # 中身を先に出す箱（カードの並びなど）は、箱ごとではなく中身を1枚ずつ出す。
 # そのため箱自身は :not() で外す。ここも2つの並びで揃える。
-ANIM_BOXES = ["visas", "rsn", "fcards", "stl", "why3", "tn3", "tn-jump", "vcards", "stages", "tline", "flow", "partners",
+ANIM_BOXES = ["visas", "rsn", "fcards", "stl", "why3", "tn3", "tn-jump", "fl-ov", "vcards", "stages", "tline", "flow", "partners",
               "faq-list", "ncards", "gcards", "contact-grid"]
 _NOT = "".join(f":not(.{c})" for c in ANIM_BOXES)
 _CHILDREN = ",\n".join(f".anim .{c} > *" for c in ANIM_BOXES)
@@ -613,6 +613,9 @@ def build_plan(out_dir, src_name, key=""):
             shell(head, header, tail, '<div class="sub">' + ph + fix_links(frag) + extra + "</div>",
                   out, ttl), encoding="utf-8")
 
+    # 受入れの流れも専用の組み方（2026-10-18 改善案）で上書きする
+    (out_dir / "flow.html").write_text(
+        shell(head, header, tail, flow_body(secs), "flow.html", "受入れまでの流れ"), encoding="utf-8")
     # 人材紹介も専用の組み方（2026-10-18 改善案）で上書きする
     (out_dir / "service.html").write_text(
         shell(head, header, tail, service_body(secs), "service.html", "ご紹介できる人材"), encoding="utf-8")
@@ -900,6 +903,120 @@ def service_body(secs):
             '<div class="more-r"><a class="txt-link" href="faq.html">すべてのご質問を見る <span aria-hidden="true">→</span></a></div>'
             '</div></section>\n')
     return '<div class="top sp tn">\n' + out + '</div>\n'
+
+
+# ============ 受入れの流れページ（2026-10-18 改善案） ============
+# 5つの手順の名前・説明・期間は原本の #flow から取る。ここで足すのは見せ方と、原本にある事実だけ。
+# ★費用がいつ発生するか、選考の観点、労働条件の扱いは、お客さまに確認できるまで書かない。
+FL_EN = ["CONSULTATION", "JOB APPLICATION", "SELECTION & INTERVIEW", "APPLICATION & PROCEDURES", "ARRIVAL & EMPLOYMENT"]
+FL_ICON = ["06", "01", "08", "10", "02"]   # SUP_ICON の番号
+FL_PHOTO = {"hero": ("img/news/20221108-1.jpeg", "フィリピン出張での打ち合わせの様子", "2022年 フィリピン出張にて"),
+            3: ("img/news/20200122-1.jpg", "ベトナムでの実習生の面接の様子", "2020年 ベトナムでの面接（企業さまと現地で）")}
+FL_FAQ = [
+    ("採用までどれくらいかかりますか。",
+     "海外の送り出し機関を通じて採用する場合、ご相談から就労開始までおおむね5〜6か月が目安です（在留資格によって異なります）。"),
+    ("面接はオンラインでもできますか。",
+     "はい。現地で書類選考ののち、オンラインまたは現地で面接します。フィリピンでは、企業さまご自身が現地で面接を行うこともできます。"),
+    ("受入れの経験がない会社でも大丈夫ですか。",
+     "はじめての企業さまがほとんどです。社内の受入れ体制づくりからご一緒します。"),
+    ("就労開始後も相談できますか。",
+     "はい。登録支援機関として、定期的な面談と、仕事や暮らしの相談・苦情への対応を続けます。"),
+]
+
+
+def flow_body(secs):
+    f = secs["flow"]
+    st = re.findall(r'<li class="step"><div class="n">STEP (\d\d)</div><h3>(.*?)</h3>\s*<p>(.*?)</p>'
+                    r'<div class="d"><span class="dk">(.*?)</span>(.*?)</div></li>', f, re.S)
+    assert len(st) == 5, len(st)
+    src, alt, cap = FL_PHOTO["hero"]
+    out = ('<div class="sp-hero"><div class="sp-hero-t">'
+           '<div class="sp-crumb"><a href="index.html">ホーム</a> ／ 受入れの流れ</div>'
+           '<span class="sp-en">RECRUITMENT PROCESS</span>'
+           '<p class="sp-k">受入れまでの流れ</p>'
+           '<h1><span>世界とつながる採用を</span><br><span>確かなステップで</span></h1>'
+           '<p class="lead">ご相談から人材の選考、受入れの準備、就労開始まで。一つひとつ丁寧にサポートします。</p>'
+           '<a class="btn gold" href="contact.html">無料で相談する <span aria-hidden="true">→</span></a></div>'
+           f'<figure class="sp-hero-ph"><img src="{src}" alt="{alt}"><figcaption>{cap}</figcaption></figure></div>\n')
+    ic = lambda k: '<svg viewBox="0 0 24 24">' + SUP_ICON[k] + '</svg>'
+    out += ('<div class="trust"><div class="wrap trust-grid">'
+            f'<div class="tc"><span class="ic" aria-hidden="true">{ic("10")}</span><div class="tc-body"><span class="tc-en">DURATION</span>'
+            '<span class="tc-k">海外の送り出し機関を通じて採用する場合の目安</span><b>約5〜6か月</b></div></div>'
+            f'<div class="tc"><span class="ic" aria-hidden="true">{ic("08")}</span><div class="tc-body"><span class="tc-en">5 STEPS</span>'
+            '<span class="tc-k">ご相談から就労開始まで</span><b>5つのステップ</b></div></div>'
+            f'<div class="tc"><span class="ic" aria-hidden="true">{ic("06")}</span><div class="tc-body"><span class="tc-en">FREE CONSULTATION</span>'
+            '<span class="tc-k">ご相談・お見積り</span><b>無料</b></div></div>'
+            '</div></div>\n')
+
+    li = ""
+    for (n, t, _p, _k, d), k in zip(st, FL_ICON):
+        li += (f'<li><a href="#fstep{int(n)}"><span class="o"><span class="stl-n">{n}</span><span class="stl-ic">{_SV.format(SUP_ICON[k])}</span></span>'
+               f'<b>{t}</b><small>{d}</small></a></li>')
+    out += ('<section><div class="wrap"><div class="sec-head"><span class="en">FIVE STEPS</span><h2>ご相談から就労開始まで</h2></div>'
+            f'<ol class="fl-ov">{li}</ol></div></section>\n')
+
+    visuals = {
+        1: ('<div class="fl-card"><span class="k">ご相談でお伺いすること</span>'
+            '<ul class="checks"><li>職種・仕事の内容</li><li>採用したい人数</li><li>採用の時期</li></ul>'
+            '<a class="btn line" href="contact.html">無料で相談する <span aria-hidden="true">→</span></a></div>'),
+        2: ('<div><div class="fl-dg"><div class="c"><small>海外の送り出し機関</small><b>フィリピン<br>ベトナム</b></div>'
+            '<span class="ar" aria-hidden="true">⇄</span>'
+            '<div class="c own"><b>A and K<br>グループ</b><small>ブリッジング協同組合</small></div>'
+            '<span class="ar" aria-hidden="true">⇄</span>'
+            '<div class="c"><small>日本の</small><b>受入れ<br>企業さま</b></div></div>'
+            '<p class="fl-dg-cap">提携する現地の送り出し機関と連携して募集します</p></div>'),
+        3: None,
+        4: ('<div class="fl-big"><span class="k">申請・手続きの期間の目安</span>'
+            '<span class="v"><small>約</small>3〜4<small>か月</small></span>'
+            '<span class="s">在留資格の申請から査証の取得まで</span></div>'),
+        5: ('<div class="fl-card"><span class="k">入国後の主な支援（特定技能の場合）</span>'
+            '<ul class="checks"><li>出入国する際の送迎</li><li>住居の確保・生活に必要な契約の支援</li>'
+            '<li>生活オリエンテーションの実施</li><li>定期的な面談</li></ul>'
+            '<a class="btn line" href="support.html">支援内容を見る <span aria-hidden="true">→</span></a></div>'),
+    }
+    extra = {
+        1: "<p>どの制度が合うか分からない段階からご相談いただけます。</p>",
+        3: "<p>フィリピンでは、提携する送り出し機関で企業さまご自身が面接を行うこともできます。</p>",
+        5: "<p>特定技能の方は、登録支援機関として就労開始後も支援を続けます。</p>",
+    }
+    for i, (n, t, p, k, d) in enumerate(st, 1):
+        if visuals[i] is None:
+            ph = FL_PHOTO[i]
+            vis = f'<figure class="fl-ph"><img src="{ph[0]}" alt="{ph[1]}" loading="lazy"><figcaption>{ph[2]}</figcaption></figure>'
+        else:
+            vis = visuals[i]
+        alt_cls = " alt" if i % 2 == 0 else ""
+        rev = " rev" if i % 2 == 0 else ""
+        out += (f'<section class="fl-step{alt_cls}" id="fstep{i}"><div class="wrap fl-in{rev}"><div class="fl-t">'
+                f'<div class="sp-step-h"><span class="sp-step-n">STEP<b>{n}</b></span><span class="en">{FL_EN[i - 1]}</span><h2>{t}</h2></div>'
+                f'<p>{p}</p>{extra.get(i, "")}<span class="fl-d"><small>{k}</small>{d}</span></div>'
+                f'<div class="fl-v">{vis}</div></div></section>\n')
+
+    out += ('<section class="fl-prep"><div class="wrap">'
+            '<div class="sec-head"><span class="en">PREPARATION</span><h2>ご相談前に整理しておくと安心なこと</h2></div>'
+            '<ul class="why3 light">'
+            f'<li><span class="ic" aria-hidden="true">{ic("01")}</span><h3>職種・仕事の内容</h3><p>どのような仕事をお任せしたいか</p></li>'
+            f'<li><span class="ic" aria-hidden="true">{ic("08")}</span><h3>採用したい人数</h3><p>何名の採用をお考えか</p></li>'
+            f'<li><span class="ic" aria-hidden="true">{ic("10")}</span><h3>希望の時期</h3><p>いつ頃からの就労をご希望か</p></li>'
+            '</ul><p class="fl-prep-note">決まっていないことがあっても大丈夫です。ご相談の中で一緒に整理します。</p></div></section>\n')
+
+    out += ('<section class="fl-cont"><div class="wrap fl-cont-in"><div>'
+            '<div class="sec-head"><span class="en">CONTINUOUS SUPPORT</span><h2>採用後も安心が続くように</h2></div>'
+            '<p>登録支援機関として、就労開始後も定期的な面談と、仕事や暮らしの相談・苦情への対応を続けます。</p>'
+            '<a class="btn gold" href="support.html">支援内容を見る <span aria-hidden="true">→</span></a></div>'
+            f'<ul><li><span class="ic" aria-hidden="true">{ic("03")}</span>生活の支援</li>'
+            f'<li><span class="ic" aria-hidden="true">{ic("10")}</span>定期的な面談</li>'
+            f'<li><span class="ic" aria-hidden="true">{ic("07")}</span>相談・苦情への対応</li></ul>'
+            '</div></section>\n')
+
+    qs = "".join(f'<details><summary>{q}</summary><div class="a"><p style="margin:0">{a}</p></div></details>'
+                 for q, a in FL_FAQ)
+    out += ('<section class="faq alt"><div class="wrap">'
+            '<div class="sec-head"><span class="en">FAQ</span><h2>よくあるご質問</h2></div>'
+            f'<div class="faq-list">{qs}</div>'
+            '<div class="more-r"><a class="txt-link" href="faq.html">すべてのご質問を見る <span aria-hidden="true">→</span></a></div>'
+            '</div></section>\n')
+    return '<div class="top sp fl">\n' + out + '</div>\n'
 
 
 def group_section():
