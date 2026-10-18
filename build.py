@@ -315,6 +315,39 @@ ANIM_HEAD = """
 .hero-copy .wrap > *:nth-child(4){animation-delay:.60s}
 .trust{animation:rise .7s cubic-bezier(.2,.7,.3,1) .4s both}
 
+/* ---- トップのFVをもう一段動かす（2026-10-18 松本さん「TOPページのFVにもっと動きをだしてほしい」） ----
+   ・見出しは1行ずつ、下から押し上がるように現れる（行の下側を隠しておき、開ける）
+   ・小見出しの金の線が左から伸びる
+   ・空の写真は、寄りが終わったあとも雲が流れるようにゆっくり横へ動き続ける
+   ・右上から差す光が、ゆっくり明るくなったり弱まったりする
+   ・金のボタンに、ときどき光が走る
+   ・紺の帯は3つが順に浮かぶ
+   どれも透明度・位置・切り抜きだけで、レイアウトは動かさない。「動きを減らす」設定では止める（下の reduce） */
+@keyframes lineUp  { from{clip-path:inset(0 0 100% 0); transform:translateY(55%)} to{clip-path:inset(0 0 -10% 0); transform:none} }
+@keyframes lineGrow{ from{transform:scaleX(0)} to{transform:none} }
+@keyframes skyDrift{ from{transform:translateX(0)} to{transform:translateX(-4%)} }
+@keyframes glow    { 0%,100%{opacity:.35; transform:translate(0,0) scale(1)} 50%{opacity:.85; transform:translate(-3%,2%) scale(1.08)} }
+@keyframes shine   { 0%,72%{transform:translateX(-120%) skewX(-20deg)} 100%{transform:translateX(320%) skewX(-20deg)} }
+.hero .bg{left:-2%; right:-6%; animation:skyDrift 38s ease-in-out 2s infinite alternate}
+.hero::before{content:""; position:absolute; z-index:1; right:-12%; top:-30%; width:70%; height:120%; pointer-events:none;
+  background:radial-gradient(closest-side, rgba(255,246,222,.32), rgba(255,246,222,0)); animation:glow 11s ease-in-out infinite}
+.hero-copy h1{animation:none}
+.hero-copy h1 span{animation:lineUp 1s cubic-bezier(.2,.75,.25,1) both}
+.hero-copy h1 span:nth-of-type(1){animation-delay:.35s}
+.hero-copy h1 span:nth-of-type(2){animation-delay:.6s}
+.hero-en::before{transform-origin:left center; animation:lineGrow 1s cubic-bezier(.2,.7,.3,1) .1s both}
+.hero-copy .wrap > .lead{animation-delay:.95s}
+.hero-copy .wrap > .hero-actions{animation-delay:1.15s}
+.hero .btn.gold{position:relative; overflow:hidden}
+.hero .btn.gold::after{content:""; position:absolute; top:0; bottom:0; left:0; width:38%; pointer-events:none;
+  background:linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.5), rgba(255,255,255,0));
+  transform:translateX(-120%) skewX(-20deg); animation:shine 5.5s ease-in-out 2.4s infinite}
+.top .trust{animation:none}
+.top .trust .tc{animation:rise .8s cubic-bezier(.2,.7,.3,1) both}
+.top .trust .tc:nth-child(1){animation-delay:1.3s}
+.top .trust .tc:nth-child(2){animation-delay:1.45s}
+.top .trust .tc:nth-child(3){animation-delay:1.6s}
+
 /* スクロールで出てくる分だけ、JSがあるとき（.anim）に隠しておく */
 __SEL__{opacity:0}
 .anim .on{animation:rise .7s cubic-bezier(.2,.7,.3,1) both}
@@ -324,10 +357,14 @@ __SEL__{opacity:0}
 @media (prefers-reduced-motion:reduce){
   __SEL__{opacity:1}
   .anim .on, .hero .bg img, .hero-copy .wrap > *, .trust{animation:none}
+  .hero .bg, .hero::before, .hero-copy h1 span, .hero-en::before, .hero .btn.gold::after, .top .trust .tc{animation:none}
+  .hero .btn.gold::after{display:none}
 }
 @media print{
   __SEL__{opacity:1 !important}
   .anim .on, .hero .bg img, .hero-copy .wrap > *, .trust{animation:none !important}
+  .hero .bg, .hero::before, .hero-copy h1 span, .hero-en::before, .hero .btn.gold::after, .top .trust .tc{animation:none !important}
+  .hero .btn.gold::after{display:none}
 }
 </style>
 <script>
