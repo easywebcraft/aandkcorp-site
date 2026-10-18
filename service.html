@@ -651,6 +651,126 @@ footer a:hover{color:#fff; text-decoration:underline}
   .sp-reg .wrap::before, .sp-reg .wrap::after{display:none}
 }
 
+/* ===== 人材紹介ページ（2026-10-18 改善案。build.py の service_body が組む） =====
+   FV → 登録番号の帯 → OUR TALENT（目次）→ 01 特定技能・02 技能実習（大きく）→ 03〜05（3列）
+   → 比較 → GLOBAL RECRUITMENT NETWORK → WHY → 流れへの導線 → FAQ。
+   現場の写真が無いので、01 は紺のパネル（英字と登録番号）で見せる。 */
+.top section.tn-intro{padding:96px 0 40px}
+.tn-jump{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(5,1fr); border-top:1px solid var(--line); border-bottom:1px solid var(--line)}
+.tn-jump a{display:flex; align-items:baseline; gap:10px; height:100%; padding:18px 18px; border-left:1px solid var(--line);
+  text-decoration:none; color:var(--ink); font-weight:700; font-size:15px; transition:background-color .2s}
+.tn-jump li:first-child a{border-left:0}
+.tn-jump a span{font-family:var(--en); font-weight:500; font-size:22px; color:var(--gold)}
+.tn-jump a:hover{background:var(--blue-s)}
+.top section.tn-big{padding:88px 0; scroll-margin-top:76px}
+.tn-big-in{display:grid; grid-template-columns:55fr 45fr; gap:64px; align-items:center}
+.tn-big.rev .tn-big-in{grid-template-columns:45fr 55fr}
+.tn-big.rev .tn-vis{order:2}
+.tn-vis{position:relative; margin:0}
+.tn-vis img{width:100%; aspect-ratio:16/10; object-fit:cover; filter:saturate(.9)}
+.tn-vis figcaption{margin-top:10px; font-size:12.5px; color:var(--muted)}
+.tn-panel{position:relative; overflow:hidden; aspect-ratio:16/10; display:flex; flex-direction:column; justify-content:flex-end;
+  padding:40px 44px; color:#fff; background:radial-gradient(ellipse 80% 80% at 20% 25%,#1b4468 0%,var(--navy) 65%)}
+.tn-panel .num{position:absolute; top:18px; right:30px; font-family:var(--en); font-weight:500; font-size:150px; line-height:1; color:rgba(182,154,104,.22)}
+.tn-panel .big{position:relative; font-family:var(--en); font-weight:500; font-size:clamp(34px,4vw,56px); line-height:1.05}
+.tn-panel .big em{font-style:italic; color:var(--gold-l)}
+.tn-panel .meta{position:relative; margin-top:22px; padding-top:16px; border-top:1px solid rgba(255,255,255,.2); font-size:14px; color:rgba(255,255,255,.86)}
+.tn-head{display:flex; align-items:flex-end; gap:18px}
+.tn-n{font-family:var(--en); font-weight:500; font-size:64px; line-height:.9; color:var(--gold)}
+.tn-en{display:block; font-family:var(--en); font-weight:600; font-size:13px; letter-spacing:.2em; color:var(--muted)}
+.tn-head h2{margin:4px 0 0; font-size:clamp(26px,2.8vw,34px); line-height:1.3; color:var(--ink); letter-spacing:.06em}
+.tn-catch{margin:24px 0 14px; font-size:clamp(18px,1.8vw,21px); line-height:1.6; color:var(--navy)}
+.tn-body p{margin:0 0 14px; font-size:15px; line-height:2}
+.tn-body .checks{margin:4px 0 24px}
+.tn-note{margin:0 0 22px; padding:14px 18px; background:var(--panel); border-left:3px solid var(--gold); font-size:14px; line-height:1.8}
+.top section.tn-big.alt .tn-note{background:#fff}
+.tn-note b{color:var(--ink)}
+.btn.line{background:transparent; color:var(--navy); border:1px solid var(--navy); padding:12px 24px; font-size:14px}
+.btn.line:hover{background:var(--navy); color:#fff}
+.tn3{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid var(--line)}
+.tn3 li{padding:34px 34px 8px; border-left:1px solid var(--line); scroll-margin-top:96px}
+.tn3 li:first-child{padding-left:0; border-left:0}
+.tn3 .tn-n{font-size:46px}
+.tn3 .tn-en{margin-top:12px}
+.tn3 h3{margin:4px 0 8px; font-size:21px; color:var(--ink)}
+.tn3 .sum{margin:0 0 10px; font-size:14.5px; font-weight:700; color:var(--blue)}
+.tn3 p{margin:0; font-size:14.5px; line-height:1.95}
+.cmp{width:100%; border-collapse:collapse; font-size:14.5px}
+.cmp th, .cmp td{padding:18px 20px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; line-height:1.8}
+.cmp thead th{background:var(--navy); color:#fff; font-size:13px; letter-spacing:.06em; border-bottom:0}
+.cmp thead th:first-child{width:24%}
+.cmp tbody th{font-size:16px; color:var(--ink); white-space:nowrap}
+.cmp tbody th span{margin-right:10px; font-family:var(--en); font-weight:500; font-size:22px; color:var(--gold)}
+.cmp td.a{font-weight:700; color:var(--navy)}
+.cmp-note{margin:14px 0 0; font-size:13px; color:var(--muted)}
+.cmp-cta{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:20px 40px; margin-top:40px;
+  padding:30px 36px; background:#fff; border-left:3px solid var(--gold)}
+.cmp-cta b{display:block; font-size:18px; color:var(--ink)}
+.cmp-cta p{margin:6px 0 0; font-size:14.5px}
+.top section.tn-net{background:radial-gradient(ellipse 70% 80% at 25% 40%,#1b4468 0%,var(--navy) 60%); color:#fff}
+.tn-net-in{display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center}
+.top .tn-net .sec-head .en{color:var(--gold-l)}
+.top .tn-net .sec-head h2{color:#fff}
+.tn-net-t p{margin:0 0 16px; font-size:15px; line-height:2; color:rgba(255,255,255,.86)}
+.tn-net-l{list-style:none; margin:8px 0 24px; padding:0}
+.tn-net-l li{padding:12px 0; border-top:1px solid rgba(255,255,255,.14); font-size:15px}
+.tn-net-l span{display:inline-block; min-width:9.5em; font-family:var(--en); font-weight:600; font-size:13px; letter-spacing:.2em; color:var(--gold-l)}
+.top .tn-net .txt-link{color:var(--gold-l)}
+.tn-ph2{position:relative; display:grid; grid-template-columns:1fr 1fr; gap:24px}
+.tn-ph2::before{content:""; position:absolute; left:50%; top:-28px; bottom:-28px; width:1px; background:var(--gold); opacity:.7}
+.tn-ph2 figure{position:relative; margin:0}
+.tn-ph2 figure:nth-child(2){margin-top:56px}
+.tn-ph2 img{width:100%; aspect-ratio:4/3; object-fit:cover; filter:saturate(.85)}
+.tn-ph2 figcaption{margin-top:8px; font-size:12.5px; color:rgba(255,255,255,.75)}
+.tn-why .sec-head{text-align:center}
+.top .tn-why .sec-head .en{justify-content:center}
+.why3.light{border-top-color:var(--line)}
+.why3.light li{border-left-color:var(--line)}
+.why3.light .ic{border-color:var(--blue-line); color:var(--navy)}
+.why3.light h3{color:var(--ink)}
+.why3.light p{color:var(--text)}
+.why3 .wn{display:block; margin-bottom:14px; font-family:var(--en); font-weight:500; font-size:36px; line-height:1; color:var(--gold)}
+.top section.tn-proc{padding:0 0 96px}
+.tn-proc-in{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:24px 48px; padding:52px 56px;
+  color:#fff; background:linear-gradient(100deg,var(--navy) 0%,#1d4c70 100%)}
+.top .tn-proc .sec-head{margin:0}
+.top .tn-proc .sec-head .en{color:var(--gold-l)}
+.top .tn-proc .sec-head h2{color:#fff}
+.tn-proc-f{margin:14px 0 0; font-size:14.5px; color:rgba(255,255,255,.84)}
+.tn-proc-f b{color:var(--gold-l); font-size:18px}
+@media (max-width:1000px){
+  .tn-jump{grid-template-columns:repeat(2,1fr)}
+  .tn-jump li:nth-child(odd) a{border-left:0}
+  .tn-jump li:nth-child(n+3) a{border-top:1px solid var(--line)}
+  .tn-big-in, .tn-big.rev .tn-big-in, .tn-net-in{grid-template-columns:1fr; gap:32px}
+  .tn-big.rev .tn-vis{order:0}
+  .tn3{grid-template-columns:1fr}
+  .tn3 li{padding:26px 0 18px; border-left:0; border-top:1px solid var(--line)}
+  .tn3 li:first-child{border-top:0}
+}
+@media (max-width:760px){
+  .top section.tn-intro{padding:60px 0 24px}
+  .top section.tn-big{padding:60px 0}
+  .tn-panel{padding:26px 24px}
+  .tn-panel .num{font-size:100px}
+  .tn-n{font-size:50px}
+  .cmp thead{display:none}
+  .cmp, .cmp tbody, .cmp tr, .cmp th, .cmp td{display:block; width:auto}
+  .cmp tr{padding:16px 0; border-bottom:1px solid var(--line)}
+  .cmp th, .cmp td{padding:2px 0; border:0}
+  .cmp td::before{content:attr(data-k); display:block; font-size:12px; font-weight:700; color:var(--muted)}
+  .cmp td + td{margin-top:8px}
+  .cmp-cta{padding:24px 20px}
+  .cmp-cta .btn{width:100%}
+  .tn-ph2 figure:nth-child(2){margin-top:32px}
+  .tn-proc-in{padding:36px 24px}
+  .top .tn-proc .sec-head h2{font-size:clamp(19px,5.4vw,24px)}
+  .tn-net-l span{display:block; min-width:0}
+  .cmp-cta .btn{font-size:14px; padding:15px 12px}
+  .tn-proc-in .btn{width:100%}
+  .top section.tn-proc{padding:0 0 60px}
+}
+
 /* ---- 下層ページの見出し（build.py が差し込む） ---- */
 .page-head{padding:44px 0 40px; background:var(--panel); border-bottom:1px solid var(--line-s)}
 .page-head .en{color:var(--blue); font-size:11px; font-weight:700; letter-spacing:.18em; display:block; margin-bottom:8px}
@@ -763,12 +883,14 @@ footer a:hover{color:#fff; text-decoration:underline}
 .trust{animation:rise .7s cubic-bezier(.2,.7,.3,1) .4s both}
 
 /* スクロールで出てくる分だけ、JSがあるとき（.anim）に隠しておく */
-.anim section > .wrap > *:not(.visas):not(.rsn):not(.fcards):not(.stl):not(.why3):not(.vcards):not(.stages):not(.tline):not(.flow):not(.partners):not(.faq-list):not(.ncards):not(.gcards):not(.contact-grid),
+.anim section > .wrap > *:not(.visas):not(.rsn):not(.fcards):not(.stl):not(.why3):not(.tn3):not(.tn-jump):not(.vcards):not(.stages):not(.tline):not(.flow):not(.partners):not(.faq-list):not(.ncards):not(.gcards):not(.contact-grid),
 .anim .visas > *,
 .anim .rsn > *,
 .anim .fcards > *,
 .anim .stl > *,
 .anim .why3 > *,
+.anim .tn3 > *,
+.anim .tn-jump > *,
 .anim .vcards > *,
 .anim .stages > *,
 .anim .tline > *,
@@ -785,12 +907,14 @@ footer a:hover{color:#fff; text-decoration:underline}
 @media (max-width:700px){ .anim .on{animation-name:riseSp} }
 
 @media (prefers-reduced-motion:reduce){
-  .anim section > .wrap > *:not(.visas):not(.rsn):not(.fcards):not(.stl):not(.why3):not(.vcards):not(.stages):not(.tline):not(.flow):not(.partners):not(.faq-list):not(.ncards):not(.gcards):not(.contact-grid),
+  .anim section > .wrap > *:not(.visas):not(.rsn):not(.fcards):not(.stl):not(.why3):not(.tn3):not(.tn-jump):not(.vcards):not(.stages):not(.tline):not(.flow):not(.partners):not(.faq-list):not(.ncards):not(.gcards):not(.contact-grid),
 .anim .visas > *,
 .anim .rsn > *,
 .anim .fcards > *,
 .anim .stl > *,
 .anim .why3 > *,
+.anim .tn3 > *,
+.anim .tn-jump > *,
 .anim .vcards > *,
 .anim .stages > *,
 .anim .tline > *,
@@ -805,12 +929,14 @@ footer a:hover{color:#fff; text-decoration:underline}
   .anim .on, .hero .bg img, .hero-copy .wrap > *, .trust{animation:none}
 }
 @media print{
-  .anim section > .wrap > *:not(.visas):not(.rsn):not(.fcards):not(.stl):not(.why3):not(.vcards):not(.stages):not(.tline):not(.flow):not(.partners):not(.faq-list):not(.ncards):not(.gcards):not(.contact-grid),
+  .anim section > .wrap > *:not(.visas):not(.rsn):not(.fcards):not(.stl):not(.why3):not(.tn3):not(.tn-jump):not(.vcards):not(.stages):not(.tline):not(.flow):not(.partners):not(.faq-list):not(.ncards):not(.gcards):not(.contact-grid),
 .anim .visas > *,
 .anim .rsn > *,
 .anim .fcards > *,
 .anim .stl > *,
 .anim .why3 > *,
+.anim .tn3 > *,
+.anim .tn-jump > *,
 .anim .vcards > *,
 .anim .stages > *,
 .anim .tline > *,
@@ -859,29 +985,20 @@ setTimeout(function(){
   </div>
 </header>
 
-<div class="sub"><div class="crumb"><div class="wrap"><a href="index.html">ホーム</a> ／ ご紹介できる人材</div></div>
-<div class="page-head"><div class="wrap"><span class="en">TALENT</span><h1>ご紹介できる人材<span class="count">5 TYPES</span></h1><p>就労が可能な5つの在留資格に対応。<br>企業さまに合う制度選びからご相談いただけます。<small class="note-s">介護人材のご紹介にも力を入れています。</small></p></div></div>
-<section class="alt" id="visas">
-  <div class="wrap">
-    
-    <div class="visas">
-      <div class="visa" id="v-ginou"><div class="n">01</div><h3>技能実習</h3><p class="sum">自社グループの監理団体を通じてご紹介</p>
-        <p>自社グループの監理団体を通じ、現地で選考した実習生をご紹介します。手続きの代行と、<strong>フィリピン国内での出国手続き</strong>までお手伝いします。</p></div>
-      <div class="visa" id="v-tokutei"><div class="n">02</div><h3>特定技能</h3><p class="sum">受入れ後に必要な支援までお引き受け</p>
-        <p>登録支援機関として、受入れ後に義務づけられた支援も含めてお引き受けします。</p></div>
-      <div class="visa" id="v-ryugaku"><div class="n">03</div><h3>留学生</h3><p class="sum">特定技能への資格変更にも対応</p>
-        <p>資格外活動の許可を得た留学生のご紹介。<strong>特定技能試験に合格した留学生を、特定技能ビザへ資格変更してご紹介する</strong>こともできます。</p></div>
-      <div class="visa" id="v-kodo"><div class="n">04</div><h3>高度人材</h3><p class="sum">職種と勤務内容に合わせてご紹介</p>
-        <p>専門的な知識や技術を持つ人材を、職種と勤務内容に合わせてご紹介します。</p></div>
-      <div class="visa" id="v-nikkei"><div class="n">05</div><h3>日系人・定住者</h3><p class="sum">就労に制限がなく、すぐに働ける</p>
-        <p>就労に制限のない在留資格をお持ちの方のご紹介。すぐに働いていただけます。</p></div>
-    </div>
-    <!-- ★実績の数字（受入企業数・累計紹介人数・対応国籍）は、お客さまから実数が届くまで載せない -->
-    <div class="consult"><p>どの制度が自社に合うか分からない方も、ご相談ください。<small>職種・人数・時期をお伺いし、合う在留資格をご提案します。</small></p><a class="btn" href="contact.html">制度選びから相談する</a></div>
-  </div>
-</section>
-
-</div><div class="cta" id="contact">
+<div class="top sp tn">
+<div class="sp-hero"><div class="sp-hero-t"><div class="sp-crumb"><a href="index.html">ホーム</a> ／ ご紹介できる人材</div><span class="sp-en">GLOBAL TALENT SOLUTIONS</span><p class="sp-k">ご紹介できる人材</p><h1><span>世界の可能性を</span><br><span>企業の新しい力に</span></h1><p class="lead">特定技能、技能実習、高度人材など、幅広い外国人材の採用をサポート。A and K は、企業の事業内容や採用ニーズに合わせた人材との出会いを支援します。</p><a class="btn gold" href="contact.html">人材のご相談をする <span aria-hidden="true">→</span></a></div><figure class="sp-hero-ph"><img src="img/news/20190315-1.jpg" alt="フィリピンの職業訓練庁（TESDA）を訪問したときの様子"><figcaption>2019年 フィリピンの職業訓練庁（TESDA）にて</figcaption></figure></div>
+<div class="sp-reg"><div class="wrap"><span class="en">REGISTERED SUPPORT ORGANIZATION</span><b>登録支援機関　登録番号 19登-000975</b></div></div>
+<section class="tn-intro"><div class="wrap"><div class="sec-head"><span class="en">OUR TALENT</span><h2>企業のニーズに合わせた<br>5つの人材カテゴリー</h2></div><ol class="tn-jump"><li><a href="#v-tokutei"><span>01</span>特定技能</a></li><li><a href="#v-ginou"><span>02</span>技能実習</a></li><li><a href="#v-ryugaku"><span>03</span>留学生</a></li><li><a href="#v-kodo"><span>04</span>高度人材</a></li><li><a href="#v-nikkei"><span>05</span>日系人・定住者</a></li></ol></div></section>
+<section class="tn-big" id="v-tokutei"><div class="wrap tn-big-in"><div class="tn-vis tn-panel" aria-hidden="true"><span class="num">01</span><span class="big">Specified<br><em>Skilled</em> Worker</span><span class="meta">登録支援機関　登録番号 19登-000975</span></div><div class="tn-body"><div class="tn-head"><span class="tn-n">01</span><div><span class="tn-en">SPECIFIED SKILLED WORKER</span><h2>特定技能</h2></div></div><h3 class="tn-catch">現場を支える新たな力を</h3><p>特定技能は、国が定める分野で、一定の技能と日本語の力を持つ外国人材が働くための在留資格です。登録支援機関として、受入れ後に義務づけられた支援も含めてお引き受けします。</p><ul class="checks"><li>受入れ後に義務づけられた支援（10項目）の実施をお引き受け</li><li>特定技能試験に合格した留学生の、特定技能への資格変更にも対応</li><li>介護人材のご紹介にも力を入れています</li></ul><a class="btn line" href="support.html">受入れ後の支援について詳しく見る <span aria-hidden="true">→</span></a></div></div></section>
+<section class="tn-big rev alt" id="v-ginou"><div class="wrap tn-big-in"><figure class="tn-vis"><img src="img/hero-trainees.jpg" alt="提携する送り出し機関での日本語授業の様子" loading="lazy"><figcaption>提携する送り出し機関での日本語授業</figcaption></figure><div class="tn-body"><div class="tn-head"><span class="tn-n">02</span><div><span class="tn-en">TECHNICAL INTERN TRAINING</span><h2>技能実習</h2></div></div><h3 class="tn-catch">人材の育成を通じて未来につなぐ</h3><p>自社グループの監理団体を通じ、現地で選考した実習生をご紹介します。手続きの代行と、<strong>フィリピン国内での出国手続き</strong>までお手伝いします。</p><p class="tn-note"><b>育成就労制度への移行</b><br>技能実習制度は、2027年4月1日から育成就労制度へ移行する予定です。</p><ul class="checks"><li>ブリッジング協同組合<small>（自社グループの監理団体）</small></li><li>フィリピン・ベトナムの送り出し機関と提携</li></ul><a class="btn line" href="partners.html">グループ・提携機関を見る <span aria-hidden="true">→</span></a></div></div></section>
+<section class="tn-more"><div class="wrap"><ul class="tn3"><li id="v-ryugaku"><span class="tn-n">03</span><span class="tn-en">INTERNATIONAL STUDENTS</span><h3>留学生</h3><p class="sum">特定技能への資格変更にも対応</p><p>資格外活動の許可を得た留学生のご紹介。<strong>特定技能試験に合格した留学生を、特定技能ビザへ資格変更してご紹介する</strong>こともできます。</p></li><li id="v-kodo"><span class="tn-n">04</span><span class="tn-en">PROFESSIONAL TALENT</span><h3>高度人材</h3><p class="sum">職種と勤務内容に合わせてご紹介</p><p>専門的な知識や技術を持つ人材を、職種と勤務内容に合わせてご紹介します。</p></li><li id="v-nikkei"><span class="tn-n">05</span><span class="tn-en">RESIDENT TALENT</span><h3>日系人・定住者</h3><p class="sum">就労に制限がなく、すぐに働ける</p><p>就労に制限のない在留資格をお持ちの方のご紹介。すぐに働いていただけます。</p></li></ul></div></section>
+<section class="alt"><div class="wrap"><div class="sec-head"><span class="en">FIND YOUR TALENT</span><h2>企業のニーズに合わせて<br>合う人材を</h2></div><table class="cmp"><thead><tr><th scope="col">人材カテゴリー</th><th scope="col">主な検討シーン</th><th scope="col">A and K の対応</th></tr></thead><tbody><tr><th scope="row"><span>01</span>特定技能</th><td data-k="主な検討シーン">国が定める分野で、一定の技能と日本語の力を持つ人材を採用したい</td><td class="a" data-k="A and K の対応">受入れ後に必要な支援までお引き受け</td></tr><tr><th scope="row"><span>02</span>技能実習</th><td data-k="主な検討シーン">技能の習得を目的とした受入れ（実習）を検討したい</td><td class="a" data-k="A and K の対応">自社グループの監理団体を通じてご紹介</td></tr><tr><th scope="row"><span>03</span>留学生</th><td data-k="主な検討シーン">資格外活動の範囲でのアルバイトや、特定技能への資格変更による採用を検討したい</td><td class="a" data-k="A and K の対応">特定技能への資格変更にも対応</td></tr><tr><th scope="row"><span>04</span>高度人材</th><td data-k="主な検討シーン">専門的な知識や技術を持つ人材を、職種に合わせて採用したい</td><td class="a" data-k="A and K の対応">職種と勤務内容に合わせてご紹介</td></tr><tr><th scope="row"><span>05</span>日系人・定住者</th><td data-k="主な検討シーン">就労に制限のない、国内に住む人材を採用したい</td><td class="a" data-k="A and K の対応">就労に制限がなく、すぐに働ける</td></tr></tbody></table><p class="cmp-note">※実際に採用できる職種や働き方は、在留資格・許可の内容・制度の要件によって異なります。</p><div class="cmp-cta"><div><b>自社に合う制度が分からなくても、ご安心ください。</b><p>採用したい職種・人数・時期などをお伺いし、企業さまの状況に合った人材採用をご提案します。</p></div><a class="btn" href="contact.html">自社に合う人材について相談する <span aria-hidden="true">→</span></a></div></div></section>
+<section class="tn-net"><div class="wrap tn-net-in"><div class="tn-net-t"><div class="sec-head"><span class="en">GLOBAL RECRUITMENT NETWORK</span><h2>世界とつながり<br>人材の可能性を広げる</h2></div><p>グループ内の監理団体と、フィリピン・ベトナムの送り出し機関が連携しています。フィリピンでは、企業さまご自身が現地で面接を行うこともできます。</p><ul class="tn-net-l"><li><span>JAPAN</span>ブリッジング協同組合（自社グループ）</li><li><span>PHILIPPINES</span>プロデンシャルエンプロイメント</li><li><span>VIETNAM</span>POLIMEX 国際人材株式会社</li></ul><a class="txt-link" href="partners.html">海外ネットワークを見る <span aria-hidden="true">→</span></a></div><div class="tn-ph2"><figure><img src="img/news/20200122-1.jpg" alt="ベトナムでの実習生の面接の様子" loading="lazy"><figcaption>2020年 ベトナムでの面接</figcaption></figure><figure><img src="img/news/20191011-1.jpg" alt="フィリピン出張で現地の若者と" loading="lazy"><figcaption>2019年 フィリピン出張にて</figcaption></figure></div></div></section>
+<section class="tn-why"><div class="wrap"><div class="sec-head"><span class="en">WHY A and K</span><h2>人材との出会いから<br>その先の定着まで</h2></div><ul class="why3 light"><li><span class="wn">01</span><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3.5 20c0-3.2 2.5-5.8 5.5-5.8s5.5 2.6 5.5 5.8"/><circle cx="17" cy="9" r="2.4"/><path d="M16.2 14.3c2.6.4 4.3 2.8 4.3 5.7"/></svg></span><h3>幅広い人材への対応</h3><p>特定技能・技能実習・留学生・高度人材・日系人／定住者の5つに対応。合う制度選びからご一緒します。</p></li><li><span class="wn">02</span><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.4 2.5 3.6 5.5 3.6 9s-1.2 6.5-3.6 9c-2.4-2.5-3.6-5.5-3.6-9S9.6 5.5 12 3z"/></svg></span><h3>国内外との連携</h3><p>自社グループの監理団体と、フィリピン・ベトナムの送り出し機関とのネットワークがあります。</p></li><li><span class="wn">03</span><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V8.5L12 4l7 4.5V21M9.5 21v-4.5h5V21M9 11.5h.01M12 11.5h.01M15 11.5h.01"/></svg></span><h3>受入れ後までの支援</h3><p>登録支援機関として、入国前の説明から就労後の定期的な面談まで支援を続けます。</p></li></ul></div></section>
+<section class="tn-proc"><div class="wrap"><div class="tn-proc-in"><div><div class="sec-head"><span class="en">RECRUITMENT PROCESS</span><h2><span>ご相談から採用まで</span><br><span>安心して進められるように</span></h2></div><p class="tn-proc-f">ご相談から就労開始まで <b>約5〜6か月</b>（海外の送り出し機関を通じて採用する場合の目安）</p></div><a class="btn gold" href="flow.html">受入れまでの流れを見る <span aria-hidden="true">→</span></a></div></div></section>
+<section class="faq"><div class="wrap"><div class="sec-head"><span class="en">FAQ</span><h2>よくあるご質問</h2></div><div class="faq-list"><details><summary>外国人材を初めて採用する場合、どの制度が適していますか。</summary><div class="a"><p style="margin:0">職種・人数・時期によって合う制度が変わります。どの制度が合うか分からない段階からご相談ください。お話を伺い、合う在留資格をご提案します。</p></div></details><details><summary>特定技能と技能実習には、どのような違いがありますか。</summary><div class="a"><p style="margin:0">技能実習は、技能の習得を目的とした制度です（2027年4月1日から育成就労制度へ移行する予定です）。特定技能は、国が定める分野で一定の技能と日本語の力を持つ人が働くための在留資格で、受入れ後の支援が義務づけられています。弊社は登録支援機関として、その支援をお引き受けします。</p></div></details><details><summary>どのような職種で外国人材を採用できますか。</summary><div class="a"><p style="margin:0">在留資格ごとに、働ける仕事の範囲が決まっています。ご希望の職種をお伺いして、合う制度をご案内します。介護人材のご紹介にも力を入れています。</p></div></details><details><summary>採用までにどのくらいの期間がかかりますか。</summary><div class="a"><p style="margin:0">海外の送り出し機関を通じて採用する場合、ご相談から就労開始までおおむね5〜6か月が目安です（在留資格によって異なります）。</p></div></details><details><summary>採用後の生活支援も依頼できますか。</summary><div class="a"><p style="margin:0">特定技能の方は、登録支援機関として、住まい探しや生活に必要な契約、生活オリエンテーション、定期的な面談などをお引き受けします。</p></div></details></div><div class="more-r"><a class="txt-link" href="faq.html">すべてのご質問を見る <span aria-hidden="true">→</span></a></div></div></section>
+</div>
+<div class="cta" id="contact">
   <div class="wrap">
     <span class="en">CONTACT</span>
     <h2><span>外国人材の受入れについて</span><br><span>まずはお気軽にご相談ください</span></h2>
@@ -977,7 +1094,7 @@ setTimeout(function(){
 <script>
 (function () {
   // ★ここの並びは <head> の隠す指定と必ず同じにすること
-  var ANIM_SEL = 'section > .wrap > *:not(.visas):not(.rsn):not(.fcards):not(.stl):not(.why3):not(.vcards):not(.stages):not(.tline):not(.flow):not(.partners):not(.faq-list):not(.ncards):not(.gcards):not(.contact-grid),.visas > *,.rsn > *,.fcards > *,.stl > *,.why3 > *,.vcards > *,.stages > *,.tline > *,.flow > *,.partners > *,.faq-list > *,.ncards > *,.gcards > *,.contact-grid > *,.nlist > .wrap > *,.cta > .wrap > *';
+  var ANIM_SEL = 'section > .wrap > *:not(.visas):not(.rsn):not(.fcards):not(.stl):not(.why3):not(.tn3):not(.tn-jump):not(.vcards):not(.stages):not(.tline):not(.flow):not(.partners):not(.faq-list):not(.ncards):not(.gcards):not(.contact-grid),.visas > *,.rsn > *,.fcards > *,.stl > *,.why3 > *,.tn3 > *,.tn-jump > *,.vcards > *,.stages > *,.tline > *,.flow > *,.partners > *,.faq-list > *,.ncards > *,.gcards > *,.contact-grid > *,.nlist > .wrap > *,.cta > .wrap > *';
   var units = [].slice.call(document.querySelectorAll(ANIM_SEL));
 
   function sweep() {

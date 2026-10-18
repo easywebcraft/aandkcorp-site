@@ -52,7 +52,7 @@ NOINDEX = True
 # 出さないため。トップの節見出しには説明文を置かない）。
 PAGES = {
     "service.html":  ("visas",    "人材紹介", "ご紹介できる人材", "TALENT",
-                      "就労が可能な5つの在留資格すべてに対応しています。"),
+                      "企業のニーズに応じた5つの人材カテゴリーに対応しています。"),
     "support.html":  ("support",  "支援内容",       "登録支援機関としての支援", "SUPPORT",
                       "特定技能で義務づけられている支援です。"),
     "flow.html":     ("flow",     "受入れの流れ",   "受入れまでの流れ", "FLOW",
@@ -177,7 +177,7 @@ EXTRA_CSS = """
 #
 # 中身を先に出す箱（カードの並びなど）は、箱ごとではなく中身を1枚ずつ出す。
 # そのため箱自身は :not() で外す。ここも2つの並びで揃える。
-ANIM_BOXES = ["visas", "rsn", "fcards", "stl", "why3", "vcards", "stages", "tline", "flow", "partners",
+ANIM_BOXES = ["visas", "rsn", "fcards", "stl", "why3", "tn3", "tn-jump", "vcards", "stages", "tline", "flow", "partners",
               "faq-list", "ncards", "gcards", "contact-grid"]
 _NOT = "".join(f":not(.{c})" for c in ANIM_BOXES)
 _CHILDREN = ",\n".join(f".anim .{c} > *" for c in ANIM_BOXES)
@@ -613,6 +613,9 @@ def build_plan(out_dir, src_name, key=""):
             shell(head, header, tail, '<div class="sub">' + ph + fix_links(frag) + extra + "</div>",
                   out, ttl), encoding="utf-8")
 
+    # 人材紹介も専用の組み方（2026-10-18 改善案）で上書きする
+    (out_dir / "service.html").write_text(
+        shell(head, header, tail, service_body(secs), "service.html", "ご紹介できる人材"), encoding="utf-8")
     # 支援内容は専用の組み方（2026-10-18 改善案）で上書きする
     (out_dir / "support.html").write_text(
         shell(head, header, tail, support_body(secs), "support.html", "登録支援機関としての支援"), encoding="utf-8")
@@ -742,6 +745,161 @@ def support_body(secs):
             '<div class="more-r"><a class="txt-link" href="faq.html">すべてのご質問を見る <span aria-hidden="true">→</span></a></div>'
             '</div></section>\n')
     return '<div class="top sp">\n' + out + '</div>\n'
+
+
+# ============ 人材紹介ページ（2026-10-18 改善案） ============
+# 5つの人材の名前・一言（.sum）・説明は原本の #visas から取る。ここで足すのは見せ方と、
+# 制度そのものの事実（特定技能・技能実習の目的、育成就労への移行予定）だけ。
+# ★A and K の育成就労への対応、対応できる業種・職種は、お客さまに確認できるまで書かない。
+TN_EN = {"v-tokutei": "SPECIFIED SKILLED WORKER", "v-ginou": "TECHNICAL INTERN TRAINING",
+         "v-ryugaku": "INTERNATIONAL STUDENTS", "v-kodo": "PROFESSIONAL TALENT", "v-nikkei": "RESIDENT TALENT"}
+TN_PHOTO = {"hero": ("img/news/20190315-1.jpg", "フィリピンの職業訓練庁（TESDA）を訪問したときの様子", "2019年 フィリピンの職業訓練庁（TESDA）にて"),
+            "v-ginou": ("img/hero-trainees.jpg", "提携する送り出し機関での日本語授業の様子", "提携する送り出し機関での日本語授業"),
+            "net1": ("img/news/20200122-1.jpg", "ベトナムでの実習生の面接の様子", "2020年 ベトナムでの面接"),
+            "net2": ("img/news/20191011-1.jpg", "フィリピン出張で現地の若者と", "2019年 フィリピン出張にて")}
+# 比較（主な検討シーン）。制度の事実と、原本の説明から書く
+TN_CMP = {
+    "v-tokutei": "国が定める分野で、一定の技能と日本語の力を持つ人材を採用したい",
+    "v-ginou": "技能の習得を目的とした受入れ（実習）を検討したい",
+    "v-ryugaku": "資格外活動の範囲でのアルバイトや、特定技能への資格変更による採用を検討したい",
+    "v-kodo": "専門的な知識や技術を持つ人材を、職種に合わせて採用したい",
+    "v-nikkei": "就労に制限のない、国内に住む人材を採用したい",
+}
+TN_FAQ = [
+    ("外国人材を初めて採用する場合、どの制度が適していますか。",
+     "職種・人数・時期によって合う制度が変わります。どの制度が合うか分からない段階からご相談ください。お話を伺い、合う在留資格をご提案します。"),
+    ("特定技能と技能実習には、どのような違いがありますか。",
+     "技能実習は、技能の習得を目的とした制度です（2027年4月1日から育成就労制度へ移行する予定です）。"
+     "特定技能は、国が定める分野で一定の技能と日本語の力を持つ人が働くための在留資格で、受入れ後の支援が義務づけられています。"
+     "弊社は登録支援機関として、その支援をお引き受けします。"),
+    ("どのような職種で外国人材を採用できますか。",
+     "在留資格ごとに、働ける仕事の範囲が決まっています。ご希望の職種をお伺いして、合う制度をご案内します。介護人材のご紹介にも力を入れています。"),
+    ("採用までにどのくらいの期間がかかりますか。",
+     "海外の送り出し機関を通じて採用する場合、ご相談から就労開始までおおむね5〜6か月が目安です（在留資格によって異なります）。"),
+    ("採用後の生活支援も依頼できますか。",
+     "特定技能の方は、登録支援機関として、住まい探しや生活に必要な契約、生活オリエンテーション、定期的な面談などをお引き受けします。"),
+]
+
+
+def service_body(secs):
+    f = secs["visas"]
+    vs = re.findall(r'<div class="visa" id="([\w-]+)"><div class="n">(.*?)</div><h3>(.*?)</h3>'
+                    r'<p class="sum">(.*?)</p>\s*<p>(.*?)</p></div>', f, re.S)
+    assert [v[0] for v in vs] == ["v-tokutei", "v-ginou", "v-ryugaku", "v-kodo", "v-nikkei"], [v[0] for v in vs]
+    V = {v[0]: v for v in vs}
+    src, alt, cap = TN_PHOTO["hero"]
+    out = ('<div class="sp-hero"><div class="sp-hero-t">'
+           '<div class="sp-crumb"><a href="index.html">ホーム</a> ／ ご紹介できる人材</div>'
+           '<span class="sp-en">GLOBAL TALENT SOLUTIONS</span>'
+           '<p class="sp-k">ご紹介できる人材</p>'
+           '<h1><span>世界の可能性を</span><br><span>企業の新しい力に</span></h1>'
+           '<p class="lead">特定技能、技能実習、高度人材など、幅広い外国人材の採用をサポート。'
+           'A and K は、企業の事業内容や採用ニーズに合わせた人材との出会いを支援します。</p>'
+           '<a class="btn gold" href="contact.html">人材のご相談をする <span aria-hidden="true">→</span></a></div>'
+           f'<figure class="sp-hero-ph"><img src="{src}" alt="{alt}"><figcaption>{cap}</figcaption></figure></div>\n'
+           '<div class="sp-reg"><div class="wrap"><span class="en">REGISTERED SUPPORT ORGANIZATION</span>'
+           '<b>登録支援機関　登録番号 19登-000975</b></div></div>\n')
+
+    jump = "".join(f'<li><a href="#{i}"><span>{n}</span>{t}</a></li>' for i, n, t, _s, _d in vs)
+    out += ('<section class="tn-intro"><div class="wrap">'
+            '<div class="sec-head"><span class="en">OUR TALENT</span><h2>企業のニーズに合わせた<br>5つの人材カテゴリー</h2></div>'
+            f'<ol class="tn-jump">{jump}</ol></div></section>\n')
+
+    def head(v):
+        i, n, t, _s, _d = v
+        return (f'<div class="tn-head"><span class="tn-n">{n}</span><div><span class="tn-en">{TN_EN[i]}</span>'
+                f'<h2>{t}</h2></div></div>')
+
+    # 01 特定技能（紺のパネル）
+    v = V["v-tokutei"]
+    out += ('<section class="tn-big" id="v-tokutei"><div class="wrap tn-big-in">'
+            '<div class="tn-vis tn-panel" aria-hidden="true"><span class="num">01</span>'
+            '<span class="big">Specified<br><em>Skilled</em> Worker</span>'
+            '<span class="meta">登録支援機関　登録番号 19登-000975</span></div>'
+            f'<div class="tn-body">{head(v)}<h3 class="tn-catch">現場を支える新たな力を</h3>'
+            '<p>特定技能は、国が定める分野で、一定の技能と日本語の力を持つ外国人材が働くための在留資格です。'
+            f'{v[4]}</p>'
+            '<ul class="checks"><li>受入れ後に義務づけられた支援（10項目）の実施をお引き受け</li>'
+            '<li>特定技能試験に合格した留学生の、特定技能への資格変更にも対応</li>'
+            '<li>介護人材のご紹介にも力を入れています</li></ul>'
+            '<a class="btn line" href="support.html">受入れ後の支援について詳しく見る <span aria-hidden="true">→</span></a>'
+            '</div></div></section>\n')
+
+    # 02 技能実習（写真）
+    v = V["v-ginou"]
+    src, alt, cap = TN_PHOTO["v-ginou"]
+    out += ('<section class="tn-big rev alt" id="v-ginou"><div class="wrap tn-big-in">'
+            f'<figure class="tn-vis"><img src="{src}" alt="{alt}" loading="lazy"><figcaption>{cap}</figcaption></figure>'
+            f'<div class="tn-body">{head(v)}<h3 class="tn-catch">人材の育成を通じて未来につなぐ</h3>'
+            f'<p>{v[4]}</p>'
+            '<p class="tn-note"><b>育成就労制度への移行</b><br>技能実習制度は、2027年4月1日から育成就労制度へ移行する予定です。</p>'
+            '<ul class="checks"><li>ブリッジング協同組合<small>（自社グループの監理団体）</small></li>'
+            '<li>フィリピン・ベトナムの送り出し機関と提携</li></ul>'
+            '<a class="btn line" href="partners.html">グループ・提携機関を見る <span aria-hidden="true">→</span></a>'
+            '</div></div></section>\n')
+
+    # 03〜05
+    li = ""
+    for i in ("v-ryugaku", "v-kodo", "v-nikkei"):
+        _i, n, t, sm, d = V[i]
+        li += (f'<li id="{i}"><span class="tn-n">{n}</span><span class="tn-en">{TN_EN[i]}</span><h3>{t}</h3>'
+               f'<p class="sum">{sm}</p><p>{d}</p></li>')
+    out += f'<section class="tn-more"><div class="wrap"><ul class="tn3">{li}</ul></div></section>\n'
+
+    # 比較
+    rows = "".join(f'<tr><th scope="row"><span>{n}</span>{t}</th><td data-k="主な検討シーン">{TN_CMP[i]}</td>'
+                   f'<td class="a" data-k="A and K の対応">{sm}</td></tr>' for i, n, t, sm, _d in vs)
+    out += ('<section class="alt"><div class="wrap">'
+            '<div class="sec-head"><span class="en">FIND YOUR TALENT</span><h2>企業のニーズに合わせて<br>合う人材を</h2></div>'
+            '<table class="cmp"><thead><tr><th scope="col">人材カテゴリー</th><th scope="col">主な検討シーン</th>'
+            f'<th scope="col">A and K の対応</th></tr></thead><tbody>{rows}</tbody></table>'
+            '<p class="cmp-note">※実際に採用できる職種や働き方は、在留資格・許可の内容・制度の要件によって異なります。</p>'
+            '<div class="cmp-cta"><div><b>自社に合う制度が分からなくても、ご安心ください。</b>'
+            '<p>採用したい職種・人数・時期などをお伺いし、企業さまの状況に合った人材採用をご提案します。</p></div>'
+            '<a class="btn" href="contact.html">自社に合う人材について相談する <span aria-hidden="true">→</span></a></div>'
+            '</div></section>\n')
+
+    # GLOBAL RECRUITMENT NETWORK
+    p1, p2 = TN_PHOTO["net1"], TN_PHOTO["net2"]
+    out += ('<section class="tn-net"><div class="wrap tn-net-in"><div class="tn-net-t">'
+            '<div class="sec-head"><span class="en">GLOBAL RECRUITMENT NETWORK</span><h2>世界とつながり<br>人材の可能性を広げる</h2></div>'
+            '<p>グループ内の監理団体と、フィリピン・ベトナムの送り出し機関が連携しています。'
+            'フィリピンでは、企業さまご自身が現地で面接を行うこともできます。</p>'
+            '<ul class="tn-net-l"><li><span>JAPAN</span>ブリッジング協同組合（自社グループ）</li>'
+            '<li><span>PHILIPPINES</span>プロデンシャルエンプロイメント</li>'
+            '<li><span>VIETNAM</span>POLIMEX 国際人材株式会社</li></ul>'
+            '<a class="txt-link" href="partners.html">海外ネットワークを見る <span aria-hidden="true">→</span></a></div>'
+            f'<div class="tn-ph2"><figure><img src="{p1[0]}" alt="{p1[1]}" loading="lazy"><figcaption>{p1[2]}</figcaption></figure>'
+            f'<figure><img src="{p2[0]}" alt="{p2[1]}" loading="lazy"><figcaption>{p2[2]}</figcaption></figure></div>'
+            '</div></section>\n')
+
+    # WHY A and K
+    out += ('<section class="tn-why"><div class="wrap">'
+            '<div class="sec-head"><span class="en">WHY A and K</span><h2>人材との出会いから<br>その先の定着まで</h2></div>'
+            '<ul class="why3 light">'
+            f'<li><span class="wn">01</span><span class="ic" aria-hidden="true">{WHY_ICON["one"]}</span><h3>幅広い人材への対応</h3>'
+            '<p>特定技能・技能実習・留学生・高度人材・日系人／定住者の5つに対応。合う制度選びからご一緒します。</p></li>'
+            f'<li><span class="wn">02</span><span class="ic" aria-hidden="true">{WHY_ICON["net"]}</span><h3>国内外との連携</h3>'
+            '<p>自社グループの監理団体と、フィリピン・ベトナムの送り出し機関とのネットワークがあります。</p></li>'
+            f'<li><span class="wn">03</span><span class="ic" aria-hidden="true">{WHY_ICON["local"]}</span><h3>受入れ後までの支援</h3>'
+            '<p>登録支援機関として、入国前の説明から就労後の定期的な面談まで支援を続けます。</p></li>'
+            '</ul></div></section>\n')
+
+    # 流れへの導線
+    out += ('<section class="tn-proc"><div class="wrap"><div class="tn-proc-in"><div>'
+            '<div class="sec-head"><span class="en">RECRUITMENT PROCESS</span><h2><span>ご相談から採用まで</span><br><span>安心して進められるように</span></h2></div>'
+            '<p class="tn-proc-f">ご相談から就労開始まで <b>約5〜6か月</b>（海外の送り出し機関を通じて採用する場合の目安）</p></div>'
+            '<a class="btn gold" href="flow.html">受入れまでの流れを見る <span aria-hidden="true">→</span></a>'
+            '</div></div></section>\n')
+
+    qs = "".join(f'<details><summary>{q}</summary><div class="a"><p style="margin:0">{a}</p></div></details>'
+                 for q, a in TN_FAQ)
+    out += ('<section class="faq"><div class="wrap">'
+            '<div class="sec-head"><span class="en">FAQ</span><h2>よくあるご質問</h2></div>'
+            f'<div class="faq-list">{qs}</div>'
+            '<div class="more-r"><a class="txt-link" href="faq.html">すべてのご質問を見る <span aria-hidden="true">→</span></a></div>'
+            '</div></section>\n')
+    return '<div class="top sp tn">\n' + out + '</div>\n'
 
 
 def group_section():

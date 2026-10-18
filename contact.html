@@ -651,6 +651,126 @@ footer a:hover{color:#fff; text-decoration:underline}
   .sp-reg .wrap::before, .sp-reg .wrap::after{display:none}
 }
 
+/* ===== 人材紹介ページ（2026-10-18 改善案。build.py の service_body が組む） =====
+   FV → 登録番号の帯 → OUR TALENT（目次）→ 01 特定技能・02 技能実習（大きく）→ 03〜05（3列）
+   → 比較 → GLOBAL RECRUITMENT NETWORK → WHY → 流れへの導線 → FAQ。
+   現場の写真が無いので、01 は紺のパネル（英字と登録番号）で見せる。 */
+.top section.tn-intro{padding:96px 0 40px}
+.tn-jump{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(5,1fr); border-top:1px solid var(--line); border-bottom:1px solid var(--line)}
+.tn-jump a{display:flex; align-items:baseline; gap:10px; height:100%; padding:18px 18px; border-left:1px solid var(--line);
+  text-decoration:none; color:var(--ink); font-weight:700; font-size:15px; transition:background-color .2s}
+.tn-jump li:first-child a{border-left:0}
+.tn-jump a span{font-family:var(--en); font-weight:500; font-size:22px; color:var(--gold)}
+.tn-jump a:hover{background:var(--blue-s)}
+.top section.tn-big{padding:88px 0; scroll-margin-top:76px}
+.tn-big-in{display:grid; grid-template-columns:55fr 45fr; gap:64px; align-items:center}
+.tn-big.rev .tn-big-in{grid-template-columns:45fr 55fr}
+.tn-big.rev .tn-vis{order:2}
+.tn-vis{position:relative; margin:0}
+.tn-vis img{width:100%; aspect-ratio:16/10; object-fit:cover; filter:saturate(.9)}
+.tn-vis figcaption{margin-top:10px; font-size:12.5px; color:var(--muted)}
+.tn-panel{position:relative; overflow:hidden; aspect-ratio:16/10; display:flex; flex-direction:column; justify-content:flex-end;
+  padding:40px 44px; color:#fff; background:radial-gradient(ellipse 80% 80% at 20% 25%,#1b4468 0%,var(--navy) 65%)}
+.tn-panel .num{position:absolute; top:18px; right:30px; font-family:var(--en); font-weight:500; font-size:150px; line-height:1; color:rgba(182,154,104,.22)}
+.tn-panel .big{position:relative; font-family:var(--en); font-weight:500; font-size:clamp(34px,4vw,56px); line-height:1.05}
+.tn-panel .big em{font-style:italic; color:var(--gold-l)}
+.tn-panel .meta{position:relative; margin-top:22px; padding-top:16px; border-top:1px solid rgba(255,255,255,.2); font-size:14px; color:rgba(255,255,255,.86)}
+.tn-head{display:flex; align-items:flex-end; gap:18px}
+.tn-n{font-family:var(--en); font-weight:500; font-size:64px; line-height:.9; color:var(--gold)}
+.tn-en{display:block; font-family:var(--en); font-weight:600; font-size:13px; letter-spacing:.2em; color:var(--muted)}
+.tn-head h2{margin:4px 0 0; font-size:clamp(26px,2.8vw,34px); line-height:1.3; color:var(--ink); letter-spacing:.06em}
+.tn-catch{margin:24px 0 14px; font-size:clamp(18px,1.8vw,21px); line-height:1.6; color:var(--navy)}
+.tn-body p{margin:0 0 14px; font-size:15px; line-height:2}
+.tn-body .checks{margin:4px 0 24px}
+.tn-note{margin:0 0 22px; padding:14px 18px; background:var(--panel); border-left:3px solid var(--gold); font-size:14px; line-height:1.8}
+.top section.tn-big.alt .tn-note{background:#fff}
+.tn-note b{color:var(--ink)}
+.btn.line{background:transparent; color:var(--navy); border:1px solid var(--navy); padding:12px 24px; font-size:14px}
+.btn.line:hover{background:var(--navy); color:#fff}
+.tn3{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid var(--line)}
+.tn3 li{padding:34px 34px 8px; border-left:1px solid var(--line); scroll-margin-top:96px}
+.tn3 li:first-child{padding-left:0; border-left:0}
+.tn3 .tn-n{font-size:46px}
+.tn3 .tn-en{margin-top:12px}
+.tn3 h3{margin:4px 0 8px; font-size:21px; color:var(--ink)}
+.tn3 .sum{margin:0 0 10px; font-size:14.5px; font-weight:700; color:var(--blue)}
+.tn3 p{margin:0; font-size:14.5px; line-height:1.95}
+.cmp{width:100%; border-collapse:collapse; font-size:14.5px}
+.cmp th, .cmp td{padding:18px 20px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; line-height:1.8}
+.cmp thead th{background:var(--navy); color:#fff; font-size:13px; letter-spacing:.06em; border-bottom:0}
+.cmp thead th:first-child{width:24%}
+.cmp tbody th{font-size:16px; color:var(--ink); white-space:nowrap}
+.cmp tbody th span{margin-right:10px; font-family:var(--en); font-weight:500; font-size:22px; color:var(--gold)}
+.cmp td.a{font-weight:700; color:var(--navy)}
+.cmp-note{margin:14px 0 0; font-size:13px; color:var(--muted)}
+.cmp-cta{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:20px 40px; margin-top:40px;
+  padding:30px 36px; background:#fff; border-left:3px solid var(--gold)}
+.cmp-cta b{display:block; font-size:18px; color:var(--ink)}
+.cmp-cta p{margin:6px 0 0; font-size:14.5px}
+.top section.tn-net{background:radial-gradient(ellipse 70% 80% at 25% 40%,#1b4468 0%,var(--navy) 60%); color:#fff}
+.tn-net-in{display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center}
+.top .tn-net .sec-head .en{color:var(--gold-l)}
+.top .tn-net .sec-head h2{color:#fff}
+.tn-net-t p{margin:0 0 16px; font-size:15px; line-height:2; color:rgba(255,255,255,.86)}
+.tn-net-l{list-style:none; margin:8px 0 24px; padding:0}
+.tn-net-l li{padding:12px 0; border-top:1px solid rgba(255,255,255,.14); font-size:15px}
+.tn-net-l span{display:inline-block; min-width:9.5em; font-family:var(--en); font-weight:600; font-size:13px; letter-spacing:.2em; color:var(--gold-l)}
+.top .tn-net .txt-link{color:var(--gold-l)}
+.tn-ph2{position:relative; display:grid; grid-template-columns:1fr 1fr; gap:24px}
+.tn-ph2::before{content:""; position:absolute; left:50%; top:-28px; bottom:-28px; width:1px; background:var(--gold); opacity:.7}
+.tn-ph2 figure{position:relative; margin:0}
+.tn-ph2 figure:nth-child(2){margin-top:56px}
+.tn-ph2 img{width:100%; aspect-ratio:4/3; object-fit:cover; filter:saturate(.85)}
+.tn-ph2 figcaption{margin-top:8px; font-size:12.5px; color:rgba(255,255,255,.75)}
+.tn-why .sec-head{text-align:center}
+.top .tn-why .sec-head .en{justify-content:center}
+.why3.light{border-top-color:var(--line)}
+.why3.light li{border-left-color:var(--line)}
+.why3.light .ic{border-color:var(--blue-line); color:var(--navy)}
+.why3.light h3{color:var(--ink)}
+.why3.light p{color:var(--text)}
+.why3 .wn{display:block; margin-bottom:14px; font-family:var(--en); font-weight:500; font-size:36px; line-height:1; color:var(--gold)}
+.top section.tn-proc{padding:0 0 96px}
+.tn-proc-in{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:24px 48px; padding:52px 56px;
+  color:#fff; background:linear-gradient(100deg,var(--navy) 0%,#1d4c70 100%)}
+.top .tn-proc .sec-head{margin:0}
+.top .tn-proc .sec-head .en{color:var(--gold-l)}
+.top .tn-proc .sec-head h2{color:#fff}
+.tn-proc-f{margin:14px 0 0; font-size:14.5px; color:rgba(255,255,255,.84)}
+.tn-proc-f b{color:var(--gold-l); font-size:18px}
+@media (max-width:1000px){
+  .tn-jump{grid-template-columns:repeat(2,1fr)}
+  .tn-jump li:nth-child(odd) a{border-left:0}
+  .tn-jump li:nth-child(n+3) a{border-top:1px solid var(--line)}
+  .tn-big-in, .tn-big.rev .tn-big-in, .tn-net-in{grid-template-columns:1fr; gap:32px}
+  .tn-big.rev .tn-vis{order:0}
+  .tn3{grid-template-columns:1fr}
+  .tn3 li{padding:26px 0 18px; border-left:0; border-top:1px solid var(--line)}
+  .tn3 li:first-child{border-top:0}
+}
+@media (max-width:760px){
+  .top section.tn-intro{padding:60px 0 24px}
+  .top section.tn-big{padding:60px 0}
+  .tn-panel{padding:26px 24px}
+  .tn-panel .num{font-size:100px}
+  .tn-n{font-size:50px}
+  .cmp thead{display:none}
+  .cmp, .cmp tbody, .cmp tr, .cmp th, .cmp td{display:block; width:auto}
+  .cmp tr{padding:16px 0; border-bottom:1px solid var(--line)}
+  .cmp th, .cmp td{padding:2px 0; border:0}
+  .cmp td::before{content:attr(data-k); display:block; font-size:12px; font-weight:700; color:var(--muted)}
+  .cmp td + td{margin-top:8px}
+  .cmp-cta{padding:24px 20px}
+  .cmp-cta .btn{width:100%}
+  .tn-ph2 figure:nth-child(2){margin-top:32px}
+  .tn-proc-in{padding:36px 24px}
+  .top .tn-proc .sec-head h2{font-size:clamp(19px,5.4vw,24px)}
+  .tn-net-l span{display:block; min-width:0}
+  .cmp-cta .btn{font-size:14px; padding:15px 12px}
+  .tn-proc-in .btn{width:100%}
+  .top section.tn-proc{padding:0 0 60px}
+}
+
 /* ---- 下層ページの見出し（build.py が差し込む） ---- */
 .page-head{padding:44px 0 40px; background:var(--panel); border-bottom:1px solid var(--line-s)}
 .page-head .en{color:var(--blue); font-size:11px; font-weight:700; letter-spacing:.18em; display:block; margin-bottom:8px}
@@ -763,12 +883,14 @@ footer a:hover{color:#fff; text-decoration:underline}
 .trust{animation:rise .7s cubic-bezier(.2,.7,.3,1) .4s both}
 
 /* スクロールで出てくる分だけ、JSがあるとき（.anim）に隠しておく */
-.anim section > .wrap > *:not(.visas):not(.rsn):not(.fcards):not(.stl):not(.why3):not(.vcards):not(.stages):not(.tline):not(.flow):not(.partners):not(.faq-list):not(.ncards):not(.gcards):not(.contact-grid),
+.anim section > .wrap > *:not(.visas):not(.rsn):not(.fcards):not(.stl):not(.why3):not(.tn3):not(.tn-jump):not(.vcards):not(.stages):not(.tline):not(.flow):not(.partners):not(.faq-list):not(.ncards):not(.gcards):not(.contact-grid),
 .anim .visas > *,
 .anim .rsn > *,
 .anim .fcards > *,
 .anim .stl > *,
 .anim .why3 > *,
+.anim .tn3 > *,
+.anim .tn-jump > *,
 .anim .vcards > *,
 .anim .stages > *,
 .anim .tline > *,
@@ -785,12 +907,14 @@ footer a:hover{color:#fff; text-decoration:underline}
 @media (max-width:700px){ .anim .on{animation-name:riseSp} }
 
 @media (prefers-reduced-motion:reduce){
-  .anim section > .wrap > *:not(.visas):not(.rsn):not(.fcards):not(.stl):not(.why3):not(.vcards):not(.stages):not(.tline):not(.flow):not(.partners):not(.faq-list):not(.ncards):not(.gcards):not(.contact-grid),
+  .anim section > .wrap > *:not(.visas):not(.rsn):not(.fcards):not(.stl):not(.why3):not(.tn3):not(.tn-jump):not(.vcards):not(.stages):not(.tline):not(.flow):not(.partners):not(.faq-list):not(.ncards):not(.gcards):not(.contact-grid),
 .anim .visas > *,
 .anim .rsn > *,
 .anim .fcards > *,
 .anim .stl > *,
 .anim .why3 > *,
+.anim .tn3 > *,
+.anim .tn-jump > *,
 .anim .vcards > *,
 .anim .stages > *,
 .anim .tline > *,
@@ -805,12 +929,14 @@ footer a:hover{color:#fff; text-decoration:underline}
   .anim .on, .hero .bg img, .hero-copy .wrap > *, .trust{animation:none}
 }
 @media print{
-  .anim section > .wrap > *:not(.visas):not(.rsn):not(.fcards):not(.stl):not(.why3):not(.vcards):not(.stages):not(.tline):not(.flow):not(.partners):not(.faq-list):not(.ncards):not(.gcards):not(.contact-grid),
+  .anim section > .wrap > *:not(.visas):not(.rsn):not(.fcards):not(.stl):not(.why3):not(.tn3):not(.tn-jump):not(.vcards):not(.stages):not(.tline):not(.flow):not(.partners):not(.faq-list):not(.ncards):not(.gcards):not(.contact-grid),
 .anim .visas > *,
 .anim .rsn > *,
 .anim .fcards > *,
 .anim .stl > *,
 .anim .why3 > *,
+.anim .tn3 > *,
+.anim .tn-jump > *,
 .anim .vcards > *,
 .anim .stages > *,
 .anim .tline > *,
@@ -945,7 +1071,7 @@ setTimeout(function(){
 <script>
 (function () {
   // ★ここの並びは <head> の隠す指定と必ず同じにすること
-  var ANIM_SEL = 'section > .wrap > *:not(.visas):not(.rsn):not(.fcards):not(.stl):not(.why3):not(.vcards):not(.stages):not(.tline):not(.flow):not(.partners):not(.faq-list):not(.ncards):not(.gcards):not(.contact-grid),.visas > *,.rsn > *,.fcards > *,.stl > *,.why3 > *,.vcards > *,.stages > *,.tline > *,.flow > *,.partners > *,.faq-list > *,.ncards > *,.gcards > *,.contact-grid > *,.nlist > .wrap > *,.cta > .wrap > *';
+  var ANIM_SEL = 'section > .wrap > *:not(.visas):not(.rsn):not(.fcards):not(.stl):not(.why3):not(.tn3):not(.tn-jump):not(.vcards):not(.stages):not(.tline):not(.flow):not(.partners):not(.faq-list):not(.ncards):not(.gcards):not(.contact-grid),.visas > *,.rsn > *,.fcards > *,.stl > *,.why3 > *,.tn3 > *,.tn-jump > *,.vcards > *,.stages > *,.tline > *,.flow > *,.partners > *,.faq-list > *,.ncards > *,.gcards > *,.contact-grid > *,.nlist > .wrap > *,.cta > .wrap > *';
   var units = [].slice.call(document.querySelectorAll(ANIM_SEL));
 
   function sweep() {
