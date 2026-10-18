@@ -996,6 +996,76 @@ footer a:hover{color:#fff; text-decoration:underline}
   .cp-acc > div{padding:22px 20px; flex-direction:column; gap:10px}
 }
 
+/* ===== サイト全体の動き（2026-10-18 松本さん「HP全体的に動きがでるようにしてほしい」） =====
+   法人サイトなので控えめに。・FV：文字が順に浮かぶ／写真がゆっくり引く／スクロールで写真が少し遅れて動く
+   ・スクロールで見えたとき：写真が左から現れる／見出しの金の線が伸びる／金の番号がふわっと出る／年表の線と点が伸びる
+   ・押せるものだけ：カードが浮く、ボタンの矢印が伸びる（押せないものは動かさない）
+   ★隠す指定は html.fx（下の JS が付ける）のときだけ。JS が動かなければ全部ふつうに見える。
+   ★「動きを減らす」設定では何も動かさない。 */
+.sp-hero{overflow:hidden}
+.sp-hero-ph{overflow:hidden}
+.sp-hero-ph img, .pn-collage img{top:-6%; bottom:-6%; height:auto}
+.hero .bg{top:-6%; bottom:-6%}
+header{transition:box-shadow .3s}
+header.scrolled{box-shadow:0 6px 24px rgba(16,42,67,.08)}
+.pn-tl{position:relative; border-left:0}
+.pn-tl::before{content:""; position:absolute; left:0; top:0; bottom:0; width:1px; background:var(--gold); transform-origin:top}
+@media (prefers-reduced-motion:no-preference){
+  /* FV（下層）：文字を順に、写真はゆっくり引く */
+  @keyframes fxRise{from{opacity:0; transform:translateY(16px)} to{opacity:1; transform:none}}
+  @keyframes fxZoom{from{scale:1.12} to{scale:1}}
+  .sp-hero-t > *{animation:fxRise .8s cubic-bezier(.2,.7,.3,1) both}
+  .sp-hero-t > :nth-child(2){animation-delay:.1s}
+  .sp-hero-t > :nth-child(3){animation-delay:.18s}
+  .sp-hero-t > :nth-child(4){animation-delay:.28s}
+  .sp-hero-t > :nth-child(5){animation-delay:.4s}
+  .sp-hero-t > :nth-child(6){animation-delay:.52s}
+  .sp-hero-ph img, .pn-collage img{animation:fxZoom 9s cubic-bezier(.16,.6,.3,1) both}
+  .sp-reg, .sp-hero + .trust{animation:fxRise .8s cubic-bezier(.2,.7,.3,1) .45s both}
+  .sp-hero-ph img, .pn-collage img, .hero .bg img{translate:0 var(--py,0px)}
+  .cp-nav{animation:fxRise .8s cubic-bezier(.2,.7,.3,1) .5s both}
+
+  /* 写真が左から現れる */
+  .fx :is(.tn-vis > img, .tn-vis figure > img, .sp-ph img, .fl-ph img, .fcards figure, .ncards figure, .pn-sub figure, .cp-gb figure, .tn-ph2 figure, .tn-panel, .fl-big){
+    clip-path:inset(0 100% 0 0); transition:clip-path 1.1s cubic-bezier(.7,0,.2,1)}
+  .fx :is(.tn-vis > img, .tn-vis figure > img, .sp-ph img, .fl-ph img, .fcards figure, .ncards figure, .pn-sub figure, .cp-gb figure, .tn-ph2 figure, .tn-panel, .fl-big).in{clip-path:inset(0)}
+
+  /* 見出しの金の線が伸びる */
+  .fx .top .sec-head .en::before{transform:scaleX(0); transform-origin:left center; transition:transform .9s cubic-bezier(.2,.7,.3,1) .15s}
+  .fx .top .tn-why .sec-head .en::before{transform-origin:center}
+  .fx .top .sec-head.in .en::before{transform:none}
+
+  /* 金の番号がふわっと出る */
+  .fx :is(.stl-n, .rs-n, .tn-n, .sp-step-n b, .si-n, .wn, .pn-flow .n, .tl .dot, .stage-n, .vcard .n, .tn-panel .num){
+    opacity:0; transform:translateY(12px) scale(.92); transition:opacity .7s ease, transform .8s cubic-bezier(.2,.7,.3,1)}
+  .fx :is(.stl-n, .rs-n, .tn-n, .sp-step-n b, .si-n, .wn, .pn-flow .n, .tl .dot, .stage-n, .vcard .n, .tn-panel .num).in{opacity:1; transform:none}
+  .fx .tn-panel .num.in{opacity:1}
+
+  /* 年表：線が上から伸び、点と文が順に出る */
+  .fx .pn-tl::before{transform:scaleY(0); transition:transform 1.6s cubic-bezier(.2,.7,.3,1)}
+  .fx .pn-tl.in::before{transform:none}
+  .fx .pn-tl li{opacity:0; transform:translateX(-10px); transition:opacity .6s ease, transform .7s cubic-bezier(.2,.7,.3,1)}
+  .fx .pn-tl li::before{transform:scale(0); transition:transform .5s cubic-bezier(.3,1.6,.5,1) .15s}
+  .fx .pn-tl li.in{opacity:1; transform:none}
+  .fx .pn-tl li.in::before{transform:none}
+
+  /* 押せるものだけ：浮く・矢印が伸びる */
+  .btn{transition:background-color .2s, border-color .2s, color .2s, transform .25s, box-shadow .25s}
+  .btn:hover{transform:translateY(-2px); box-shadow:0 10px 22px rgba(16,42,67,.16)}
+  .btn span, .btn i{display:inline-block; transition:transform .25s}
+  .btn:hover span, .btn:hover i{transform:translateX(4px)}
+  .fcards a, .ncards a, .top a.vcard, .stl a, .fl-ov a, .cw{transition:transform .3s cubic-bezier(.2,.7,.3,1), box-shadow .3s, border-color .2s, background-color .2s}
+  .fcards a:hover, .ncards a:hover, .top a.vcard:hover, .cw:hover{transform:translateY(-4px)}
+  .stl a:hover .stl-n, .fl-ov a:hover .stl-n, .fx .stl a:hover .stl-n.in, .fx .fl-ov a:hover .stl-n.in{transform:scale(1.08)}
+  .stl-n{transition:transform .3s cubic-bezier(.3,1.6,.5,1)}
+  .fcards img, .ncards img{transition:transform .8s cubic-bezier(.2,.7,.3,1)}
+  .fcards a:hover img, .ncards a:hover img{transform:scale(1.05)}
+
+  /* お問い合わせ欄：背景の光がゆっくり動く */
+  @keyframes fxGlow{from{transform:translateX(-12%)} to{transform:translateX(12%)}}
+  .cta::before{animation:fxGlow 14s ease-in-out infinite alternate}
+}
+
 /* ---- 下層ページの見出し（build.py が差し込む） ---- */
 .page-head{padding:44px 0 40px; background:var(--panel); border-bottom:1px solid var(--line-s)}
 .page-head .en{color:var(--blue); font-size:11px; font-weight:700; letter-spacing:.18em; display:block; margin-bottom:8px}
@@ -1451,6 +1521,57 @@ setTimeout(function(){
     if (!nav.contains(e.target) && e.target !== btn) setOpen(false);
   });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setOpen(false); });
+})();
+</script>
+<script>
+// サイト全体の動き（2026-10-18）。見えたら .in を付ける／FVの写真を少し遅れて動かす／ヘッダーに影
+(function () {
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var head = document.querySelector('header');
+  var heroImgs = [].slice.call(document.querySelectorAll('.sp-hero-ph img, .pn-collage img, .hero .bg img'));
+  var ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () {
+      ticking = false;
+      var y = window.scrollY || 0;
+      if (head) head.classList.toggle('scrolled', y > 8);
+      if (!reduce && y < 1200) {
+        heroImgs.forEach(function (im) { im.style.setProperty('--py', (y * 0.12).toFixed(1) + 'px'); });
+      }
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  if (reduce || !('IntersectionObserver' in window)) return;   // 動かさない（隠しもしない）
+
+  var SEL = ['.tn-vis > img', '.tn-vis figure > img', '.sp-ph img', '.fl-ph img', '.fcards figure', '.ncards figure',
+             '.pn-sub figure', '.cp-gb figure', '.tn-ph2 figure', '.tn-panel', '.fl-big', '.top .sec-head',
+             '.stl-n', '.rs-n', '.tn-n', '.sp-step-n b', '.si-n', '.wn', '.pn-flow .n', '.tl .dot', '.stage-n',
+             '.vcard .n', '.tn-panel .num', '.pn-tl', '.pn-tl li'].join(',');
+  var els = [].slice.call(document.querySelectorAll(SEL));
+  document.documentElement.classList.add('fx');
+  var io = new IntersectionObserver(function (ents) {
+    ents.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      var el = e.target;
+      // 並んでいるもの（年表の行・番号）は少しずつずらす
+      var sib = el.parentElement ? [].indexOf.call(el.parentElement.children, el) : 0;
+      if (el.matches('.pn-tl li')) el.style.transitionDelay = (sib * 0.09) + 's';
+      el.classList.add('in');
+      (owner.get(el) || []).forEach(function (k) { k.classList.add('in'); });
+      io.unobserve(el);
+    });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+  // ★写真・パネルは最初に clip-path で全部隠しているため、それ自体は「見えた」と判定されない。親で判定する
+  var WIPE = '.tn-vis > img,.tn-vis figure > img,.sp-ph img,.fl-ph img,.fcards figure,.ncards figure,.pn-sub figure,.cp-gb figure,.tn-ph2 figure,.tn-panel,.fl-big';
+  var owner = new Map();
+  els.forEach(function (el) {
+    var t = el.matches(WIPE) && el.parentElement ? el.parentElement : el;
+    if (t !== el) { (owner.get(t) || owner.set(t, []).get(t)).push(el); }
+    io.observe(t);
+  });
 })();
 </script>
 </body>
