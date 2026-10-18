@@ -100,8 +100,8 @@ header{position:sticky; top:0; z-index:70; background:#fff; border-bottom:1px so
                              rgba(16,42,67,.18) 80%,rgba(16,42,67,.04) 100%)}
 .hero-copy{position:relative; z-index:2; display:flex; align-items:center; min-height:inherit; padding:64px 0 88px}
 .hero-copy .wrap{width:100%}
-.hero-en{display:flex; align-items:center; gap:16px; margin:0 0 26px; font-family:var(--en); font-weight:600;
-  font-size:clamp(14px,1.25vw,16px); letter-spacing:.26em; color:var(--gold-l); line-height:1.5}
+.hero-en{display:flex; align-items:center; gap:16px; margin:0 0 22px; font-weight:700;
+  font-size:clamp(15px,1.5vw,19px); letter-spacing:.14em; color:var(--gold-l); line-height:1.5}
 .hero-en::before{content:""; flex:none; width:44px; height:1px; background:var(--gold)}
 .hero-copy h1{font-size:clamp(34px,4.5vw,60px); font-weight:700; line-height:1.42; margin:0 0 26px;
   letter-spacing:.06em; color:#fff}
@@ -141,7 +141,7 @@ header{position:sticky; top:0; z-index:70; background:#fff; border-bottom:1px so
 .tc .ic{border-color:rgba(182,154,104,.55); background:transparent; color:var(--gold-l)}
 .tc-body{display:flex; flex-direction:column; min-width:0}
 .tc-en{font-family:var(--en); font-size:13px; font-weight:600; letter-spacing:.22em; color:var(--gold-l); line-height:1.3}
-.tc-k{font-size:12.5px; color:rgba(255,255,255,.72); margin-top:4px}
+.tc-k{font-size:13px; color:rgba(255,255,255,.8); margin-top:4px}
 .tc b{font-size:17px; font-weight:700; color:#fff; line-height:1.5}
 
 /* ---- 節 ---- */
@@ -163,7 +163,7 @@ section.alt{background:var(--panel); border-top:1px solid var(--line-s); border-
 
 /* ---- ご紹介できる人材（下層：詳しいカード） ---- */
 .visas{display:grid; grid-template-columns:repeat(6,1fr); gap:24px 28px}
-.visa{grid-column:span 2; display:grid; grid-template-rows:auto auto auto 1fr; background:#fff;
+.visa{scroll-margin-top:96px; grid-column:span 2; display:grid; grid-template-rows:auto auto auto 1fr; background:#fff;
   border:1px solid var(--line); padding:28px 28px 30px; border-radius:6px}
 .visa:nth-child(4){grid-column:2 / span 2}
 .visa .n{display:flex; align-items:center; gap:12px; font-size:12px; font-weight:700; letter-spacing:.06em; color:var(--blue-dd)}
@@ -417,7 +417,7 @@ footer a:hover{color:#fff; text-decoration:underline}
    並び：FV → 信頼の帯 → INTRODUCTION → 3つの強み → GLOBAL NETWORK → 人材 → 支援 → 流れ
          → ABOUT US → お知らせ → お問い合わせ。数字・実績は今あるものだけを使う。
    トップの節は build.py が <div class="top"> で包む。下層には効かない。 */
-.top section{padding:120px 0}
+.top section{padding:104px 0}
 .top section.alt{background:var(--panel); border:0}
 .top .sec-head{border-left:0; padding-left:0; margin-bottom:56px}
 .top .sec-head .en{display:flex; align-items:center; gap:14px; font-family:var(--en); font-weight:600;
@@ -429,36 +429,33 @@ footer a:hover{color:#fff; text-decoration:underline}
 .top .txt-link{color:var(--blue)}
 .top .txt-link.light{color:#fff}
 
-/* INTRODUCTION：大きな英字と本文 */
-.intro-grid{display:grid; grid-template-columns:1fr 1.05fr; gap:72px; align-items:center}
-.intro-en{margin:0; font-family:var(--en); font-weight:500; font-size:clamp(46px,6.2vw,90px); line-height:1.04;
-  color:var(--navy); letter-spacing:.005em}
-.intro-en em{font-style:italic; color:var(--gold)}
-.top .intro .sec-head{margin-bottom:28px}
-.intro-body p{margin:0 0 16px; font-size:16px; line-height:2.1}
-.intro-body p:last-child{margin-bottom:0}
+/* 選ばれる3つの理由（短く3列） */
+.rsn{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(3,1fr); gap:24px}
+.rs{display:flex; flex-direction:column; background:#fff; border-top:3px solid var(--navy); padding:32px 30px 30px}
+.rs-n{font-family:var(--en); font-weight:500; font-size:44px; line-height:1; color:var(--gold)}
+.rs h3{font-size:19px; color:var(--ink); margin:16px 0 12px; line-height:1.55}
+.rs p{margin:0; font-size:14.5px; line-height:1.95}
+.rs .txt-link{margin-top:auto; padding-top:16px}
 
-/* 3つの強み：写真と文を左右交互に */
-.strs{display:grid; gap:110px}
-.str{display:grid; grid-template-columns:1.08fr 1fr; gap:80px; align-items:center}
-.str:nth-child(even) .str-ph{order:2}
-.str-ph{margin:0}
-.str-ph .ph{position:relative; isolation:isolate}
-.str-ph img{width:100%; aspect-ratio:4/3; object-fit:cover}
-.str-ph .ph::before{content:""; position:absolute; z-index:-1; inset:22px -22px -22px 22px; border:1px solid var(--gold)}
-.str:nth-child(even) .str-ph .ph::before{inset:22px 22px -22px -22px}
-.str-ph figcaption{margin-top:30px; font-size:12px; color:var(--muted)}
-.str-n{display:block; font-family:var(--en); font-weight:500; font-size:68px; line-height:1; color:var(--gold)}
-.str-en{display:block; margin-top:12px; font-family:var(--en); font-weight:600; font-size:14px; letter-spacing:.22em; color:var(--muted)}
-.str h3{font-size:clamp(21px,2.2vw,27px); color:var(--ink); margin:12px 0 18px; line-height:1.5; letter-spacing:.04em}
-.str p{font-size:15.5px; line-height:2; margin:0 0 24px}
-.str .checks{max-width:30em}
+/* 現地での取り組み（お知らせにある事実から） */
+.fcards{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(3,1fr); gap:28px}
+.fcards a{display:flex; flex-direction:column; height:100%; text-decoration:none; color:inherit; border:1px solid var(--line);
+  background:#fff; transition:border-color .2s, box-shadow .2s}
+.fcards a:hover{border-color:var(--gold); box-shadow:0 10px 26px rgba(16,42,67,.08)}
+.fcards figure{margin:0; aspect-ratio:16/10; overflow:hidden; background:var(--panel)}
+.fcards img{width:100%; height:100%; object-fit:cover}
+.fc-b{padding:22px 24px 26px}
+.fc-k{display:block; font-size:13px; font-weight:700; color:var(--gold-d); letter-spacing:.06em}
+.fc-b h3{font-size:18px; color:var(--ink); margin:6px 0 10px; line-height:1.5}
+.fc-b p{margin:0; font-size:14px; line-height:1.9}
 
-/* GLOBAL NETWORK：紺の地にアジアの点描地図 */
-.top section.network{background:radial-gradient(ellipse 70% 70% at 28% 45%,#1b4468 0%,var(--navy) 62%); color:#fff}
-.top .network .sec-head .en{color:var(--gold-l)}
-.top .network .sec-head h2{color:#fff}
-.nw{display:grid; grid-template-columns:1.12fr 1fr; gap:56px; align-items:center}
+/* 提携機関のページの地図（紺の箱） */
+.pt-map{display:grid; grid-template-columns:1.1fr 1fr; gap:40px; align-items:center; background:radial-gradient(ellipse 70% 70% at 28% 45%,#1b4468 0%,var(--navy) 62%);
+  color:#fff; padding:40px 48px; margin-bottom:24px}
+.pt-map-l{list-style:none; margin:0; padding:0}
+.pt-map-l li{padding:14px 0; border-top:1px solid rgba(255,255,255,.14); font-size:15px; line-height:1.7}
+.pt-map-l li:first-child{border-top:0}
+.pt-map-l span{display:block; font-family:var(--en); font-weight:600; font-size:14px; letter-spacing:.24em; color:var(--gold-l)}
 .nw-map{display:block; width:100%; height:auto}
 .nw-land{fill:none; stroke:rgba(255,255,255,.24); stroke-width:3.4; stroke-linecap:round}
 .nw-arc{fill:none; stroke:var(--gold); stroke-width:1.8; stroke-dasharray:6 7; stroke-linecap:round}
@@ -466,16 +463,6 @@ footer a:hover{color:#fff; text-decoration:underline}
 .nw-jp circle{fill:#fff}
 .nw-pin .nw-pulse{fill:none; stroke:var(--gold-l); stroke-width:1.4; opacity:0; transform-box:fill-box; transform-origin:center}
 .nw-pin text{fill:#fff; font-family:var(--en); font-size:17px; font-weight:600; letter-spacing:.18em}
-.nw-list{display:grid; gap:14px}
-.nw-c{background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.14); border-radius:4px; padding:20px 26px}
-.nw-c .k{display:block; font-family:var(--en); font-weight:600; font-size:14px; letter-spacing:.24em; color:var(--gold-l)}
-.nw-o{padding:10px 0}
-.nw-o + .nw-o{border-top:1px solid rgba(255,255,255,.1)}
-.nw-o b{display:block; font-size:16px; color:#fff; line-height:1.6}
-.nw-o .role{display:inline-block; margin-left:10px; padding:0 8px; border:1px solid rgba(182,154,104,.65); border-radius:2px;
-  font-size:11.5px; font-weight:700; color:var(--gold-l); vertical-align:2px; line-height:1.7}
-.nw-o p{margin:2px 0 0; font-size:13.5px; line-height:1.8; color:rgba(255,255,255,.74)}
-.top .network .txt-link{color:var(--gold-l)}
 @media (prefers-reduced-motion:no-preference){
   .nw-arc{animation:nwDash 1.4s linear infinite}
   .nw-arc2{animation-duration:1.7s}
@@ -492,6 +479,9 @@ footer a:hover{color:#fff; text-decoration:underline}
 .top .vcard .n{font-family:var(--en); font-weight:500; font-size:34px; letter-spacing:.02em; color:var(--gold); line-height:1}
 .top .vcard h3{margin:14px 0 10px; padding:0; border:0; font-size:18.5px}
 .top .vcard p{font-size:14px; color:var(--text)}
+.top a.vcard{display:flex; flex-direction:column; text-decoration:none; color:inherit; transition:background-color .2s}
+.top a.vcard:hover{background:var(--blue-s)}
+.top .vcard .go{margin-top:auto; padding-top:14px; font-size:13.5px; font-weight:700; color:var(--blue)}
 
 /* 支援（3段階） */
 .top .stage{background:#fff; border:1px solid var(--line); border-top:3px solid var(--navy); border-radius:0; padding:32px 30px 28px}
@@ -518,9 +508,13 @@ footer a:hover{color:#fff; text-decoration:underline}
 .ab{background:var(--panel); border-left:3px solid var(--gold); padding:18px 22px}
 .ab-k{display:block; font-size:12px; font-weight:700; color:var(--muted)}
 .ab b{display:block; margin-top:4px; font-size:15.5px; color:var(--ink); line-height:1.6}
-.ab small{display:block; margin-top:4px; font-size:12.5px; color:var(--muted)}
+.ab small{display:block; margin-top:4px; font-size:13px; color:var(--muted)}
 .about-grid .more-r{margin-top:22px}
 
+/* お知らせの分類（build.py が news.json の内容から付ける） */
+.ncat{display:inline-block; font-style:normal; font-family:var(--sans); font-size:11.5px; font-weight:700; letter-spacing:.04em; color:var(--navy);
+  border:1px solid var(--line); background:#fff; padding:1px 8px; margin-left:10px; vertical-align:2px; border-radius:2px}
+.ncat.c-hr{border-color:var(--gold); color:var(--gold-d)}
 /* お知らせ（写真つき3件） */
 .top section.topnews{padding:110px 0}
 .nb-head{display:flex; align-items:flex-end; justify-content:space-between; gap:20px; margin-bottom:44px}
@@ -537,25 +531,17 @@ footer a:hover{color:#fff; text-decoration:underline}
   padding:6px 24px 24px; font-size:14.5px; line-height:1.85}
 
 @media (max-width:1000px){
-  .intro-grid, .str, .nw, .about-grid{grid-template-columns:1fr; gap:36px}
-  .str:nth-child(even) .str-ph{order:0}
-  .strs{gap:80px}
-  .str-ph{margin-right:22px}
-  .str:nth-child(even) .str-ph{margin:0 0 0 22px}
-  .nw-map{max-width:620px; margin:0 auto}
+  .about-grid, .pt-map{grid-template-columns:1fr; gap:28px}
+  .rsn, .fcards{grid-template-columns:1fr; gap:16px}
+  .nw-map{max-width:560px; margin:0 auto}
 }
 @media (max-width:760px){
-  .top section{padding:76px 0}
-  .top section.topnews{padding:72px 0}
-  .top .sec-head{margin-bottom:36px}
-  .intro-en{font-size:clamp(40px,12vw,56px)}
-  .str-n{font-size:52px}
-  .str-ph .ph::before{inset:14px -14px -14px 14px}
-  .str:nth-child(even) .str-ph .ph::before{inset:14px 14px -14px -14px}
-  .str-ph{margin-right:14px}
-  .str:nth-child(even) .str-ph{margin:0 0 0 14px}
-  .str-ph figcaption{margin-top:22px}
-  .nw-c{padding:18px 20px}
+  .top section{padding:60px 0}
+  .top section.topnews{padding:60px 0}
+  .top .sec-head{margin-bottom:28px}
+  .rs{padding:24px 22px}
+  .rs-n{font-size:36px}
+  .pt-map{padding:28px 20px}
   .top .vcards{grid-template-columns:1fr}
   .top .vcard{padding:24px 22px}
   .abiz{grid-template-columns:1fr}
@@ -601,20 +587,20 @@ footer a:hover{color:#fff; text-decoration:underline}
   <div class="bg"><img src="img/hero-sky.jpg" alt="青空と雲"></div>
   <div class="hero-copy">
     <div class="wrap">
-      <p class="hero-en">GLOBAL CONNECTIONS.<br>LASTING PARTNERSHIPS.</p>
+      <p class="hero-en">外国人材の採用・受入れ支援</p>
       <h1><span>国境を越え</span><br><span>企業の未来をつなぐ</span></h1>
       <p class="lead">外国人材の採用から受入れ、定着まで。<br>海外の提携機関とのネットワークを活かし、<br>企業と人材の持続的な成長を支えます。</p>
       <div class="hero-actions">
         <a class="btn gold" href="#contact">外国人材の採用を相談する</a>
-        <a class="txt-link light" href="#intro">A and Kについて知る <span aria-hidden="true">→</span></a>
+        <a class="txt-link light" href="#aboutus">A and Kについて知る <span aria-hidden="true">→</span></a>
       </div>
     </div>
   </div>
-  <a class="scroll" href="#intro" aria-label="下へスクロール"><span>SCROLL</span><i aria-hidden="true"></i></a>
+  <a class="scroll" href="#trust" aria-label="下へスクロール"><span>SCROLL</span><i aria-hidden="true"></i></a>
 </div>
 
 <!-- ===== 02 信頼情報（紺の帯） ===== -->
-<div class="trust">
+<div class="trust" id="trust">
   <div class="wrap trust-grid">
     <div class="tc"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2"/><path d="M5.8 16c.6-1.4 1.8-2 3.2-2s2.6.6 3.2 2M14.5 10h4M14.5 13.5h4"/></svg></span>
       <div class="tc-body"><span class="tc-en">REGISTERED</span><span class="tc-k">登録支援機関</span><b>登録番号 19登-000975</b></div></div>
@@ -625,80 +611,43 @@ footer a:hover{color:#fff; text-decoration:underline}
   </div>
 </div>
 
-<!-- ===== 03 INTRODUCTION（トップだけ） ===== -->
-<section class="intro" id="intro">
-  <div class="wrap intro-grid">
-    <p class="intro-en" aria-hidden="true">Connecting<br>people <em>across</em><br>borders</p>
-    <div class="intro-body">
-      <div class="sec-head"><span class="en">INTRODUCTION</span><h2>外国人材の採用から<br>定着までを一貫して</h2></div>
-      <p>株式会社 A and K は、岐阜県可児市の登録支援機関です。技能実習・特定技能・留学生・高度人材・日系人の5つの在留資格・人材に対応し、入国の手続きや生活の支援、就労後の面談までお引き受けします。</p>
-      <p>グループ内の監理団体ブリッジング協同組合と、フィリピン・ベトナムの送り出し機関との連携で、企業さまの受入れを支えます。</p>
-    </div>
-  </div>
-</section>
-
-<!-- ===== 04 3つの強み（トップだけ。写真は旧サイトのお知らせにある出張時のもの） ===== -->
-<section class="alt strengths" id="strengths">
+<!-- ===== 03 選ばれる3つの理由（トップだけ。短く。提携機関の詳しい説明は partners.html に任せる） ===== -->
+<section class="alt reasons" id="reasons">
   <div class="wrap">
-    <div class="sec-head"><span class="en">OUR STRENGTHS</span><h2>人と企業の未来を支える<br>3つの強み</h2></div>
-    <div class="strs">
-      <article class="str">
-        <figure class="str-ph"><div class="ph"><img src="img/news/20190725-3.jpg" alt="フィリピンの送り出し機関を訪問したときの様子" loading="lazy"></div><figcaption>2019年 フィリピンの送り出し機関にて</figcaption></figure>
-        <div class="str-body">
-          <span class="str-n">01</span><span class="str-en">FIVE TYPES OF TALENT</span>
-          <h3>5つの在留資格・人材に対応</h3>
-          <p>職種・人数・時期をお伺いし、企業さまに合う在留資格をご提案します。どの制度が合うか分からない段階からご相談いただけます。</p>
-          <ul class="tags"><li>技能実習</li><li>特定技能</li><li>留学生</li><li>高度人材</li><li>日系人・定住者</li></ul>
-        </div>
-      </article>
-      <article class="str">
-        <figure class="str-ph"><div class="ph"><img src="img/news/20221108-2.jpeg" alt="フィリピン出張で現地の教室を訪ねたときの様子" loading="lazy"></div><figcaption>2022年 フィリピン出張にて</figcaption></figure>
-        <div class="str-body">
-          <span class="str-n">02</span><span class="str-en">END-TO-END SUPPORT</span>
-          <h3>採用から定着までの一貫支援</h3>
-          <p>登録支援機関として、入国前の説明から日本での暮らし、就労後の面談まで、受入れに必要な支援をお引き受けします。</p>
-          <ul class="checks"><li>入国前の事前ガイダンス</li><li>住まい・生活に必要な契約の支援</li><li>日本語学習の機会の提供</li><li>仕事や暮らしの相談への対応</li><li>定期的な面談</li></ul>
-        </div>
-      </article>
-      <article class="str">
-        <figure class="str-ph"><div class="ph"><img src="img/news/20221108-1.jpeg" alt="フィリピン出張での打ち合わせの様子" loading="lazy"></div><figcaption>2022年 フィリピン出張にて</figcaption></figure>
-        <div class="str-body">
-          <span class="str-n">03</span><span class="str-en">TRUSTED PARTNERS</span>
-          <h3>国内外の提携機関との連携</h3>
-          <p>自社グループで監理団体を運営し、フィリピン・ベトナムの送り出し機関と提携しています。国内でも、愛知の監理団体と業務提携しています。</p>
-          <ul class="checks"><li>ブリッジング協同組合<small>（自社グループの監理団体）</small></li><li>フィリピンの送り出し機関<small>（プロデンシャルエンプロイメント）</small></li><li>ベトナムの送り出し機関<small>（POLIMEX）</small></li><li>トラスト江南協同組合<small>（提携する監理団体）</small></li></ul>
-        </div>
-      </article>
-    </div>
+    <div class="sec-head"><span class="en">WHY A and K</span><h2>選ばれる3つの理由</h2></div>
+    <ol class="rsn">
+      <li class="rs"><span class="rs-n">01</span><h3>5つの在留資格・人材に対応</h3>
+        <p>職種・人数・時期をお伺いし、企業さまに合う在留資格をご提案します。どの制度が合うか分からない段階からご相談いただけます。</p></li>
+      <li class="rs"><span class="rs-n">02</span><h3>採用から定着まで一貫して支援</h3>
+        <p>登録支援機関として、入国前の説明から住まい・生活の手続き、就労後の定期的な面談までお引き受けします。</p></li>
+      <li class="rs"><span class="rs-n">03</span><h3>自社グループと海外の提携機関</h3>
+        <p>グループ内の監理団体と、フィリピン・ベトナムの送り出し機関が連携。フィリピンでは企業さまご自身が現地で面接することもできます。</p>
+        <a class="txt-link" href="#partners">提携機関を見る <span aria-hidden="true">→</span></a></li>
+    </ol>
   </div>
 </section>
 
-<!-- ===== 05 GLOBAL NETWORK（トップだけ。書いてよいのは partners 節にある事実だけ） =====
-     地図は飾り（大まかな海岸線の点描。tmp の ak_map.py で作成）。印は国の位置だけで、都市名は出さない。 -->
-<section class="network" id="network">
+<!-- ===== 04 現地での取り組み（トップだけ）
+     ★導入事例の代わりに、旧サイトのお知らせにある事実だけを書く。お客さまの事例（課題→支援→その後）は
+       掲載のご了承と内容が届いてから足す。 ===== -->
+<section class="field" id="field">
   <div class="wrap">
-    <div class="sec-head"><span class="en">GLOBAL NETWORK</span><h2><span>日本とアジアをつなぐ</span><span>ネットワーク</span></h2></div>
-    <div class="nw">
-      <svg class="nw-map" viewBox="0 0 560 460" aria-hidden="true" focusable="false"><path class="nw-land" d="M3 3h0M10 3h0M17 3h0M24 3h0M31 3h0M38 3h0M45 3h0M52 3h0M59 3h0M66 3h0M73 3h0M80 3h0M87 3h0M94 3h0M101 3h0M108 3h0M115 3h0M122 3h0M129 3h0M136 3h0M143 3h0M150 3h0M157 3h0M164 3h0M171 3h0M178 3h0M185 3h0M192 3h0M199 3h0M206 3h0M213 3h0M220 3h0M227 3h0M234 3h0M241 3h0M248 3h0M255 3h0M262 3h0M269 3h0M276 3h0M283 3h0M290 3h0M297 3h0M304 3h0M311 3h0M318 3h0M325 3h0M332 3h0M339 3h0M346 3h0M353 3h0M360 3h0M367 3h0M374 3h0M381 3h0M388 3h0M3 10h0M10 10h0M17 10h0M24 10h0M31 10h0M38 10h0M45 10h0M52 10h0M59 10h0M66 10h0M73 10h0M80 10h0M87 10h0M94 10h0M101 10h0M108 10h0M115 10h0M122 10h0M129 10h0M136 10h0M143 10h0M150 10h0M157 10h0M164 10h0M171 10h0M178 10h0M185 10h0M192 10h0M199 10h0M206 10h0M213 10h0M220 10h0M227 10h0M234 10h0M241 10h0M248 10h0M255 10h0M262 10h0M269 10h0M276 10h0M283 10h0M290 10h0M297 10h0M304 10h0M311 10h0M318 10h0M325 10h0M332 10h0M339 10h0M346 10h0M353 10h0M360 10h0M367 10h0M374 10h0M381 10h0M472 10h0M3 17h0M10 17h0M17 17h0M24 17h0M31 17h0M38 17h0M45 17h0M52 17h0M59 17h0M66 17h0M73 17h0M80 17h0M87 17h0M94 17h0M101 17h0M108 17h0M115 17h0M122 17h0M129 17h0M136 17h0M143 17h0M150 17h0M157 17h0M164 17h0M171 17h0M178 17h0M185 17h0M192 17h0M199 17h0M206 17h0M213 17h0M220 17h0M227 17h0M234 17h0M241 17h0M248 17h0M255 17h0M262 17h0M269 17h0M276 17h0M283 17h0M290 17h0M297 17h0M304 17h0M311 17h0M318 17h0M325 17h0M332 17h0M339 17h0M346 17h0M353 17h0M360 17h0M367 17h0M374 17h0M381 17h0M472 17h0M479 17h0M486 17h0M3 24h0M10 24h0M17 24h0M24 24h0M31 24h0M38 24h0M45 24h0M52 24h0M59 24h0M66 24h0M73 24h0M80 24h0M87 24h0M94 24h0M101 24h0M108 24h0M115 24h0M122 24h0M129 24h0M136 24h0M143 24h0M150 24h0M157 24h0M164 24h0M171 24h0M178 24h0M185 24h0M192 24h0M199 24h0M206 24h0M213 24h0M220 24h0M227 24h0M234 24h0M241 24h0M248 24h0M255 24h0M262 24h0M269 24h0M276 24h0M283 24h0M290 24h0M297 24h0M304 24h0M311 24h0M318 24h0M325 24h0M332 24h0M339 24h0M346 24h0M353 24h0M360 24h0M367 24h0M374 24h0M381 24h0M465 24h0M472 24h0M479 24h0M486 24h0M493 24h0M3 31h0M10 31h0M17 31h0M24 31h0M31 31h0M38 31h0M45 31h0M52 31h0M59 31h0M66 31h0M73 31h0M80 31h0M87 31h0M94 31h0M101 31h0M108 31h0M115 31h0M122 31h0M129 31h0M136 31h0M143 31h0M150 31h0M157 31h0M164 31h0M171 31h0M178 31h0M185 31h0M192 31h0M199 31h0M206 31h0M213 31h0M220 31h0M227 31h0M234 31h0M241 31h0M248 31h0M255 31h0M262 31h0M269 31h0M276 31h0M283 31h0M290 31h0M297 31h0M304 31h0M311 31h0M318 31h0M325 31h0M332 31h0M339 31h0M346 31h0M353 31h0M360 31h0M367 31h0M374 31h0M458 31h0M465 31h0M472 31h0M479 31h0M486 31h0M493 31h0M3 38h0M10 38h0M17 38h0M24 38h0M31 38h0M38 38h0M45 38h0M52 38h0M59 38h0M66 38h0M73 38h0M80 38h0M87 38h0M94 38h0M101 38h0M108 38h0M115 38h0M122 38h0M129 38h0M136 38h0M143 38h0M150 38h0M157 38h0M164 38h0M171 38h0M178 38h0M185 38h0M192 38h0M199 38h0M206 38h0M213 38h0M220 38h0M227 38h0M234 38h0M241 38h0M248 38h0M255 38h0M262 38h0M269 38h0M276 38h0M283 38h0M290 38h0M297 38h0M304 38h0M311 38h0M318 38h0M325 38h0M332 38h0M339 38h0M346 38h0M353 38h0M458 38h0M479 38h0M3 45h0M10 45h0M17 45h0M24 45h0M31 45h0M38 45h0M45 45h0M52 45h0M59 45h0M66 45h0M73 45h0M80 45h0M87 45h0M94 45h0M101 45h0M108 45h0M115 45h0M122 45h0M129 45h0M136 45h0M143 45h0M150 45h0M157 45h0M164 45h0M171 45h0M178 45h0M185 45h0M192 45h0M199 45h0M206 45h0M213 45h0M220 45h0M227 45h0M234 45h0M241 45h0M248 45h0M255 45h0M262 45h0M269 45h0M276 45h0M283 45h0M290 45h0M297 45h0M304 45h0M311 45h0M318 45h0M325 45h0M332 45h0M339 45h0M346 45h0M3 52h0M10 52h0M17 52h0M24 52h0M31 52h0M38 52h0M45 52h0M52 52h0M59 52h0M66 52h0M73 52h0M80 52h0M87 52h0M94 52h0M101 52h0M108 52h0M115 52h0M122 52h0M129 52h0M136 52h0M143 52h0M150 52h0M157 52h0M164 52h0M171 52h0M178 52h0M185 52h0M192 52h0M199 52h0M206 52h0M213 52h0M220 52h0M227 52h0M234 52h0M241 52h0M248 52h0M255 52h0M262 52h0M269 52h0M276 52h0M283 52h0M290 52h0M297 52h0M304 52h0M311 52h0M318 52h0M325 52h0M332 52h0M339 52h0M451 52h0M458 52h0M3 59h0M10 59h0M17 59h0M24 59h0M31 59h0M38 59h0M45 59h0M52 59h0M59 59h0M66 59h0M73 59h0M80 59h0M87 59h0M94 59h0M101 59h0M108 59h0M115 59h0M122 59h0M129 59h0M136 59h0M143 59h0M150 59h0M157 59h0M164 59h0M171 59h0M178 59h0M185 59h0M192 59h0M199 59h0M206 59h0M213 59h0M220 59h0M227 59h0M234 59h0M241 59h0M248 59h0M255 59h0M262 59h0M290 59h0M297 59h0M304 59h0M311 59h0M318 59h0M325 59h0M332 59h0M339 59h0M451 59h0M458 59h0M465 59h0M3 66h0M10 66h0M17 66h0M24 66h0M31 66h0M38 66h0M45 66h0M52 66h0M59 66h0M66 66h0M73 66h0M80 66h0M87 66h0M94 66h0M101 66h0M108 66h0M115 66h0M122 66h0M129 66h0M136 66h0M143 66h0M150 66h0M157 66h0M164 66h0M171 66h0M178 66h0M185 66h0M192 66h0M199 66h0M206 66h0M213 66h0M220 66h0M227 66h0M234 66h0M241 66h0M248 66h0M255 66h0M262 66h0M297 66h0M304 66h0M311 66h0M318 66h0M325 66h0M332 66h0M339 66h0M451 66h0M458 66h0M465 66h0M3 73h0M10 73h0M17 73h0M24 73h0M31 73h0M38 73h0M45 73h0M52 73h0M59 73h0M66 73h0M73 73h0M80 73h0M87 73h0M94 73h0M101 73h0M108 73h0M115 73h0M122 73h0M129 73h0M136 73h0M143 73h0M150 73h0M157 73h0M164 73h0M171 73h0M178 73h0M185 73h0M192 73h0M199 73h0M206 73h0M213 73h0M220 73h0M227 73h0M304 73h0M311 73h0M318 73h0M325 73h0M332 73h0M339 73h0M451 73h0M458 73h0M465 73h0M3 80h0M10 80h0M17 80h0M24 80h0M31 80h0M38 80h0M45 80h0M52 80h0M59 80h0M66 80h0M73 80h0M80 80h0M87 80h0M94 80h0M101 80h0M108 80h0M115 80h0M122 80h0M129 80h0M136 80h0M143 80h0M150 80h0M157 80h0M164 80h0M171 80h0M178 80h0M185 80h0M192 80h0M199 80h0M206 80h0M213 80h0M220 80h0M227 80h0M234 80h0M304 80h0M311 80h0M318 80h0M325 80h0M332 80h0M339 80h0M444 80h0M451 80h0M458 80h0M3 87h0M10 87h0M17 87h0M24 87h0M31 87h0M38 87h0M45 87h0M52 87h0M59 87h0M66 87h0M73 87h0M80 87h0M87 87h0M94 87h0M101 87h0M108 87h0M115 87h0M122 87h0M129 87h0M136 87h0M143 87h0M150 87h0M157 87h0M164 87h0M171 87h0M178 87h0M185 87h0M192 87h0M199 87h0M206 87h0M213 87h0M220 87h0M227 87h0M234 87h0M241 87h0M248 87h0M255 87h0M262 87h0M269 87h0M318 87h0M325 87h0M332 87h0M339 87h0M437 87h0M444 87h0M451 87h0M458 87h0M3 94h0M10 94h0M17 94h0M24 94h0M31 94h0M38 94h0M45 94h0M52 94h0M59 94h0M66 94h0M73 94h0M80 94h0M87 94h0M94 94h0M101 94h0M108 94h0M115 94h0M122 94h0M129 94h0M136 94h0M143 94h0M150 94h0M157 94h0M164 94h0M171 94h0M178 94h0M185 94h0M192 94h0M199 94h0M206 94h0M213 94h0M220 94h0M227 94h0M234 94h0M241 94h0M248 94h0M255 94h0M262 94h0M318 94h0M325 94h0M332 94h0M339 94h0M416 94h0M423 94h0M430 94h0M437 94h0M444 94h0M451 94h0M458 94h0M3 101h0M10 101h0M17 101h0M24 101h0M31 101h0M38 101h0M45 101h0M52 101h0M59 101h0M66 101h0M73 101h0M80 101h0M87 101h0M94 101h0M101 101h0M108 101h0M115 101h0M122 101h0M129 101h0M136 101h0M143 101h0M150 101h0M157 101h0M164 101h0M171 101h0M178 101h0M185 101h0M192 101h0M199 101h0M206 101h0M213 101h0M220 101h0M227 101h0M234 101h0M241 101h0M248 101h0M318 101h0M325 101h0M332 101h0M339 101h0M409 101h0M416 101h0M423 101h0M430 101h0M437 101h0M444 101h0M451 101h0M3 108h0M10 108h0M17 108h0M24 108h0M31 108h0M38 108h0M45 108h0M52 108h0M59 108h0M66 108h0M73 108h0M80 108h0M87 108h0M94 108h0M101 108h0M108 108h0M115 108h0M122 108h0M129 108h0M136 108h0M143 108h0M150 108h0M157 108h0M164 108h0M171 108h0M178 108h0M185 108h0M192 108h0M199 108h0M206 108h0M213 108h0M220 108h0M227 108h0M234 108h0M241 108h0M318 108h0M325 108h0M332 108h0M381 108h0M388 108h0M395 108h0M402 108h0M409 108h0M416 108h0M423 108h0M430 108h0M437 108h0M444 108h0M3 115h0M10 115h0M17 115h0M24 115h0M31 115h0M38 115h0M45 115h0M52 115h0M59 115h0M66 115h0M73 115h0M80 115h0M87 115h0M94 115h0M101 115h0M108 115h0M115 115h0M122 115h0M129 115h0M136 115h0M143 115h0M150 115h0M157 115h0M164 115h0M171 115h0M178 115h0M185 115h0M192 115h0M199 115h0M206 115h0M213 115h0M220 115h0M227 115h0M234 115h0M241 115h0M248 115h0M367 115h0M374 115h0M381 115h0M388 115h0M402 115h0M409 115h0M416 115h0M3 122h0M10 122h0M17 122h0M24 122h0M31 122h0M38 122h0M45 122h0M52 122h0M59 122h0M66 122h0M73 122h0M80 122h0M87 122h0M94 122h0M101 122h0M108 122h0M115 122h0M122 122h0M129 122h0M136 122h0M143 122h0M150 122h0M157 122h0M164 122h0M171 122h0M178 122h0M185 122h0M192 122h0M199 122h0M206 122h0M213 122h0M220 122h0M227 122h0M234 122h0M241 122h0M248 122h0M353 122h0M360 122h0M381 122h0M388 122h0M395 122h0M409 122h0M3 129h0M10 129h0M17 129h0M24 129h0M31 129h0M38 129h0M45 129h0M52 129h0M59 129h0M66 129h0M73 129h0M80 129h0M87 129h0M94 129h0M101 129h0M108 129h0M115 129h0M122 129h0M129 129h0M136 129h0M143 129h0M150 129h0M157 129h0M164 129h0M171 129h0M178 129h0M185 129h0M192 129h0M199 129h0M206 129h0M213 129h0M220 129h0M227 129h0M234 129h0M241 129h0M248 129h0M255 129h0M353 129h0M360 129h0M367 129h0M381 129h0M388 129h0M3 136h0M10 136h0M17 136h0M24 136h0M31 136h0M38 136h0M45 136h0M52 136h0M59 136h0M66 136h0M73 136h0M80 136h0M87 136h0M94 136h0M101 136h0M108 136h0M115 136h0M122 136h0M129 136h0M136 136h0M143 136h0M150 136h0M157 136h0M164 136h0M171 136h0M178 136h0M185 136h0M192 136h0M199 136h0M206 136h0M213 136h0M220 136h0M227 136h0M234 136h0M241 136h0M248 136h0M255 136h0M353 136h0M360 136h0M367 136h0M3 143h0M10 143h0M17 143h0M24 143h0M31 143h0M38 143h0M45 143h0M52 143h0M59 143h0M66 143h0M73 143h0M80 143h0M87 143h0M94 143h0M101 143h0M108 143h0M115 143h0M122 143h0M129 143h0M136 143h0M143 143h0M150 143h0M157 143h0M164 143h0M171 143h0M178 143h0M185 143h0M192 143h0M199 143h0M206 143h0M213 143h0M220 143h0M227 143h0M234 143h0M241 143h0M248 143h0M255 143h0M262 143h0M353 143h0M360 143h0M3 150h0M10 150h0M17 150h0M24 150h0M31 150h0M38 150h0M45 150h0M52 150h0M59 150h0M66 150h0M73 150h0M80 150h0M87 150h0M94 150h0M101 150h0M108 150h0M115 150h0M122 150h0M129 150h0M136 150h0M143 150h0M150 150h0M157 150h0M164 150h0M171 150h0M178 150h0M185 150h0M192 150h0M199 150h0M206 150h0M213 150h0M220 150h0M227 150h0M234 150h0M241 150h0M248 150h0M255 150h0M262 150h0M269 150h0M3 157h0M10 157h0M17 157h0M24 157h0M31 157h0M38 157h0M45 157h0M52 157h0M59 157h0M66 157h0M73 157h0M80 157h0M87 157h0M94 157h0M101 157h0M108 157h0M115 157h0M122 157h0M129 157h0M136 157h0M143 157h0M150 157h0M157 157h0M164 157h0M171 157h0M178 157h0M185 157h0M192 157h0M199 157h0M206 157h0M213 157h0M220 157h0M227 157h0M234 157h0M241 157h0M248 157h0M255 157h0M262 157h0M269 157h0M3 164h0M10 164h0M17 164h0M24 164h0M31 164h0M38 164h0M45 164h0M52 164h0M59 164h0M66 164h0M73 164h0M80 164h0M87 164h0M94 164h0M101 164h0M108 164h0M115 164h0M122 164h0M129 164h0M136 164h0M143 164h0M150 164h0M157 164h0M164 164h0M171 164h0M178 164h0M185 164h0M192 164h0M199 164h0M206 164h0M213 164h0M220 164h0M227 164h0M234 164h0M241 164h0M248 164h0M255 164h0M262 164h0M3 171h0M10 171h0M17 171h0M24 171h0M31 171h0M38 171h0M45 171h0M52 171h0M59 171h0M66 171h0M73 171h0M80 171h0M87 171h0M94 171h0M101 171h0M108 171h0M115 171h0M122 171h0M129 171h0M136 171h0M143 171h0M150 171h0M157 171h0M164 171h0M171 171h0M178 171h0M185 171h0M192 171h0M199 171h0M206 171h0M213 171h0M220 171h0M227 171h0M234 171h0M241 171h0M248 171h0M255 171h0M262 171h0M3 178h0M10 178h0M17 178h0M24 178h0M31 178h0M38 178h0M45 178h0M52 178h0M59 178h0M66 178h0M73 178h0M80 178h0M87 178h0M94 178h0M101 178h0M108 178h0M115 178h0M122 178h0M129 178h0M136 178h0M143 178h0M150 178h0M157 178h0M164 178h0M171 178h0M178 178h0M185 178h0M192 178h0M199 178h0M206 178h0M213 178h0M220 178h0M227 178h0M234 178h0M241 178h0M248 178h0M255 178h0M262 178h0M3 185h0M10 185h0M17 185h0M24 185h0M31 185h0M38 185h0M45 185h0M52 185h0M59 185h0M66 185h0M73 185h0M80 185h0M87 185h0M94 185h0M101 185h0M108 185h0M115 185h0M122 185h0M129 185h0M136 185h0M143 185h0M150 185h0M157 185h0M164 185h0M171 185h0M178 185h0M185 185h0M192 185h0M199 185h0M206 185h0M213 185h0M220 185h0M227 185h0M234 185h0M241 185h0M248 185h0M255 185h0M3 192h0M10 192h0M17 192h0M24 192h0M31 192h0M38 192h0M45 192h0M52 192h0M59 192h0M66 192h0M73 192h0M80 192h0M87 192h0M94 192h0M101 192h0M108 192h0M115 192h0M122 192h0M129 192h0M136 192h0M143 192h0M150 192h0M157 192h0M164 192h0M171 192h0M178 192h0M185 192h0M192 192h0M199 192h0M206 192h0M213 192h0M220 192h0M227 192h0M234 192h0M241 192h0M248 192h0M3 199h0M10 199h0M17 199h0M24 199h0M31 199h0M38 199h0M45 199h0M52 199h0M59 199h0M66 199h0M73 199h0M80 199h0M87 199h0M94 199h0M101 199h0M108 199h0M115 199h0M122 199h0M129 199h0M136 199h0M143 199h0M150 199h0M157 199h0M164 199h0M171 199h0M178 199h0M185 199h0M192 199h0M199 199h0M206 199h0M213 199h0M220 199h0M227 199h0M234 199h0M241 199h0M248 199h0M3 206h0M10 206h0M17 206h0M24 206h0M31 206h0M38 206h0M45 206h0M52 206h0M59 206h0M66 206h0M73 206h0M80 206h0M87 206h0M94 206h0M101 206h0M108 206h0M115 206h0M122 206h0M129 206h0M136 206h0M143 206h0M150 206h0M157 206h0M164 206h0M171 206h0M178 206h0M185 206h0M192 206h0M199 206h0M206 206h0M213 206h0M220 206h0M227 206h0M234 206h0M241 206h0M3 213h0M10 213h0M17 213h0M24 213h0M31 213h0M38 213h0M45 213h0M52 213h0M59 213h0M66 213h0M73 213h0M80 213h0M87 213h0M94 213h0M101 213h0M108 213h0M115 213h0M122 213h0M129 213h0M136 213h0M143 213h0M150 213h0M157 213h0M164 213h0M171 213h0M178 213h0M185 213h0M192 213h0M199 213h0M206 213h0M213 213h0M220 213h0M227 213h0M234 213h0M262 213h0M3 220h0M10 220h0M17 220h0M24 220h0M31 220h0M38 220h0M45 220h0M52 220h0M59 220h0M66 220h0M73 220h0M80 220h0M87 220h0M94 220h0M101 220h0M108 220h0M115 220h0M122 220h0M129 220h0M136 220h0M143 220h0M150 220h0M157 220h0M164 220h0M171 220h0M178 220h0M185 220h0M192 220h0M199 220h0M206 220h0M213 220h0M220 220h0M227 220h0M255 220h0M262 220h0M3 227h0M10 227h0M17 227h0M24 227h0M31 227h0M38 227h0M45 227h0M52 227h0M59 227h0M66 227h0M73 227h0M80 227h0M87 227h0M94 227h0M101 227h0M108 227h0M115 227h0M122 227h0M129 227h0M136 227h0M143 227h0M150 227h0M157 227h0M164 227h0M171 227h0M178 227h0M185 227h0M192 227h0M199 227h0M206 227h0M213 227h0M255 227h0M262 227h0M3 234h0M10 234h0M17 234h0M24 234h0M31 234h0M38 234h0M45 234h0M52 234h0M59 234h0M66 234h0M73 234h0M80 234h0M87 234h0M94 234h0M101 234h0M108 234h0M115 234h0M122 234h0M129 234h0M136 234h0M143 234h0M150 234h0M157 234h0M164 234h0M171 234h0M178 234h0M185 234h0M192 234h0M199 234h0M255 234h0M3 241h0M10 241h0M17 241h0M24 241h0M31 241h0M38 241h0M45 241h0M52 241h0M59 241h0M66 241h0M73 241h0M80 241h0M87 241h0M94 241h0M101 241h0M108 241h0M115 241h0M122 241h0M129 241h0M136 241h0M143 241h0M150 241h0M157 241h0M164 241h0M171 241h0M178 241h0M3 248h0M10 248h0M17 248h0M24 248h0M31 248h0M38 248h0M45 248h0M52 248h0M59 248h0M66 248h0M73 248h0M80 248h0M87 248h0M94 248h0M101 248h0M108 248h0M115 248h0M122 248h0M150 248h0M157 248h0M3 255h0M10 255h0M17 255h0M24 255h0M31 255h0M38 255h0M45 255h0M52 255h0M59 255h0M66 255h0M73 255h0M80 255h0M87 255h0M94 255h0M101 255h0M108 255h0M115 255h0M3 262h0M10 262h0M17 262h0M24 262h0M31 262h0M38 262h0M45 262h0M52 262h0M59 262h0M66 262h0M73 262h0M80 262h0M87 262h0M94 262h0M101 262h0M108 262h0M150 262h0M157 262h0M3 269h0M10 269h0M17 269h0M24 269h0M31 269h0M38 269h0M45 269h0M52 269h0M59 269h0M66 269h0M73 269h0M80 269h0M87 269h0M94 269h0M101 269h0M108 269h0M143 269h0M150 269h0M3 276h0M10 276h0M17 276h0M24 276h0M31 276h0M38 276h0M45 276h0M52 276h0M59 276h0M66 276h0M73 276h0M80 276h0M87 276h0M94 276h0M101 276h0M108 276h0M143 276h0M262 276h0M269 276h0M3 283h0M10 283h0M17 283h0M24 283h0M31 283h0M38 283h0M45 283h0M52 283h0M59 283h0M66 283h0M73 283h0M80 283h0M87 283h0M94 283h0M101 283h0M108 283h0M115 283h0M255 283h0M262 283h0M269 283h0M3 290h0M10 290h0M17 290h0M24 290h0M31 290h0M38 290h0M45 290h0M52 290h0M59 290h0M66 290h0M73 290h0M80 290h0M87 290h0M94 290h0M101 290h0M108 290h0M115 290h0M255 290h0M262 290h0M269 290h0M3 297h0M31 297h0M38 297h0M45 297h0M52 297h0M59 297h0M66 297h0M73 297h0M80 297h0M87 297h0M94 297h0M101 297h0M108 297h0M115 297h0M122 297h0M255 297h0M262 297h0M31 304h0M38 304h0M45 304h0M52 304h0M59 304h0M66 304h0M73 304h0M80 304h0M87 304h0M94 304h0M101 304h0M108 304h0M115 304h0M122 304h0M129 304h0M255 304h0M262 304h0M31 311h0M38 311h0M45 311h0M52 311h0M59 311h0M66 311h0M73 311h0M80 311h0M87 311h0M94 311h0M101 311h0M108 311h0M115 311h0M122 311h0M129 311h0M136 311h0M262 311h0M31 318h0M38 318h0M45 318h0M52 318h0M59 318h0M66 318h0M73 318h0M80 318h0M87 318h0M94 318h0M101 318h0M108 318h0M115 318h0M122 318h0M129 318h0M136 318h0M262 318h0M269 318h0M38 325h0M45 325h0M52 325h0M59 325h0M66 325h0M73 325h0M80 325h0M87 325h0M94 325h0M101 325h0M108 325h0M115 325h0M122 325h0M129 325h0M136 325h0M276 325h0M283 325h0M290 325h0M38 332h0M45 332h0M73 332h0M80 332h0M87 332h0M94 332h0M101 332h0M108 332h0M115 332h0M122 332h0M129 332h0M136 332h0M290 332h0M38 339h0M45 339h0M80 339h0M87 339h0M94 339h0M101 339h0M108 339h0M115 339h0M122 339h0M129 339h0M136 339h0M290 339h0M297 339h0M38 346h0M45 346h0M87 346h0M94 346h0M101 346h0M108 346h0M115 346h0M122 346h0M129 346h0M136 346h0M276 346h0M290 346h0M297 346h0M304 346h0M38 353h0M87 353h0M94 353h0M101 353h0M108 353h0M115 353h0M122 353h0M283 353h0M290 353h0M297 353h0M304 353h0M38 360h0M101 360h0M108 360h0M115 360h0M283 360h0M290 360h0M38 367h0M45 367h0M101 367h0M108 367h0M304 367h0M38 374h0M45 374h0M290 374h0M297 374h0M304 374h0M38 381h0M45 381h0M52 381h0M276 381h0M283 381h0M290 381h0M297 381h0M304 381h0M311 381h0M45 388h0M52 388h0M290 388h0M297 388h0M304 388h0M311 388h0M52 395h0M59 395h0M66 395h0M220 395h0M297 395h0M304 395h0M311 395h0M59 402h0M66 402h0M73 402h0M213 402h0M220 402h0M227 402h0M304 402h0M3 409h0M10 409h0M17 409h0M24 409h0M59 409h0M66 409h0M73 409h0M80 409h0M206 409h0M213 409h0M220 409h0M227 409h0M234 409h0M241 409h0M3 416h0M10 416h0M17 416h0M24 416h0M31 416h0M59 416h0M66 416h0M73 416h0M80 416h0M199 416h0M206 416h0M213 416h0M220 416h0M227 416h0M234 416h0M3 423h0M10 423h0M17 423h0M24 423h0M31 423h0M38 423h0M59 423h0M66 423h0M73 423h0M80 423h0M192 423h0M199 423h0M206 423h0M213 423h0M220 423h0M227 423h0M3 430h0M10 430h0M17 430h0M24 430h0M31 430h0M38 430h0M45 430h0M66 430h0M73 430h0M80 430h0M185 430h0M192 430h0M199 430h0M206 430h0M213 430h0M220 430h0M227 430h0M10 437h0M17 437h0M24 437h0M31 437h0M38 437h0M45 437h0M52 437h0M73 437h0M80 437h0M87 437h0M171 437h0M178 437h0M185 437h0M192 437h0M199 437h0M206 437h0M213 437h0M220 437h0M227 437h0M17 444h0M24 444h0M31 444h0M38 444h0M45 444h0M52 444h0M59 444h0M87 444h0M150 444h0M157 444h0M164 444h0M171 444h0M178 444h0M185 444h0M192 444h0M199 444h0M206 444h0M213 444h0M220 444h0M227 444h0M24 451h0M31 451h0M38 451h0M45 451h0M52 451h0M59 451h0M66 451h0M73 451h0M150 451h0M157 451h0M164 451h0M171 451h0M178 451h0M185 451h0M192 451h0M199 451h0M206 451h0M213 451h0M220 451h0M227 451h0M234 451h0M31 458h0M38 458h0M45 458h0M52 458h0M59 458h0M66 458h0M73 458h0M80 458h0M143 458h0M150 458h0M157 458h0M164 458h0M171 458h0M178 458h0M185 458h0M192 458h0M199 458h0M206 458h0M213 458h0M220 458h0M227 458h0"/><path class="nw-arc" d="M260 310Q283 163 420 106"/><path class="nw-arc nw-arc2" d="M110 295Q223 132 420 106"/><g class="nw-pin nw-jp" transform="translate(420 106)"><circle class="nw-pulse" r="16"/><circle r="6"/><text x="18" y="5" text-anchor="start">JAPAN</text></g><g class="nw-pin nw-ph" transform="translate(260 310)"><circle class="nw-pulse" r="16"/><circle r="6"/><text x="18" y="5" text-anchor="start">PHILIPPINES</text></g><g class="nw-pin nw-vn" transform="translate(110 295)"><circle class="nw-pulse" r="16"/><circle r="6"/><text x="0" y="34" text-anchor="middle">VIETNAM</text></g></svg>
-      <div class="nw-list">
-        <div class="nw-c"><span class="k">JAPAN</span>
-          <div class="nw-o"><b>株式会社 A and K<span class="role">登録支援機関</span></b><p>募集・紹介／入国の手続き・生活の支援</p></div>
-          <div class="nw-o"><b>ブリッジング協同組合<span class="role">監理団体</span></b><p>2021年8月に弊社が設立。技能実習生の受入れを、紹介から監理まで自社グループ内で。</p></div>
-          <div class="nw-o"><b>トラスト江南協同組合<span class="role">提携監理団体</span></b><p>2019年9月に業務提携。愛知・岐阜・三重の企業さまや介護施設さまへの受入れを支えています。</p></div>
-        </div>
-        <div class="nw-c"><span class="k">PHILIPPINES</span>
-          <div class="nw-o"><b>プロデンシャルエンプロイメント<span class="role">送り出し機関</span></b><p>現地で企業さまご自身が面接を行うこともできます。</p></div>
-        </div>
-        <div class="nw-c"><span class="k">VIETNAM</span>
-          <div class="nw-o"><b>POLIMEX 国際人材株式会社<span class="role">送り出し機関</span></b><p>2021年8月にブリッジング協同組合と業務提携。</p></div>
-        </div>
-      </div>
-    </div>
-    <div class="more-r"><a class="txt-link" href="#partners">グループ・提携機関を詳しく見る <span aria-hidden="true">→</span></a></div>
+    <div class="sec-head"><span class="en">IN THE FIELD</span><h2>現地での取り組み</h2></div>
+    <ul class="fcards">
+      <li><a href="news.html#n20200122"><figure><img src="img/news/20200122-1.jpg" alt="ベトナムでの実習生の面接の様子" loading="lazy"></figure>
+        <div class="fc-b"><span class="fc-k">2020年1月　ベトナム</span><h3>企業さまと現地で面接</h3>
+        <p>内装工事の会社の社長さまとベトナムを訪れ、実習生の面接を行いました。2名を採用し、現地で3か月の日本語研修を受けてから来日する流れです。</p></div></a></li>
+      <li><a href="news.html#n20221108"><figure><img src="img/news/20221108-2.jpeg" alt="フィリピン出張で現地の教室を訪ねたときの様子" loading="lazy"></figure>
+        <div class="fc-b"><span class="fc-k">2022年10月　フィリピン</span><h3>送り出し機関と契約</h3>
+        <p>フィリピンに出張し、送り出し機関「プロデンシャルエンプロイメント」と契約しました。現地で企業さまご自身が面接を行うこともできます。</p></div></a></li>
+      <li><a href="news.html#n20190725"><figure><img src="img/news/20190725-3.jpg" alt="フィリピンの送り出し機関を訪問したときの様子" loading="lazy"></figure>
+        <div class="fc-b"><span class="fc-k">2019年7月　フィリピン</span><h3>視察に同行</h3>
+        <p>日本から視察に来られた方々と、フィリピンの送り出し機関を訪問しました。日本行きが決まった若者が日本語の勉強に取り組む様子を見ていただきました。</p></div></a></li>
+    </ul>
   </div>
 </section>
 
-<!-- ===== 06 ご紹介できる人材（下層 service.html の本文。トップには名前と .sum だけを出す） ===== -->
+<!-- ===== 05 ご紹介できる人材（下層 service.html の本文。トップには名前と .sum だけを出す） ===== -->
 <section class="alt" id="visas">
   <div class="wrap">
     <div class="sec-head">
@@ -707,15 +656,15 @@ footer a:hover{color:#fff; text-decoration:underline}
       <p>就労が可能な5つの在留資格に対応。<br>企業さまに合う制度選びからご相談いただけます。<small class="note-s">介護人材のご紹介にも力を入れています。</small></p>
     </div>
     <div class="visas">
-      <div class="visa"><div class="n">01</div><h3>技能実習</h3><p class="sum">自社グループの監理団体を通じてご紹介</p>
+      <div class="visa" id="v-ginou"><div class="n">01</div><h3>技能実習</h3><p class="sum">自社グループの監理団体を通じてご紹介</p>
         <p>自社グループの監理団体を通じ、現地で選考した実習生をご紹介します。手続きの代行と、<strong>フィリピン国内での出国手続き</strong>までお手伝いします。</p></div>
-      <div class="visa"><div class="n">02</div><h3>特定技能</h3><p class="sum">受入れ後に必要な支援までお引き受け</p>
+      <div class="visa" id="v-tokutei"><div class="n">02</div><h3>特定技能</h3><p class="sum">受入れ後に必要な支援までお引き受け</p>
         <p>登録支援機関として、受入れ後に義務づけられた支援も含めてお引き受けします。</p></div>
-      <div class="visa"><div class="n">03</div><h3>留学生</h3><p class="sum">特定技能への資格変更にも対応</p>
+      <div class="visa" id="v-ryugaku"><div class="n">03</div><h3>留学生</h3><p class="sum">特定技能への資格変更にも対応</p>
         <p>資格外活動の許可を得た留学生のご紹介。<strong>特定技能試験に合格した留学生を、特定技能ビザへ資格変更してご紹介する</strong>こともできます。</p></div>
-      <div class="visa"><div class="n">04</div><h3>高度人材</h3><p class="sum">職種と勤務内容に合わせてご紹介</p>
+      <div class="visa" id="v-kodo"><div class="n">04</div><h3>高度人材</h3><p class="sum">職種と勤務内容に合わせてご紹介</p>
         <p>専門的な知識や技術を持つ人材を、職種と勤務内容に合わせてご紹介します。</p></div>
-      <div class="visa"><div class="n">05</div><h3>日系人・定住者</h3><p class="sum">就労に制限がなく、すぐに働ける</p>
+      <div class="visa" id="v-nikkei"><div class="n">05</div><h3>日系人・定住者</h3><p class="sum">就労に制限がなく、すぐに働ける</p>
         <p>就労に制限のない在留資格をお持ちの方のご紹介。すぐに働いていただけます。</p></div>
     </div>
     <!-- ★実績の数字（受入企業数・累計紹介人数・対応国籍）は、お客さまから実数が届くまで載せない -->
@@ -749,7 +698,7 @@ footer a:hover{color:#fff; text-decoration:underline}
       <p>ご相談から就労開始まで、5つのステップでサポートします。</p>
     </div>
     <div class="flow-total"><span class="k">ご相談から就労開始まで</span><span class="v"><small>約</small>5〜6<small>か月</small></span>
-      <span class="s">※在留資格によって異なります。ご相談の段階では費用はいただきません。</span></div>
+      <span class="s">※海外の送り出し機関を通じて採用する場合の目安です。在留資格によって異なります。ご相談の段階では費用はいただきません。</span></div>
     <ol class="flow">
       <li class="step"><div class="n">STEP 01</div><h3>ご相談</h3>
         <p>職種・人数・時期をお伺いし、合う在留資格をご提案します。</p><div class="d"><span class="dk">費用</span>無料</div></li>
@@ -772,6 +721,15 @@ footer a:hover{color:#fff; text-decoration:underline}
       <span class="en">GROUP &amp; PARTNERS</span>
       <h2>自社グループと提携機関</h2>
       <p><strong class="lead-big">自社グループと提携機関で、<br>募集から就労後まで一貫して支援。</strong><small class="note-s">監理団体を自社で設立しているため、募集から入国、就労後の支援までを一貫してお引き受けできます。</small></p>
+    </div>
+
+    <div class="pt-map">
+      <svg class="nw-map" viewBox="0 0 560 460" aria-hidden="true" focusable="false"><path class="nw-land" d="M3 3h0M10 3h0M17 3h0M24 3h0M31 3h0M38 3h0M45 3h0M52 3h0M59 3h0M66 3h0M73 3h0M80 3h0M87 3h0M94 3h0M101 3h0M108 3h0M115 3h0M122 3h0M129 3h0M136 3h0M143 3h0M150 3h0M157 3h0M164 3h0M171 3h0M178 3h0M185 3h0M192 3h0M199 3h0M206 3h0M213 3h0M220 3h0M227 3h0M234 3h0M241 3h0M248 3h0M255 3h0M262 3h0M269 3h0M276 3h0M283 3h0M290 3h0M297 3h0M304 3h0M311 3h0M318 3h0M325 3h0M332 3h0M339 3h0M346 3h0M353 3h0M360 3h0M367 3h0M374 3h0M381 3h0M388 3h0M3 10h0M10 10h0M17 10h0M24 10h0M31 10h0M38 10h0M45 10h0M52 10h0M59 10h0M66 10h0M73 10h0M80 10h0M87 10h0M94 10h0M101 10h0M108 10h0M115 10h0M122 10h0M129 10h0M136 10h0M143 10h0M150 10h0M157 10h0M164 10h0M171 10h0M178 10h0M185 10h0M192 10h0M199 10h0M206 10h0M213 10h0M220 10h0M227 10h0M234 10h0M241 10h0M248 10h0M255 10h0M262 10h0M269 10h0M276 10h0M283 10h0M290 10h0M297 10h0M304 10h0M311 10h0M318 10h0M325 10h0M332 10h0M339 10h0M346 10h0M353 10h0M360 10h0M367 10h0M374 10h0M381 10h0M472 10h0M3 17h0M10 17h0M17 17h0M24 17h0M31 17h0M38 17h0M45 17h0M52 17h0M59 17h0M66 17h0M73 17h0M80 17h0M87 17h0M94 17h0M101 17h0M108 17h0M115 17h0M122 17h0M129 17h0M136 17h0M143 17h0M150 17h0M157 17h0M164 17h0M171 17h0M178 17h0M185 17h0M192 17h0M199 17h0M206 17h0M213 17h0M220 17h0M227 17h0M234 17h0M241 17h0M248 17h0M255 17h0M262 17h0M269 17h0M276 17h0M283 17h0M290 17h0M297 17h0M304 17h0M311 17h0M318 17h0M325 17h0M332 17h0M339 17h0M346 17h0M353 17h0M360 17h0M367 17h0M374 17h0M381 17h0M472 17h0M479 17h0M486 17h0M3 24h0M10 24h0M17 24h0M24 24h0M31 24h0M38 24h0M45 24h0M52 24h0M59 24h0M66 24h0M73 24h0M80 24h0M87 24h0M94 24h0M101 24h0M108 24h0M115 24h0M122 24h0M129 24h0M136 24h0M143 24h0M150 24h0M157 24h0M164 24h0M171 24h0M178 24h0M185 24h0M192 24h0M199 24h0M206 24h0M213 24h0M220 24h0M227 24h0M234 24h0M241 24h0M248 24h0M255 24h0M262 24h0M269 24h0M276 24h0M283 24h0M290 24h0M297 24h0M304 24h0M311 24h0M318 24h0M325 24h0M332 24h0M339 24h0M346 24h0M353 24h0M360 24h0M367 24h0M374 24h0M381 24h0M465 24h0M472 24h0M479 24h0M486 24h0M493 24h0M3 31h0M10 31h0M17 31h0M24 31h0M31 31h0M38 31h0M45 31h0M52 31h0M59 31h0M66 31h0M73 31h0M80 31h0M87 31h0M94 31h0M101 31h0M108 31h0M115 31h0M122 31h0M129 31h0M136 31h0M143 31h0M150 31h0M157 31h0M164 31h0M171 31h0M178 31h0M185 31h0M192 31h0M199 31h0M206 31h0M213 31h0M220 31h0M227 31h0M234 31h0M241 31h0M248 31h0M255 31h0M262 31h0M269 31h0M276 31h0M283 31h0M290 31h0M297 31h0M304 31h0M311 31h0M318 31h0M325 31h0M332 31h0M339 31h0M346 31h0M353 31h0M360 31h0M367 31h0M374 31h0M458 31h0M465 31h0M472 31h0M479 31h0M486 31h0M493 31h0M3 38h0M10 38h0M17 38h0M24 38h0M31 38h0M38 38h0M45 38h0M52 38h0M59 38h0M66 38h0M73 38h0M80 38h0M87 38h0M94 38h0M101 38h0M108 38h0M115 38h0M122 38h0M129 38h0M136 38h0M143 38h0M150 38h0M157 38h0M164 38h0M171 38h0M178 38h0M185 38h0M192 38h0M199 38h0M206 38h0M213 38h0M220 38h0M227 38h0M234 38h0M241 38h0M248 38h0M255 38h0M262 38h0M269 38h0M276 38h0M283 38h0M290 38h0M297 38h0M304 38h0M311 38h0M318 38h0M325 38h0M332 38h0M339 38h0M346 38h0M353 38h0M458 38h0M479 38h0M3 45h0M10 45h0M17 45h0M24 45h0M31 45h0M38 45h0M45 45h0M52 45h0M59 45h0M66 45h0M73 45h0M80 45h0M87 45h0M94 45h0M101 45h0M108 45h0M115 45h0M122 45h0M129 45h0M136 45h0M143 45h0M150 45h0M157 45h0M164 45h0M171 45h0M178 45h0M185 45h0M192 45h0M199 45h0M206 45h0M213 45h0M220 45h0M227 45h0M234 45h0M241 45h0M248 45h0M255 45h0M262 45h0M269 45h0M276 45h0M283 45h0M290 45h0M297 45h0M304 45h0M311 45h0M318 45h0M325 45h0M332 45h0M339 45h0M346 45h0M3 52h0M10 52h0M17 52h0M24 52h0M31 52h0M38 52h0M45 52h0M52 52h0M59 52h0M66 52h0M73 52h0M80 52h0M87 52h0M94 52h0M101 52h0M108 52h0M115 52h0M122 52h0M129 52h0M136 52h0M143 52h0M150 52h0M157 52h0M164 52h0M171 52h0M178 52h0M185 52h0M192 52h0M199 52h0M206 52h0M213 52h0M220 52h0M227 52h0M234 52h0M241 52h0M248 52h0M255 52h0M262 52h0M269 52h0M276 52h0M283 52h0M290 52h0M297 52h0M304 52h0M311 52h0M318 52h0M325 52h0M332 52h0M339 52h0M451 52h0M458 52h0M3 59h0M10 59h0M17 59h0M24 59h0M31 59h0M38 59h0M45 59h0M52 59h0M59 59h0M66 59h0M73 59h0M80 59h0M87 59h0M94 59h0M101 59h0M108 59h0M115 59h0M122 59h0M129 59h0M136 59h0M143 59h0M150 59h0M157 59h0M164 59h0M171 59h0M178 59h0M185 59h0M192 59h0M199 59h0M206 59h0M213 59h0M220 59h0M227 59h0M234 59h0M241 59h0M248 59h0M255 59h0M262 59h0M290 59h0M297 59h0M304 59h0M311 59h0M318 59h0M325 59h0M332 59h0M339 59h0M451 59h0M458 59h0M465 59h0M3 66h0M10 66h0M17 66h0M24 66h0M31 66h0M38 66h0M45 66h0M52 66h0M59 66h0M66 66h0M73 66h0M80 66h0M87 66h0M94 66h0M101 66h0M108 66h0M115 66h0M122 66h0M129 66h0M136 66h0M143 66h0M150 66h0M157 66h0M164 66h0M171 66h0M178 66h0M185 66h0M192 66h0M199 66h0M206 66h0M213 66h0M220 66h0M227 66h0M234 66h0M241 66h0M248 66h0M255 66h0M262 66h0M297 66h0M304 66h0M311 66h0M318 66h0M325 66h0M332 66h0M339 66h0M451 66h0M458 66h0M465 66h0M3 73h0M10 73h0M17 73h0M24 73h0M31 73h0M38 73h0M45 73h0M52 73h0M59 73h0M66 73h0M73 73h0M80 73h0M87 73h0M94 73h0M101 73h0M108 73h0M115 73h0M122 73h0M129 73h0M136 73h0M143 73h0M150 73h0M157 73h0M164 73h0M171 73h0M178 73h0M185 73h0M192 73h0M199 73h0M206 73h0M213 73h0M220 73h0M227 73h0M304 73h0M311 73h0M318 73h0M325 73h0M332 73h0M339 73h0M451 73h0M458 73h0M465 73h0M3 80h0M10 80h0M17 80h0M24 80h0M31 80h0M38 80h0M45 80h0M52 80h0M59 80h0M66 80h0M73 80h0M80 80h0M87 80h0M94 80h0M101 80h0M108 80h0M115 80h0M122 80h0M129 80h0M136 80h0M143 80h0M150 80h0M157 80h0M164 80h0M171 80h0M178 80h0M185 80h0M192 80h0M199 80h0M206 80h0M213 80h0M220 80h0M227 80h0M234 80h0M304 80h0M311 80h0M318 80h0M325 80h0M332 80h0M339 80h0M444 80h0M451 80h0M458 80h0M3 87h0M10 87h0M17 87h0M24 87h0M31 87h0M38 87h0M45 87h0M52 87h0M59 87h0M66 87h0M73 87h0M80 87h0M87 87h0M94 87h0M101 87h0M108 87h0M115 87h0M122 87h0M129 87h0M136 87h0M143 87h0M150 87h0M157 87h0M164 87h0M171 87h0M178 87h0M185 87h0M192 87h0M199 87h0M206 87h0M213 87h0M220 87h0M227 87h0M234 87h0M241 87h0M248 87h0M255 87h0M262 87h0M269 87h0M318 87h0M325 87h0M332 87h0M339 87h0M437 87h0M444 87h0M451 87h0M458 87h0M3 94h0M10 94h0M17 94h0M24 94h0M31 94h0M38 94h0M45 94h0M52 94h0M59 94h0M66 94h0M73 94h0M80 94h0M87 94h0M94 94h0M101 94h0M108 94h0M115 94h0M122 94h0M129 94h0M136 94h0M143 94h0M150 94h0M157 94h0M164 94h0M171 94h0M178 94h0M185 94h0M192 94h0M199 94h0M206 94h0M213 94h0M220 94h0M227 94h0M234 94h0M241 94h0M248 94h0M255 94h0M262 94h0M318 94h0M325 94h0M332 94h0M339 94h0M416 94h0M423 94h0M430 94h0M437 94h0M444 94h0M451 94h0M458 94h0M3 101h0M10 101h0M17 101h0M24 101h0M31 101h0M38 101h0M45 101h0M52 101h0M59 101h0M66 101h0M73 101h0M80 101h0M87 101h0M94 101h0M101 101h0M108 101h0M115 101h0M122 101h0M129 101h0M136 101h0M143 101h0M150 101h0M157 101h0M164 101h0M171 101h0M178 101h0M185 101h0M192 101h0M199 101h0M206 101h0M213 101h0M220 101h0M227 101h0M234 101h0M241 101h0M248 101h0M318 101h0M325 101h0M332 101h0M339 101h0M409 101h0M416 101h0M423 101h0M430 101h0M437 101h0M444 101h0M451 101h0M3 108h0M10 108h0M17 108h0M24 108h0M31 108h0M38 108h0M45 108h0M52 108h0M59 108h0M66 108h0M73 108h0M80 108h0M87 108h0M94 108h0M101 108h0M108 108h0M115 108h0M122 108h0M129 108h0M136 108h0M143 108h0M150 108h0M157 108h0M164 108h0M171 108h0M178 108h0M185 108h0M192 108h0M199 108h0M206 108h0M213 108h0M220 108h0M227 108h0M234 108h0M241 108h0M318 108h0M325 108h0M332 108h0M381 108h0M388 108h0M395 108h0M402 108h0M409 108h0M416 108h0M423 108h0M430 108h0M437 108h0M444 108h0M3 115h0M10 115h0M17 115h0M24 115h0M31 115h0M38 115h0M45 115h0M52 115h0M59 115h0M66 115h0M73 115h0M80 115h0M87 115h0M94 115h0M101 115h0M108 115h0M115 115h0M122 115h0M129 115h0M136 115h0M143 115h0M150 115h0M157 115h0M164 115h0M171 115h0M178 115h0M185 115h0M192 115h0M199 115h0M206 115h0M213 115h0M220 115h0M227 115h0M234 115h0M241 115h0M248 115h0M367 115h0M374 115h0M381 115h0M388 115h0M402 115h0M409 115h0M416 115h0M3 122h0M10 122h0M17 122h0M24 122h0M31 122h0M38 122h0M45 122h0M52 122h0M59 122h0M66 122h0M73 122h0M80 122h0M87 122h0M94 122h0M101 122h0M108 122h0M115 122h0M122 122h0M129 122h0M136 122h0M143 122h0M150 122h0M157 122h0M164 122h0M171 122h0M178 122h0M185 122h0M192 122h0M199 122h0M206 122h0M213 122h0M220 122h0M227 122h0M234 122h0M241 122h0M248 122h0M353 122h0M360 122h0M381 122h0M388 122h0M395 122h0M409 122h0M3 129h0M10 129h0M17 129h0M24 129h0M31 129h0M38 129h0M45 129h0M52 129h0M59 129h0M66 129h0M73 129h0M80 129h0M87 129h0M94 129h0M101 129h0M108 129h0M115 129h0M122 129h0M129 129h0M136 129h0M143 129h0M150 129h0M157 129h0M164 129h0M171 129h0M178 129h0M185 129h0M192 129h0M199 129h0M206 129h0M213 129h0M220 129h0M227 129h0M234 129h0M241 129h0M248 129h0M255 129h0M353 129h0M360 129h0M367 129h0M381 129h0M388 129h0M3 136h0M10 136h0M17 136h0M24 136h0M31 136h0M38 136h0M45 136h0M52 136h0M59 136h0M66 136h0M73 136h0M80 136h0M87 136h0M94 136h0M101 136h0M108 136h0M115 136h0M122 136h0M129 136h0M136 136h0M143 136h0M150 136h0M157 136h0M164 136h0M171 136h0M178 136h0M185 136h0M192 136h0M199 136h0M206 136h0M213 136h0M220 136h0M227 136h0M234 136h0M241 136h0M248 136h0M255 136h0M353 136h0M360 136h0M367 136h0M3 143h0M10 143h0M17 143h0M24 143h0M31 143h0M38 143h0M45 143h0M52 143h0M59 143h0M66 143h0M73 143h0M80 143h0M87 143h0M94 143h0M101 143h0M108 143h0M115 143h0M122 143h0M129 143h0M136 143h0M143 143h0M150 143h0M157 143h0M164 143h0M171 143h0M178 143h0M185 143h0M192 143h0M199 143h0M206 143h0M213 143h0M220 143h0M227 143h0M234 143h0M241 143h0M248 143h0M255 143h0M262 143h0M353 143h0M360 143h0M3 150h0M10 150h0M17 150h0M24 150h0M31 150h0M38 150h0M45 150h0M52 150h0M59 150h0M66 150h0M73 150h0M80 150h0M87 150h0M94 150h0M101 150h0M108 150h0M115 150h0M122 150h0M129 150h0M136 150h0M143 150h0M150 150h0M157 150h0M164 150h0M171 150h0M178 150h0M185 150h0M192 150h0M199 150h0M206 150h0M213 150h0M220 150h0M227 150h0M234 150h0M241 150h0M248 150h0M255 150h0M262 150h0M269 150h0M3 157h0M10 157h0M17 157h0M24 157h0M31 157h0M38 157h0M45 157h0M52 157h0M59 157h0M66 157h0M73 157h0M80 157h0M87 157h0M94 157h0M101 157h0M108 157h0M115 157h0M122 157h0M129 157h0M136 157h0M143 157h0M150 157h0M157 157h0M164 157h0M171 157h0M178 157h0M185 157h0M192 157h0M199 157h0M206 157h0M213 157h0M220 157h0M227 157h0M234 157h0M241 157h0M248 157h0M255 157h0M262 157h0M269 157h0M3 164h0M10 164h0M17 164h0M24 164h0M31 164h0M38 164h0M45 164h0M52 164h0M59 164h0M66 164h0M73 164h0M80 164h0M87 164h0M94 164h0M101 164h0M108 164h0M115 164h0M122 164h0M129 164h0M136 164h0M143 164h0M150 164h0M157 164h0M164 164h0M171 164h0M178 164h0M185 164h0M192 164h0M199 164h0M206 164h0M213 164h0M220 164h0M227 164h0M234 164h0M241 164h0M248 164h0M255 164h0M262 164h0M3 171h0M10 171h0M17 171h0M24 171h0M31 171h0M38 171h0M45 171h0M52 171h0M59 171h0M66 171h0M73 171h0M80 171h0M87 171h0M94 171h0M101 171h0M108 171h0M115 171h0M122 171h0M129 171h0M136 171h0M143 171h0M150 171h0M157 171h0M164 171h0M171 171h0M178 171h0M185 171h0M192 171h0M199 171h0M206 171h0M213 171h0M220 171h0M227 171h0M234 171h0M241 171h0M248 171h0M255 171h0M262 171h0M3 178h0M10 178h0M17 178h0M24 178h0M31 178h0M38 178h0M45 178h0M52 178h0M59 178h0M66 178h0M73 178h0M80 178h0M87 178h0M94 178h0M101 178h0M108 178h0M115 178h0M122 178h0M129 178h0M136 178h0M143 178h0M150 178h0M157 178h0M164 178h0M171 178h0M178 178h0M185 178h0M192 178h0M199 178h0M206 178h0M213 178h0M220 178h0M227 178h0M234 178h0M241 178h0M248 178h0M255 178h0M262 178h0M3 185h0M10 185h0M17 185h0M24 185h0M31 185h0M38 185h0M45 185h0M52 185h0M59 185h0M66 185h0M73 185h0M80 185h0M87 185h0M94 185h0M101 185h0M108 185h0M115 185h0M122 185h0M129 185h0M136 185h0M143 185h0M150 185h0M157 185h0M164 185h0M171 185h0M178 185h0M185 185h0M192 185h0M199 185h0M206 185h0M213 185h0M220 185h0M227 185h0M234 185h0M241 185h0M248 185h0M255 185h0M3 192h0M10 192h0M17 192h0M24 192h0M31 192h0M38 192h0M45 192h0M52 192h0M59 192h0M66 192h0M73 192h0M80 192h0M87 192h0M94 192h0M101 192h0M108 192h0M115 192h0M122 192h0M129 192h0M136 192h0M143 192h0M150 192h0M157 192h0M164 192h0M171 192h0M178 192h0M185 192h0M192 192h0M199 192h0M206 192h0M213 192h0M220 192h0M227 192h0M234 192h0M241 192h0M248 192h0M3 199h0M10 199h0M17 199h0M24 199h0M31 199h0M38 199h0M45 199h0M52 199h0M59 199h0M66 199h0M73 199h0M80 199h0M87 199h0M94 199h0M101 199h0M108 199h0M115 199h0M122 199h0M129 199h0M136 199h0M143 199h0M150 199h0M157 199h0M164 199h0M171 199h0M178 199h0M185 199h0M192 199h0M199 199h0M206 199h0M213 199h0M220 199h0M227 199h0M234 199h0M241 199h0M248 199h0M3 206h0M10 206h0M17 206h0M24 206h0M31 206h0M38 206h0M45 206h0M52 206h0M59 206h0M66 206h0M73 206h0M80 206h0M87 206h0M94 206h0M101 206h0M108 206h0M115 206h0M122 206h0M129 206h0M136 206h0M143 206h0M150 206h0M157 206h0M164 206h0M171 206h0M178 206h0M185 206h0M192 206h0M199 206h0M206 206h0M213 206h0M220 206h0M227 206h0M234 206h0M241 206h0M3 213h0M10 213h0M17 213h0M24 213h0M31 213h0M38 213h0M45 213h0M52 213h0M59 213h0M66 213h0M73 213h0M80 213h0M87 213h0M94 213h0M101 213h0M108 213h0M115 213h0M122 213h0M129 213h0M136 213h0M143 213h0M150 213h0M157 213h0M164 213h0M171 213h0M178 213h0M185 213h0M192 213h0M199 213h0M206 213h0M213 213h0M220 213h0M227 213h0M234 213h0M262 213h0M3 220h0M10 220h0M17 220h0M24 220h0M31 220h0M38 220h0M45 220h0M52 220h0M59 220h0M66 220h0M73 220h0M80 220h0M87 220h0M94 220h0M101 220h0M108 220h0M115 220h0M122 220h0M129 220h0M136 220h0M143 220h0M150 220h0M157 220h0M164 220h0M171 220h0M178 220h0M185 220h0M192 220h0M199 220h0M206 220h0M213 220h0M220 220h0M227 220h0M255 220h0M262 220h0M3 227h0M10 227h0M17 227h0M24 227h0M31 227h0M38 227h0M45 227h0M52 227h0M59 227h0M66 227h0M73 227h0M80 227h0M87 227h0M94 227h0M101 227h0M108 227h0M115 227h0M122 227h0M129 227h0M136 227h0M143 227h0M150 227h0M157 227h0M164 227h0M171 227h0M178 227h0M185 227h0M192 227h0M199 227h0M206 227h0M213 227h0M255 227h0M262 227h0M3 234h0M10 234h0M17 234h0M24 234h0M31 234h0M38 234h0M45 234h0M52 234h0M59 234h0M66 234h0M73 234h0M80 234h0M87 234h0M94 234h0M101 234h0M108 234h0M115 234h0M122 234h0M129 234h0M136 234h0M143 234h0M150 234h0M157 234h0M164 234h0M171 234h0M178 234h0M185 234h0M192 234h0M199 234h0M255 234h0M3 241h0M10 241h0M17 241h0M24 241h0M31 241h0M38 241h0M45 241h0M52 241h0M59 241h0M66 241h0M73 241h0M80 241h0M87 241h0M94 241h0M101 241h0M108 241h0M115 241h0M122 241h0M129 241h0M136 241h0M143 241h0M150 241h0M157 241h0M164 241h0M171 241h0M178 241h0M3 248h0M10 248h0M17 248h0M24 248h0M31 248h0M38 248h0M45 248h0M52 248h0M59 248h0M66 248h0M73 248h0M80 248h0M87 248h0M94 248h0M101 248h0M108 248h0M115 248h0M122 248h0M150 248h0M157 248h0M3 255h0M10 255h0M17 255h0M24 255h0M31 255h0M38 255h0M45 255h0M52 255h0M59 255h0M66 255h0M73 255h0M80 255h0M87 255h0M94 255h0M101 255h0M108 255h0M115 255h0M3 262h0M10 262h0M17 262h0M24 262h0M31 262h0M38 262h0M45 262h0M52 262h0M59 262h0M66 262h0M73 262h0M80 262h0M87 262h0M94 262h0M101 262h0M108 262h0M150 262h0M157 262h0M3 269h0M10 269h0M17 269h0M24 269h0M31 269h0M38 269h0M45 269h0M52 269h0M59 269h0M66 269h0M73 269h0M80 269h0M87 269h0M94 269h0M101 269h0M108 269h0M143 269h0M150 269h0M3 276h0M10 276h0M17 276h0M24 276h0M31 276h0M38 276h0M45 276h0M52 276h0M59 276h0M66 276h0M73 276h0M80 276h0M87 276h0M94 276h0M101 276h0M108 276h0M143 276h0M262 276h0M269 276h0M3 283h0M10 283h0M17 283h0M24 283h0M31 283h0M38 283h0M45 283h0M52 283h0M59 283h0M66 283h0M73 283h0M80 283h0M87 283h0M94 283h0M101 283h0M108 283h0M115 283h0M255 283h0M262 283h0M269 283h0M3 290h0M10 290h0M17 290h0M24 290h0M31 290h0M38 290h0M45 290h0M52 290h0M59 290h0M66 290h0M73 290h0M80 290h0M87 290h0M94 290h0M101 290h0M108 290h0M115 290h0M255 290h0M262 290h0M269 290h0M3 297h0M31 297h0M38 297h0M45 297h0M52 297h0M59 297h0M66 297h0M73 297h0M80 297h0M87 297h0M94 297h0M101 297h0M108 297h0M115 297h0M122 297h0M255 297h0M262 297h0M31 304h0M38 304h0M45 304h0M52 304h0M59 304h0M66 304h0M73 304h0M80 304h0M87 304h0M94 304h0M101 304h0M108 304h0M115 304h0M122 304h0M129 304h0M255 304h0M262 304h0M31 311h0M38 311h0M45 311h0M52 311h0M59 311h0M66 311h0M73 311h0M80 311h0M87 311h0M94 311h0M101 311h0M108 311h0M115 311h0M122 311h0M129 311h0M136 311h0M262 311h0M31 318h0M38 318h0M45 318h0M52 318h0M59 318h0M66 318h0M73 318h0M80 318h0M87 318h0M94 318h0M101 318h0M108 318h0M115 318h0M122 318h0M129 318h0M136 318h0M262 318h0M269 318h0M38 325h0M45 325h0M52 325h0M59 325h0M66 325h0M73 325h0M80 325h0M87 325h0M94 325h0M101 325h0M108 325h0M115 325h0M122 325h0M129 325h0M136 325h0M276 325h0M283 325h0M290 325h0M38 332h0M45 332h0M73 332h0M80 332h0M87 332h0M94 332h0M101 332h0M108 332h0M115 332h0M122 332h0M129 332h0M136 332h0M290 332h0M38 339h0M45 339h0M80 339h0M87 339h0M94 339h0M101 339h0M108 339h0M115 339h0M122 339h0M129 339h0M136 339h0M290 339h0M297 339h0M38 346h0M45 346h0M87 346h0M94 346h0M101 346h0M108 346h0M115 346h0M122 346h0M129 346h0M136 346h0M276 346h0M290 346h0M297 346h0M304 346h0M38 353h0M87 353h0M94 353h0M101 353h0M108 353h0M115 353h0M122 353h0M283 353h0M290 353h0M297 353h0M304 353h0M38 360h0M101 360h0M108 360h0M115 360h0M283 360h0M290 360h0M38 367h0M45 367h0M101 367h0M108 367h0M304 367h0M38 374h0M45 374h0M290 374h0M297 374h0M304 374h0M38 381h0M45 381h0M52 381h0M276 381h0M283 381h0M290 381h0M297 381h0M304 381h0M311 381h0M45 388h0M52 388h0M290 388h0M297 388h0M304 388h0M311 388h0M52 395h0M59 395h0M66 395h0M220 395h0M297 395h0M304 395h0M311 395h0M59 402h0M66 402h0M73 402h0M213 402h0M220 402h0M227 402h0M304 402h0M3 409h0M10 409h0M17 409h0M24 409h0M59 409h0M66 409h0M73 409h0M80 409h0M206 409h0M213 409h0M220 409h0M227 409h0M234 409h0M241 409h0M3 416h0M10 416h0M17 416h0M24 416h0M31 416h0M59 416h0M66 416h0M73 416h0M80 416h0M199 416h0M206 416h0M213 416h0M220 416h0M227 416h0M234 416h0M3 423h0M10 423h0M17 423h0M24 423h0M31 423h0M38 423h0M59 423h0M66 423h0M73 423h0M80 423h0M192 423h0M199 423h0M206 423h0M213 423h0M220 423h0M227 423h0M3 430h0M10 430h0M17 430h0M24 430h0M31 430h0M38 430h0M45 430h0M66 430h0M73 430h0M80 430h0M185 430h0M192 430h0M199 430h0M206 430h0M213 430h0M220 430h0M227 430h0M10 437h0M17 437h0M24 437h0M31 437h0M38 437h0M45 437h0M52 437h0M73 437h0M80 437h0M87 437h0M171 437h0M178 437h0M185 437h0M192 437h0M199 437h0M206 437h0M213 437h0M220 437h0M227 437h0M17 444h0M24 444h0M31 444h0M38 444h0M45 444h0M52 444h0M59 444h0M87 444h0M150 444h0M157 444h0M164 444h0M171 444h0M178 444h0M185 444h0M192 444h0M199 444h0M206 444h0M213 444h0M220 444h0M227 444h0M24 451h0M31 451h0M38 451h0M45 451h0M52 451h0M59 451h0M66 451h0M73 451h0M150 451h0M157 451h0M164 451h0M171 451h0M178 451h0M185 451h0M192 451h0M199 451h0M206 451h0M213 451h0M220 451h0M227 451h0M234 451h0M31 458h0M38 458h0M45 458h0M52 458h0M59 458h0M66 458h0M73 458h0M80 458h0M143 458h0M150 458h0M157 458h0M164 458h0M171 458h0M178 458h0M185 458h0M192 458h0M199 458h0M206 458h0M213 458h0M220 458h0M227 458h0"/><path class="nw-arc" d="M260 310Q283 163 420 106"/><path class="nw-arc nw-arc2" d="M110 295Q223 132 420 106"/><g class="nw-pin nw-jp" transform="translate(420 106)"><circle class="nw-pulse" r="16"/><circle r="6"/><text x="18" y="5" text-anchor="start">JAPAN</text></g><g class="nw-pin nw-ph" transform="translate(260 310)"><circle class="nw-pulse" r="16"/><circle r="6"/><text x="18" y="5" text-anchor="start">PHILIPPINES</text></g><g class="nw-pin nw-vn" transform="translate(110 295)"><circle class="nw-pulse" r="16"/><circle r="6"/><text x="0" y="34" text-anchor="middle">VIETNAM</text></g></svg>
+      <ul class="pt-map-l">
+        <li><span>JAPAN</span>株式会社 A and K／ブリッジング協同組合／トラスト江南協同組合</li>
+        <li><span>PHILIPPINES</span>プロデンシャルエンプロイメント</li>
+        <li><span>VIETNAM</span>POLIMEX 国際人材株式会社</li>
+      </ul>
     </div>
 
     <div class="pt-block pt-group">
@@ -881,11 +839,27 @@ footer a:hover{color:#fff; text-decoration:underline}
       </details>
       <details>
         <summary>受入れまでにどのくらいの期間がかかりますか。</summary>
-        <div class="a"><p style="margin:0">在留資格によりますが、ご相談から就労開始までおおむね5〜6か月が目安です。</p></div>
+        <div class="a"><p style="margin:0">海外の送り出し機関を通じて採用する場合、ご相談から就労開始までおおむね5〜6か月が目安です（在留資格によって異なります）。</p></div>
       </details>
       <details>
         <summary>受入れの経験がない会社でも大丈夫ですか。</summary>
         <div class="a"><p style="margin:0">はじめての企業さまがほとんどです。社内の受入れ体制づくりからご一緒します。</p></div>
+      </details>
+      <details>
+        <summary>どのような人材を紹介してもらえますか。</summary>
+        <div class="a"><p style="margin:0">技能実習・特定技能・留学生・高度人材・日系人／定住者の5つに対応しています。介護人材のご紹介にも力を入れています。</p></div>
+      </details>
+      <details>
+        <summary>面接は現地に行かないとできませんか。</summary>
+        <div class="a"><p style="margin:0">書類選考ののち、オンラインまたは現地で面接します。フィリピンでは、提携する送り出し機関で企業さまご自身が面接を行うこともできます。</p></div>
+      </details>
+      <details>
+        <summary>住まいの準備も手伝ってもらえますか。</summary>
+        <div class="a"><p style="margin:0">特定技能の方は、登録支援機関として住まい探しと、銀行口座・携帯電話・電気ガス水道などの契約をお手伝いします。</p></div>
+      </details>
+      <details>
+        <summary>働き始めたあとも支援はありますか。</summary>
+        <div class="a"><p style="margin:0">定期的な面談と、仕事や暮らしの相談・苦情への対応を続けます。法令違反などがあれば行政機関へ通報します。</p></div>
       </details>
     </div>
   </div>

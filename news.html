@@ -100,8 +100,8 @@ header{position:sticky; top:0; z-index:70; background:#fff; border-bottom:1px so
                              rgba(16,42,67,.18) 80%,rgba(16,42,67,.04) 100%)}
 .hero-copy{position:relative; z-index:2; display:flex; align-items:center; min-height:inherit; padding:64px 0 88px}
 .hero-copy .wrap{width:100%}
-.hero-en{display:flex; align-items:center; gap:16px; margin:0 0 26px; font-family:var(--en); font-weight:600;
-  font-size:clamp(14px,1.25vw,16px); letter-spacing:.26em; color:var(--gold-l); line-height:1.5}
+.hero-en{display:flex; align-items:center; gap:16px; margin:0 0 22px; font-weight:700;
+  font-size:clamp(15px,1.5vw,19px); letter-spacing:.14em; color:var(--gold-l); line-height:1.5}
 .hero-en::before{content:""; flex:none; width:44px; height:1px; background:var(--gold)}
 .hero-copy h1{font-size:clamp(34px,4.5vw,60px); font-weight:700; line-height:1.42; margin:0 0 26px;
   letter-spacing:.06em; color:#fff}
@@ -141,7 +141,7 @@ header{position:sticky; top:0; z-index:70; background:#fff; border-bottom:1px so
 .tc .ic{border-color:rgba(182,154,104,.55); background:transparent; color:var(--gold-l)}
 .tc-body{display:flex; flex-direction:column; min-width:0}
 .tc-en{font-family:var(--en); font-size:13px; font-weight:600; letter-spacing:.22em; color:var(--gold-l); line-height:1.3}
-.tc-k{font-size:12.5px; color:rgba(255,255,255,.72); margin-top:4px}
+.tc-k{font-size:13px; color:rgba(255,255,255,.8); margin-top:4px}
 .tc b{font-size:17px; font-weight:700; color:#fff; line-height:1.5}
 
 /* ---- 節 ---- */
@@ -163,7 +163,7 @@ section.alt{background:var(--panel); border-top:1px solid var(--line-s); border-
 
 /* ---- ご紹介できる人材（下層：詳しいカード） ---- */
 .visas{display:grid; grid-template-columns:repeat(6,1fr); gap:24px 28px}
-.visa{grid-column:span 2; display:grid; grid-template-rows:auto auto auto 1fr; background:#fff;
+.visa{scroll-margin-top:96px; grid-column:span 2; display:grid; grid-template-rows:auto auto auto 1fr; background:#fff;
   border:1px solid var(--line); padding:28px 28px 30px; border-radius:6px}
 .visa:nth-child(4){grid-column:2 / span 2}
 .visa .n{display:flex; align-items:center; gap:12px; font-size:12px; font-weight:700; letter-spacing:.06em; color:var(--blue-dd)}
@@ -417,7 +417,7 @@ footer a:hover{color:#fff; text-decoration:underline}
    並び：FV → 信頼の帯 → INTRODUCTION → 3つの強み → GLOBAL NETWORK → 人材 → 支援 → 流れ
          → ABOUT US → お知らせ → お問い合わせ。数字・実績は今あるものだけを使う。
    トップの節は build.py が <div class="top"> で包む。下層には効かない。 */
-.top section{padding:120px 0}
+.top section{padding:104px 0}
 .top section.alt{background:var(--panel); border:0}
 .top .sec-head{border-left:0; padding-left:0; margin-bottom:56px}
 .top .sec-head .en{display:flex; align-items:center; gap:14px; font-family:var(--en); font-weight:600;
@@ -429,36 +429,33 @@ footer a:hover{color:#fff; text-decoration:underline}
 .top .txt-link{color:var(--blue)}
 .top .txt-link.light{color:#fff}
 
-/* INTRODUCTION：大きな英字と本文 */
-.intro-grid{display:grid; grid-template-columns:1fr 1.05fr; gap:72px; align-items:center}
-.intro-en{margin:0; font-family:var(--en); font-weight:500; font-size:clamp(46px,6.2vw,90px); line-height:1.04;
-  color:var(--navy); letter-spacing:.005em}
-.intro-en em{font-style:italic; color:var(--gold)}
-.top .intro .sec-head{margin-bottom:28px}
-.intro-body p{margin:0 0 16px; font-size:16px; line-height:2.1}
-.intro-body p:last-child{margin-bottom:0}
+/* 選ばれる3つの理由（短く3列） */
+.rsn{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(3,1fr); gap:24px}
+.rs{display:flex; flex-direction:column; background:#fff; border-top:3px solid var(--navy); padding:32px 30px 30px}
+.rs-n{font-family:var(--en); font-weight:500; font-size:44px; line-height:1; color:var(--gold)}
+.rs h3{font-size:19px; color:var(--ink); margin:16px 0 12px; line-height:1.55}
+.rs p{margin:0; font-size:14.5px; line-height:1.95}
+.rs .txt-link{margin-top:auto; padding-top:16px}
 
-/* 3つの強み：写真と文を左右交互に */
-.strs{display:grid; gap:110px}
-.str{display:grid; grid-template-columns:1.08fr 1fr; gap:80px; align-items:center}
-.str:nth-child(even) .str-ph{order:2}
-.str-ph{margin:0}
-.str-ph .ph{position:relative; isolation:isolate}
-.str-ph img{width:100%; aspect-ratio:4/3; object-fit:cover}
-.str-ph .ph::before{content:""; position:absolute; z-index:-1; inset:22px -22px -22px 22px; border:1px solid var(--gold)}
-.str:nth-child(even) .str-ph .ph::before{inset:22px 22px -22px -22px}
-.str-ph figcaption{margin-top:30px; font-size:12px; color:var(--muted)}
-.str-n{display:block; font-family:var(--en); font-weight:500; font-size:68px; line-height:1; color:var(--gold)}
-.str-en{display:block; margin-top:12px; font-family:var(--en); font-weight:600; font-size:14px; letter-spacing:.22em; color:var(--muted)}
-.str h3{font-size:clamp(21px,2.2vw,27px); color:var(--ink); margin:12px 0 18px; line-height:1.5; letter-spacing:.04em}
-.str p{font-size:15.5px; line-height:2; margin:0 0 24px}
-.str .checks{max-width:30em}
+/* 現地での取り組み（お知らせにある事実から） */
+.fcards{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(3,1fr); gap:28px}
+.fcards a{display:flex; flex-direction:column; height:100%; text-decoration:none; color:inherit; border:1px solid var(--line);
+  background:#fff; transition:border-color .2s, box-shadow .2s}
+.fcards a:hover{border-color:var(--gold); box-shadow:0 10px 26px rgba(16,42,67,.08)}
+.fcards figure{margin:0; aspect-ratio:16/10; overflow:hidden; background:var(--panel)}
+.fcards img{width:100%; height:100%; object-fit:cover}
+.fc-b{padding:22px 24px 26px}
+.fc-k{display:block; font-size:13px; font-weight:700; color:var(--gold-d); letter-spacing:.06em}
+.fc-b h3{font-size:18px; color:var(--ink); margin:6px 0 10px; line-height:1.5}
+.fc-b p{margin:0; font-size:14px; line-height:1.9}
 
-/* GLOBAL NETWORK：紺の地にアジアの点描地図 */
-.top section.network{background:radial-gradient(ellipse 70% 70% at 28% 45%,#1b4468 0%,var(--navy) 62%); color:#fff}
-.top .network .sec-head .en{color:var(--gold-l)}
-.top .network .sec-head h2{color:#fff}
-.nw{display:grid; grid-template-columns:1.12fr 1fr; gap:56px; align-items:center}
+/* 提携機関のページの地図（紺の箱） */
+.pt-map{display:grid; grid-template-columns:1.1fr 1fr; gap:40px; align-items:center; background:radial-gradient(ellipse 70% 70% at 28% 45%,#1b4468 0%,var(--navy) 62%);
+  color:#fff; padding:40px 48px; margin-bottom:24px}
+.pt-map-l{list-style:none; margin:0; padding:0}
+.pt-map-l li{padding:14px 0; border-top:1px solid rgba(255,255,255,.14); font-size:15px; line-height:1.7}
+.pt-map-l li:first-child{border-top:0}
+.pt-map-l span{display:block; font-family:var(--en); font-weight:600; font-size:14px; letter-spacing:.24em; color:var(--gold-l)}
 .nw-map{display:block; width:100%; height:auto}
 .nw-land{fill:none; stroke:rgba(255,255,255,.24); stroke-width:3.4; stroke-linecap:round}
 .nw-arc{fill:none; stroke:var(--gold); stroke-width:1.8; stroke-dasharray:6 7; stroke-linecap:round}
@@ -466,16 +463,6 @@ footer a:hover{color:#fff; text-decoration:underline}
 .nw-jp circle{fill:#fff}
 .nw-pin .nw-pulse{fill:none; stroke:var(--gold-l); stroke-width:1.4; opacity:0; transform-box:fill-box; transform-origin:center}
 .nw-pin text{fill:#fff; font-family:var(--en); font-size:17px; font-weight:600; letter-spacing:.18em}
-.nw-list{display:grid; gap:14px}
-.nw-c{background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.14); border-radius:4px; padding:20px 26px}
-.nw-c .k{display:block; font-family:var(--en); font-weight:600; font-size:14px; letter-spacing:.24em; color:var(--gold-l)}
-.nw-o{padding:10px 0}
-.nw-o + .nw-o{border-top:1px solid rgba(255,255,255,.1)}
-.nw-o b{display:block; font-size:16px; color:#fff; line-height:1.6}
-.nw-o .role{display:inline-block; margin-left:10px; padding:0 8px; border:1px solid rgba(182,154,104,.65); border-radius:2px;
-  font-size:11.5px; font-weight:700; color:var(--gold-l); vertical-align:2px; line-height:1.7}
-.nw-o p{margin:2px 0 0; font-size:13.5px; line-height:1.8; color:rgba(255,255,255,.74)}
-.top .network .txt-link{color:var(--gold-l)}
 @media (prefers-reduced-motion:no-preference){
   .nw-arc{animation:nwDash 1.4s linear infinite}
   .nw-arc2{animation-duration:1.7s}
@@ -492,6 +479,9 @@ footer a:hover{color:#fff; text-decoration:underline}
 .top .vcard .n{font-family:var(--en); font-weight:500; font-size:34px; letter-spacing:.02em; color:var(--gold); line-height:1}
 .top .vcard h3{margin:14px 0 10px; padding:0; border:0; font-size:18.5px}
 .top .vcard p{font-size:14px; color:var(--text)}
+.top a.vcard{display:flex; flex-direction:column; text-decoration:none; color:inherit; transition:background-color .2s}
+.top a.vcard:hover{background:var(--blue-s)}
+.top .vcard .go{margin-top:auto; padding-top:14px; font-size:13.5px; font-weight:700; color:var(--blue)}
 
 /* 支援（3段階） */
 .top .stage{background:#fff; border:1px solid var(--line); border-top:3px solid var(--navy); border-radius:0; padding:32px 30px 28px}
@@ -518,9 +508,13 @@ footer a:hover{color:#fff; text-decoration:underline}
 .ab{background:var(--panel); border-left:3px solid var(--gold); padding:18px 22px}
 .ab-k{display:block; font-size:12px; font-weight:700; color:var(--muted)}
 .ab b{display:block; margin-top:4px; font-size:15.5px; color:var(--ink); line-height:1.6}
-.ab small{display:block; margin-top:4px; font-size:12.5px; color:var(--muted)}
+.ab small{display:block; margin-top:4px; font-size:13px; color:var(--muted)}
 .about-grid .more-r{margin-top:22px}
 
+/* お知らせの分類（build.py が news.json の内容から付ける） */
+.ncat{display:inline-block; font-style:normal; font-family:var(--sans); font-size:11.5px; font-weight:700; letter-spacing:.04em; color:var(--navy);
+  border:1px solid var(--line); background:#fff; padding:1px 8px; margin-left:10px; vertical-align:2px; border-radius:2px}
+.ncat.c-hr{border-color:var(--gold); color:var(--gold-d)}
 /* お知らせ（写真つき3件） */
 .top section.topnews{padding:110px 0}
 .nb-head{display:flex; align-items:flex-end; justify-content:space-between; gap:20px; margin-bottom:44px}
@@ -537,25 +531,17 @@ footer a:hover{color:#fff; text-decoration:underline}
   padding:6px 24px 24px; font-size:14.5px; line-height:1.85}
 
 @media (max-width:1000px){
-  .intro-grid, .str, .nw, .about-grid{grid-template-columns:1fr; gap:36px}
-  .str:nth-child(even) .str-ph{order:0}
-  .strs{gap:80px}
-  .str-ph{margin-right:22px}
-  .str:nth-child(even) .str-ph{margin:0 0 0 22px}
-  .nw-map{max-width:620px; margin:0 auto}
+  .about-grid, .pt-map{grid-template-columns:1fr; gap:28px}
+  .rsn, .fcards{grid-template-columns:1fr; gap:16px}
+  .nw-map{max-width:560px; margin:0 auto}
 }
 @media (max-width:760px){
-  .top section{padding:76px 0}
-  .top section.topnews{padding:72px 0}
-  .top .sec-head{margin-bottom:36px}
-  .intro-en{font-size:clamp(40px,12vw,56px)}
-  .str-n{font-size:52px}
-  .str-ph .ph::before{inset:14px -14px -14px 14px}
-  .str:nth-child(even) .str-ph .ph::before{inset:14px 14px -14px -14px}
-  .str-ph{margin-right:14px}
-  .str:nth-child(even) .str-ph{margin:0 0 0 14px}
-  .str-ph figcaption{margin-top:22px}
-  .nw-c{padding:18px 20px}
+  .top section{padding:60px 0}
+  .top section.topnews{padding:60px 0}
+  .top .sec-head{margin-bottom:28px}
+  .rs{padding:24px 22px}
+  .rs-n{font-size:36px}
+  .pt-map{padding:28px 20px}
   .top .vcards{grid-template-columns:1fr}
   .top .vcard{padding:24px 22px}
   .abiz{grid-template-columns:1fr}
@@ -587,7 +573,13 @@ footer a:hover{color:#fff; text-decoration:underline}
 .nlist{padding:52px 0 86px}
 .nitem{display:grid; grid-template-columns:140px 1fr; gap:34px;
   padding:32px 0; border-bottom:1px solid var(--line)}
-.nitem:first-child{border-top:1px solid var(--line)}
+.nitem:first-child, .nfilter + .nitem{border-top:1px solid var(--line)}
+.nitem{scroll-margin-top:96px}
+.nitem .ncat{display:table; margin:8px 0 0}
+.nfilter{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:28px}
+.nfilter button{font:inherit; font-size:13.5px; font-weight:700; padding:7px 16px; min-height:40px; cursor:pointer;
+  background:#fff; color:var(--navy); border:1px solid var(--line); border-radius:2px}
+.nfilter button.on{background:var(--navy); border-color:var(--navy); color:#fff}
 /* ★グリッドの子は既定で min-width:auto。中に長い英数字があると列が縮まず、
    320pxで箱からはみ出す（案Cのお知らせで実際に出た）。 */
 .nitem > *{min-width:0}
@@ -669,9 +661,10 @@ footer a:hover{color:#fff; text-decoration:underline}
 .trust{animation:rise .7s cubic-bezier(.2,.7,.3,1) .4s both}
 
 /* スクロールで出てくる分だけ、JSがあるとき（.anim）に隠しておく */
-.anim section > .wrap > *:not(.visas):not(.strs):not(.vcards):not(.stages):not(.tline):not(.flow):not(.partners):not(.faq-list):not(.ncards):not(.gcards):not(.contact-grid),
+.anim section > .wrap > *:not(.visas):not(.rsn):not(.fcards):not(.vcards):not(.stages):not(.tline):not(.flow):not(.partners):not(.faq-list):not(.ncards):not(.gcards):not(.contact-grid),
 .anim .visas > *,
-.anim .strs > *,
+.anim .rsn > *,
+.anim .fcards > *,
 .anim .vcards > *,
 .anim .stages > *,
 .anim .tline > *,
@@ -688,9 +681,10 @@ footer a:hover{color:#fff; text-decoration:underline}
 @media (max-width:700px){ .anim .on{animation-name:riseSp} }
 
 @media (prefers-reduced-motion:reduce){
-  .anim section > .wrap > *:not(.visas):not(.strs):not(.vcards):not(.stages):not(.tline):not(.flow):not(.partners):not(.faq-list):not(.ncards):not(.gcards):not(.contact-grid),
+  .anim section > .wrap > *:not(.visas):not(.rsn):not(.fcards):not(.vcards):not(.stages):not(.tline):not(.flow):not(.partners):not(.faq-list):not(.ncards):not(.gcards):not(.contact-grid),
 .anim .visas > *,
-.anim .strs > *,
+.anim .rsn > *,
+.anim .fcards > *,
 .anim .vcards > *,
 .anim .stages > *,
 .anim .tline > *,
@@ -705,9 +699,10 @@ footer a:hover{color:#fff; text-decoration:underline}
   .anim .on, .hero .bg img, .hero-copy .wrap > *, .trust{animation:none}
 }
 @media print{
-  .anim section > .wrap > *:not(.visas):not(.strs):not(.vcards):not(.stages):not(.tline):not(.flow):not(.partners):not(.faq-list):not(.ncards):not(.gcards):not(.contact-grid),
+  .anim section > .wrap > *:not(.visas):not(.rsn):not(.fcards):not(.vcards):not(.stages):not(.tline):not(.flow):not(.partners):not(.faq-list):not(.ncards):not(.gcards):not(.contact-grid),
 .anim .visas > *,
-.anim .strs > *,
+.anim .rsn > *,
+.anim .fcards > *,
 .anim .vcards > *,
 .anim .stages > *,
 .anim .tline > *,
@@ -759,30 +754,43 @@ setTimeout(function(){
 <div class="crumb"><div class="wrap"><a href="index.html">ホーム</a> ／ 過去のお知らせ</div></div>
 <div class="page-head"><div class="wrap"><span class="en">NEWS &amp; TOPICS</span><h1>過去のお知らせ</h1></div></div>
 <div class="nlist"><div class="wrap">
-      <article class="nitem"><time>2025.06.02</time><div class="nbody"><p>弊社運営の児童発達支援・放課後デイサービス「かみのてKIDS」が新築移転しました。</p><p>中日新聞と岐阜新聞に掲載されました。</p><p>今後、療育の必要な児童の受け入れ人数を増やしていきます。</p><p>場所　　可児市土田2569-2</p><p>連絡先　0574-66-3513</p><div class="ngal"><img src="img/news/20250602-1.jpeg" alt="" loading="lazy"><img src="img/news/20250602-2.jpeg" alt="" loading="lazy"></div></div></article>
-      <article class="nitem"><time>2025.03.22</time><div class="nbody"><p>弊社運営のハンズオブガッド今渡保育園の卒園式を3月22日（土）可児市アーラにて行いました。</p><p>今年度の卒園児は21名です。</p><p>フィリピン国籍、ブラジル国籍の外国にルーツがある園児です。</p><p>4月からは日本の小学校に入学します。</p><p>日本語もしっかり勉強したので頑張って小学校に通ってください。</p><p>今回、お忙しいところお祝いのお言葉に来て頂きました冨田可児市長様ありがとうございました。</p><p>また今渡北小学校の片田教頭、伊左治先生、岐阜県警本部の原田警部補、タンポポ班の皆様にも感謝しております。</p><p>弊社は、これからも外国人の住民が地域の一員として暮らしていけるように多文化共生社会に貢献していきます。</p><div class="ngal"><img src="img/news/20250322-1.jpg" alt="" loading="lazy"><img src="img/news/20250322-2.jpg" alt="" loading="lazy"><img src="img/news/20250322-3.jpg" alt="" loading="lazy"><img src="img/news/20250322-4.jpg" alt="" loading="lazy"><img src="img/news/20250322-5.jpg" alt="" loading="lazy"></div></div></article>
-      <article class="nitem"><time>2024.12.13</time><div class="nbody"><p>新施設の地鎮祭を執り行いました。</p><p>弊社運営の児童発達支援・放課後等デイサービス事業「かみのてKIDS」を新築する建物に移転します。</p><p>移転後は利用者増加のため建物内に事業所を増設します。</p><p>開校は令和7年6月2日（月）です。</p><p>弊社の施設では支援が必要な外国籍の児童も通訳を通じて療育をします。</p><div class="ngal"><img src="img/news/20241213-1.jpeg" alt="" loading="lazy"><img src="img/news/20241213-2.jpeg" alt="" loading="lazy"><img src="img/news/20241213-3.jpeg" alt="" loading="lazy"></div></div></article>
-      <article class="nitem"><time>2024.03.24</time><div class="nbody"><p>弊社運営のハンズオブガッド今渡保育園の年長クラスの卒園式を3</p><p>月24日（日）に</p><p>可児市アーラにて行いました。</p><p>今年度の卒園児は26名です。</p><p>フィリピン国籍、ブラジル国籍の外国にルーツがある園児の中で今</p><p>年は日本国籍の園児が1名含まれています。</p><p>この環境の中で1名の日本国籍の園児は3年間保育園で他の園児た</p><p>ちが話す英語、タガログ語、ポルトガル語を</p><p>しっかりと理解出来るようになりました。</p><p>外国籍の子供たちは日本語を学び、4月からは日本の小学校でたく</p><p>さんの日本の子供と友達になれるでしょう。</p><p>卒園おめでとうございました。</p><p>弊社のスタッフもお疲れさまでした。</p><p>また4月から新しい園児を迎えて頑張りましょう。</p><div class="ngal"><img src="img/news/20240324-1.jpeg" alt="" loading="lazy"><img src="img/news/20240324-2.jpeg" alt="" loading="lazy"></div></div></article>
-      <article class="nitem"><time>2023.10.02</time><div class="nbody"><p>2023年10月2日（月）可児市小規模認可保育園「かみのて今</p><p>渡保育園」と児童発達・放課後デイサービス「かみのてKIDS」</p><p>を開園しました。</p><p>オープニングセレモニーには金子俊平衆議院議員のほか冨田可児市</p><p>長や市議会議員の方々のに参加して頂きオープニングセレモニーを</p><p>開催しました。</p><p>今後も地域の子育て支援に協力をして行きます。</p><div class="ngal"><img src="img/news/20231002-1.jpeg" alt="" loading="lazy"><img src="img/news/20231002-2.jpeg" alt="" loading="lazy"><img src="img/news/20231002-3.jpeg" alt="" loading="lazy"></div></div></article>
-      <article class="nitem"><time>2023.05.22</time><div class="nbody"><p>2023年5月13日（土）弊社の新社屋建設の地鎮祭を執り行いました。</p><p>多くの方に参加して頂き、工事の安全と無事完成を祈りました。</p><p>今回の新社屋には、1階には弊社事務所と小規模認可保育園を2階には児童発達・放課</p><p>後デイと一時預かり事業を開設します。</p><p>地域の子育て支援に貢献できるように努めていきます。</p><p>完成予定は9月末です。</p><div class="ngal"><img src="img/news/20230522-1.jpeg" alt="" loading="lazy"><img src="img/news/20230522-2.jpeg" alt="" loading="lazy"><img src="img/news/20230522-3.jpeg" alt="" loading="lazy"><img src="img/news/20230522-4.jpeg" alt="" loading="lazy"></div></div></article>
-      <article class="nitem"><time>2023.01.26</time><div class="nbody"><p>弊社では新しく開校（2023年夏予定）する児童発達支援・放課後デイサービスで一緒に施設を立ち上げて下さる児童発達支援管理責任者資格を有する方を募集します。</p><p>弊社のホームページのお問い合わせからメールを頂ければ、後日弊社より詳細をメールにて連絡します。</p></div></article>
-      <article class="nitem"><time>2022.11.08</time><div class="nbody"><p>2022年10月23日よりフィリピンに出張しました。新しくフ</p><p>ィリピン国内の送り出し機関「プロデンシャルエンプロイメントエ</p><p>ージェンシー」と契約をしました。</p><p>このエージェンシーは経営者が日本人であり現</p><p>在はフィリピン国内最大で約2500名の技能実習生を日本に送っ</p><p>ています。</p><p>技能実習ビザ・特定技能ビザの介護人材にも力を入れています。</p><div class="ngal"><img src="img/news/20221108-1.jpeg" alt="" loading="lazy"><img src="img/news/20221108-2.jpeg" alt="" loading="lazy"><img src="img/news/20221108-3.jpeg" alt="" loading="lazy"><img src="img/news/20221108-4.jpeg" alt="" loading="lazy"><img src="img/news/20221108-5.jpeg" alt="" loading="lazy"><img src="img/news/20221108-6.jpeg" alt="" loading="lazy"><img src="img/news/20221108-7.jpeg" alt="" loading="lazy"></div></div></article>
-      <article class="nitem"><time>2022.07.07</time><div class="nbody"><p>7月4日（月）に弊社運営のこども家庭庁所管企業主導型保</p><p>育事業「かみのて保育園」が開園しました。</p><p>冨田可児市長のほか近隣の市議会議員も参加して頂きオープニングのテープカットを行いました。</p><p>その模様が中日新聞・岐阜新聞に掲載されました。</p><p>弊社はこれからも多文化共生事業に貢献していきます。</p><div class="ngal"><img src="img/news/20220707-1.jpeg" alt="" loading="lazy"><img src="img/news/20220707-2.jpeg" alt="" loading="lazy"></div></div></article>
-      <article class="nitem"><time>2022.03.26</time><div class="nbody"><p>可児市文化センターAlaにて弊社経営のハンズオブガッド保育園の卒園式を行いました。</p><p>外国にルーツのある児童25名が卒園しました。</p><p>4月からランドセルを背負って小学校に通学する姿が楽しみです。</p><p>今回の卒園式の様子を中日新聞社様・岐阜新聞社様紙面に掲載していただきました。</p><div class="ngal"><img src="img/news/20220326-1.jpg" alt="" loading="lazy"><img src="img/news/20220326-2.jpg" alt="" loading="lazy"></div></div></article>
-      <article class="nitem"><time>2022.02.05</time><div class="nbody"><p>弊社は2022年7月に内閣府所管事業 企業主導型保育施設かみのて保育園をオープンします。</p><p>2月5日に地鎮祭を行い、現在岐阜県可児市今渡で工事着工しています。</p><p>オープンにつきスタッフを募集します。</p><p>保育士・看護師資格を所有の方のご応募をお待ちしています。</p><p>応募方法はかみのて保育園ホームページ</p><p>HP:</p><p>https://www.kaminote-hoikuen.</p><p>com</p><p>またはQRコードから</p><p>&gt;&gt; 過去のお知らせはこちら</p><div class="ngal"><img src="img/news/20220205-1.jpg" alt="" loading="lazy"><img src="img/news/20220205-2.jpg" alt="" loading="lazy"><img src="img/news/20220205-3.jpg" alt="" loading="lazy"><img src="img/news/20220205-4.jpg" alt="" loading="lazy"><img src="img/news/20220205-5.jpg" alt="" loading="lazy"></div></div></article>
-      <article class="nitem"><time>2021.08.30</time><div class="nbody"><p>令和3年8月30日に弊社設立のブリッジング協同組合はベトナム</p><p>国内の送り出し機関POLIMEX国際人材株式会社と業務提携を</p><p>しました。</p><p>今後は企業様にベトナム国内からスムーズに技能実習生</p><p>を紹介します。</p></div></article>
-      <article class="nitem"><time>2021.08.18</time><div class="nbody"><p>令和3年8月2日に中小企業協同組合法により、愛知県知事の許可を受けてブリッジング協同組合を設立しました。</p><p>今後は外国人技能実習生受入事業を事業目的に加えベトナム・フィリピン・カンボジア・インドネシア・タイから技能実習生受入を開始していきます。</p></div></article>
-      <article class="nitem"><time>2021.03.28</time><div class="nbody"><p>HANDS OF GOD保育園の卒園式を行いました。</p><p>コロナ禍で感染予防対策をしっかりして無事27名の卒園式を終え</p><p>ました。</p><p>園児たちがランドセルを背負って小学校に通う姿が楽しみです。</p><p>卒園式の記事が中日新聞と岐阜新聞に掲載されました。</p><div class="ngal"><img src="img/news/20210328-1.jpeg" alt="" loading="lazy"><img src="img/news/20210328-2.jpeg" alt="" loading="lazy"><img src="img/news/20210328-3.jpeg" alt="" loading="lazy"><img src="img/news/20210328-4.jpeg" alt="" loading="lazy"></div></div></article>
-      <article class="nitem"><time>2020.05.25</time><div class="nbody"><p>この度、弊社が経営している外国人児童の保育園「「ハンドス・オブ・ガッド（Hands of God）」にトイレと洗面所を増設すべく、クラウドファンディングに挑戦します。</p><p>https://readyfor.jp/projects/handsofgod</p><p>保育園は認可外のため、国からの助成金が少なく、施設の設備が十分ではありません。また認可保育園に比べ保育料も高く、親御さんへの負担も大きくなっています。</p><p>今回、認可保育園として運営することを目指し、第一歩としてトイレと洗面所を増設したいと思っています。コロナ感染の影響もあり、手洗いやうがいの頻度を増やすことは急務だと考えており、皆様からいただいた支援で、できるだけ早く増設をしたいと考えています。</p><p>ページをご覧いただき、是非、保育園を助けていただきたく、</p><p>ご支援をいただければ幸いです。</p><p>よろしくお願いいたします。</p><p>https://readyfor.jp/projects/handsofgod</p><div class="ngal"><img src="img/news/20200525-1.jpg" alt="" loading="lazy"><img src="img/news/20200525-2.jpg" alt="" loading="lazy"><img src="img/news/20200525-3.jpg" alt="" loading="lazy"></div></div></article>
-      <article class="nitem"><time>2020.03.21</time><div class="nbody"><p>弊社事業の認可外保育園ハンドスオブガッドの卒園式を行いました。</p><p>年長児24名が卒園して4月から小学校に入学して日本の子供たちと同じ教室で学びます。</p><p>言葉にまだ不安がある子供もいますが元気に頑張ってください。</p><p>ここまで成長させてくれたスタッフ（先生）さんもお疲れさまでした。</p><p>この模様が中日新聞にも掲載されました。</p><p>今後も弊社では外国人との多文化共生事業を進めていきます。</p><div class="ngal"><img src="img/news/20200321-1.jpg" alt="" loading="lazy"><img src="img/news/20200321-2.jpg" alt="" loading="lazy"><img src="img/news/20200321-3.jpg" alt="" loading="lazy"><img src="img/news/20200321-4.jpg" alt="" loading="lazy"></div></div></article>
-      <article class="nitem"><time>2020.01.22</time><div class="nbody"><p>1月13日から16日までベトナムに行きました。</p><p>今回は内装工事の社長をお連れして実習生の面接です。</p><p>面接では、日本で家族のために一生懸命働くことを誓った実習生の気持ちが伝わってきました。</p><p>今回は2名の実習生を採用しました。</p><p>彼らはベトナムで3か月間の日本語研修を行った後、日本に来ます。</p><p>建築関連の事業の方で人材不足でお困りの方は、ぜひお問い合わせください。</p><p>迅速に実習生をご紹介します。</p><div class="ngal"><img src="img/news/20200122-1.jpg" alt="" loading="lazy"><img src="img/news/20200122-2.jpg" alt="" loading="lazy"><img src="img/news/20200122-3.jpg" alt="" loading="lazy"></div></div></article>
-      <article class="nitem"><time>2020.01.08</time><div class="nbody"><p>2019/12/9より、岐阜県可児市今渡1149-1に事務所を開設しました。</p><p>名鉄日本ライン今渡駅より徒歩10分の場所です。</p><p>人出不足でお悩みの企業・介護事業所様に外国人材を紹介します。</p><p>是非お立ち寄りください。</p><p>1Fには外国人の認可外保育園があります。</p><p>外国国籍の子供たちが元気に日本の言葉や文化・習慣を身に着けて、日本の小学校に入学していきます。</p><p>見学も可能です。</p></div></article>
-      <article class="nitem"><time>2019.10.11</time><div class="nbody"><p>10月1日から6日までフィリピンへ出張に行きました。</p><p>今回は江南市にある弊社提携のトラスト江南協同組合様の理事長をお連れして、フィリピン送り出し機関のYWAとの委託契約です。</p><p>無事契約が締結され、今後はフィリピンからの技能実習生を受け入れる事が出来ます。</p><p>フィリピン実習生には、今後建築分野や介護分野で頑張ってもらいたいです。</p><div class="ngal"><img src="img/news/20191011-1.jpg" alt="" loading="lazy"><img src="img/news/20191011-2.jpg" alt="" loading="lazy"></div></div></article>
-      <article class="nitem"><time>2019.09.30</time><div class="nbody"><p>犬山商工会議所にて外国人人材セミナーを開催します。</p><p>外国人技能実習生の受け入れをお考えの企業・介護施設の関係者の方は是非参加してください。</p><p>参加要領は下記をダウンロードしてください。</p><p>出席の方はホームページの</p><p>お問い合わせ</p><p>から出席の連絡をして下さい。</p><p>・</p><p>外国人材介護セミナーのご案内（PDF）</p><p>・</p><p>外国人材セミナーのご案内（PDF）</p></div></article>
-      <article class="nitem"><time>2019.09.06</time><div class="nbody"><p>弊社は技能実習生受入監理団体である</p><p>トラスト江南協同組合</p><p>と業務提携をしました。</p><p>今後は愛知・岐阜・三重の中小企業様や介護施設様に技能実習生をご紹介することが出来ます。</p><p>人材不足にお困りの企業・介護関係者の方は是非ご相談ください。</p></div></article>
-      <article class="nitem"><time>2019.07.25</time><div class="nbody"><p>7月17日～25日、フィリピンに出張してきました。</p><p>日本から視察にお越しの方々に、フィリピンの送り出し機関を訪問してもらいました。</p><p>日本行きが決まった若者が、夢を抱いて日本語教育を頑張っていました。</p><p>いよいよ始まる看護の実習生の勉強は一段と高い内容で教育をされていました。</p><p>もう一つはカビテ州イムス市長（赤シャツ）、副市長と面談です。</p><p>イムス市はまもなく人口50万人になる大都市です。</p><p>しかし、若者の雇用が思うようになりません。</p><p>日本企業とタイアップして、日本に就労できないかのミーティングを行いました。</p><div class="ngal"><img src="img/news/20190725-1.jpg" alt="" loading="lazy"><img src="img/news/20190725-2.jpg" alt="" loading="lazy"><img src="img/news/20190725-3.jpg" alt="" loading="lazy"></div></div></article>
-      <article class="nitem"><time>2019.06.28</time><div class="nbody"><p>弊社、株式会社AandKは、出入国在留管理庁長官より登録支援機関登録通知書が届きました。</p><p>これにより弊社は特定技能ビザにより外国人材雇用をお考えの企業様の支援計画の作成・実施を行うことができます。</p><p>特定技能ビザについて、ご不明な場合はお問い合わせください。</p><div class="ngal"><img src="img/news/20190628-1.jpg" alt="" loading="lazy"></div></div></article>
-      <article class="nitem"><time>2019.03.15</time><div class="nbody"><p>3月2日～12日、フィリピンに行き、TESDA（職業訓練庁）を訪問してきました。</p><p>ここは、いろいろな技術を学ぶ国の公の機関です。</p><p>この機関の養成講座を修了すると、技能習得修了書を発行してもらえます。</p><p>新在留資格ビザで、日本での就労を希望する若者が、真剣に取り組んでいました。</p><div class="ngal"><img src="img/news/20190315-1.jpg" alt="" loading="lazy"><img src="img/news/20190315-2.jpg" alt="" loading="lazy"><img src="img/news/20190315-3.jpg" alt="" loading="lazy"><img src="img/news/20190315-4.jpg" alt="" loading="lazy"></div></div></article>
+<div class="nfilter" role="group" aria-label="分類で絞り込む"><button type="button" class="on" data-cat="">すべて</button><button type="button" data-cat="hr">外国人材支援</button><button type="button" data-cat="care">保育・福祉</button><button type="button" data-cat="co">会社情報</button></div>
+<script>
+// 分類で絞り込む。JS が無いときは全件がそのまま見える
+document.addEventListener('click', function (e) {
+  var b = e.target.closest('.nfilter button');
+  if (!b) return;
+  var c = b.getAttribute('data-cat');
+  [].forEach.call(document.querySelectorAll('.nfilter button'), function (x) { x.classList.toggle('on', x === b); });
+  [].forEach.call(document.querySelectorAll('.nitem'), function (it) {
+    it.hidden = !!c && it.getAttribute('data-cat') !== c;
+  });
+});
+</script>
+      <article class="nitem" id="n20250602" data-cat="care"><time>2025.06.02<em class="ncat c-care">保育・福祉</em></time><div class="nbody"><p>弊社運営の児童発達支援・放課後デイサービス「かみのてKIDS」が新築移転しました。</p><p>中日新聞と岐阜新聞に掲載されました。</p><p>今後、療育の必要な児童の受け入れ人数を増やしていきます。</p><p>場所　　可児市土田2569-2</p><p>連絡先　0574-66-3513</p><div class="ngal"><img src="img/news/20250602-1.jpeg" alt="" loading="lazy"><img src="img/news/20250602-2.jpeg" alt="" loading="lazy"></div></div></article>
+      <article class="nitem" id="n20250322" data-cat="care"><time>2025.03.22<em class="ncat c-care">保育・福祉</em></time><div class="nbody"><p>弊社運営のハンズオブガッド今渡保育園の卒園式を3月22日（土）可児市アーラにて行いました。</p><p>今年度の卒園児は21名です。</p><p>フィリピン国籍、ブラジル国籍の外国にルーツがある園児です。</p><p>4月からは日本の小学校に入学します。</p><p>日本語もしっかり勉強したので頑張って小学校に通ってください。</p><p>今回、お忙しいところお祝いのお言葉に来て頂きました冨田可児市長様ありがとうございました。</p><p>また今渡北小学校の片田教頭、伊左治先生、岐阜県警本部の原田警部補、タンポポ班の皆様にも感謝しております。</p><p>弊社は、これからも外国人の住民が地域の一員として暮らしていけるように多文化共生社会に貢献していきます。</p><div class="ngal"><img src="img/news/20250322-1.jpg" alt="" loading="lazy"><img src="img/news/20250322-2.jpg" alt="" loading="lazy"><img src="img/news/20250322-3.jpg" alt="" loading="lazy"><img src="img/news/20250322-4.jpg" alt="" loading="lazy"><img src="img/news/20250322-5.jpg" alt="" loading="lazy"></div></div></article>
+      <article class="nitem" id="n20241213" data-cat="co"><time>2024.12.13<em class="ncat c-co">会社情報</em></time><div class="nbody"><p>新施設の地鎮祭を執り行いました。</p><p>弊社運営の児童発達支援・放課後等デイサービス事業「かみのてKIDS」を新築する建物に移転します。</p><p>移転後は利用者増加のため建物内に事業所を増設します。</p><p>開校は令和7年6月2日（月）です。</p><p>弊社の施設では支援が必要な外国籍の児童も通訳を通じて療育をします。</p><div class="ngal"><img src="img/news/20241213-1.jpeg" alt="" loading="lazy"><img src="img/news/20241213-2.jpeg" alt="" loading="lazy"><img src="img/news/20241213-3.jpeg" alt="" loading="lazy"></div></div></article>
+      <article class="nitem" id="n20240324" data-cat="care"><time>2024.03.24<em class="ncat c-care">保育・福祉</em></time><div class="nbody"><p>弊社運営のハンズオブガッド今渡保育園の年長クラスの卒園式を3</p><p>月24日（日）に</p><p>可児市アーラにて行いました。</p><p>今年度の卒園児は26名です。</p><p>フィリピン国籍、ブラジル国籍の外国にルーツがある園児の中で今</p><p>年は日本国籍の園児が1名含まれています。</p><p>この環境の中で1名の日本国籍の園児は3年間保育園で他の園児た</p><p>ちが話す英語、タガログ語、ポルトガル語を</p><p>しっかりと理解出来るようになりました。</p><p>外国籍の子供たちは日本語を学び、4月からは日本の小学校でたく</p><p>さんの日本の子供と友達になれるでしょう。</p><p>卒園おめでとうございました。</p><p>弊社のスタッフもお疲れさまでした。</p><p>また4月から新しい園児を迎えて頑張りましょう。</p><div class="ngal"><img src="img/news/20240324-1.jpeg" alt="" loading="lazy"><img src="img/news/20240324-2.jpeg" alt="" loading="lazy"></div></div></article>
+      <article class="nitem" id="n20231002" data-cat="care"><time>2023.10.02<em class="ncat c-care">保育・福祉</em></time><div class="nbody"><p>2023年10月2日（月）可児市小規模認可保育園「かみのて今</p><p>渡保育園」と児童発達・放課後デイサービス「かみのてKIDS」</p><p>を開園しました。</p><p>オープニングセレモニーには金子俊平衆議院議員のほか冨田可児市</p><p>長や市議会議員の方々のに参加して頂きオープニングセレモニーを</p><p>開催しました。</p><p>今後も地域の子育て支援に協力をして行きます。</p><div class="ngal"><img src="img/news/20231002-1.jpeg" alt="" loading="lazy"><img src="img/news/20231002-2.jpeg" alt="" loading="lazy"><img src="img/news/20231002-3.jpeg" alt="" loading="lazy"></div></div></article>
+      <article class="nitem" id="n20230522" data-cat="co"><time>2023.05.22<em class="ncat c-co">会社情報</em></time><div class="nbody"><p>2023年5月13日（土）弊社の新社屋建設の地鎮祭を執り行いました。</p><p>多くの方に参加して頂き、工事の安全と無事完成を祈りました。</p><p>今回の新社屋には、1階には弊社事務所と小規模認可保育園を2階には児童発達・放課</p><p>後デイと一時預かり事業を開設します。</p><p>地域の子育て支援に貢献できるように努めていきます。</p><p>完成予定は9月末です。</p><div class="ngal"><img src="img/news/20230522-1.jpeg" alt="" loading="lazy"><img src="img/news/20230522-2.jpeg" alt="" loading="lazy"><img src="img/news/20230522-3.jpeg" alt="" loading="lazy"><img src="img/news/20230522-4.jpeg" alt="" loading="lazy"></div></div></article>
+      <article class="nitem" id="n20230126" data-cat="care"><time>2023.01.26<em class="ncat c-care">保育・福祉</em></time><div class="nbody"><p>弊社では新しく開校（2023年夏予定）する児童発達支援・放課後デイサービスで一緒に施設を立ち上げて下さる児童発達支援管理責任者資格を有する方を募集します。</p><p>弊社のホームページのお問い合わせからメールを頂ければ、後日弊社より詳細をメールにて連絡します。</p></div></article>
+      <article class="nitem" id="n20221108" data-cat="hr"><time>2022.11.08<em class="ncat c-hr">外国人材支援</em></time><div class="nbody"><p>2022年10月23日よりフィリピンに出張しました。新しくフ</p><p>ィリピン国内の送り出し機関「プロデンシャルエンプロイメントエ</p><p>ージェンシー」と契約をしました。</p><p>このエージェンシーは経営者が日本人であり現</p><p>在はフィリピン国内最大で約2500名の技能実習生を日本に送っ</p><p>ています。</p><p>技能実習ビザ・特定技能ビザの介護人材にも力を入れています。</p><div class="ngal"><img src="img/news/20221108-1.jpeg" alt="" loading="lazy"><img src="img/news/20221108-2.jpeg" alt="" loading="lazy"><img src="img/news/20221108-3.jpeg" alt="" loading="lazy"><img src="img/news/20221108-4.jpeg" alt="" loading="lazy"><img src="img/news/20221108-5.jpeg" alt="" loading="lazy"><img src="img/news/20221108-6.jpeg" alt="" loading="lazy"><img src="img/news/20221108-7.jpeg" alt="" loading="lazy"></div></div></article>
+      <article class="nitem" id="n20220707" data-cat="care"><time>2022.07.07<em class="ncat c-care">保育・福祉</em></time><div class="nbody"><p>7月4日（月）に弊社運営のこども家庭庁所管企業主導型保</p><p>育事業「かみのて保育園」が開園しました。</p><p>冨田可児市長のほか近隣の市議会議員も参加して頂きオープニングのテープカットを行いました。</p><p>その模様が中日新聞・岐阜新聞に掲載されました。</p><p>弊社はこれからも多文化共生事業に貢献していきます。</p><div class="ngal"><img src="img/news/20220707-1.jpeg" alt="" loading="lazy"><img src="img/news/20220707-2.jpeg" alt="" loading="lazy"></div></div></article>
+      <article class="nitem" id="n20220326" data-cat="care"><time>2022.03.26<em class="ncat c-care">保育・福祉</em></time><div class="nbody"><p>可児市文化センターAlaにて弊社経営のハンズオブガッド保育園の卒園式を行いました。</p><p>外国にルーツのある児童25名が卒園しました。</p><p>4月からランドセルを背負って小学校に通学する姿が楽しみです。</p><p>今回の卒園式の様子を中日新聞社様・岐阜新聞社様紙面に掲載していただきました。</p><div class="ngal"><img src="img/news/20220326-1.jpg" alt="" loading="lazy"><img src="img/news/20220326-2.jpg" alt="" loading="lazy"></div></div></article>
+      <article class="nitem" id="n20220205" data-cat="care"><time>2022.02.05<em class="ncat c-care">保育・福祉</em></time><div class="nbody"><p>弊社は2022年7月に内閣府所管事業 企業主導型保育施設かみのて保育園をオープンします。</p><p>2月5日に地鎮祭を行い、現在岐阜県可児市今渡で工事着工しています。</p><p>オープンにつきスタッフを募集します。</p><p>保育士・看護師資格を所有の方のご応募をお待ちしています。</p><p>応募方法はかみのて保育園ホームページ</p><p>HP:</p><p>https://www.kaminote-hoikuen.</p><p>com</p><p>またはQRコードから</p><p>&gt;&gt; 過去のお知らせはこちら</p><div class="ngal"><img src="img/news/20220205-1.jpg" alt="" loading="lazy"><img src="img/news/20220205-2.jpg" alt="" loading="lazy"><img src="img/news/20220205-3.jpg" alt="" loading="lazy"><img src="img/news/20220205-4.jpg" alt="" loading="lazy"><img src="img/news/20220205-5.jpg" alt="" loading="lazy"></div></div></article>
+      <article class="nitem" id="n20210830" data-cat="hr"><time>2021.08.30<em class="ncat c-hr">外国人材支援</em></time><div class="nbody"><p>令和3年8月30日に弊社設立のブリッジング協同組合はベトナム</p><p>国内の送り出し機関POLIMEX国際人材株式会社と業務提携を</p><p>しました。</p><p>今後は企業様にベトナム国内からスムーズに技能実習生</p><p>を紹介します。</p></div></article>
+      <article class="nitem" id="n20210818" data-cat="hr"><time>2021.08.18<em class="ncat c-hr">外国人材支援</em></time><div class="nbody"><p>令和3年8月2日に中小企業協同組合法により、愛知県知事の許可を受けてブリッジング協同組合を設立しました。</p><p>今後は外国人技能実習生受入事業を事業目的に加えベトナム・フィリピン・カンボジア・インドネシア・タイから技能実習生受入を開始していきます。</p></div></article>
+      <article class="nitem" id="n20210328" data-cat="care"><time>2021.03.28<em class="ncat c-care">保育・福祉</em></time><div class="nbody"><p>HANDS OF GOD保育園の卒園式を行いました。</p><p>コロナ禍で感染予防対策をしっかりして無事27名の卒園式を終え</p><p>ました。</p><p>園児たちがランドセルを背負って小学校に通う姿が楽しみです。</p><p>卒園式の記事が中日新聞と岐阜新聞に掲載されました。</p><div class="ngal"><img src="img/news/20210328-1.jpeg" alt="" loading="lazy"><img src="img/news/20210328-2.jpeg" alt="" loading="lazy"><img src="img/news/20210328-3.jpeg" alt="" loading="lazy"><img src="img/news/20210328-4.jpeg" alt="" loading="lazy"></div></div></article>
+      <article class="nitem" id="n20200525" data-cat="care"><time>2020.05.25<em class="ncat c-care">保育・福祉</em></time><div class="nbody"><p>この度、弊社が経営している外国人児童の保育園「「ハンドス・オブ・ガッド（Hands of God）」にトイレと洗面所を増設すべく、クラウドファンディングに挑戦します。</p><p>https://readyfor.jp/projects/handsofgod</p><p>保育園は認可外のため、国からの助成金が少なく、施設の設備が十分ではありません。また認可保育園に比べ保育料も高く、親御さんへの負担も大きくなっています。</p><p>今回、認可保育園として運営することを目指し、第一歩としてトイレと洗面所を増設したいと思っています。コロナ感染の影響もあり、手洗いやうがいの頻度を増やすことは急務だと考えており、皆様からいただいた支援で、できるだけ早く増設をしたいと考えています。</p><p>ページをご覧いただき、是非、保育園を助けていただきたく、</p><p>ご支援をいただければ幸いです。</p><p>よろしくお願いいたします。</p><p>https://readyfor.jp/projects/handsofgod</p><div class="ngal"><img src="img/news/20200525-1.jpg" alt="" loading="lazy"><img src="img/news/20200525-2.jpg" alt="" loading="lazy"><img src="img/news/20200525-3.jpg" alt="" loading="lazy"></div></div></article>
+      <article class="nitem" id="n20200321" data-cat="care"><time>2020.03.21<em class="ncat c-care">保育・福祉</em></time><div class="nbody"><p>弊社事業の認可外保育園ハンドスオブガッドの卒園式を行いました。</p><p>年長児24名が卒園して4月から小学校に入学して日本の子供たちと同じ教室で学びます。</p><p>言葉にまだ不安がある子供もいますが元気に頑張ってください。</p><p>ここまで成長させてくれたスタッフ（先生）さんもお疲れさまでした。</p><p>この模様が中日新聞にも掲載されました。</p><p>今後も弊社では外国人との多文化共生事業を進めていきます。</p><div class="ngal"><img src="img/news/20200321-1.jpg" alt="" loading="lazy"><img src="img/news/20200321-2.jpg" alt="" loading="lazy"><img src="img/news/20200321-3.jpg" alt="" loading="lazy"><img src="img/news/20200321-4.jpg" alt="" loading="lazy"></div></div></article>
+      <article class="nitem" id="n20200122" data-cat="hr"><time>2020.01.22<em class="ncat c-hr">外国人材支援</em></time><div class="nbody"><p>1月13日から16日までベトナムに行きました。</p><p>今回は内装工事の社長をお連れして実習生の面接です。</p><p>面接では、日本で家族のために一生懸命働くことを誓った実習生の気持ちが伝わってきました。</p><p>今回は2名の実習生を採用しました。</p><p>彼らはベトナムで3か月間の日本語研修を行った後、日本に来ます。</p><p>建築関連の事業の方で人材不足でお困りの方は、ぜひお問い合わせください。</p><p>迅速に実習生をご紹介します。</p><div class="ngal"><img src="img/news/20200122-1.jpg" alt="" loading="lazy"><img src="img/news/20200122-2.jpg" alt="" loading="lazy"><img src="img/news/20200122-3.jpg" alt="" loading="lazy"></div></div></article>
+      <article class="nitem" id="n20200108" data-cat="co"><time>2020.01.08<em class="ncat c-co">会社情報</em></time><div class="nbody"><p>2019/12/9より、岐阜県可児市今渡1149-1に事務所を開設しました。</p><p>名鉄日本ライン今渡駅より徒歩10分の場所です。</p><p>人出不足でお悩みの企業・介護事業所様に外国人材を紹介します。</p><p>是非お立ち寄りください。</p><p>1Fには外国人の認可外保育園があります。</p><p>外国国籍の子供たちが元気に日本の言葉や文化・習慣を身に着けて、日本の小学校に入学していきます。</p><p>見学も可能です。</p></div></article>
+      <article class="nitem" id="n20191011" data-cat="hr"><time>2019.10.11<em class="ncat c-hr">外国人材支援</em></time><div class="nbody"><p>10月1日から6日までフィリピンへ出張に行きました。</p><p>今回は江南市にある弊社提携のトラスト江南協同組合様の理事長をお連れして、フィリピン送り出し機関のYWAとの委託契約です。</p><p>無事契約が締結され、今後はフィリピンからの技能実習生を受け入れる事が出来ます。</p><p>フィリピン実習生には、今後建築分野や介護分野で頑張ってもらいたいです。</p><div class="ngal"><img src="img/news/20191011-1.jpg" alt="" loading="lazy"><img src="img/news/20191011-2.jpg" alt="" loading="lazy"></div></div></article>
+      <article class="nitem" id="n20190930" data-cat="hr"><time>2019.09.30<em class="ncat c-hr">外国人材支援</em></time><div class="nbody"><p>犬山商工会議所にて外国人人材セミナーを開催します。</p><p>外国人技能実習生の受け入れをお考えの企業・介護施設の関係者の方は是非参加してください。</p><p>参加要領は下記をダウンロードしてください。</p><p>出席の方はホームページの</p><p>お問い合わせ</p><p>から出席の連絡をして下さい。</p><p>・</p><p>外国人材介護セミナーのご案内（PDF）</p><p>・</p><p>外国人材セミナーのご案内（PDF）</p></div></article>
+      <article class="nitem" id="n20190906" data-cat="hr"><time>2019.09.06<em class="ncat c-hr">外国人材支援</em></time><div class="nbody"><p>弊社は技能実習生受入監理団体である</p><p>トラスト江南協同組合</p><p>と業務提携をしました。</p><p>今後は愛知・岐阜・三重の中小企業様や介護施設様に技能実習生をご紹介することが出来ます。</p><p>人材不足にお困りの企業・介護関係者の方は是非ご相談ください。</p></div></article>
+      <article class="nitem" id="n20190725" data-cat="hr"><time>2019.07.25<em class="ncat c-hr">外国人材支援</em></time><div class="nbody"><p>7月17日～25日、フィリピンに出張してきました。</p><p>日本から視察にお越しの方々に、フィリピンの送り出し機関を訪問してもらいました。</p><p>日本行きが決まった若者が、夢を抱いて日本語教育を頑張っていました。</p><p>いよいよ始まる看護の実習生の勉強は一段と高い内容で教育をされていました。</p><p>もう一つはカビテ州イムス市長（赤シャツ）、副市長と面談です。</p><p>イムス市はまもなく人口50万人になる大都市です。</p><p>しかし、若者の雇用が思うようになりません。</p><p>日本企業とタイアップして、日本に就労できないかのミーティングを行いました。</p><div class="ngal"><img src="img/news/20190725-1.jpg" alt="" loading="lazy"><img src="img/news/20190725-2.jpg" alt="" loading="lazy"><img src="img/news/20190725-3.jpg" alt="" loading="lazy"></div></div></article>
+      <article class="nitem" id="n20190628" data-cat="hr"><time>2019.06.28<em class="ncat c-hr">外国人材支援</em></time><div class="nbody"><p>弊社、株式会社AandKは、出入国在留管理庁長官より登録支援機関登録通知書が届きました。</p><p>これにより弊社は特定技能ビザにより外国人材雇用をお考えの企業様の支援計画の作成・実施を行うことができます。</p><p>特定技能ビザについて、ご不明な場合はお問い合わせください。</p><div class="ngal"><img src="img/news/20190628-1.jpg" alt="" loading="lazy"></div></div></article>
+      <article class="nitem" id="n20190315" data-cat="hr"><time>2019.03.15<em class="ncat c-hr">外国人材支援</em></time><div class="nbody"><p>3月2日～12日、フィリピンに行き、TESDA（職業訓練庁）を訪問してきました。</p><p>ここは、いろいろな技術を学ぶ国の公の機関です。</p><p>この機関の養成講座を修了すると、技能習得修了書を発行してもらえます。</p><p>新在留資格ビザで、日本での就労を希望する若者が、真剣に取り組んでいました。</p><div class="ngal"><img src="img/news/20190315-1.jpg" alt="" loading="lazy"><img src="img/news/20190315-2.jpg" alt="" loading="lazy"><img src="img/news/20190315-3.jpg" alt="" loading="lazy"><img src="img/news/20190315-4.jpg" alt="" loading="lazy"></div></div></article>
 </div></div>
 <div class="cta" id="contact">
   <div class="wrap">
@@ -880,7 +888,7 @@ setTimeout(function(){
 <script>
 (function () {
   // ★ここの並びは <head> の隠す指定と必ず同じにすること
-  var ANIM_SEL = 'section > .wrap > *:not(.visas):not(.strs):not(.vcards):not(.stages):not(.tline):not(.flow):not(.partners):not(.faq-list):not(.ncards):not(.gcards):not(.contact-grid),.visas > *,.strs > *,.vcards > *,.stages > *,.tline > *,.flow > *,.partners > *,.faq-list > *,.ncards > *,.gcards > *,.contact-grid > *,.nlist > .wrap > *,.cta > .wrap > *';
+  var ANIM_SEL = 'section > .wrap > *:not(.visas):not(.rsn):not(.fcards):not(.vcards):not(.stages):not(.tline):not(.flow):not(.partners):not(.faq-list):not(.ncards):not(.gcards):not(.contact-grid),.visas > *,.rsn > *,.fcards > *,.vcards > *,.stages > *,.tline > *,.flow > *,.partners > *,.faq-list > *,.ncards > *,.gcards > *,.contact-grid > *,.nlist > .wrap > *,.cta > .wrap > *';
   var units = [].slice.call(document.querySelectorAll(ANIM_SEL));
 
   function sweep() {

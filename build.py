@@ -9,10 +9,10 @@
 とどめ、中身の説明は下層ページで行う。原本の文章はどちらにも書かず、
 下層ページ用の原文から digest() が抜き出して要約を組み立てる。
 
-トップの並び（2026-10-18 トップ改善案で組み直し。紺・白・金）:
-  FV → 信頼の帯 → INTRODUCTION → 3つの強み → GLOBAL NETWORK → 人材 → 支援 → 流れ
-  → ABOUT US → お知らせ → お問い合わせ
-  intro / strengths / network / aboutus / news はトップだけの節。人材・支援・流れは
+トップの並び（2026-10-18 改善案その2。「何を頼めるか」と具体的なサービスを先に）:
+  FV → 信頼の帯 → 人材 → 選ばれる3つの理由 → 現地での取り組み → 支援 → 流れ
+  → よくあるご質問 → 会社・グループ（ABOUT US）→ お知らせ → お問い合わせ
+  reasons / field / aboutus / news はトップだけの節。人材・支援・流れは
   下層ページ用の原文から digest() が要約を作る。トップは <div class="top"> で包む。
 
 出力:
@@ -102,7 +102,13 @@ EXTRA_CSS = """
 .nlist{padding:52px 0 86px}
 .nitem{display:grid; grid-template-columns:140px 1fr; gap:34px;
   padding:32px 0; border-bottom:1px solid var(--line)}
-.nitem:first-child{border-top:1px solid var(--line)}
+.nitem:first-child, .nfilter + .nitem{border-top:1px solid var(--line)}
+.nitem{scroll-margin-top:96px}
+.nitem .ncat{display:table; margin:8px 0 0}
+.nfilter{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:28px}
+.nfilter button{font:inherit; font-size:13.5px; font-weight:700; padding:7px 16px; min-height:40px; cursor:pointer;
+  background:#fff; color:var(--navy); border:1px solid var(--line); border-radius:2px}
+.nfilter button.on{background:var(--navy); border-color:var(--navy); color:#fff}
 /* ★グリッドの子は既定で min-width:auto。中に長い英数字があると列が縮まず、
    320pxで箱からはみ出す（案Cのお知らせで実際に出た）。 */
 .nitem > *{min-width:0}
@@ -171,7 +177,7 @@ EXTRA_CSS = """
 #
 # 中身を先に出す箱（カードの並びなど）は、箱ごとではなく中身を1枚ずつ出す。
 # そのため箱自身は :not() で外す。ここも2つの並びで揃える。
-ANIM_BOXES = ["visas", "strs", "vcards", "stages", "tline", "flow", "partners",
+ANIM_BOXES = ["visas", "rsn", "fcards", "vcards", "stages", "tline", "flow", "partners",
               "faq-list", "ncards", "gcards", "contact-grid"]
 _NOT = "".join(f":not(.{c})" for c in ANIM_BOXES)
 _CHILDREN = ",\n".join(f".anim .{c} > *" for c in ANIM_BOXES)
@@ -411,8 +417,10 @@ def digest(secs):
     # 人材：名前と一行（.sum）だけ。詳しい説明は service.html。
     # ★実績の数字（受入企業数・累計紹介人数・対応国籍）は、お客さまから実数が届くまで出さない。
     f = secs["visas"]
-    vs = re.findall(r'<div class="visa"><div class="n">(.*?)</div><h3>(.*?)</h3><p class="sum">(.*?)</p>', f, re.S)
-    cards = "".join(f'<div class="vcard"><span class="n">{n}</span><h3>{t}</h3><p>{d}</p></div>' for n, t, d in vs)
+    vs = re.findall(r'<div class="visa" id="([\w-]+)"><div class="n">(.*?)</div><h3>(.*?)</h3><p class="sum">(.*?)</p>', f, re.S)
+    assert len(vs) == 5
+    cards = "".join(f'<a class="vcard" href="service.html#{i}"><span class="n">{n}</span><h3>{t}</h3><p>{d}</p>'
+                    f'<span class="go">詳しく見る <span aria-hidden="true">→</span></span></a>' for i, n, t, d in vs)
     out["visas"] = top_section(f, "visas", f'<div class="vcards">{cards}</div>', "service.html")
 
     # 支援：3段階の名前と、各段階の項目名だけ。項目の説明は support.html。
@@ -438,17 +446,56 @@ def digest(secs):
 
     return out
 
-def fill_news(sec, n=3):
-    """お知らせの節を news.json の最新 n 件で埋める。
-    原本に直接書くと更新のたびに直すことになり、実際そのまま
-    2021年で止まっていた。日付・見出し・1枚目の写真だけを出し、本文は news.html に置く。"""
-    items = json.loads((SRC / "news.json").read_text(encoding="utf-8"))[:n]
-    li = ""
+# お知らせの分類。news.json に分類の欄は無いので、言葉から決める。
+# ★本文は見ず、見出しで決まらないときだけ本文を見る（卒園式の本文に「フィリピン」が出てくるため）。
+#   見出しでは 会社情報 → 保育・福祉 → 外国人材支援 の順、本文では 外国人材支援 → 保育・福祉 の順。
+NEWS_CATS = [("hr", "外国人材支援"), ("care", "保育・福祉"), ("co", "会社情報")]
+NEWS_KW = {
+    "co": ("地鎮祭", "事務所", "社屋"),
+    "care": ("保育", "卒園", "KIDS", "児童", "デイサービス"),
+    "hr": ("フィリピン", "ベトナム", "実習", "監理団体", "登録支援", "送り出し", "外国人人材", "ブリッジング", "TESDA"),
+}
+
+def news_cat(it):
+    for c in ("co", "care", "hr"):
+        if any(k in it["title"] for k in NEWS_KW[c]):
+            return c
+    body = "".join(it["body"])
+    for c in ("hr", "care"):
+        if any(k in body for k in NEWS_KW[c]):
+            return c
+    return "co"
+
+def news_items():
+    """news.json に、分類（cat, cat_name）と、一覧での位置（anchor）を足して返す。"""
+    items = json.loads((SRC / "news.json").read_text(encoding="utf-8"))
+    seen = {}
     for it in items:
+        it["cat"] = news_cat(it)
+        it["cat_name"] = dict(NEWS_CATS)[it["cat"]]
+        a = "n" + it["date"].replace(".", "")
+        seen[a] = seen.get(a, 0) + 1
+        it["anchor"] = a if seen[a] == 1 else f"{a}-{seen[a]}"
+    return items
+
+def fill_news(sec):
+    """お知らせの節を、分類ごとの最新1件（計3件）で埋める。
+    ★news.json の見出しは旧サイトの1行目で、語の途中で切れているものがある。本文をつなげて3行で切る。最新3件だけだと保育の話が並び、
+    主事業の外国人材支援が見えなくなるため（2026-10-18 改善案）。
+    日付・見出し・1枚目の写真だけを出し、リンクは一覧の該当記事の位置へ。"""
+    items, picked = news_items(), []
+    for c, _n in NEWS_CATS:
+        it = next((x for x in items if x["cat"] == c), None)
+        if it:
+            picked.append(it)
+    picked.sort(key=lambda x: x["date"], reverse=True)
+    li = ""
+    for it in picked:
         img = (f'<img src="img/news/{it["images"][0]}" alt="" loading="lazy">' if it["images"]
                else '<img src="img/logo-mark.jpg" alt="" loading="lazy" style="object-fit:contain">')
-        li += (f'<li><a href="news.html"><figure>{img}</figure><time>{it["date"]}</time>'
-               f'<span>{html.escape(it["title"])}</span></a></li>')
+        cat = f'<em class="ncat c-{it["cat"]}">{it["cat_name"]}</em>'
+        li += (f'<li><a href="news.html#{it["anchor"]}"><figure>{img}</figure><time>{it["date"]}{cat}</time>'
+               f'<span>{html.escape(it["title"] + "".join(it["body"]))}</span></a></li>')
     old = sec[sec.index('<ul class="ncards">'): sec.index("</ul>") + 5]
     return sec.replace(old, f'<ul class="ncards">{li}</ul>')
 
@@ -536,14 +583,17 @@ def build_plan(out_dir, src_name, key=""):
     head, header, hero, cta, footer, note, secs = parts(src_name, key)
     tail = fix_links(cta) + fix_links(footer) + note
 
-    # トップ：FV・信頼の帯 → INTRODUCTION → 強み → GLOBAL NETWORK → 人材 → 支援 → 流れ
-    #        → ABOUT US → お知らせ。FAQ は下層（faq.html）だけに置く。
+    # トップ：FV・信頼の帯 → 人材 → 選ばれる3つの理由 → 現地での取り組み → 支援 → 流れ
+    #        → よくあるご質問 → 会社・グループ → お知らせ
     tops = digest(secs)
-    body = fix_links(hero)
-    for sec in ("intro", "strengths", "network"):
+    body = fix_links(hero) + fix_links(tops["visas"])
+    for sec in ("reasons", "field"):
         body += fix_links(secs[sec])
-    for sec in ("visas", "support", "flow"):
+    for sec in ("support", "flow"):
         body += fix_links(tops[sec])
+    # FAQ はトップでは見出しのすぐ下の説明文を外す（下層ではページ見出しの説明に使う）
+    faq = re.sub(r"(<h2>.*?</h2>)\s*<p>.*?</p>", r"\1", secs["faq"], count=1, flags=re.S)
+    body += fix_links(faq)
     body += fix_links(secs["aboutus"].replace("<!--ABOUT_DL-->", about_dl())) + fix_links(fill_news(secs["news"]))
     body = '<div class="top">\n' + body + '</div>\n'
     (out_dir / "index.html").write_text(
@@ -566,7 +616,7 @@ def build_plan(out_dir, src_name, key=""):
     (out_dir / "news.html").write_text(
         shell(head, header, tail, news_body(), "news.html", "過去のお知らせ"), encoding="utf-8")
     (out_dir / "contact.html").write_text(
-        shell(head, header, tail, contact_body(), "contact.html", "お問い合わせ"), encoding="utf-8")
+        shell(head, header, fix_links(footer) + note, contact_body(), "contact.html", "お問い合わせ"), encoding="utf-8")
     (out_dir / "privacy.html").write_text(
         shell(head, header, tail, privacy_body(), "privacy.html", "プライバシーポリシー"), encoding="utf-8")
 
@@ -612,7 +662,7 @@ def outline_table():
 
 
 def news_body():
-    items = json.loads((SRC / "news.json").read_text(encoding="utf-8"))
+    items = news_items()
     arts = []
     for it in items:
         body = "".join(f"<p>{html.escape(l)}</p>" for l in ([it["title"]] + it["body"]) if l)
@@ -620,12 +670,32 @@ def news_body():
         if it["images"]:
             gal = '<div class="ngal">' + "".join(
                 f'<img src="img/news/{n}" alt="" loading="lazy">' for n in it["images"]) + "</div>"
-        arts.append(f'      <article class="nitem"><time>{it["date"]}</time>'
+        arts.append(f'      <article class="nitem" id="{it["anchor"]}" data-cat="{it["cat"]}"><time>{it["date"]}'
+                    f'<em class="ncat c-{it["cat"]}">{it["cat_name"]}</em></time>'
                     f'<div class="nbody">{body}{gal}</div></article>')
+    btns = '<button type="button" class="on" data-cat="">すべて</button>' + "".join(
+        f'<button type="button" data-cat="{c}">{n}</button>' for c, n in NEWS_CATS)
+    filt = (f'<div class="nfilter" role="group" aria-label="分類で絞り込む">{btns}</div>\n'
+            + NEWS_FILTER_JS)
     return ('<div class="crumb"><div class="wrap"><a href="index.html">ホーム</a> ／ 過去のお知らせ</div></div>\n'
             '<div class="page-head"><div class="wrap"><span class="en">NEWS &amp; TOPICS</span>'
             '<h1>過去のお知らせ</h1></div></div>\n'
-            '<div class="nlist"><div class="wrap">\n' + "\n".join(arts) + "\n</div></div>\n")
+            '<div class="nlist"><div class="wrap">\n' + filt + "\n".join(arts) + "\n</div></div>\n")
+
+
+NEWS_FILTER_JS = """<script>
+// 分類で絞り込む。JS が無いときは全件がそのまま見える
+document.addEventListener('click', function (e) {
+  var b = e.target.closest('.nfilter button');
+  if (!b) return;
+  var c = b.getAttribute('data-cat');
+  [].forEach.call(document.querySelectorAll('.nfilter button'), function (x) { x.classList.toggle('on', x === b); });
+  [].forEach.call(document.querySelectorAll('.nitem'), function (it) {
+    it.hidden = !!c && it.getAttribute('data-cat') !== c;
+  });
+});
+</script>
+"""
 
 
 def contact_body():

@@ -100,8 +100,8 @@ header{position:sticky; top:0; z-index:70; background:#fff; border-bottom:1px so
                              rgba(16,42,67,.18) 80%,rgba(16,42,67,.04) 100%)}
 .hero-copy{position:relative; z-index:2; display:flex; align-items:center; min-height:inherit; padding:64px 0 88px}
 .hero-copy .wrap{width:100%}
-.hero-en{display:flex; align-items:center; gap:16px; margin:0 0 26px; font-family:var(--en); font-weight:600;
-  font-size:clamp(14px,1.25vw,16px); letter-spacing:.26em; color:var(--gold-l); line-height:1.5}
+.hero-en{display:flex; align-items:center; gap:16px; margin:0 0 22px; font-weight:700;
+  font-size:clamp(15px,1.5vw,19px); letter-spacing:.14em; color:var(--gold-l); line-height:1.5}
 .hero-en::before{content:""; flex:none; width:44px; height:1px; background:var(--gold)}
 .hero-copy h1{font-size:clamp(34px,4.5vw,60px); font-weight:700; line-height:1.42; margin:0 0 26px;
   letter-spacing:.06em; color:#fff}
@@ -141,7 +141,7 @@ header{position:sticky; top:0; z-index:70; background:#fff; border-bottom:1px so
 .tc .ic{border-color:rgba(182,154,104,.55); background:transparent; color:var(--gold-l)}
 .tc-body{display:flex; flex-direction:column; min-width:0}
 .tc-en{font-family:var(--en); font-size:13px; font-weight:600; letter-spacing:.22em; color:var(--gold-l); line-height:1.3}
-.tc-k{font-size:12.5px; color:rgba(255,255,255,.72); margin-top:4px}
+.tc-k{font-size:13px; color:rgba(255,255,255,.8); margin-top:4px}
 .tc b{font-size:17px; font-weight:700; color:#fff; line-height:1.5}
 
 /* ---- 節 ---- */
@@ -163,7 +163,7 @@ section.alt{background:var(--panel); border-top:1px solid var(--line-s); border-
 
 /* ---- ご紹介できる人材（下層：詳しいカード） ---- */
 .visas{display:grid; grid-template-columns:repeat(6,1fr); gap:24px 28px}
-.visa{grid-column:span 2; display:grid; grid-template-rows:auto auto auto 1fr; background:#fff;
+.visa{scroll-margin-top:96px; grid-column:span 2; display:grid; grid-template-rows:auto auto auto 1fr; background:#fff;
   border:1px solid var(--line); padding:28px 28px 30px; border-radius:6px}
 .visa:nth-child(4){grid-column:2 / span 2}
 .visa .n{display:flex; align-items:center; gap:12px; font-size:12px; font-weight:700; letter-spacing:.06em; color:var(--blue-dd)}
@@ -417,7 +417,7 @@ footer a:hover{color:#fff; text-decoration:underline}
    並び：FV → 信頼の帯 → INTRODUCTION → 3つの強み → GLOBAL NETWORK → 人材 → 支援 → 流れ
          → ABOUT US → お知らせ → お問い合わせ。数字・実績は今あるものだけを使う。
    トップの節は build.py が <div class="top"> で包む。下層には効かない。 */
-.top section{padding:120px 0}
+.top section{padding:104px 0}
 .top section.alt{background:var(--panel); border:0}
 .top .sec-head{border-left:0; padding-left:0; margin-bottom:56px}
 .top .sec-head .en{display:flex; align-items:center; gap:14px; font-family:var(--en); font-weight:600;
@@ -429,36 +429,33 @@ footer a:hover{color:#fff; text-decoration:underline}
 .top .txt-link{color:var(--blue)}
 .top .txt-link.light{color:#fff}
 
-/* INTRODUCTION：大きな英字と本文 */
-.intro-grid{display:grid; grid-template-columns:1fr 1.05fr; gap:72px; align-items:center}
-.intro-en{margin:0; font-family:var(--en); font-weight:500; font-size:clamp(46px,6.2vw,90px); line-height:1.04;
-  color:var(--navy); letter-spacing:.005em}
-.intro-en em{font-style:italic; color:var(--gold)}
-.top .intro .sec-head{margin-bottom:28px}
-.intro-body p{margin:0 0 16px; font-size:16px; line-height:2.1}
-.intro-body p:last-child{margin-bottom:0}
+/* 選ばれる3つの理由（短く3列） */
+.rsn{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(3,1fr); gap:24px}
+.rs{display:flex; flex-direction:column; background:#fff; border-top:3px solid var(--navy); padding:32px 30px 30px}
+.rs-n{font-family:var(--en); font-weight:500; font-size:44px; line-height:1; color:var(--gold)}
+.rs h3{font-size:19px; color:var(--ink); margin:16px 0 12px; line-height:1.55}
+.rs p{margin:0; font-size:14.5px; line-height:1.95}
+.rs .txt-link{margin-top:auto; padding-top:16px}
 
-/* 3つの強み：写真と文を左右交互に */
-.strs{display:grid; gap:110px}
-.str{display:grid; grid-template-columns:1.08fr 1fr; gap:80px; align-items:center}
-.str:nth-child(even) .str-ph{order:2}
-.str-ph{margin:0}
-.str-ph .ph{position:relative; isolation:isolate}
-.str-ph img{width:100%; aspect-ratio:4/3; object-fit:cover}
-.str-ph .ph::before{content:""; position:absolute; z-index:-1; inset:22px -22px -22px 22px; border:1px solid var(--gold)}
-.str:nth-child(even) .str-ph .ph::before{inset:22px 22px -22px -22px}
-.str-ph figcaption{margin-top:30px; font-size:12px; color:var(--muted)}
-.str-n{display:block; font-family:var(--en); font-weight:500; font-size:68px; line-height:1; color:var(--gold)}
-.str-en{display:block; margin-top:12px; font-family:var(--en); font-weight:600; font-size:14px; letter-spacing:.22em; color:var(--muted)}
-.str h3{font-size:clamp(21px,2.2vw,27px); color:var(--ink); margin:12px 0 18px; line-height:1.5; letter-spacing:.04em}
-.str p{font-size:15.5px; line-height:2; margin:0 0 24px}
-.str .checks{max-width:30em}
+/* 現地での取り組み（お知らせにある事実から） */
+.fcards{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(3,1fr); gap:28px}
+.fcards a{display:flex; flex-direction:column; height:100%; text-decoration:none; color:inherit; border:1px solid var(--line);
+  background:#fff; transition:border-color .2s, box-shadow .2s}
+.fcards a:hover{border-color:var(--gold); box-shadow:0 10px 26px rgba(16,42,67,.08)}
+.fcards figure{margin:0; aspect-ratio:16/10; overflow:hidden; background:var(--panel)}
+.fcards img{width:100%; height:100%; object-fit:cover}
+.fc-b{padding:22px 24px 26px}
+.fc-k{display:block; font-size:13px; font-weight:700; color:var(--gold-d); letter-spacing:.06em}
+.fc-b h3{font-size:18px; color:var(--ink); margin:6px 0 10px; line-height:1.5}
+.fc-b p{margin:0; font-size:14px; line-height:1.9}
 
-/* GLOBAL NETWORK：紺の地にアジアの点描地図 */
-.top section.network{background:radial-gradient(ellipse 70% 70% at 28% 45%,#1b4468 0%,var(--navy) 62%); color:#fff}
-.top .network .sec-head .en{color:var(--gold-l)}
-.top .network .sec-head h2{color:#fff}
-.nw{display:grid; grid-template-columns:1.12fr 1fr; gap:56px; align-items:center}
+/* 提携機関のページの地図（紺の箱） */
+.pt-map{display:grid; grid-template-columns:1.1fr 1fr; gap:40px; align-items:center; background:radial-gradient(ellipse 70% 70% at 28% 45%,#1b4468 0%,var(--navy) 62%);
+  color:#fff; padding:40px 48px; margin-bottom:24px}
+.pt-map-l{list-style:none; margin:0; padding:0}
+.pt-map-l li{padding:14px 0; border-top:1px solid rgba(255,255,255,.14); font-size:15px; line-height:1.7}
+.pt-map-l li:first-child{border-top:0}
+.pt-map-l span{display:block; font-family:var(--en); font-weight:600; font-size:14px; letter-spacing:.24em; color:var(--gold-l)}
 .nw-map{display:block; width:100%; height:auto}
 .nw-land{fill:none; stroke:rgba(255,255,255,.24); stroke-width:3.4; stroke-linecap:round}
 .nw-arc{fill:none; stroke:var(--gold); stroke-width:1.8; stroke-dasharray:6 7; stroke-linecap:round}
@@ -466,16 +463,6 @@ footer a:hover{color:#fff; text-decoration:underline}
 .nw-jp circle{fill:#fff}
 .nw-pin .nw-pulse{fill:none; stroke:var(--gold-l); stroke-width:1.4; opacity:0; transform-box:fill-box; transform-origin:center}
 .nw-pin text{fill:#fff; font-family:var(--en); font-size:17px; font-weight:600; letter-spacing:.18em}
-.nw-list{display:grid; gap:14px}
-.nw-c{background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.14); border-radius:4px; padding:20px 26px}
-.nw-c .k{display:block; font-family:var(--en); font-weight:600; font-size:14px; letter-spacing:.24em; color:var(--gold-l)}
-.nw-o{padding:10px 0}
-.nw-o + .nw-o{border-top:1px solid rgba(255,255,255,.1)}
-.nw-o b{display:block; font-size:16px; color:#fff; line-height:1.6}
-.nw-o .role{display:inline-block; margin-left:10px; padding:0 8px; border:1px solid rgba(182,154,104,.65); border-radius:2px;
-  font-size:11.5px; font-weight:700; color:var(--gold-l); vertical-align:2px; line-height:1.7}
-.nw-o p{margin:2px 0 0; font-size:13.5px; line-height:1.8; color:rgba(255,255,255,.74)}
-.top .network .txt-link{color:var(--gold-l)}
 @media (prefers-reduced-motion:no-preference){
   .nw-arc{animation:nwDash 1.4s linear infinite}
   .nw-arc2{animation-duration:1.7s}
@@ -492,6 +479,9 @@ footer a:hover{color:#fff; text-decoration:underline}
 .top .vcard .n{font-family:var(--en); font-weight:500; font-size:34px; letter-spacing:.02em; color:var(--gold); line-height:1}
 .top .vcard h3{margin:14px 0 10px; padding:0; border:0; font-size:18.5px}
 .top .vcard p{font-size:14px; color:var(--text)}
+.top a.vcard{display:flex; flex-direction:column; text-decoration:none; color:inherit; transition:background-color .2s}
+.top a.vcard:hover{background:var(--blue-s)}
+.top .vcard .go{margin-top:auto; padding-top:14px; font-size:13.5px; font-weight:700; color:var(--blue)}
 
 /* 支援（3段階） */
 .top .stage{background:#fff; border:1px solid var(--line); border-top:3px solid var(--navy); border-radius:0; padding:32px 30px 28px}
@@ -518,9 +508,13 @@ footer a:hover{color:#fff; text-decoration:underline}
 .ab{background:var(--panel); border-left:3px solid var(--gold); padding:18px 22px}
 .ab-k{display:block; font-size:12px; font-weight:700; color:var(--muted)}
 .ab b{display:block; margin-top:4px; font-size:15.5px; color:var(--ink); line-height:1.6}
-.ab small{display:block; margin-top:4px; font-size:12.5px; color:var(--muted)}
+.ab small{display:block; margin-top:4px; font-size:13px; color:var(--muted)}
 .about-grid .more-r{margin-top:22px}
 
+/* お知らせの分類（build.py が news.json の内容から付ける） */
+.ncat{display:inline-block; font-style:normal; font-family:var(--sans); font-size:11.5px; font-weight:700; letter-spacing:.04em; color:var(--navy);
+  border:1px solid var(--line); background:#fff; padding:1px 8px; margin-left:10px; vertical-align:2px; border-radius:2px}
+.ncat.c-hr{border-color:var(--gold); color:var(--gold-d)}
 /* お知らせ（写真つき3件） */
 .top section.topnews{padding:110px 0}
 .nb-head{display:flex; align-items:flex-end; justify-content:space-between; gap:20px; margin-bottom:44px}
@@ -537,25 +531,17 @@ footer a:hover{color:#fff; text-decoration:underline}
   padding:6px 24px 24px; font-size:14.5px; line-height:1.85}
 
 @media (max-width:1000px){
-  .intro-grid, .str, .nw, .about-grid{grid-template-columns:1fr; gap:36px}
-  .str:nth-child(even) .str-ph{order:0}
-  .strs{gap:80px}
-  .str-ph{margin-right:22px}
-  .str:nth-child(even) .str-ph{margin:0 0 0 22px}
-  .nw-map{max-width:620px; margin:0 auto}
+  .about-grid, .pt-map{grid-template-columns:1fr; gap:28px}
+  .rsn, .fcards{grid-template-columns:1fr; gap:16px}
+  .nw-map{max-width:560px; margin:0 auto}
 }
 @media (max-width:760px){
-  .top section{padding:76px 0}
-  .top section.topnews{padding:72px 0}
-  .top .sec-head{margin-bottom:36px}
-  .intro-en{font-size:clamp(40px,12vw,56px)}
-  .str-n{font-size:52px}
-  .str-ph .ph::before{inset:14px -14px -14px 14px}
-  .str:nth-child(even) .str-ph .ph::before{inset:14px 14px -14px -14px}
-  .str-ph{margin-right:14px}
-  .str:nth-child(even) .str-ph{margin:0 0 0 14px}
-  .str-ph figcaption{margin-top:22px}
-  .nw-c{padding:18px 20px}
+  .top section{padding:60px 0}
+  .top section.topnews{padding:60px 0}
+  .top .sec-head{margin-bottom:28px}
+  .rs{padding:24px 22px}
+  .rs-n{font-size:36px}
+  .pt-map{padding:28px 20px}
   .top .vcards{grid-template-columns:1fr}
   .top .vcard{padding:24px 22px}
   .abiz{grid-template-columns:1fr}
@@ -587,7 +573,13 @@ footer a:hover{color:#fff; text-decoration:underline}
 .nlist{padding:52px 0 86px}
 .nitem{display:grid; grid-template-columns:140px 1fr; gap:34px;
   padding:32px 0; border-bottom:1px solid var(--line)}
-.nitem:first-child{border-top:1px solid var(--line)}
+.nitem:first-child, .nfilter + .nitem{border-top:1px solid var(--line)}
+.nitem{scroll-margin-top:96px}
+.nitem .ncat{display:table; margin:8px 0 0}
+.nfilter{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:28px}
+.nfilter button{font:inherit; font-size:13.5px; font-weight:700; padding:7px 16px; min-height:40px; cursor:pointer;
+  background:#fff; color:var(--navy); border:1px solid var(--line); border-radius:2px}
+.nfilter button.on{background:var(--navy); border-color:var(--navy); color:#fff}
 /* ★グリッドの子は既定で min-width:auto。中に長い英数字があると列が縮まず、
    320pxで箱からはみ出す（案Cのお知らせで実際に出た）。 */
 .nitem > *{min-width:0}
@@ -669,9 +661,10 @@ footer a:hover{color:#fff; text-decoration:underline}
 .trust{animation:rise .7s cubic-bezier(.2,.7,.3,1) .4s both}
 
 /* スクロールで出てくる分だけ、JSがあるとき（.anim）に隠しておく */
-.anim section > .wrap > *:not(.visas):not(.strs):not(.vcards):not(.stages):not(.tline):not(.flow):not(.partners):not(.faq-list):not(.ncards):not(.gcards):not(.contact-grid),
+.anim section > .wrap > *:not(.visas):not(.rsn):not(.fcards):not(.vcards):not(.stages):not(.tline):not(.flow):not(.partners):not(.faq-list):not(.ncards):not(.gcards):not(.contact-grid),
 .anim .visas > *,
-.anim .strs > *,
+.anim .rsn > *,
+.anim .fcards > *,
 .anim .vcards > *,
 .anim .stages > *,
 .anim .tline > *,
@@ -688,9 +681,10 @@ footer a:hover{color:#fff; text-decoration:underline}
 @media (max-width:700px){ .anim .on{animation-name:riseSp} }
 
 @media (prefers-reduced-motion:reduce){
-  .anim section > .wrap > *:not(.visas):not(.strs):not(.vcards):not(.stages):not(.tline):not(.flow):not(.partners):not(.faq-list):not(.ncards):not(.gcards):not(.contact-grid),
+  .anim section > .wrap > *:not(.visas):not(.rsn):not(.fcards):not(.vcards):not(.stages):not(.tline):not(.flow):not(.partners):not(.faq-list):not(.ncards):not(.gcards):not(.contact-grid),
 .anim .visas > *,
-.anim .strs > *,
+.anim .rsn > *,
+.anim .fcards > *,
 .anim .vcards > *,
 .anim .stages > *,
 .anim .tline > *,
@@ -705,9 +699,10 @@ footer a:hover{color:#fff; text-decoration:underline}
   .anim .on, .hero .bg img, .hero-copy .wrap > *, .trust{animation:none}
 }
 @media print{
-  .anim section > .wrap > *:not(.visas):not(.strs):not(.vcards):not(.stages):not(.tline):not(.flow):not(.partners):not(.faq-list):not(.ncards):not(.gcards):not(.contact-grid),
+  .anim section > .wrap > *:not(.visas):not(.rsn):not(.fcards):not(.vcards):not(.stages):not(.tline):not(.flow):not(.partners):not(.faq-list):not(.ncards):not(.gcards):not(.contact-grid),
 .anim .visas > *,
-.anim .strs > *,
+.anim .rsn > *,
+.anim .fcards > *,
 .anim .vcards > *,
 .anim .stages > *,
 .anim .tline > *,
@@ -769,11 +764,27 @@ setTimeout(function(){
       </details>
       <details>
         <summary>受入れまでにどのくらいの期間がかかりますか。</summary>
-        <div class="a"><p style="margin:0">在留資格によりますが、ご相談から就労開始までおおむね5〜6か月が目安です。</p></div>
+        <div class="a"><p style="margin:0">海外の送り出し機関を通じて採用する場合、ご相談から就労開始までおおむね5〜6か月が目安です（在留資格によって異なります）。</p></div>
       </details>
       <details>
         <summary>受入れの経験がない会社でも大丈夫ですか。</summary>
         <div class="a"><p style="margin:0">はじめての企業さまがほとんどです。社内の受入れ体制づくりからご一緒します。</p></div>
+      </details>
+      <details>
+        <summary>どのような人材を紹介してもらえますか。</summary>
+        <div class="a"><p style="margin:0">技能実習・特定技能・留学生・高度人材・日系人／定住者の5つに対応しています。介護人材のご紹介にも力を入れています。</p></div>
+      </details>
+      <details>
+        <summary>面接は現地に行かないとできませんか。</summary>
+        <div class="a"><p style="margin:0">書類選考ののち、オンラインまたは現地で面接します。フィリピンでは、提携する送り出し機関で企業さまご自身が面接を行うこともできます。</p></div>
+      </details>
+      <details>
+        <summary>住まいの準備も手伝ってもらえますか。</summary>
+        <div class="a"><p style="margin:0">特定技能の方は、登録支援機関として住まい探しと、銀行口座・携帯電話・電気ガス水道などの契約をお手伝いします。</p></div>
+      </details>
+      <details>
+        <summary>働き始めたあとも支援はありますか。</summary>
+        <div class="a"><p style="margin:0">定期的な面談と、仕事や暮らしの相談・苦情への対応を続けます。法令違反などがあれば行政機関へ通報します。</p></div>
       </details>
     </div>
   </div>
@@ -875,7 +886,7 @@ setTimeout(function(){
 <script>
 (function () {
   // ★ここの並びは <head> の隠す指定と必ず同じにすること
-  var ANIM_SEL = 'section > .wrap > *:not(.visas):not(.strs):not(.vcards):not(.stages):not(.tline):not(.flow):not(.partners):not(.faq-list):not(.ncards):not(.gcards):not(.contact-grid),.visas > *,.strs > *,.vcards > *,.stages > *,.tline > *,.flow > *,.partners > *,.faq-list > *,.ncards > *,.gcards > *,.contact-grid > *,.nlist > .wrap > *,.cta > .wrap > *';
+  var ANIM_SEL = 'section > .wrap > *:not(.visas):not(.rsn):not(.fcards):not(.vcards):not(.stages):not(.tline):not(.flow):not(.partners):not(.faq-list):not(.ncards):not(.gcards):not(.contact-grid),.visas > *,.rsn > *,.fcards > *,.vcards > *,.stages > *,.tline > *,.flow > *,.partners > *,.faq-list > *,.ncards > *,.gcards > *,.contact-grid > *,.nlist > .wrap > *,.cta > .wrap > *';
   var units = [].slice.call(document.querySelectorAll(ANIM_SEL));
 
   function sweep() {
