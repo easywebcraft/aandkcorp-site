@@ -8,8 +8,8 @@
 <meta name="description" content="技能実習・特定技能をはじめ、外国人材の採用から入国・定着支援まで一貫してサポートします。登録支援機関（登録番号 19登-000975）。岐阜県可児市。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- 欧文は Open Sans（参考にしたサイトと同じ）。和文はゴシックの端末書体に任せる。 -->
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<!-- 欧文は Open Sans（参考にしたサイトと同じ）。大きな英字だけ Cormorant Garamond。和文はゴシックの端末書体に任せる。 -->
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 /* ===== 案B ─ 青とゴシックで明快に（Sky株式会社のサイトを参考） =====
    案Aが「明朝・余白・金茶」なのに対し、こちらは「ゴシック・情報量・青」。
@@ -17,19 +17,22 @@
    見出しの前に青い印を置いて視線の起点を作る。
    参考にしたのは書体・配色・ヘッダーの型で、CSSは自前で書いている。 */
 :root{
-  --blue:#0a7fc2; --blue-d:#086ba4; --blue-dd:#0a5a8c; --blue-s:#eef6fb; --blue-line:#d6e8f3;
-  --ink:#16273a; --muted:#6b7683; --line:#dde4ea; --line-s:#eef2f6;
-  --bg:#fff; --panel:#f5f7fa;
+  /* 2026-10-18 紺・白・金に変更（トップ改善案）。名前は blue のまま中身を紺系にした */
+  --navy:#102A43; --blue:#245D87; --blue-d:#1d4c70; --blue-dd:#102A43; --blue-s:#eef3f7; --blue-line:#d3dfe9;
+  --gold:#B69A68; --gold-d:#86693a; --gold-l:#d8c39b;
+  --ink:#102A43; --text:#344054; --muted:#667085; --line:#e1e6ec; --line-s:#eef1f5;
+  --bg:#fff; --panel:#F5F7F9;
+  --en:"Cormorant Garamond",Georgia,"Times New Roman",serif;
   --sans:"Open Sans",-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN",
          "Yu Gothic",Meiryo,"Noto Sans JP",sans-serif;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans);
+body{margin:0; background:var(--bg); color:var(--text); font-family:var(--sans);
   font-size:15px; line-height:1.85; -webkit-font-smoothing:antialiased}
 img{display:block; max-width:100%}
 a{color:inherit}
-.wrap{max-width:1160px; margin:0 auto; padding:0 24px}
+.wrap{max-width:1248px; margin:0 auto; padding:0 24px}
 
 /* ページの先頭へ戻るボタン（右下。確認用の帯の上に出す） */
 .to-top{position:fixed; right:20px; bottom:52px; z-index:75; width:52px; height:52px; border-radius:50%;
@@ -43,8 +46,8 @@ a{color:inherit}
 @media print{ .to-top{display:none} }
 /* スマホは確認用の帯が2行になるので、その分上げる。帯を外すとき（公開時）は bottom を 20px に戻す */
 @media (max-width:760px){ .to-top{right:14px; bottom:74px; width:46px; height:46px} }
-.note{position:fixed; left:0; right:0; bottom:0; z-index:80; background:rgba(0,104,159,.94);
-  color:#dff1fa; font-size:12px; text-align:center; padding:7px 12px}
+.note{position:fixed; left:0; right:0; bottom:0; z-index:80; background:rgba(16,42,67,.94);
+  color:#e7edf3; font-size:12px; text-align:center; padding:7px 12px}
 
 /* ---- ヘッダー（1列：ロゴ／メニュー／お問い合わせ。2026-10-03 に2段から変更） ---- */
 header{position:sticky; top:0; z-index:70; background:#fff; border-bottom:1px solid var(--line)}
@@ -55,12 +58,12 @@ header{position:sticky; top:0; z-index:70; background:#fff; border-bottom:1px so
 .gnav{display:flex}
 .gnav a{display:flex; align-items:center; text-decoration:none; padding:0 16px; font-size:14.5px; font-weight:600;
   white-space:nowrap; border-bottom:3px solid transparent; border-top:3px solid transparent}
-.gnav a:hover{color:var(--blue-d); border-bottom-color:var(--blue)}
-.gnav a.on{color:var(--blue-d); border-bottom-color:var(--blue)}
-.pill{flex:none; display:inline-flex; align-items:center; background:var(--blue); color:#fff; margin-left:8px;
+.gnav a:hover{color:var(--navy); border-bottom-color:var(--gold)}
+.gnav a.on{color:var(--navy); border-bottom-color:var(--gold)}
+.pill{flex:none; display:inline-flex; align-items:center; background:var(--navy); color:#fff; margin-left:8px;
   text-decoration:none; padding:9px 22px; border-radius:999px; font-size:13.5px; font-weight:700;
   white-space:nowrap; min-height:44px}
-.pill:hover{background:var(--blue-d)}
+.pill:hover{background:var(--blue)}
 /* 指で押す的は44px角を下回らせない（38pxだった） */
 .hamburger{display:none; flex:none; background:none; border:1px solid var(--line); font-size:19px; padding:5px 12px;
   cursor:pointer; color:var(--ink); border-radius:4px; min-width:44px; min-height:44px; line-height:1}
@@ -86,53 +89,60 @@ header{position:sticky; top:0; z-index:70; background:#fff; border-bottom:1px so
   border-radius:50%; border:1px solid var(--blue-line); background:#fff; color:var(--blue-dd)}
 .ic svg{width:24px; height:24px; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round}
 
-/* ---- ファーストビュー（2026-10-03 のご指示で、組み直し前のまま） ---- */
-.hero{position:relative; background:var(--blue-s); overflow:hidden}
-.hero .bg{position:relative; height:clamp(500px,68vh,640px); height:clamp(500px,68svh,640px)}
-.hero .bg img{width:100%; height:100%; object-fit:cover; object-position:35% 78%}
-/* 左に白を寄せて文字の場所を作る。写真の右側（空と雲）はそのまま見せる */
+/* ---- ファーストビュー（2026-10-18 トップ改善案：写真全面＋左に紺のグラデーション） ---- */
+.hero{position:relative; background:var(--navy); overflow:hidden; color:#fff;
+  min-height:clamp(540px, calc(100vh - 186px), 820px); min-height:clamp(540px, calc(100svh - 186px), 820px)}
+.hero .bg{position:absolute; inset:0}
+.hero .bg img{width:100%; height:100%; object-fit:cover; object-position:62% 55%}
+/* 左に紺を寄せて文字の場所を作る。右側は空の写真をそのまま見せる */
 .hero .bg::after{content:""; position:absolute; inset:0;
-  background:linear-gradient(95deg,rgba(255,255,255,.96) 0%,rgba(255,255,255,.94) 40%,
-                             rgba(255,255,255,.82) 60%,rgba(255,255,255,.35) 80%,transparent 96%)}
-.hero-copy{position:absolute; inset:0; display:flex; align-items:center; z-index:2}
+  background:linear-gradient(90deg,rgba(16,42,67,.97) 0%,rgba(16,42,67,.92) 30%,rgba(16,42,67,.62) 54%,
+                             rgba(16,42,67,.18) 80%,rgba(16,42,67,.04) 100%)}
+.hero-copy{position:relative; z-index:2; display:flex; align-items:center; min-height:inherit; padding:64px 0 88px}
 .hero-copy .wrap{width:100%}
-/* ★強調の青は白地で 4.5 以上出る濃さ（--blue-dd）にする */
-.hero-copy h1{font-size:clamp(30px,4.6vw,54px); font-weight:700; line-height:1.38; margin:0 0 22px;
-  letter-spacing:.02em; color:var(--ink)}
-.hero-copy h1 b{color:var(--blue-dd); font-weight:700}
-.hero-copy h1 span, .hero-copy h1 b{display:inline-block}
-.hero-copy .lead{font-size:16px; line-height:1.9; color:var(--ink); margin:0 0 18px}
-.visa-list{list-style:none; margin:0 0 30px; padding:0; display:flex; flex-wrap:wrap; gap:4px 0; font-size:13.5px; color:var(--muted)}
-.visa-list li{white-space:nowrap}
-.visa-list{gap:6px 18px}
-.visa-list li{position:relative}
-.visa-list li + li::before{content:"/"; position:absolute; left:-12px; color:#c3ccd5}
-.hero-actions{display:flex; align-items:center; gap:26px; flex-wrap:wrap}
-.hero-copy .trust{margin:28px 0 0; padding-top:16px; border-top:1px solid var(--line); max-width:30em;
-  font-size:12.5px; color:var(--muted); letter-spacing:.02em}
-.tags-k{margin:0 0 10px; font-size:12.5px; font-weight:700; color:var(--muted); letter-spacing:.04em}
+.hero-en{display:flex; align-items:center; gap:16px; margin:0 0 26px; font-family:var(--en); font-weight:600;
+  font-size:clamp(14px,1.25vw,16px); letter-spacing:.26em; color:var(--gold-l); line-height:1.5}
+.hero-en::before{content:""; flex:none; width:44px; height:1px; background:var(--gold)}
+.hero-copy h1{font-size:clamp(34px,4.5vw,60px); font-weight:700; line-height:1.42; margin:0 0 26px;
+  letter-spacing:.06em; color:#fff}
+.hero-copy h1 span{display:inline-block}
+.hero-copy .lead{font-size:clamp(15px,1.3vw,17px); line-height:2.05; color:rgba(255,255,255,.88); margin:0 0 40px; letter-spacing:.03em}
+.hero-actions{display:flex; align-items:center; gap:18px 34px; flex-wrap:wrap}
+/* スクロールの合図 */
+.scroll{position:absolute; z-index:3; right:clamp(18px,3.4vw,48px); bottom:0; display:flex; flex-direction:column;
+  align-items:center; gap:14px; text-decoration:none; color:rgba(255,255,255,.82); font-family:var(--en);
+  font-weight:600; font-size:12px; letter-spacing:.3em}
+.scroll span{writing-mode:vertical-rl}
+.scroll i{position:relative; display:block; width:1px; height:76px; background:rgba(255,255,255,.28); overflow:hidden}
+.scroll i::after{content:""; position:absolute; left:0; top:-40%; width:1px; height:40%; background:var(--gold-l);
+  animation:scrollLine 2.4s cubic-bezier(.6,0,.3,1) infinite}
+@keyframes scrollLine{to{top:100%}}
 .tags{list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:8px}
-.tags li{font-size:14px; font-weight:700; color:var(--blue-dd); background:var(--blue-s); border:1px solid var(--blue-line);
-  padding:6px 14px; border-radius:4px; line-height:1.5; white-space:nowrap}
+.tags li{font-size:13.5px; font-weight:700; color:var(--navy); background:#fff; border:1px solid var(--line);
+  padding:5px 14px; border-radius:2px; line-height:1.5; white-space:nowrap}
 
 .btn{display:inline-block; text-decoration:none; padding:15px 32px; font-size:15px; text-align:center;
   font-weight:700; border-radius:4px; background:var(--blue); color:#fff; border:2px solid var(--blue)}
 .btn:hover{background:var(--blue-d); border-color:var(--blue-d)}
 .btn.ghost{background:#fff; color:var(--blue-d)}
 .btn.ghost:hover{background:var(--blue-s)}
+.btn.gold{background:var(--gold); border-color:var(--gold); color:var(--navy)}
+.btn.gold:hover{background:var(--gold-l); border-color:var(--gold-l)}
+.txt-link.light{color:#fff}
 .txt-link{color:var(--blue-dd); font-weight:700; font-size:14.5px; text-decoration:none; white-space:nowrap}
 .txt-link span{display:inline-block; transition:transform .2s}
 .txt-link:hover span{transform:translateX(4px)}
 
-/* ---- 信頼情報：FV直下に3枚 ---- */
-.trust{background:var(--panel); border-top:1px solid var(--line-s); border-bottom:1px solid var(--line-s); padding:36px 0}
-.trust-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
-.tc{display:flex; gap:18px; align-items:flex-start; background:#fff; border:1px solid var(--line); border-radius:6px; padding:24px 24px 22px}
+/* ---- 信頼情報：FV直下の紺の帯 ---- */
+.trust{background:var(--navy); color:#fff; border-top:1px solid rgba(255,255,255,.12)}
+.trust-grid{display:grid; grid-template-columns:repeat(3,1fr)}
+.tc{display:flex; gap:18px; align-items:center; padding:30px 28px; border-left:1px solid rgba(255,255,255,.14)}
+.tc:first-child{border-left:0; padding-left:0}
+.tc .ic{border-color:rgba(182,154,104,.55); background:transparent; color:var(--gold-l)}
 .tc-body{display:flex; flex-direction:column; min-width:0}
-.tc-en{font-size:10px; font-weight:700; letter-spacing:.14em; color:#9aa5b1; line-height:1.4}
-.tc-k{font-size:13px; font-weight:700; color:var(--blue-dd); margin-top:6px}
-.tc b{font-size:18px; font-weight:700; color:var(--ink); line-height:1.5; margin-top:2px}
-.tc small{font-size:12.5px; color:var(--muted); line-height:1.6; margin-top:4px}
+.tc-en{font-family:var(--en); font-size:13px; font-weight:600; letter-spacing:.22em; color:var(--gold-l); line-height:1.3}
+.tc-k{font-size:12.5px; color:rgba(255,255,255,.72); margin-top:4px}
+.tc b{font-size:17px; font-weight:700; color:#fff; line-height:1.5}
 
 /* ---- 節 ---- */
 section{padding:100px 0}
@@ -145,16 +155,6 @@ section.alt{background:var(--panel); border-top:1px solid var(--line-s); border-
 .note-s{display:block; margin-top:10px; font-size:13px; color:var(--muted)}
 .more-r{text-align:right; margin-top:36px}
 
-/* ---- A and K の特徴（3枚） ---- */
-.feats{display:grid; grid-template-columns:repeat(3,1fr); gap:24px}
-.feat{display:flex; flex-direction:column; background:#fff; border:1px solid var(--line); border-top:3px solid var(--blue);
-  border-radius:6px; padding:32px 30px 30px}
-.feat-top{display:flex; align-items:center; justify-content:space-between; margin-bottom:18px}
-.feat-n{font-size:11px; font-weight:700; letter-spacing:.16em; color:#9aa5b1}
-.feat h3{font-size:20px; font-weight:700; margin:0 0 12px; line-height:1.5; color:var(--ink)}
-.feat p{font-size:14.5px; color:#4a5866; margin:0 0 18px; line-height:1.9}
-.feat .tags{margin-top:auto}
-.feat .tags li{font-size:13px; padding:4px 11px}
 .checks{list-style:none; margin:auto 0 0; padding:0; border-top:1px solid var(--line)}
 .checks li{position:relative; padding:9px 0 9px 24px; border-bottom:1px solid var(--line-s); font-size:14px; line-height:1.6}
 .checks li::before{content:""; position:absolute; left:3px; top:14px; width:5px; height:9px;
@@ -259,25 +259,6 @@ section.alt{background:var(--panel); border-top:1px solid var(--line-s); border-
   .step .d{flex-direction:row; gap:10px; align-items:baseline}
 }
 
-/* ---- グループ・提携機関（トップ：連携の図） ---- */
-.net{display:grid; grid-template-columns:1fr 1.2fr 1fr; gap:28px; align-items:stretch}
-.net-col{position:relative; background:#fff; border:1px solid var(--line); border-radius:6px; padding:24px 24px 18px}
-.net-own{background:var(--blue-s); border-color:var(--blue-line)}
-/* 中央（自社グループ）と左右（提携）を細い線でつなぐ */
-.net-own::before, .net-own::after{content:""; position:absolute; top:50%; width:28px; height:1px; background:var(--blue)}
-.net-own::before{left:-29px} .net-own::after{right:-29px}
-.net-k{display:flex; align-items:center; gap:8px; font-size:12.5px; font-weight:700; color:var(--blue-dd); letter-spacing:.04em; margin-bottom:6px}
-.net-k em{font-style:normal; font-size:10px; letter-spacing:.14em; color:#9aa5b1}
-.net-item{padding:14px 0; border-top:1px solid var(--line)}
-.net-k + .net-item{border-top:0}
-.net-own .net-item{border-top-color:var(--blue-line)}
-.net-item small{display:block; font-size:12px; font-weight:700; color:var(--muted)}
-.net-item b{display:block; font-size:16px; color:var(--ink); line-height:1.5}
-.net-item span{display:block; font-size:13px; color:#4a5866; line-height:1.7; margin-top:2px}
-.net-item .role{display:inline-block; font-size:11.5px; font-weight:700; color:var(--blue-dd); background:#fff;
-  border:1px solid var(--blue-line); border-radius:3px; padding:0 8px; margin:4px 0 0}
-.net-foot{margin:22px 0 0; font-size:14px; color:var(--muted); text-align:center}
-
 /* ---- グループ・提携機関（下層） ---- */
 .lead-big{display:block; font-size:clamp(18px,2.2vw,22px); font-weight:700; color:var(--ink); line-height:1.6; letter-spacing:.02em}
 .pt-block{display:grid; grid-template-columns:200px 1fr; gap:36px; padding:36px 0}
@@ -323,30 +304,6 @@ section.alt{background:var(--panel); border-top:1px solid var(--line-s); border-
 .about-dl dt{color:var(--muted); font-size:13px; padding-top:1px}
 .about-dl dd{margin:0; color:var(--ink)}
 
-/* ---- グループ事業（後半に控えめに） ---- */
-.sec-head.sm h2{font-size:clamp(19px,2.2vw,23px)}
-section#groupbiz{padding:76px 0}
-.gbiz{display:grid; grid-template-columns:repeat(2,1fr); gap:16px}
-.gb{background:#fff; border:1px solid var(--line); border-radius:6px; padding:22px 26px}
-.gb-k{display:block; font-size:12.5px; font-weight:700; color:var(--muted)}
-.gb b{display:block; font-size:16px; color:var(--ink); margin-top:4px; line-height:1.6}
-.gb small{display:block; font-size:13px; color:var(--muted); margin-top:4px}
-
-/* ---- お知らせ（後半。見出しは小さく、3件だけ） ---- */
-section.topnews{padding:72px 0}
-.nb-head{display:flex; align-items:baseline; gap:14px; margin-bottom:12px}
-.nb-head .en{font-size:11px; font-weight:700; letter-spacing:.18em; color:var(--blue)}
-.nb-head h2{margin:0; font-size:18px; font-weight:700; color:var(--ink)}
-.nb-head .txt-link{margin-left:auto; font-size:13.5px}
-.nlist-top{list-style:none; margin:0; padding:0; border-top:1px solid var(--line)}
-.nlist-top li{border-bottom:1px solid var(--line)}
-.nlist-top a{display:grid; grid-template-columns:110px 1fr 20px; gap:20px; align-items:center;
-  padding:14px 6px; color:var(--ink); text-decoration:none; font-size:14.5px}
-.nlist-top a:hover{background:var(--blue-s)}
-.nlist-top span{overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
-.nlist-top time{color:var(--muted); font-variant-numeric:tabular-nums; font-size:13.5px}
-.nlist-top i{font-style:normal; color:var(--blue-dd)}
-
 /* ---- よくあるご質問（アコーディオン） ---- */
 .faq-list{max-width:880px}
 .faq details{background:#fff; border:1px solid var(--line); margin-bottom:10px; border-radius:6px}
@@ -365,24 +322,29 @@ section.topnews{padding:72px 0}
   font-size:12.5px; font-weight:700; display:flex; align-items:center; justify-content:center; border-radius:3px}
 
 /* ---- 最後のお問い合わせ ---- */
-.cta{background:var(--blue-s); border-top:1px solid var(--blue-line); text-align:center; padding:96px 0}
-.cta .en{display:block; font-size:11px; font-weight:700; letter-spacing:.18em; color:var(--blue); margin-bottom:12px}
-.cta h2{font-size:clamp(24px,3.1vw,34px); font-weight:700; margin:0 0 18px; color:var(--ink); line-height:1.5}
+.cta{position:relative; background:var(--navy); color:#fff; text-align:center; padding:110px 0; overflow:hidden}
+.cta::before{content:""; position:absolute; inset:0; pointer-events:none;
+  background:radial-gradient(ellipse 60% 80% at 50% 0%,rgba(36,93,135,.55),transparent 70%)}
+.cta .wrap{position:relative}
+.cta .en{display:block; font-family:var(--en); font-size:16px; font-weight:600; letter-spacing:.3em; color:var(--gold-l); margin-bottom:14px}
+.cta h2{font-size:clamp(25px,3.1vw,36px); font-weight:700; margin:0 0 20px; color:#fff; line-height:1.55; letter-spacing:.05em}
 .cta h2 span{display:inline-block}
-.cta p{color:#4a5866; margin:0 0 36px; font-size:16px; line-height:1.95}
+.cta p{color:rgba(255,255,255,.82); margin:0 0 38px; font-size:16px; line-height:1.95}
+.cta .btn-lg{background:var(--gold); border-color:var(--gold); color:var(--navy)}
+.cta .btn-lg:hover{background:var(--gold-l); border-color:var(--gold-l)}
 .btn-lg{display:inline-flex; align-items:center; justify-content:center; gap:14px; min-width:360px; padding:22px 40px; font-size:18px; border-radius:6px}
 .btn-lg i{font-style:normal; font-size:20px}
 .cta-sub{display:flex; justify-content:center; flex-wrap:wrap; gap:14px; margin-top:32px}
-.cw{display:flex; flex-direction:column; align-items:flex-start; gap:2px; padding:16px 24px; min-width:280px; background:#fff;
-  border:1px solid var(--blue-line); border-radius:6px; text-decoration:none; color:var(--ink); text-align:left}
-.cw:hover{border-color:var(--blue)}
-.cw-k{font-size:12px; font-weight:700; color:var(--muted)}
-.cw b{font-size:22px; font-weight:700; color:var(--blue-dd); letter-spacing:.02em; line-height:1.4}
+.cw{display:flex; flex-direction:column; align-items:flex-start; gap:2px; padding:16px 24px; min-width:280px; background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.2); border-radius:4px; text-decoration:none; color:#fff; text-align:left}
+.cw:hover{border-color:var(--gold)}
+.cw-k{font-size:12px; font-weight:700; color:rgba(255,255,255,.7)}
+.cw b{font-size:22px; font-weight:700; color:#fff; letter-spacing:.02em; line-height:1.4}
 .cw b.mail{font-size:17px; overflow-wrap:anywhere}
-.cw small{font-size:12px; color:var(--muted)}
+.cw small{font-size:12px; color:rgba(255,255,255,.7)}
 
 /* フッター */
-footer{background:var(--blue-dd); color:#cfe8f5; font-size:13px; padding:48px 0 20px}
+footer{background:#0b1f33; color:#c9d4df; font-size:13px; padding:48px 0 20px}
 footer .cols{display:grid; grid-template-columns:1.5fr 1fr 1fr; gap:38px; margin-bottom:30px}
 footer h4{color:#fff; font-size:14.5px; font-weight:700; margin:0 0 12px}
 footer ul{list-style:none; margin:0; padding:0}
@@ -399,13 +361,12 @@ footer a:hover{color:#fff; text-decoration:underline}
   .pill{margin-left:auto}
 }
 @media (max-width:1000px){
-  .trust-grid, .feats{grid-template-columns:1fr}
+  .trust-grid{grid-template-columns:1fr}
+  .tc{padding:18px 0; border-left:0; border-top:1px solid rgba(255,255,255,.14)}
+  .tc:first-child{border-top:0}
   .vcards{grid-template-columns:repeat(2,1fr)}
   .stages{grid-template-columns:1fr; gap:40px}
   .stage:not(:last-child)::after{right:auto; left:50%; top:auto; bottom:-27px; transform:translateX(-50%) rotate(135deg)}
-  .net{grid-template-columns:1fr; gap:28px}
-  .net-own::before, .net-own::after{left:50%; right:auto; width:1px; height:28px; top:auto}
-  .net-own::before{top:-29px} .net-own::after{bottom:-29px}
   .about{grid-template-columns:1fr; gap:28px}
 }
 @media (max-width:860px){
@@ -421,17 +382,16 @@ footer a:hover{color:#fff; text-decoration:underline}
 }
 @media (max-width:760px){
   section{padding:64px 0}
-  section.topnews, section#groupbiz{padding:52px 0}
   .sec-head{margin-bottom:32px; padding-left:16px}
-  .hero .bg::after{background:linear-gradient(180deg,rgba(255,255,255,.93) 0%,
-    rgba(255,255,255,.86) 52%,rgba(255,255,255,.5) 100%)}
-  .hero .bg{height:auto; min-height:560px}
-  .hero-copy{position:relative; padding:40px 0 44px}
-  .hero .bg{position:absolute; inset:0}
+  .hero{min-height:calc(100vh - 64px); min-height:calc(100svh - 64px)}
+  .hero .bg::after{background:linear-gradient(180deg,rgba(16,42,67,.9) 0%,rgba(16,42,67,.8) 55%,rgba(16,42,67,.55) 100%)}
+  .hero-copy{padding:40px 0 100px}
+  .hero-copy h1{font-size:clamp(30px,8.4vw,38px)}
   .hero-copy .lead br{display:none}
-  .trust{padding:24px 0}
-  .tc{padding:20px}
-  .feat{padding:26px 22px 24px}
+  .hero-actions .btn{width:100%}
+  .scroll{right:auto; left:50%; transform:translateX(-50%)}
+  .scroll span{writing-mode:horizontal-tb}
+  .scroll i{height:44px}
   .vcards{grid-template-columns:1fr; gap:12px}
   .vcard{padding:20px 22px}
   .vcard h3{margin-bottom:8px; padding-bottom:8px}
@@ -442,11 +402,6 @@ footer a:hover{color:#fff; text-decoration:underline}
   .flow-total{padding:20px 22px; margin-bottom:36px}
   .about-dl{padding:4px 20px}
   .about-dl div{grid-template-columns:1fr; gap:0}
-  .gbiz{grid-template-columns:1fr}
-  .nlist-top a{grid-template-columns:1fr 18px; gap:2px 12px; padding:14px 2px}
-  .nlist-top time{grid-column:1}
-  .nlist-top span{grid-column:1; white-space:normal}
-  .nlist-top i{grid-column:2; grid-row:1 / 3}
   .faq summary{padding:18px 48px 18px 16px; font-size:15px}
   .faq summary::after{right:18px}
   .faq .a{padding:0 16px 20px; font-size:14.5px}
@@ -456,6 +411,156 @@ footer a:hover{color:#fff; text-decoration:underline}
   .btn-lg{min-width:0; width:100%; padding:20px 20px; font-size:17px}
   .cw{min-width:0; width:100%}
   footer .cols{grid-template-columns:1fr; gap:22px}
+}
+
+/* ===== 2026-10-18 トップ改善案（紺・白・金） =====
+   並び：FV → 信頼の帯 → INTRODUCTION → 3つの強み → GLOBAL NETWORK → 人材 → 支援 → 流れ
+         → ABOUT US → お知らせ → お問い合わせ。数字・実績は今あるものだけを使う。
+   トップの節は build.py が <div class="top"> で包む。下層には効かない。 */
+.top section{padding:120px 0}
+.top section.alt{background:var(--panel); border:0}
+.top .sec-head{border-left:0; padding-left:0; margin-bottom:56px}
+.top .sec-head .en{display:flex; align-items:center; gap:14px; font-family:var(--en); font-weight:600;
+  font-size:clamp(15px,1.4vw,17px); letter-spacing:.26em; color:var(--gold-d)}
+.top .sec-head .en::before{content:""; flex:none; width:36px; height:1px; background:var(--gold)}
+.top .sec-head h2{font-size:clamp(25px,2.9vw,36px); color:var(--ink); letter-spacing:.06em; margin:14px 0 0; line-height:1.5}
+.top .sec-head h2 span, .about-msg strong span{display:inline-block}
+.top .more-r{margin-top:44px}
+.top .txt-link{color:var(--blue)}
+.top .txt-link.light{color:#fff}
+
+/* INTRODUCTION：大きな英字と本文 */
+.intro-grid{display:grid; grid-template-columns:1fr 1.05fr; gap:72px; align-items:center}
+.intro-en{margin:0; font-family:var(--en); font-weight:500; font-size:clamp(46px,6.2vw,90px); line-height:1.04;
+  color:var(--navy); letter-spacing:.005em}
+.intro-en em{font-style:italic; color:var(--gold)}
+.top .intro .sec-head{margin-bottom:28px}
+.intro-body p{margin:0 0 16px; font-size:16px; line-height:2.1}
+.intro-body p:last-child{margin-bottom:0}
+
+/* 3つの強み：写真と文を左右交互に */
+.strs{display:grid; gap:110px}
+.str{display:grid; grid-template-columns:1.08fr 1fr; gap:80px; align-items:center}
+.str:nth-child(even) .str-ph{order:2}
+.str-ph{margin:0}
+.str-ph .ph{position:relative; isolation:isolate}
+.str-ph img{width:100%; aspect-ratio:4/3; object-fit:cover}
+.str-ph .ph::before{content:""; position:absolute; z-index:-1; inset:22px -22px -22px 22px; border:1px solid var(--gold)}
+.str:nth-child(even) .str-ph .ph::before{inset:22px 22px -22px -22px}
+.str-ph figcaption{margin-top:30px; font-size:12px; color:var(--muted)}
+.str-n{display:block; font-family:var(--en); font-weight:500; font-size:68px; line-height:1; color:var(--gold)}
+.str-en{display:block; margin-top:12px; font-family:var(--en); font-weight:600; font-size:14px; letter-spacing:.22em; color:var(--muted)}
+.str h3{font-size:clamp(21px,2.2vw,27px); color:var(--ink); margin:12px 0 18px; line-height:1.5; letter-spacing:.04em}
+.str p{font-size:15.5px; line-height:2; margin:0 0 24px}
+.str .checks{max-width:30em}
+
+/* GLOBAL NETWORK：紺の地にアジアの点描地図 */
+.top section.network{background:radial-gradient(ellipse 70% 70% at 28% 45%,#1b4468 0%,var(--navy) 62%); color:#fff}
+.top .network .sec-head .en{color:var(--gold-l)}
+.top .network .sec-head h2{color:#fff}
+.nw{display:grid; grid-template-columns:1.12fr 1fr; gap:56px; align-items:center}
+.nw-map{display:block; width:100%; height:auto}
+.nw-land{fill:none; stroke:rgba(255,255,255,.24); stroke-width:3.4; stroke-linecap:round}
+.nw-arc{fill:none; stroke:var(--gold); stroke-width:1.8; stroke-dasharray:6 7; stroke-linecap:round}
+.nw-pin circle{fill:var(--gold)}
+.nw-jp circle{fill:#fff}
+.nw-pin .nw-pulse{fill:none; stroke:var(--gold-l); stroke-width:1.4; opacity:0; transform-box:fill-box; transform-origin:center}
+.nw-pin text{fill:#fff; font-family:var(--en); font-size:17px; font-weight:600; letter-spacing:.18em}
+.nw-list{display:grid; gap:14px}
+.nw-c{background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.14); border-radius:4px; padding:20px 26px}
+.nw-c .k{display:block; font-family:var(--en); font-weight:600; font-size:14px; letter-spacing:.24em; color:var(--gold-l)}
+.nw-o{padding:10px 0}
+.nw-o + .nw-o{border-top:1px solid rgba(255,255,255,.1)}
+.nw-o b{display:block; font-size:16px; color:#fff; line-height:1.6}
+.nw-o .role{display:inline-block; margin-left:10px; padding:0 8px; border:1px solid rgba(182,154,104,.65); border-radius:2px;
+  font-size:11.5px; font-weight:700; color:var(--gold-l); vertical-align:2px; line-height:1.7}
+.nw-o p{margin:2px 0 0; font-size:13.5px; line-height:1.8; color:rgba(255,255,255,.74)}
+.top .network .txt-link{color:var(--gold-l)}
+@media (prefers-reduced-motion:no-preference){
+  .nw-arc{animation:nwDash 1.4s linear infinite}
+  .nw-arc2{animation-duration:1.7s}
+  .nw-pin .nw-pulse{animation:nwPulse 2.6s ease-out infinite}
+  .nw-ph .nw-pulse{animation-delay:.9s}
+  .nw-vn .nw-pulse{animation-delay:1.7s}
+}
+@keyframes nwDash{to{stroke-dashoffset:-26}}
+@keyframes nwPulse{0%{opacity:.8; transform:scale(.4)} 100%{opacity:0; transform:scale(1.6)}}
+
+/* 人材（5つ）：罫線で区切った一列 */
+.top .vcards{gap:0; border-top:1px solid var(--line); border-left:1px solid var(--line)}
+.top .vcard{border:0; border-right:1px solid var(--line); border-bottom:1px solid var(--line); border-radius:0; padding:36px 26px 32px}
+.top .vcard .n{font-family:var(--en); font-weight:500; font-size:34px; letter-spacing:.02em; color:var(--gold); line-height:1}
+.top .vcard h3{margin:14px 0 10px; padding:0; border:0; font-size:18.5px}
+.top .vcard p{font-size:14px; color:var(--text)}
+
+/* 支援（3段階） */
+.top .stage{background:#fff; border:1px solid var(--line); border-top:3px solid var(--navy); border-radius:0; padding:32px 30px 28px}
+.top .stage-n{font-family:var(--en); font-weight:500; font-size:38px; color:var(--gold)}
+.top .stage:not(:last-child)::after{border-color:var(--gold)}
+.top .stage .checks{border-radius:0}
+.top .checks li::before{border-color:var(--gold-d)}
+
+/* 流れ（5ステップ） */
+.top .flow-total{background:var(--navy); border:0; border-radius:0; color:#fff}
+.top .flow-total .k{color:#fff}
+.top .flow-total .v{color:var(--gold-l)}
+.top .flow-total .s{color:rgba(255,255,255,.72)}
+.top .tl .dot{border-color:var(--navy); color:var(--navy); font-family:var(--en); font-size:19px; font-weight:600}
+.top .tl:last-child .dot{background:var(--navy); color:#fff}
+.top .tl .d{color:var(--navy); border-radius:2px}
+
+/* ABOUT US */
+.about-grid{display:grid; grid-template-columns:1fr 1fr; gap:72px; align-items:start}
+.about-msg{margin:0 0 28px; font-size:16px; line-height:2.1}
+.about-msg strong{display:block; margin-bottom:14px; font-size:clamp(18px,1.8vw,21px); color:var(--ink); letter-spacing:.06em; line-height:1.7}
+.top .about-dl{border-radius:0; border-color:var(--line)}
+.abiz{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:16px}
+.ab{background:var(--panel); border-left:3px solid var(--gold); padding:18px 22px}
+.ab-k{display:block; font-size:12px; font-weight:700; color:var(--muted)}
+.ab b{display:block; margin-top:4px; font-size:15.5px; color:var(--ink); line-height:1.6}
+.ab small{display:block; margin-top:4px; font-size:12.5px; color:var(--muted)}
+.about-grid .more-r{margin-top:22px}
+
+/* お知らせ（写真つき3件） */
+.top section.topnews{padding:110px 0}
+.nb-head{display:flex; align-items:flex-end; justify-content:space-between; gap:20px; margin-bottom:44px}
+.top .nb-head .sec-head{margin:0}
+.ncards{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(3,1fr); gap:28px}
+.ncards a{display:flex; flex-direction:column; height:100%; background:#fff; text-decoration:none; color:var(--ink);
+  border:1px solid var(--line); transition:border-color .2s, box-shadow .2s}
+.ncards a:hover{border-color:var(--gold); box-shadow:0 10px 26px rgba(16,42,67,.08)}
+.ncards figure{margin:0; aspect-ratio:16/10; overflow:hidden; background:var(--panel)}
+.ncards img{width:100%; height:100%; object-fit:cover}
+.ncards time{display:block; padding:20px 24px 0; font-family:var(--en); font-weight:600; font-size:16px;
+  letter-spacing:.1em; color:var(--gold-d)}
+.ncards span{display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:3; overflow:hidden;
+  padding:6px 24px 24px; font-size:14.5px; line-height:1.85}
+
+@media (max-width:1000px){
+  .intro-grid, .str, .nw, .about-grid{grid-template-columns:1fr; gap:36px}
+  .str:nth-child(even) .str-ph{order:0}
+  .strs{gap:80px}
+  .str-ph{margin-right:22px}
+  .str:nth-child(even) .str-ph{margin:0 0 0 22px}
+  .nw-map{max-width:620px; margin:0 auto}
+}
+@media (max-width:760px){
+  .top section{padding:76px 0}
+  .top section.topnews{padding:72px 0}
+  .top .sec-head{margin-bottom:36px}
+  .intro-en{font-size:clamp(40px,12vw,56px)}
+  .str-n{font-size:52px}
+  .str-ph .ph::before{inset:14px -14px -14px 14px}
+  .str:nth-child(even) .str-ph .ph::before{inset:14px 14px -14px -14px}
+  .str-ph{margin-right:14px}
+  .str:nth-child(even) .str-ph{margin:0 0 0 14px}
+  .str-ph figcaption{margin-top:22px}
+  .nw-c{padding:18px 20px}
+  .top .vcards{grid-template-columns:1fr}
+  .top .vcard{padding:24px 22px}
+  .abiz{grid-template-columns:1fr}
+  .nb-head{flex-direction:column; align-items:flex-start; margin-bottom:30px}
+  .ncards{grid-template-columns:1fr; gap:18px}
 }
 
 /* ---- 下層ページの見出し（build.py が差し込む） ---- */
@@ -551,11 +656,11 @@ footer a:hover{color:#fff; text-decoration:underline}
 <style>
 @keyframes rise   { from{opacity:0; transform:translateY(14px)} to{opacity:1; transform:none} }
 @keyframes riseSp { from{opacity:0; transform:translateY(9px)}  to{opacity:1; transform:none} }
-@keyframes zoomOut{ from{transform:scale(1.06)} to{transform:none} }
+@keyframes zoomOut{ from{transform:scale(1.12)} to{transform:none} }
 
 /* ヒーローとお知らせ帯はJSを使わずCSSだけで動かす。JSがクラスを付けるのを
    待つと、待っている間に文字が見えてしまう（環境が遅いほど長く見える）。 */
-.hero .bg img{animation:zoomOut 1.8s cubic-bezier(.2,.7,.3,1) both}
+.hero .bg img{animation:zoomOut 9s cubic-bezier(.16,.6,.3,1) both}
 .hero-copy .wrap > *{animation:rise .7s cubic-bezier(.2,.7,.3,1) both}
 .hero-copy .wrap > *:nth-child(1){animation-delay:.15s}
 .hero-copy .wrap > *:nth-child(2){animation-delay:.30s}
@@ -564,17 +669,16 @@ footer a:hover{color:#fff; text-decoration:underline}
 .trust{animation:rise .7s cubic-bezier(.2,.7,.3,1) .4s both}
 
 /* スクロールで出てくる分だけ、JSがあるとき（.anim）に隠しておく */
-.anim section > .wrap > *:not(.visas):not(.feats):not(.vcards):not(.stages):not(.tline):not(.net):not(.flow):not(.partners):not(.faq-list):not(.gbiz):not(.gcards):not(.contact-grid),
+.anim section > .wrap > *:not(.visas):not(.strs):not(.vcards):not(.stages):not(.tline):not(.flow):not(.partners):not(.faq-list):not(.ncards):not(.gcards):not(.contact-grid),
 .anim .visas > *,
-.anim .feats > *,
+.anim .strs > *,
 .anim .vcards > *,
 .anim .stages > *,
 .anim .tline > *,
-.anim .net > *,
 .anim .flow > *,
 .anim .partners > *,
 .anim .faq-list > *,
-.anim .gbiz > *,
+.anim .ncards > *,
 .anim .gcards > *,
 .anim .contact-grid > *,
 .anim .nlist > .wrap > *,
@@ -584,17 +688,16 @@ footer a:hover{color:#fff; text-decoration:underline}
 @media (max-width:700px){ .anim .on{animation-name:riseSp} }
 
 @media (prefers-reduced-motion:reduce){
-  .anim section > .wrap > *:not(.visas):not(.feats):not(.vcards):not(.stages):not(.tline):not(.net):not(.flow):not(.partners):not(.faq-list):not(.gbiz):not(.gcards):not(.contact-grid),
+  .anim section > .wrap > *:not(.visas):not(.strs):not(.vcards):not(.stages):not(.tline):not(.flow):not(.partners):not(.faq-list):not(.ncards):not(.gcards):not(.contact-grid),
 .anim .visas > *,
-.anim .feats > *,
+.anim .strs > *,
 .anim .vcards > *,
 .anim .stages > *,
 .anim .tline > *,
-.anim .net > *,
 .anim .flow > *,
 .anim .partners > *,
 .anim .faq-list > *,
-.anim .gbiz > *,
+.anim .ncards > *,
 .anim .gcards > *,
 .anim .contact-grid > *,
 .anim .nlist > .wrap > *,
@@ -602,17 +705,16 @@ footer a:hover{color:#fff; text-decoration:underline}
   .anim .on, .hero .bg img, .hero-copy .wrap > *, .trust{animation:none}
 }
 @media print{
-  .anim section > .wrap > *:not(.visas):not(.feats):not(.vcards):not(.stages):not(.tline):not(.net):not(.flow):not(.partners):not(.faq-list):not(.gbiz):not(.gcards):not(.contact-grid),
+  .anim section > .wrap > *:not(.visas):not(.strs):not(.vcards):not(.stages):not(.tline):not(.flow):not(.partners):not(.faq-list):not(.ncards):not(.gcards):not(.contact-grid),
 .anim .visas > *,
-.anim .feats > *,
+.anim .strs > *,
 .anim .vcards > *,
 .anim .stages > *,
 .anim .tline > *,
-.anim .net > *,
 .anim .flow > *,
 .anim .partners > *,
 .anim .faq-list > *,
-.anim .gbiz > *,
+.anim .ncards > *,
 .anim .gcards > *,
 .anim .contact-grid > *,
 .anim .nlist > .wrap > *,
@@ -654,157 +756,159 @@ setTimeout(function(){
   </div>
 </header>
 
+<div class="top">
 <div class="hero">
   <div class="bg"><img src="img/hero-sky.jpg" alt="青空と雲"></div>
   <div class="hero-copy">
     <div class="wrap">
-      <h1><span>人と企業を、</span><br><b>国境を越えて</b><b>つなぐ。</b></h1>
-      <p class="lead">外国人材の採用から定着まで、<br>企業の受入れを一貫して支援します。</p>
-      <ul class="visa-list" aria-label="ご紹介できる在留資格"><li>技能実習</li><li>特定技能</li><li>留学生</li><li>高度人材</li><li>日系人</li></ul>
+      <p class="hero-en">GLOBAL CONNECTIONS.<br>LASTING PARTNERSHIPS.</p>
+      <h1><span>国境を越え</span><br><span>企業の未来をつなぐ</span></h1>
+      <p class="lead">外国人材の採用から受入れ、定着まで。<br>海外の提携機関とのネットワークを活かし、<br>企業と人材の持続的な成長を支えます。</p>
       <div class="hero-actions">
-        <a class="btn" href="contact.html">無料で相談する</a>
-        <a class="txt-link" href="flow.html">受入れの流れを見る <span aria-hidden="true">→</span></a>
+        <a class="btn gold" href="contact.html">外国人材の採用を相談する</a>
+        <a class="txt-link light" href="#intro">A and Kについて知る <span aria-hidden="true">→</span></a>
       </div>
     </div>
   </div>
+  <a class="scroll" href="#intro" aria-label="下へスクロール"><span>SCROLL</span><i aria-hidden="true"></i></a>
 </div>
 
-<!-- ===== 02 信頼情報 ===== -->
+<!-- ===== 02 信頼情報（紺の帯） ===== -->
 <div class="trust">
   <div class="wrap trust-grid">
     <div class="tc"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2"/><path d="M5.8 16c.6-1.4 1.8-2 3.2-2s2.6.6 3.2 2M14.5 10h4M14.5 13.5h4"/></svg></span>
-      <div class="tc-body"><span class="tc-en">REGISTERED SUPPORT ORGANIZATION</span><span class="tc-k">登録支援機関</span><b>登録番号 19登-000975</b><small>出入国在留管理庁</small></div></div>
+      <div class="tc-body"><span class="tc-en">REGISTERED</span><span class="tc-k">登録支援機関</span><b>登録番号 19登-000975</b></div></div>
     <div class="tc"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V8.5L12 4l7 4.5V21M9.5 21v-4.5h5V21M9 11.5h.01M12 11.5h.01M15 11.5h.01"/></svg></span>
-      <div class="tc-body"><span class="tc-en">GROUP</span><span class="tc-k">自社グループの監理団体</span><b>ブリッジング協同組合</b><small>技能実習生の受入れを自社グループで</small></div></div>
+      <div class="tc-body"><span class="tc-en">GROUP NETWORK</span><span class="tc-k">グループ内の監理団体</span><b>ブリッジング協同組合</b></div></div>
     <div class="tc"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.4 2.5 3.6 5.5 3.6 9s-1.2 6.5-3.6 9c-2.4-2.5-3.6-5.5-3.6-9S9.6 5.5 12 3z"/></svg></span>
-      <div class="tc-body"><span class="tc-en">PARTNER</span><span class="tc-k">海外の送り出し機関と連携</span><b>フィリピン／ベトナム</b><small>プロデンシャルエンプロイメント／POLIMEX</small></div></div>
+      <div class="tc-body"><span class="tc-en">INTERNATIONAL</span><span class="tc-k">海外提携ネットワーク</span><b>フィリピン・ベトナム</b></div></div>
   </div>
 </div>
 
-<section id="features">
+<section class="intro" id="intro">
+  <div class="wrap intro-grid">
+    <p class="intro-en" aria-hidden="true">Connecting<br>people <em>across</em><br>borders</p>
+    <div class="intro-body">
+      <div class="sec-head"><span class="en">INTRODUCTION</span><h2>外国人材の採用から<br>定着までを一貫して</h2></div>
+      <p>株式会社 A and K は、岐阜県可児市の登録支援機関です。技能実習・特定技能・留学生・高度人材・日系人の5つの在留資格・人材に対応し、入国の手続きや生活の支援、就労後の面談までお引き受けします。</p>
+      <p>グループ内の監理団体ブリッジング協同組合と、フィリピン・ベトナムの送り出し機関との連携で、企業さまの受入れを支えます。</p>
+    </div>
+  </div>
+</section>
+
+<section class="alt strengths" id="strengths">
   <div class="wrap">
-    <div class="sec-head">
-      <span class="en">FEATURES</span>
-      <h2>A and K の特徴</h2>
-      <p>人材のご紹介だけでなく、入国の手続きや生活の支援、就労後の支援までお引き受けします。</p>
+    <div class="sec-head"><span class="en">OUR STRENGTHS</span><h2>人と企業の未来を支える<br>3つの強み</h2></div>
+    <div class="strs">
+      <article class="str">
+        <figure class="str-ph"><div class="ph"><img src="img/news/20190725-3.jpg" alt="フィリピンの送り出し機関を訪問したときの様子" loading="lazy"></div><figcaption>2019年 フィリピンの送り出し機関にて</figcaption></figure>
+        <div class="str-body">
+          <span class="str-n">01</span><span class="str-en">FIVE TYPES OF TALENT</span>
+          <h3>5つの在留資格・人材に対応</h3>
+          <p>職種・人数・時期をお伺いし、企業さまに合う在留資格をご提案します。どの制度が合うか分からない段階からご相談いただけます。</p>
+          <ul class="tags"><li>技能実習</li><li>特定技能</li><li>留学生</li><li>高度人材</li><li>日系人・定住者</li></ul>
+        </div>
+      </article>
+      <article class="str">
+        <figure class="str-ph"><div class="ph"><img src="img/news/20221108-2.jpeg" alt="フィリピン出張で現地の教室を訪ねたときの様子" loading="lazy"></div><figcaption>2022年 フィリピン出張にて</figcaption></figure>
+        <div class="str-body">
+          <span class="str-n">02</span><span class="str-en">END-TO-END SUPPORT</span>
+          <h3>採用から定着までの一貫支援</h3>
+          <p>登録支援機関として、入国前の説明から日本での暮らし、就労後の面談まで、受入れに必要な支援をお引き受けします。</p>
+          <ul class="checks"><li>入国前の事前ガイダンス</li><li>住まい・生活に必要な契約の支援</li><li>日本語学習の機会の提供</li><li>仕事や暮らしの相談への対応</li><li>定期的な面談</li></ul>
+        </div>
+      </article>
+      <article class="str">
+        <figure class="str-ph"><div class="ph"><img src="img/news/20221108-1.jpeg" alt="フィリピン出張での打ち合わせの様子" loading="lazy"></div><figcaption>2022年 フィリピン出張にて</figcaption></figure>
+        <div class="str-body">
+          <span class="str-n">03</span><span class="str-en">TRUSTED PARTNERS</span>
+          <h3>国内外の提携機関との連携</h3>
+          <p>自社グループで監理団体を運営し、フィリピン・ベトナムの送り出し機関と提携しています。国内でも、愛知の監理団体と業務提携しています。</p>
+          <ul class="checks"><li>ブリッジング協同組合<small>（自社グループの監理団体）</small></li><li>フィリピンの送り出し機関<small>（プロデンシャルエンプロイメント）</small></li><li>ベトナムの送り出し機関<small>（POLIMEX）</small></li><li>トラスト江南協同組合<small>（提携する監理団体）</small></li></ul>
+        </div>
+      </article>
     </div>
-    <div class="feats">
-      <div class="feat">
-        <div class="feat-top"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3.5 20c0-3.2 2.5-5.8 5.5-5.8s5.5 2.6 5.5 5.8"/><circle cx="17" cy="9" r="2.4"/><path d="M16.2 14.3c2.6.4 4.3 2.8 4.3 5.7"/></svg></span><span class="feat-n">FEATURE 01</span></div>
-        <h3>5つの在留資格・人材に対応</h3>
-        <p>職種・人数・時期をお伺いし、企業さまに合う在留資格をご提案します。どの制度が合うか分からない段階からご相談いただけます。</p>
-        <ul class="tags"><li>技能実習</li><li>特定技能</li><li>留学生</li><li>高度人材</li><li>日系人・定住者</li></ul>
-      </div>
-      <div class="feat">
-        <div class="feat-top"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5h16v10.5H10L5.5 19.5V15.5H4z"/><path d="M8 9h8M8 12h5"/></svg></span><span class="feat-n">FEATURE 02</span></div>
-        <h3>採用後まで一貫してサポート</h3>
-        <p>登録支援機関として、入国前の説明から日本での暮らし、就労後の面談まで、受入れに必要な支援をお引き受けします。</p>
-        <ul class="checks"><li>入国前の事前ガイダンス</li><li>住まい・生活に必要な契約の支援</li><li>日本語学習の機会の提供</li><li>仕事や暮らしの相談への対応</li><li>定期的な面談</li></ul>
-      </div>
-      <div class="feat">
-        <div class="feat-top"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg></span><span class="feat-n">FEATURE 03</span></div>
-        <h3>グループ・提携機関との連携</h3>
-        <p>自社グループで監理団体を運営し、フィリピン・ベトナムの送り出し機関と提携しています。</p>
-        <ul class="checks"><li>ブリッジング協同組合<small>（自社グループの監理団体）</small></li><li>フィリピンの送り出し機関<small>（プロデンシャルエンプロイメント）</small></li><li>ベトナムの送り出し機関<small>（POLIMEX）</small></li></ul>
+  </div>
+</section>
+
+<section class="network" id="network">
+  <div class="wrap">
+    <div class="sec-head"><span class="en">GLOBAL NETWORK</span><h2><span>日本とアジアをつなぐ</span><span>ネットワーク</span></h2></div>
+    <div class="nw">
+      <svg class="nw-map" viewBox="0 0 560 460" aria-hidden="true" focusable="false"><path class="nw-land" d="M3 3h0M10 3h0M17 3h0M24 3h0M31 3h0M38 3h0M45 3h0M52 3h0M59 3h0M66 3h0M73 3h0M80 3h0M87 3h0M94 3h0M101 3h0M108 3h0M115 3h0M122 3h0M129 3h0M136 3h0M143 3h0M150 3h0M157 3h0M164 3h0M171 3h0M178 3h0M185 3h0M192 3h0M199 3h0M206 3h0M213 3h0M220 3h0M227 3h0M234 3h0M241 3h0M248 3h0M255 3h0M262 3h0M269 3h0M276 3h0M283 3h0M290 3h0M297 3h0M304 3h0M311 3h0M318 3h0M325 3h0M332 3h0M339 3h0M346 3h0M353 3h0M360 3h0M367 3h0M374 3h0M381 3h0M388 3h0M3 10h0M10 10h0M17 10h0M24 10h0M31 10h0M38 10h0M45 10h0M52 10h0M59 10h0M66 10h0M73 10h0M80 10h0M87 10h0M94 10h0M101 10h0M108 10h0M115 10h0M122 10h0M129 10h0M136 10h0M143 10h0M150 10h0M157 10h0M164 10h0M171 10h0M178 10h0M185 10h0M192 10h0M199 10h0M206 10h0M213 10h0M220 10h0M227 10h0M234 10h0M241 10h0M248 10h0M255 10h0M262 10h0M269 10h0M276 10h0M283 10h0M290 10h0M297 10h0M304 10h0M311 10h0M318 10h0M325 10h0M332 10h0M339 10h0M346 10h0M353 10h0M360 10h0M367 10h0M374 10h0M381 10h0M472 10h0M3 17h0M10 17h0M17 17h0M24 17h0M31 17h0M38 17h0M45 17h0M52 17h0M59 17h0M66 17h0M73 17h0M80 17h0M87 17h0M94 17h0M101 17h0M108 17h0M115 17h0M122 17h0M129 17h0M136 17h0M143 17h0M150 17h0M157 17h0M164 17h0M171 17h0M178 17h0M185 17h0M192 17h0M199 17h0M206 17h0M213 17h0M220 17h0M227 17h0M234 17h0M241 17h0M248 17h0M255 17h0M262 17h0M269 17h0M276 17h0M283 17h0M290 17h0M297 17h0M304 17h0M311 17h0M318 17h0M325 17h0M332 17h0M339 17h0M346 17h0M353 17h0M360 17h0M367 17h0M374 17h0M381 17h0M472 17h0M479 17h0M486 17h0M3 24h0M10 24h0M17 24h0M24 24h0M31 24h0M38 24h0M45 24h0M52 24h0M59 24h0M66 24h0M73 24h0M80 24h0M87 24h0M94 24h0M101 24h0M108 24h0M115 24h0M122 24h0M129 24h0M136 24h0M143 24h0M150 24h0M157 24h0M164 24h0M171 24h0M178 24h0M185 24h0M192 24h0M199 24h0M206 24h0M213 24h0M220 24h0M227 24h0M234 24h0M241 24h0M248 24h0M255 24h0M262 24h0M269 24h0M276 24h0M283 24h0M290 24h0M297 24h0M304 24h0M311 24h0M318 24h0M325 24h0M332 24h0M339 24h0M346 24h0M353 24h0M360 24h0M367 24h0M374 24h0M381 24h0M465 24h0M472 24h0M479 24h0M486 24h0M493 24h0M3 31h0M10 31h0M17 31h0M24 31h0M31 31h0M38 31h0M45 31h0M52 31h0M59 31h0M66 31h0M73 31h0M80 31h0M87 31h0M94 31h0M101 31h0M108 31h0M115 31h0M122 31h0M129 31h0M136 31h0M143 31h0M150 31h0M157 31h0M164 31h0M171 31h0M178 31h0M185 31h0M192 31h0M199 31h0M206 31h0M213 31h0M220 31h0M227 31h0M234 31h0M241 31h0M248 31h0M255 31h0M262 31h0M269 31h0M276 31h0M283 31h0M290 31h0M297 31h0M304 31h0M311 31h0M318 31h0M325 31h0M332 31h0M339 31h0M346 31h0M353 31h0M360 31h0M367 31h0M374 31h0M458 31h0M465 31h0M472 31h0M479 31h0M486 31h0M493 31h0M3 38h0M10 38h0M17 38h0M24 38h0M31 38h0M38 38h0M45 38h0M52 38h0M59 38h0M66 38h0M73 38h0M80 38h0M87 38h0M94 38h0M101 38h0M108 38h0M115 38h0M122 38h0M129 38h0M136 38h0M143 38h0M150 38h0M157 38h0M164 38h0M171 38h0M178 38h0M185 38h0M192 38h0M199 38h0M206 38h0M213 38h0M220 38h0M227 38h0M234 38h0M241 38h0M248 38h0M255 38h0M262 38h0M269 38h0M276 38h0M283 38h0M290 38h0M297 38h0M304 38h0M311 38h0M318 38h0M325 38h0M332 38h0M339 38h0M346 38h0M353 38h0M458 38h0M479 38h0M3 45h0M10 45h0M17 45h0M24 45h0M31 45h0M38 45h0M45 45h0M52 45h0M59 45h0M66 45h0M73 45h0M80 45h0M87 45h0M94 45h0M101 45h0M108 45h0M115 45h0M122 45h0M129 45h0M136 45h0M143 45h0M150 45h0M157 45h0M164 45h0M171 45h0M178 45h0M185 45h0M192 45h0M199 45h0M206 45h0M213 45h0M220 45h0M227 45h0M234 45h0M241 45h0M248 45h0M255 45h0M262 45h0M269 45h0M276 45h0M283 45h0M290 45h0M297 45h0M304 45h0M311 45h0M318 45h0M325 45h0M332 45h0M339 45h0M346 45h0M3 52h0M10 52h0M17 52h0M24 52h0M31 52h0M38 52h0M45 52h0M52 52h0M59 52h0M66 52h0M73 52h0M80 52h0M87 52h0M94 52h0M101 52h0M108 52h0M115 52h0M122 52h0M129 52h0M136 52h0M143 52h0M150 52h0M157 52h0M164 52h0M171 52h0M178 52h0M185 52h0M192 52h0M199 52h0M206 52h0M213 52h0M220 52h0M227 52h0M234 52h0M241 52h0M248 52h0M255 52h0M262 52h0M269 52h0M276 52h0M283 52h0M290 52h0M297 52h0M304 52h0M311 52h0M318 52h0M325 52h0M332 52h0M339 52h0M451 52h0M458 52h0M3 59h0M10 59h0M17 59h0M24 59h0M31 59h0M38 59h0M45 59h0M52 59h0M59 59h0M66 59h0M73 59h0M80 59h0M87 59h0M94 59h0M101 59h0M108 59h0M115 59h0M122 59h0M129 59h0M136 59h0M143 59h0M150 59h0M157 59h0M164 59h0M171 59h0M178 59h0M185 59h0M192 59h0M199 59h0M206 59h0M213 59h0M220 59h0M227 59h0M234 59h0M241 59h0M248 59h0M255 59h0M262 59h0M290 59h0M297 59h0M304 59h0M311 59h0M318 59h0M325 59h0M332 59h0M339 59h0M451 59h0M458 59h0M465 59h0M3 66h0M10 66h0M17 66h0M24 66h0M31 66h0M38 66h0M45 66h0M52 66h0M59 66h0M66 66h0M73 66h0M80 66h0M87 66h0M94 66h0M101 66h0M108 66h0M115 66h0M122 66h0M129 66h0M136 66h0M143 66h0M150 66h0M157 66h0M164 66h0M171 66h0M178 66h0M185 66h0M192 66h0M199 66h0M206 66h0M213 66h0M220 66h0M227 66h0M234 66h0M241 66h0M248 66h0M255 66h0M262 66h0M297 66h0M304 66h0M311 66h0M318 66h0M325 66h0M332 66h0M339 66h0M451 66h0M458 66h0M465 66h0M3 73h0M10 73h0M17 73h0M24 73h0M31 73h0M38 73h0M45 73h0M52 73h0M59 73h0M66 73h0M73 73h0M80 73h0M87 73h0M94 73h0M101 73h0M108 73h0M115 73h0M122 73h0M129 73h0M136 73h0M143 73h0M150 73h0M157 73h0M164 73h0M171 73h0M178 73h0M185 73h0M192 73h0M199 73h0M206 73h0M213 73h0M220 73h0M227 73h0M304 73h0M311 73h0M318 73h0M325 73h0M332 73h0M339 73h0M451 73h0M458 73h0M465 73h0M3 80h0M10 80h0M17 80h0M24 80h0M31 80h0M38 80h0M45 80h0M52 80h0M59 80h0M66 80h0M73 80h0M80 80h0M87 80h0M94 80h0M101 80h0M108 80h0M115 80h0M122 80h0M129 80h0M136 80h0M143 80h0M150 80h0M157 80h0M164 80h0M171 80h0M178 80h0M185 80h0M192 80h0M199 80h0M206 80h0M213 80h0M220 80h0M227 80h0M234 80h0M304 80h0M311 80h0M318 80h0M325 80h0M332 80h0M339 80h0M444 80h0M451 80h0M458 80h0M3 87h0M10 87h0M17 87h0M24 87h0M31 87h0M38 87h0M45 87h0M52 87h0M59 87h0M66 87h0M73 87h0M80 87h0M87 87h0M94 87h0M101 87h0M108 87h0M115 87h0M122 87h0M129 87h0M136 87h0M143 87h0M150 87h0M157 87h0M164 87h0M171 87h0M178 87h0M185 87h0M192 87h0M199 87h0M206 87h0M213 87h0M220 87h0M227 87h0M234 87h0M241 87h0M248 87h0M255 87h0M262 87h0M269 87h0M318 87h0M325 87h0M332 87h0M339 87h0M437 87h0M444 87h0M451 87h0M458 87h0M3 94h0M10 94h0M17 94h0M24 94h0M31 94h0M38 94h0M45 94h0M52 94h0M59 94h0M66 94h0M73 94h0M80 94h0M87 94h0M94 94h0M101 94h0M108 94h0M115 94h0M122 94h0M129 94h0M136 94h0M143 94h0M150 94h0M157 94h0M164 94h0M171 94h0M178 94h0M185 94h0M192 94h0M199 94h0M206 94h0M213 94h0M220 94h0M227 94h0M234 94h0M241 94h0M248 94h0M255 94h0M262 94h0M318 94h0M325 94h0M332 94h0M339 94h0M416 94h0M423 94h0M430 94h0M437 94h0M444 94h0M451 94h0M458 94h0M3 101h0M10 101h0M17 101h0M24 101h0M31 101h0M38 101h0M45 101h0M52 101h0M59 101h0M66 101h0M73 101h0M80 101h0M87 101h0M94 101h0M101 101h0M108 101h0M115 101h0M122 101h0M129 101h0M136 101h0M143 101h0M150 101h0M157 101h0M164 101h0M171 101h0M178 101h0M185 101h0M192 101h0M199 101h0M206 101h0M213 101h0M220 101h0M227 101h0M234 101h0M241 101h0M248 101h0M318 101h0M325 101h0M332 101h0M339 101h0M409 101h0M416 101h0M423 101h0M430 101h0M437 101h0M444 101h0M451 101h0M3 108h0M10 108h0M17 108h0M24 108h0M31 108h0M38 108h0M45 108h0M52 108h0M59 108h0M66 108h0M73 108h0M80 108h0M87 108h0M94 108h0M101 108h0M108 108h0M115 108h0M122 108h0M129 108h0M136 108h0M143 108h0M150 108h0M157 108h0M164 108h0M171 108h0M178 108h0M185 108h0M192 108h0M199 108h0M206 108h0M213 108h0M220 108h0M227 108h0M234 108h0M241 108h0M318 108h0M325 108h0M332 108h0M381 108h0M388 108h0M395 108h0M402 108h0M409 108h0M416 108h0M423 108h0M430 108h0M437 108h0M444 108h0M3 115h0M10 115h0M17 115h0M24 115h0M31 115h0M38 115h0M45 115h0M52 115h0M59 115h0M66 115h0M73 115h0M80 115h0M87 115h0M94 115h0M101 115h0M108 115h0M115 115h0M122 115h0M129 115h0M136 115h0M143 115h0M150 115h0M157 115h0M164 115h0M171 115h0M178 115h0M185 115h0M192 115h0M199 115h0M206 115h0M213 115h0M220 115h0M227 115h0M234 115h0M241 115h0M248 115h0M367 115h0M374 115h0M381 115h0M388 115h0M402 115h0M409 115h0M416 115h0M3 122h0M10 122h0M17 122h0M24 122h0M31 122h0M38 122h0M45 122h0M52 122h0M59 122h0M66 122h0M73 122h0M80 122h0M87 122h0M94 122h0M101 122h0M108 122h0M115 122h0M122 122h0M129 122h0M136 122h0M143 122h0M150 122h0M157 122h0M164 122h0M171 122h0M178 122h0M185 122h0M192 122h0M199 122h0M206 122h0M213 122h0M220 122h0M227 122h0M234 122h0M241 122h0M248 122h0M353 122h0M360 122h0M381 122h0M388 122h0M395 122h0M409 122h0M3 129h0M10 129h0M17 129h0M24 129h0M31 129h0M38 129h0M45 129h0M52 129h0M59 129h0M66 129h0M73 129h0M80 129h0M87 129h0M94 129h0M101 129h0M108 129h0M115 129h0M122 129h0M129 129h0M136 129h0M143 129h0M150 129h0M157 129h0M164 129h0M171 129h0M178 129h0M185 129h0M192 129h0M199 129h0M206 129h0M213 129h0M220 129h0M227 129h0M234 129h0M241 129h0M248 129h0M255 129h0M353 129h0M360 129h0M367 129h0M381 129h0M388 129h0M3 136h0M10 136h0M17 136h0M24 136h0M31 136h0M38 136h0M45 136h0M52 136h0M59 136h0M66 136h0M73 136h0M80 136h0M87 136h0M94 136h0M101 136h0M108 136h0M115 136h0M122 136h0M129 136h0M136 136h0M143 136h0M150 136h0M157 136h0M164 136h0M171 136h0M178 136h0M185 136h0M192 136h0M199 136h0M206 136h0M213 136h0M220 136h0M227 136h0M234 136h0M241 136h0M248 136h0M255 136h0M353 136h0M360 136h0M367 136h0M3 143h0M10 143h0M17 143h0M24 143h0M31 143h0M38 143h0M45 143h0M52 143h0M59 143h0M66 143h0M73 143h0M80 143h0M87 143h0M94 143h0M101 143h0M108 143h0M115 143h0M122 143h0M129 143h0M136 143h0M143 143h0M150 143h0M157 143h0M164 143h0M171 143h0M178 143h0M185 143h0M192 143h0M199 143h0M206 143h0M213 143h0M220 143h0M227 143h0M234 143h0M241 143h0M248 143h0M255 143h0M262 143h0M353 143h0M360 143h0M3 150h0M10 150h0M17 150h0M24 150h0M31 150h0M38 150h0M45 150h0M52 150h0M59 150h0M66 150h0M73 150h0M80 150h0M87 150h0M94 150h0M101 150h0M108 150h0M115 150h0M122 150h0M129 150h0M136 150h0M143 150h0M150 150h0M157 150h0M164 150h0M171 150h0M178 150h0M185 150h0M192 150h0M199 150h0M206 150h0M213 150h0M220 150h0M227 150h0M234 150h0M241 150h0M248 150h0M255 150h0M262 150h0M269 150h0M3 157h0M10 157h0M17 157h0M24 157h0M31 157h0M38 157h0M45 157h0M52 157h0M59 157h0M66 157h0M73 157h0M80 157h0M87 157h0M94 157h0M101 157h0M108 157h0M115 157h0M122 157h0M129 157h0M136 157h0M143 157h0M150 157h0M157 157h0M164 157h0M171 157h0M178 157h0M185 157h0M192 157h0M199 157h0M206 157h0M213 157h0M220 157h0M227 157h0M234 157h0M241 157h0M248 157h0M255 157h0M262 157h0M269 157h0M3 164h0M10 164h0M17 164h0M24 164h0M31 164h0M38 164h0M45 164h0M52 164h0M59 164h0M66 164h0M73 164h0M80 164h0M87 164h0M94 164h0M101 164h0M108 164h0M115 164h0M122 164h0M129 164h0M136 164h0M143 164h0M150 164h0M157 164h0M164 164h0M171 164h0M178 164h0M185 164h0M192 164h0M199 164h0M206 164h0M213 164h0M220 164h0M227 164h0M234 164h0M241 164h0M248 164h0M255 164h0M262 164h0M3 171h0M10 171h0M17 171h0M24 171h0M31 171h0M38 171h0M45 171h0M52 171h0M59 171h0M66 171h0M73 171h0M80 171h0M87 171h0M94 171h0M101 171h0M108 171h0M115 171h0M122 171h0M129 171h0M136 171h0M143 171h0M150 171h0M157 171h0M164 171h0M171 171h0M178 171h0M185 171h0M192 171h0M199 171h0M206 171h0M213 171h0M220 171h0M227 171h0M234 171h0M241 171h0M248 171h0M255 171h0M262 171h0M3 178h0M10 178h0M17 178h0M24 178h0M31 178h0M38 178h0M45 178h0M52 178h0M59 178h0M66 178h0M73 178h0M80 178h0M87 178h0M94 178h0M101 178h0M108 178h0M115 178h0M122 178h0M129 178h0M136 178h0M143 178h0M150 178h0M157 178h0M164 178h0M171 178h0M178 178h0M185 178h0M192 178h0M199 178h0M206 178h0M213 178h0M220 178h0M227 178h0M234 178h0M241 178h0M248 178h0M255 178h0M262 178h0M3 185h0M10 185h0M17 185h0M24 185h0M31 185h0M38 185h0M45 185h0M52 185h0M59 185h0M66 185h0M73 185h0M80 185h0M87 185h0M94 185h0M101 185h0M108 185h0M115 185h0M122 185h0M129 185h0M136 185h0M143 185h0M150 185h0M157 185h0M164 185h0M171 185h0M178 185h0M185 185h0M192 185h0M199 185h0M206 185h0M213 185h0M220 185h0M227 185h0M234 185h0M241 185h0M248 185h0M255 185h0M3 192h0M10 192h0M17 192h0M24 192h0M31 192h0M38 192h0M45 192h0M52 192h0M59 192h0M66 192h0M73 192h0M80 192h0M87 192h0M94 192h0M101 192h0M108 192h0M115 192h0M122 192h0M129 192h0M136 192h0M143 192h0M150 192h0M157 192h0M164 192h0M171 192h0M178 192h0M185 192h0M192 192h0M199 192h0M206 192h0M213 192h0M220 192h0M227 192h0M234 192h0M241 192h0M248 192h0M3 199h0M10 199h0M17 199h0M24 199h0M31 199h0M38 199h0M45 199h0M52 199h0M59 199h0M66 199h0M73 199h0M80 199h0M87 199h0M94 199h0M101 199h0M108 199h0M115 199h0M122 199h0M129 199h0M136 199h0M143 199h0M150 199h0M157 199h0M164 199h0M171 199h0M178 199h0M185 199h0M192 199h0M199 199h0M206 199h0M213 199h0M220 199h0M227 199h0M234 199h0M241 199h0M248 199h0M3 206h0M10 206h0M17 206h0M24 206h0M31 206h0M38 206h0M45 206h0M52 206h0M59 206h0M66 206h0M73 206h0M80 206h0M87 206h0M94 206h0M101 206h0M108 206h0M115 206h0M122 206h0M129 206h0M136 206h0M143 206h0M150 206h0M157 206h0M164 206h0M171 206h0M178 206h0M185 206h0M192 206h0M199 206h0M206 206h0M213 206h0M220 206h0M227 206h0M234 206h0M241 206h0M3 213h0M10 213h0M17 213h0M24 213h0M31 213h0M38 213h0M45 213h0M52 213h0M59 213h0M66 213h0M73 213h0M80 213h0M87 213h0M94 213h0M101 213h0M108 213h0M115 213h0M122 213h0M129 213h0M136 213h0M143 213h0M150 213h0M157 213h0M164 213h0M171 213h0M178 213h0M185 213h0M192 213h0M199 213h0M206 213h0M213 213h0M220 213h0M227 213h0M234 213h0M262 213h0M3 220h0M10 220h0M17 220h0M24 220h0M31 220h0M38 220h0M45 220h0M52 220h0M59 220h0M66 220h0M73 220h0M80 220h0M87 220h0M94 220h0M101 220h0M108 220h0M115 220h0M122 220h0M129 220h0M136 220h0M143 220h0M150 220h0M157 220h0M164 220h0M171 220h0M178 220h0M185 220h0M192 220h0M199 220h0M206 220h0M213 220h0M220 220h0M227 220h0M255 220h0M262 220h0M3 227h0M10 227h0M17 227h0M24 227h0M31 227h0M38 227h0M45 227h0M52 227h0M59 227h0M66 227h0M73 227h0M80 227h0M87 227h0M94 227h0M101 227h0M108 227h0M115 227h0M122 227h0M129 227h0M136 227h0M143 227h0M150 227h0M157 227h0M164 227h0M171 227h0M178 227h0M185 227h0M192 227h0M199 227h0M206 227h0M213 227h0M255 227h0M262 227h0M3 234h0M10 234h0M17 234h0M24 234h0M31 234h0M38 234h0M45 234h0M52 234h0M59 234h0M66 234h0M73 234h0M80 234h0M87 234h0M94 234h0M101 234h0M108 234h0M115 234h0M122 234h0M129 234h0M136 234h0M143 234h0M150 234h0M157 234h0M164 234h0M171 234h0M178 234h0M185 234h0M192 234h0M199 234h0M255 234h0M3 241h0M10 241h0M17 241h0M24 241h0M31 241h0M38 241h0M45 241h0M52 241h0M59 241h0M66 241h0M73 241h0M80 241h0M87 241h0M94 241h0M101 241h0M108 241h0M115 241h0M122 241h0M129 241h0M136 241h0M143 241h0M150 241h0M157 241h0M164 241h0M171 241h0M178 241h0M3 248h0M10 248h0M17 248h0M24 248h0M31 248h0M38 248h0M45 248h0M52 248h0M59 248h0M66 248h0M73 248h0M80 248h0M87 248h0M94 248h0M101 248h0M108 248h0M115 248h0M122 248h0M150 248h0M157 248h0M3 255h0M10 255h0M17 255h0M24 255h0M31 255h0M38 255h0M45 255h0M52 255h0M59 255h0M66 255h0M73 255h0M80 255h0M87 255h0M94 255h0M101 255h0M108 255h0M115 255h0M3 262h0M10 262h0M17 262h0M24 262h0M31 262h0M38 262h0M45 262h0M52 262h0M59 262h0M66 262h0M73 262h0M80 262h0M87 262h0M94 262h0M101 262h0M108 262h0M150 262h0M157 262h0M3 269h0M10 269h0M17 269h0M24 269h0M31 269h0M38 269h0M45 269h0M52 269h0M59 269h0M66 269h0M73 269h0M80 269h0M87 269h0M94 269h0M101 269h0M108 269h0M143 269h0M150 269h0M3 276h0M10 276h0M17 276h0M24 276h0M31 276h0M38 276h0M45 276h0M52 276h0M59 276h0M66 276h0M73 276h0M80 276h0M87 276h0M94 276h0M101 276h0M108 276h0M143 276h0M262 276h0M269 276h0M3 283h0M10 283h0M17 283h0M24 283h0M31 283h0M38 283h0M45 283h0M52 283h0M59 283h0M66 283h0M73 283h0M80 283h0M87 283h0M94 283h0M101 283h0M108 283h0M115 283h0M255 283h0M262 283h0M269 283h0M3 290h0M10 290h0M17 290h0M24 290h0M31 290h0M38 290h0M45 290h0M52 290h0M59 290h0M66 290h0M73 290h0M80 290h0M87 290h0M94 290h0M101 290h0M108 290h0M115 290h0M255 290h0M262 290h0M269 290h0M3 297h0M31 297h0M38 297h0M45 297h0M52 297h0M59 297h0M66 297h0M73 297h0M80 297h0M87 297h0M94 297h0M101 297h0M108 297h0M115 297h0M122 297h0M255 297h0M262 297h0M31 304h0M38 304h0M45 304h0M52 304h0M59 304h0M66 304h0M73 304h0M80 304h0M87 304h0M94 304h0M101 304h0M108 304h0M115 304h0M122 304h0M129 304h0M255 304h0M262 304h0M31 311h0M38 311h0M45 311h0M52 311h0M59 311h0M66 311h0M73 311h0M80 311h0M87 311h0M94 311h0M101 311h0M108 311h0M115 311h0M122 311h0M129 311h0M136 311h0M262 311h0M31 318h0M38 318h0M45 318h0M52 318h0M59 318h0M66 318h0M73 318h0M80 318h0M87 318h0M94 318h0M101 318h0M108 318h0M115 318h0M122 318h0M129 318h0M136 318h0M262 318h0M269 318h0M38 325h0M45 325h0M52 325h0M59 325h0M66 325h0M73 325h0M80 325h0M87 325h0M94 325h0M101 325h0M108 325h0M115 325h0M122 325h0M129 325h0M136 325h0M276 325h0M283 325h0M290 325h0M38 332h0M45 332h0M73 332h0M80 332h0M87 332h0M94 332h0M101 332h0M108 332h0M115 332h0M122 332h0M129 332h0M136 332h0M290 332h0M38 339h0M45 339h0M80 339h0M87 339h0M94 339h0M101 339h0M108 339h0M115 339h0M122 339h0M129 339h0M136 339h0M290 339h0M297 339h0M38 346h0M45 346h0M87 346h0M94 346h0M101 346h0M108 346h0M115 346h0M122 346h0M129 346h0M136 346h0M276 346h0M290 346h0M297 346h0M304 346h0M38 353h0M87 353h0M94 353h0M101 353h0M108 353h0M115 353h0M122 353h0M283 353h0M290 353h0M297 353h0M304 353h0M38 360h0M101 360h0M108 360h0M115 360h0M283 360h0M290 360h0M38 367h0M45 367h0M101 367h0M108 367h0M304 367h0M38 374h0M45 374h0M290 374h0M297 374h0M304 374h0M38 381h0M45 381h0M52 381h0M276 381h0M283 381h0M290 381h0M297 381h0M304 381h0M311 381h0M45 388h0M52 388h0M290 388h0M297 388h0M304 388h0M311 388h0M52 395h0M59 395h0M66 395h0M220 395h0M297 395h0M304 395h0M311 395h0M59 402h0M66 402h0M73 402h0M213 402h0M220 402h0M227 402h0M304 402h0M3 409h0M10 409h0M17 409h0M24 409h0M59 409h0M66 409h0M73 409h0M80 409h0M206 409h0M213 409h0M220 409h0M227 409h0M234 409h0M241 409h0M3 416h0M10 416h0M17 416h0M24 416h0M31 416h0M59 416h0M66 416h0M73 416h0M80 416h0M199 416h0M206 416h0M213 416h0M220 416h0M227 416h0M234 416h0M3 423h0M10 423h0M17 423h0M24 423h0M31 423h0M38 423h0M59 423h0M66 423h0M73 423h0M80 423h0M192 423h0M199 423h0M206 423h0M213 423h0M220 423h0M227 423h0M3 430h0M10 430h0M17 430h0M24 430h0M31 430h0M38 430h0M45 430h0M66 430h0M73 430h0M80 430h0M185 430h0M192 430h0M199 430h0M206 430h0M213 430h0M220 430h0M227 430h0M10 437h0M17 437h0M24 437h0M31 437h0M38 437h0M45 437h0M52 437h0M73 437h0M80 437h0M87 437h0M171 437h0M178 437h0M185 437h0M192 437h0M199 437h0M206 437h0M213 437h0M220 437h0M227 437h0M17 444h0M24 444h0M31 444h0M38 444h0M45 444h0M52 444h0M59 444h0M87 444h0M150 444h0M157 444h0M164 444h0M171 444h0M178 444h0M185 444h0M192 444h0M199 444h0M206 444h0M213 444h0M220 444h0M227 444h0M24 451h0M31 451h0M38 451h0M45 451h0M52 451h0M59 451h0M66 451h0M73 451h0M150 451h0M157 451h0M164 451h0M171 451h0M178 451h0M185 451h0M192 451h0M199 451h0M206 451h0M213 451h0M220 451h0M227 451h0M234 451h0M31 458h0M38 458h0M45 458h0M52 458h0M59 458h0M66 458h0M73 458h0M80 458h0M143 458h0M150 458h0M157 458h0M164 458h0M171 458h0M178 458h0M185 458h0M192 458h0M199 458h0M206 458h0M213 458h0M220 458h0M227 458h0"/><path class="nw-arc" d="M260 310Q283 163 420 106"/><path class="nw-arc nw-arc2" d="M110 295Q223 132 420 106"/><g class="nw-pin nw-jp" transform="translate(420 106)"><circle class="nw-pulse" r="16"/><circle r="6"/><text x="18" y="5" text-anchor="start">JAPAN</text></g><g class="nw-pin nw-ph" transform="translate(260 310)"><circle class="nw-pulse" r="16"/><circle r="6"/><text x="18" y="5" text-anchor="start">PHILIPPINES</text></g><g class="nw-pin nw-vn" transform="translate(110 295)"><circle class="nw-pulse" r="16"/><circle r="6"/><text x="0" y="34" text-anchor="middle">VIETNAM</text></g></svg>
+      <div class="nw-list">
+        <div class="nw-c"><span class="k">JAPAN</span>
+          <div class="nw-o"><b>株式会社 A and K<span class="role">登録支援機関</span></b><p>募集・紹介／入国の手続き・生活の支援</p></div>
+          <div class="nw-o"><b>ブリッジング協同組合<span class="role">監理団体</span></b><p>2021年8月に弊社が設立。技能実習生の受入れを、紹介から監理まで自社グループ内で。</p></div>
+          <div class="nw-o"><b>トラスト江南協同組合<span class="role">提携監理団体</span></b><p>2019年9月に業務提携。愛知・岐阜・三重の企業さまや介護施設さまへの受入れを支えています。</p></div>
+        </div>
+        <div class="nw-c"><span class="k">PHILIPPINES</span>
+          <div class="nw-o"><b>プロデンシャルエンプロイメント<span class="role">送り出し機関</span></b><p>現地で企業さまご自身が面接を行うこともできます。</p></div>
+        </div>
+        <div class="nw-c"><span class="k">VIETNAM</span>
+          <div class="nw-o"><b>POLIMEX 国際人材株式会社<span class="role">送り出し機関</span></b><p>2021年8月にブリッジング協同組合と業務提携。</p></div>
+        </div>
       </div>
     </div>
+    <div class="more-r"><a class="txt-link" href="partners.html">グループ・提携機関を詳しく見る <span aria-hidden="true">→</span></a></div>
   </div>
 </section>
 
 <section class="alt" id="visas">
   <div class="wrap">
-    <div class="sec-head"><span class="en">TALENT</span><h2>ご紹介できる人材</h2><p>就労が可能な5つの在留資格・人材に対応しています。</p></div>
-    <div class="vcards"><div class="vcard"><span class="n">01</span><h3>技能実習</h3><p>自社グループの監理団体を通じてご紹介</p></div><div class="vcard"><span class="n">02</span><h3>特定技能</h3><p>受入れ後に必要な支援までお引き受け</p></div><div class="vcard"><span class="n">03</span><h3>留学生</h3><p>特定技能への資格変更にも対応</p></div><div class="vcard"><span class="n">04</span><h3>高度人材</h3><p>職種と勤務内容に合わせてご紹介</p></div><div class="vcard"><span class="n">05</span><h3>日系人・定住者</h3><p>就労に制限がなく、すぐに働ける</p></div></div><div class="consult"><p>どの制度が自社に合うか分からない方も、ご相談ください。<small>職種・人数・時期をお伺いし、合う在留資格をご提案します。</small></p><a class="btn" href="contact.html">制度選びから相談する</a></div>
+    <div class="sec-head"><span class="en">OUR SERVICES</span><h2>ご紹介できる人材</h2></div>
+    <div class="vcards"><div class="vcard"><span class="n">01</span><h3>技能実習</h3><p>自社グループの監理団体を通じてご紹介</p></div><div class="vcard"><span class="n">02</span><h3>特定技能</h3><p>受入れ後に必要な支援までお引き受け</p></div><div class="vcard"><span class="n">03</span><h3>留学生</h3><p>特定技能への資格変更にも対応</p></div><div class="vcard"><span class="n">04</span><h3>高度人材</h3><p>職種と勤務内容に合わせてご紹介</p></div><div class="vcard"><span class="n">05</span><h3>日系人・定住者</h3><p>就労に制限がなく、すぐに働ける</p></div></div>
     <div class="more-r"><a class="txt-link" href="service.html">人材ごとの説明を見る <span aria-hidden="true">→</span></a></div>
   </div>
 </section>
 
 <section id="support">
   <div class="wrap">
-    <div class="sec-head"><span class="en">SUPPORT</span><h2>登録支援機関としての支援</h2><p>特定技能で義務づけられている支援を、受入れ前・生活・就労継続の3段階でお引き受けします。</p></div>
-    <ol class="stages"><li class="stage"><div class="stage-h"><span class="stage-n">01</span><span class="stage-en">BEFORE</span></div><h3>受入れ前</h3><p>入国前の説明から、住まいの準備まで</p><ul class="checks"><li>事前ガイダンスの実施</li><li>出入国する際の送迎</li><li>住居の確保・生活に必要な契約の支援</li></ul></li><li class="stage"><div class="stage-h"><span class="stage-n">02</span><span class="stage-en">LIFE</span></div><h3>生活・定着</h3><p>日本での暮らしに慣れ、安心して働けるように</p><ul class="checks"><li>生活オリエンテーションの実施</li><li>公的手続などへの同行</li><li>日本語学習の機会の提供</li><li>相談・苦情への対応</li><li>日本人との交流促進</li></ul></li><li class="stage"><div class="stage-h"><span class="stage-n">03</span><span class="stage-en">CONTINUE</span></div><h3>就労継続</h3><p>働き続けられるように、定期的に確認</p><ul class="checks"><li>転職支援（人員整理などの場合）</li><li>定期的な面談・行政機関への通報</li></ul></li></ol><div class="consult"><p>登録支援機関として必要な支援を、まとめてお任せいただけます。</p><a class="btn" href="contact.html">お問い合わせ</a></div>
+    <div class="sec-head"><span class="en">SUPPORT</span><h2>登録支援機関としての支援</h2></div>
+    <ol class="stages"><li class="stage"><div class="stage-h"><span class="stage-n">01</span><span class="stage-en">BEFORE</span></div><h3>受入れ前</h3><p>入国前の説明から、住まいの準備まで</p><ul class="checks"><li>事前ガイダンスの実施</li><li>出入国する際の送迎</li><li>住居の確保・生活に必要な契約の支援</li></ul></li><li class="stage"><div class="stage-h"><span class="stage-n">02</span><span class="stage-en">LIFE</span></div><h3>生活・定着</h3><p>日本での暮らしに慣れ、安心して働けるように</p><ul class="checks"><li>生活オリエンテーションの実施</li><li>公的手続などへの同行</li><li>日本語学習の機会の提供</li><li>相談・苦情への対応</li><li>日本人との交流促進</li></ul></li><li class="stage"><div class="stage-h"><span class="stage-n">03</span><span class="stage-en">CONTINUE</span></div><h3>就労継続</h3><p>働き続けられるように、定期的に確認</p><ul class="checks"><li>転職支援（人員整理などの場合）</li><li>定期的な面談・行政機関への通報</li></ul></li></ol>
     <div class="more-r"><a class="txt-link" href="support.html">支援内容を詳しく見る（全10項目） <span aria-hidden="true">→</span></a></div>
   </div>
 </section>
 
 <section class="alt" id="flow">
   <div class="wrap">
-    <div class="sec-head"><span class="en">FLOW</span><h2>受入れまでの流れ</h2><p>ご相談から就労開始まで、5つのステップで進めます。</p></div>
+    <div class="sec-head"><span class="en">PROCESS</span><h2>受入れまでの流れ</h2></div>
     <div class="flow-total"><span class="k">ご相談から就労開始まで</span><span class="v"><small>約</small>5〜6<small>か月</small></span>
       <span class="s">※在留資格によって異なります。ご相談の段階では費用はいただきません。</span></div><ol class="tline"><li class="tl"><span class="dot">01</span><b>ご相談</b><span class="d"><small>費用</small>無料</span></li><li class="tl"><span class="dot">02</span><b>求人のお申込み</b><span class="d"><small>期間の目安</small>約2週間</span></li><li class="tl"><span class="dot">03</span><b>選考・面接</b><span class="d"><small>期間の目安</small>約1か月</span></li><li class="tl"><span class="dot">04</span><b>申請・手続き</b><span class="d"><small>期間の目安</small>約3〜4か月</span></li><li class="tl"><span class="dot">05</span><b>入国・就労開始</b><span class="d"><small>その後</small>就労後も継続支援</span></li></ol>
     <div class="more-r"><a class="txt-link" href="flow.html">各ステップを詳しく見る <span aria-hidden="true">→</span></a></div>
   </div>
 </section>
 
-<section id="partners">
-  <div class="wrap">
-    <div class="sec-head"><span class="en">GROUP &amp; PARTNERS</span><h2>自社グループと提携機関</h2><p class="lead-strong">自社グループと提携機関で、募集から就労後まで一貫して支援。</p></div>
-    <div class="net"><div class="net-col"><span class="net-k">海外の送り出し機関<em>PARTNER</em></span><div class="net-item"><small>フィリピン</small><b>プロデンシャルエンプロイメント</b><span>現地で企業さまご自身が面接を行うこともできます。</span></div><div class="net-item"><small>ベトナム</small><b>POLIMEX 国際人材株式会社</b><span>2021年8月にブリッジング協同組合と業務提携。</span></div></div><div class="net-col net-own"><span class="net-k">自社グループ<em>OUR GROUP</em></span><div class="net-item"><b>株式会社 A and K</b><span>募集・紹介／入国の手続き・生活の支援</span><span class="role">登録支援機関</span></div><div class="net-item"><b>ブリッジング協同組合</b><span>2021年8月に弊社が設立。技能実習生の受入れを、紹介から監理まで自社グループ内で。</span><span class="role">監理団体</span></div></div><div class="net-col"><span class="net-k">国内の提携監理団体<em>PARTNER</em></span><div class="net-item"><small>日本（愛知）</small><b>トラスト江南協同組合</b><span>2019年9月に業務提携。愛知・岐阜・三重の企業さまや介護施設さまへの受入れを支えています。</span></div></div></div><p class="net-foot">就労後も、定期的な面談・相談で支援を続けます。</p>
-    <div class="more-r"><a class="txt-link" href="partners.html">グループ・提携機関を詳しく見る <span aria-hidden="true">→</span></a></div>
-  </div>
-</section>
-
-<section class="alt" id="company">
-  <div class="wrap">
-    <div class="sec-head"><span class="en">ABOUT</span><h2>会社について</h2></div>
-    <div class="about">
-      <p>弊社はグループで保育園と児童発達支援・放課後等デイサービスも運営し、外国にルーツのあるお子さまをお預かりしてきました。<strong>外国人の住民の方が地域の一員として暮らしていけるよう、多文化共生社会に貢献していきます。</strong></p>
-    <dl class="about-dl"><div><dt>会社名</dt><dd>株式会社 A and K</dd></div><div><dt>代表者</dt><dd>代表取締役　兼松 厚志</dd></div><div><dt>本社所在地</dt><dd>〒509-0207 岐阜県可児市今渡3-11</dd></div><div><dt>許可</dt><dd>登録支援機関 登録番号 19登-000975</dd></div></dl></div>
-    <div class="more-r"><a class="txt-link" href="company.html">企業情報を見る <span aria-hidden="true">→</span></a></div>
-  </div>
-</section>
-
-<section id="groupbiz">
-  <div class="wrap">
-    <div class="sec-head sm">
-      <span class="en">WITH THE COMMUNITY</span>
-      <h2>地域とともに ─ グループ事業</h2>
-      <p>外国人材の受入れ支援のほか、地域で保育園と児童発達支援・放課後等デイサービスを運営しています。</p>
+<section id="aboutus">
+  <div class="wrap about-grid">
+    <div class="about-l">
+      <div class="sec-head"><span class="en">ABOUT US</span><h2>地域と世界をつなぐ<br>身近なパートナー</h2></div>
+      <p class="about-msg"><strong><span>人をつなぎ、企業を支え、</span><span>地域とともに歩む。</span></strong>弊社はグループで保育園と児童発達支援・放課後等デイサービスも運営し、外国にルーツのあるお子さまをお預かりしてきました。外国人の住民の方が地域の一員として暮らしていけるよう、多文化共生社会に貢献していきます。</p>
+      <a class="txt-link" href="company.html">企業情報を見る <span aria-hidden="true">→</span></a>
     </div>
-    <div class="gbiz">
-      <div class="gb"><span class="gb-k">保育</span><b>かみのて保育園／かみのて今渡保育園</b><small>一時預かり事業も行っています。</small></div>
-      <div class="gb"><span class="gb-k">児童発達支援・放課後等デイサービス</span><b>かみのてKIDS／かみのてSMILE</b></div>
+    <div class="about-r">
+      <dl class="about-dl"><div><dt>会社名</dt><dd>株式会社 A and K</dd></div><div><dt>代表者</dt><dd>代表取締役　兼松 厚志</dd></div><div><dt>本社所在地</dt><dd>〒509-0207 岐阜県可児市今渡3-11</dd></div><div><dt>許可</dt><dd>登録支援機関 登録番号 19登-000975</dd></div></dl>
+      <div class="abiz">
+        <div class="ab"><span class="ab-k">保育</span><b>かみのて保育園／かみのて今渡保育園</b><small>一時預かり事業も行っています。</small></div>
+        <div class="ab"><span class="ab-k">児童発達支援・放課後等デイサービス</span><b>かみのてKIDS／かみのてSMILE</b></div>
+      </div>
+      <div class="more-r"><a class="txt-link" href="company.html#group">グループの事業を詳しく見る <span aria-hidden="true">→</span></a></div>
     </div>
-    <div class="more-r"><a class="txt-link" href="company.html#group">グループの事業を詳しく見る <span aria-hidden="true">→</span></a></div>
   </div>
 </section>
 
 <section class="alt topnews" id="news">
   <div class="wrap">
-    <div class="nb-head"><span class="en">NEWS</span><h2>お知らせ</h2><a class="txt-link" href="news.html">一覧を見る <span aria-hidden="true">→</span></a></div>
-    <ul class="nlist-top"><li><a href="news.html"><time>2025.06.02</time><span>弊社運営の児童発達支援・放課後デイサービス「かみのてKIDS」が新築移転しました。</span><i aria-hidden="true">→</i></a></li><li><a href="news.html"><time>2025.03.22</time><span>弊社運営のハンズオブガッド今渡保育園の卒園式を3月22日（土）可児市アーラにて行いました。</span><i aria-hidden="true">→</i></a></li><li><a href="news.html"><time>2024.12.13</time><span>新施設の地鎮祭を執り行いました。</span><i aria-hidden="true">→</i></a></li></ul>
+    <div class="nb-head"><div class="sec-head"><span class="en">NEWS</span><h2>お知らせ</h2></div><a class="txt-link" href="news.html">一覧を見る <span aria-hidden="true">→</span></a></div>
+    <ul class="ncards"><li><a href="news.html"><figure><img src="img/news/20250602-1.jpeg" alt="" loading="lazy"></figure><time>2025.06.02</time><span>弊社運営の児童発達支援・放課後デイサービス「かみのてKIDS」が新築移転しました。</span></a></li><li><a href="news.html"><figure><img src="img/news/20250322-1.jpg" alt="" loading="lazy"></figure><time>2025.03.22</time><span>弊社運営のハンズオブガッド今渡保育園の卒園式を3月22日（土）可児市アーラにて行いました。</span></a></li><li><a href="news.html"><figure><img src="img/news/20241213-1.jpeg" alt="" loading="lazy"></figure><time>2024.12.13</time><span>新施設の地鎮祭を執り行いました。</span></a></li></ul>
   </div>
 </section>
 
-<section class="faq" id="faq">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="en">FAQ</span>
-      <h2>よくあるご質問</h2>
-      <p>はじめてのご検討でよくいただくご質問です。</p>
-    </div>
-    <!-- ★「費用はどのくらいかかりますか」は、回答の文章がまだ無いので載せない（届いたら戻す） -->
-    <div class="faq-list">
-      <details>
-        <summary>相談だけでも費用はかかりますか。</summary>
-        <div class="a"><p style="margin:0">いいえ。ご相談とお見積りは無料です。制度の説明だけでもお気軽にお声がけください。</p></div>
-      </details>
-      <details>
-        <summary>受入れまでにどのくらいの期間がかかりますか。</summary>
-        <div class="a"><p style="margin:0">在留資格によりますが、ご相談から就労開始までおおむね5〜6か月が目安です。</p></div>
-      </details>
-      <details>
-        <summary>受入れの経験がない会社でも大丈夫ですか。</summary>
-        <div class="a"><p style="margin:0">はじめての企業さまがほとんどです。社内の受入れ体制づくりからご一緒します。</p></div>
-      </details>
-    </div>
-  </div>
-</section>
-
+</div>
 <div class="cta" id="contact">
   <div class="wrap">
     <span class="en">CONTACT</span>
-    <h2><span>外国人材の採用について、</span><span>まずはご相談ください。</span></h2>
+    <h2><span>外国人材の採用について</span><br><span>まずはご相談ください</span></h2>
     <p>ご相談・お見積りは無料です。制度の説明だけでも承ります。<br>どの制度が合うか分からない段階からでも、お気軽にお声がけください。</p>
     <a class="btn btn-lg" href="contact.html">お問い合わせ・ご相談はこちら <i aria-hidden="true">→</i></a>
     <div class="cta-sub">
@@ -897,7 +1001,7 @@ setTimeout(function(){
 <script>
 (function () {
   // ★ここの並びは <head> の隠す指定と必ず同じにすること
-  var ANIM_SEL = 'section > .wrap > *:not(.visas):not(.feats):not(.vcards):not(.stages):not(.tline):not(.net):not(.flow):not(.partners):not(.faq-list):not(.gbiz):not(.gcards):not(.contact-grid),.visas > *,.feats > *,.vcards > *,.stages > *,.tline > *,.net > *,.flow > *,.partners > *,.faq-list > *,.gbiz > *,.gcards > *,.contact-grid > *,.nlist > .wrap > *,.cta > .wrap > *';
+  var ANIM_SEL = 'section > .wrap > *:not(.visas):not(.strs):not(.vcards):not(.stages):not(.tline):not(.flow):not(.partners):not(.faq-list):not(.ncards):not(.gcards):not(.contact-grid),.visas > *,.strs > *,.vcards > *,.stages > *,.tline > *,.flow > *,.partners > *,.faq-list > *,.ncards > *,.gcards > *,.contact-grid > *,.nlist > .wrap > *,.cta > .wrap > *';
   var units = [].slice.call(document.querySelectorAll(ANIM_SEL));
 
   function sweep() {

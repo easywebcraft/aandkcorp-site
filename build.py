@@ -9,9 +9,11 @@
 とどめ、中身の説明は下層ページで行う。原本の文章はどちらにも書かず、
 下層ページ用の原文から digest() が抜き出して要約を組み立てる。
 
-トップの並び（2026-10-03 組み直し）:
-  FV → 信頼情報 → 特徴 → 人材 → 支援 → 流れ → 連携 → 会社 → グループ事業 → お知らせ → FAQ → お問い合わせ
-  「特徴」「グループ事業」「お知らせ」はトップだけの節（原本の features / groupbiz / news）。
+トップの並び（2026-10-18 トップ改善案で組み直し。紺・白・金）:
+  FV → 信頼の帯 → INTRODUCTION → 3つの強み → GLOBAL NETWORK → 人材 → 支援 → 流れ
+  → ABOUT US → お知らせ → お問い合わせ
+  intro / strengths / network / aboutus / news はトップだけの節。人材・支援・流れは
+  下層ページ用の原文から digest() が要約を作る。トップは <div class="top"> で包む。
 
 出力:
   index.html    トップ（各節の要約＋「詳しく見る」）
@@ -47,7 +49,7 @@ NOINDEX = True
 
 # 出力ファイル → (原本の節id, メニュー表示名, ページ見出し, 英字ラベル, 説明)
 # 説明は、原本の節に導入文があればそちらを優先する（節の導入文は下層でしか
-# 出さないため。トップには TOP_LEAD の短い文を置く）。
+# 出さないため。トップの節見出しには説明文を置かない）。
 PAGES = {
     "service.html":  ("visas",    "人材紹介", "ご紹介できる人材", "TALENT",
                       "就労が可能な5つの在留資格すべてに対応しています。"),
@@ -62,16 +64,9 @@ PAGES = {
     "faq.html":      ("faq",      "よくあるご質問", "よくあるご質問", "FAQ",
                       "費用や期間など、はじめてのご検討でよくいただくご質問です。"),
 }
-# トップに置く一行。**下層の導入文とは別の文にする**（同じ文を2回読ませない）。
-# ★「間に他社を挟みません」は使わない（提携機関を紹介しているので矛盾して読める）
-TOP_LEAD = {
-    "visas":    "就労が可能な5つの在留資格・人材に対応しています。",
-    "support":  "特定技能で義務づけられている支援を、受入れ前・生活・就労継続の3段階でお引き受けします。",
-    "flow":     "ご相談から就労開始まで、5つのステップで進めます。",
-    "partners": "自社グループと提携機関で、募集から就労後まで一貫して支援。",
-    "company":  "",
-    "faq":      "",
-}
+# トップの節の英字ラベル（下層のページ見出しは PAGES の英字のまま）
+TOP_EN = {"visas": "OUR SERVICES", "support": "SUPPORT", "flow": "PROCESS"}
+# ★トップでは節見出しのすぐ下に説明文を置かない（松本さんのご指示）。説明は下層ページで。
 
 # メニューの並び（左3つ／ロゴ／右3つ）
 NAV_L = [("service.html", "人材紹介"), ("support.html", "支援内容"), ("flow.html", "受入れの流れ")]
@@ -176,8 +171,8 @@ EXTRA_CSS = """
 #
 # 中身を先に出す箱（カードの並びなど）は、箱ごとではなく中身を1枚ずつ出す。
 # そのため箱自身は :not() で外す。ここも2つの並びで揃える。
-ANIM_BOXES = ["visas", "feats", "vcards", "stages", "tline", "net", "flow", "partners",
-              "faq-list", "gbiz", "gcards", "contact-grid"]
+ANIM_BOXES = ["visas", "strs", "vcards", "stages", "tline", "flow", "partners",
+              "faq-list", "ncards", "gcards", "contact-grid"]
 _NOT = "".join(f":not(.{c})" for c in ANIM_BOXES)
 _CHILDREN = ",\n".join(f".anim .{c} > *" for c in ANIM_BOXES)
 
@@ -200,11 +195,11 @@ ANIM_HEAD = """
 <style>
 @keyframes rise   { from{opacity:0; transform:translateY(14px)} to{opacity:1; transform:none} }
 @keyframes riseSp { from{opacity:0; transform:translateY(9px)}  to{opacity:1; transform:none} }
-@keyframes zoomOut{ from{transform:scale(1.06)} to{transform:none} }
+@keyframes zoomOut{ from{transform:scale(1.12)} to{transform:none} }
 
 /* ヒーローとお知らせ帯はJSを使わずCSSだけで動かす。JSがクラスを付けるのを
    待つと、待っている間に文字が見えてしまう（環境が遅いほど長く見える）。 */
-.hero .bg img{animation:zoomOut 1.8s cubic-bezier(.2,.7,.3,1) both}
+.hero .bg img{animation:zoomOut 9s cubic-bezier(.16,.6,.3,1) both}
 .hero-copy .wrap > *{animation:rise .7s cubic-bezier(.2,.7,.3,1) both}
 .hero-copy .wrap > *:nth-child(1){animation-delay:.15s}
 .hero-copy .wrap > *:nth-child(2){animation-delay:.30s}
@@ -374,26 +369,19 @@ def parts(src_name, key=""):
 
 MORE_LABEL = {
     "visas": "人材ごとの説明を見る", "support": "支援内容を詳しく見る（全10項目）", "flow": "各ステップを詳しく見る",
-    "partners": "グループ・提携機関を詳しく見る", "company": "企業情報を見る",
 }
-
-# トップで強みとして大きく見せる一文
-TOP_LEAD_BIG = {"partners"}
 
 def top_section(frag, sec_id, inner, more_href=None):
     """トップ用の節。見出しと要約だけを置き、説明は下層ページに任せる。"""
     en, h2, _ = sec_head(frag)
+    en = TOP_EN.get(sec_id, en)
     alt = ' class="alt"' if 'class="alt' in frag[: frag.index(">") + 1] else ""
-    lead = TOP_LEAD.get(sec_id, "")
-    if lead:
-        cls = ' class="lead-strong"' if sec_id in TOP_LEAD_BIG else ""
-        lead = f"<p{cls}>{lead}</p>"
     more = ""
     if more_href:
         more = (f'    <div class="more-r"><a class="txt-link" href="{more_href}">'
                 f'{MORE_LABEL.get(sec_id, "詳しく見る")} <span aria-hidden="true">→</span></a></div>\n')
     return (f'<section{alt} id="{sec_id}">\n  <div class="wrap">\n'
-            f'    <div class="sec-head"><span class="en">{en}</span><h2>{h2}</h2>{lead}</div>\n'
+            f'    <div class="sec-head"><span class="en">{en}</span><h2>{h2}</h2></div>\n'
             f"    {inner}\n" + more + "  </div>\n</section>\n\n")
 
 # 会社概要。旧サイトの会社案内ページの内容をそのまま引き継ぐ（トップの要約にも使う）
@@ -425,8 +413,7 @@ def digest(secs):
     f = secs["visas"]
     vs = re.findall(r'<div class="visa"><div class="n">(.*?)</div><h3>(.*?)</h3><p class="sum">(.*?)</p>', f, re.S)
     cards = "".join(f'<div class="vcard"><span class="n">{n}</span><h3>{t}</h3><p>{d}</p></div>' for n, t, d in vs)
-    out["visas"] = top_section(f, "visas", f'<div class="vcards">{cards}</div>'
-                               + div_block(f, '<div class="consult">'), "service.html")
+    out["visas"] = top_section(f, "visas", f'<div class="vcards">{cards}</div>', "service.html")
 
     # 支援：3段階の名前と、各段階の項目名だけ。項目の説明は support.html。
     f = secs["support"]
@@ -439,8 +426,7 @@ def digest(secs):
         stages.append(f'<li class="stage"><div class="stage-h"><span class="stage-n">{i:02d}</span>'
                       f'<span class="stage-en">{en}</span></div><h3>{h3}</h3><p>{p}</p>'
                       f'<ul class="checks">{items}</ul></li>')
-    out["support"] = top_section(f, "support", '<ol class="stages">' + "".join(stages) + "</ol>"
-                                 + div_block(f, '<div class="consult">'), "support.html")
+    out["support"] = top_section(f, "support", '<ol class="stages">' + "".join(stages) + "</ol>", "support.html")
 
     # 流れ：期間の目安（大きく）と、手順名・期間だけ。各手順の説明は flow.html。
     f = secs["flow"]
@@ -450,46 +436,28 @@ def digest(secs):
     out["flow"] = top_section(f, "flow", div_block(f, '<div class="flow-total">')
                               + f'<ol class="tline">{tl}</ol>', "flow.html")
 
-    # グループ・提携機関：自社グループを中央に、海外・国内の提携機関を左右に置いて連携を見せる。
-    # 書いてよいのは partners 節（原本）にある事実だけ。
-    f = secs["partners"]
-    out["partners"] = top_section(f, "partners", (
-        '<div class="net">'
-        '<div class="net-col"><span class="net-k">海外の送り出し機関<em>PARTNER</em></span>'
-        '<div class="net-item"><small>フィリピン</small><b>プロデンシャルエンプロイメント</b>'
-        '<span>現地で企業さまご自身が面接を行うこともできます。</span></div>'
-        '<div class="net-item"><small>ベトナム</small><b>POLIMEX 国際人材株式会社</b>'
-        '<span>2021年8月にブリッジング協同組合と業務提携。</span></div></div>'
-        '<div class="net-col net-own"><span class="net-k">自社グループ<em>OUR GROUP</em></span>'
-        '<div class="net-item"><b>株式会社 A and K</b><span>募集・紹介／入国の手続き・生活の支援</span>'
-        '<span class="role">登録支援機関</span></div>'
-        '<div class="net-item"><b>ブリッジング協同組合</b><span>2021年8月に弊社が設立。技能実習生の受入れを、紹介から監理まで自社グループ内で。</span>'
-        '<span class="role">監理団体</span></div></div>'
-        '<div class="net-col"><span class="net-k">国内の提携監理団体<em>PARTNER</em></span>'
-        '<div class="net-item"><small>日本（愛知）</small><b>トラスト江南協同組合</b>'
-        '<span>2019年9月に業務提携。愛知・岐阜・三重の企業さまや介護施設さまへの受入れを支えています。</span></div></div>'
-        '</div>'
-        '<p class="net-foot">就労後も、定期的な面談・相談で支援を続けます。</p>'), "partners.html")
-
-    # 会社について：考え方の一文と、会社の基本情報だけ。全体は company.html。
-    f = secs["company"]
-    pick = dict(OUTLINE)
-    dl = "".join(f"<div><dt>{k}</dt><dd>{pick[k].split('<br>')[0]}</dd></div>"
-                 for k in ("会社名", "代表者", "本社所在地", "許可"))
-    about = div_block(f, '<div class="about">')
-    about = about[: about.rindex("</div>")] + f'<dl class="about-dl">{dl}</dl></div>'
-    out["company"] = top_section(f, "company", about, "company.html")
     return out
 
 def fill_news(sec, n=3):
     """お知らせの節を news.json の最新 n 件で埋める。
     原本に直接書くと更新のたびに直すことになり、実際そのまま
-    2021年で止まっていた。見出しだけを出し、本文と写真は news.html に置く。"""
+    2021年で止まっていた。日付・見出し・1枚目の写真だけを出し、本文は news.html に置く。"""
     items = json.loads((SRC / "news.json").read_text(encoding="utf-8"))[:n]
-    li = "".join(f'<li><a href="news.html"><time>{it["date"]}</time>'
-                 f'<span>{html.escape(it["title"])}</span><i aria-hidden="true">→</i></a></li>' for it in items)
-    old = sec[sec.index('<ul class="nlist-top">'): sec.index("</ul>") + 5]
-    return sec.replace(old, f'<ul class="nlist-top">{li}</ul>')
+    li = ""
+    for it in items:
+        img = (f'<img src="img/news/{it["images"][0]}" alt="" loading="lazy">' if it["images"]
+               else '<img src="img/logo-mark.jpg" alt="" loading="lazy" style="object-fit:contain">')
+        li += (f'<li><a href="news.html"><figure>{img}</figure><time>{it["date"]}</time>'
+               f'<span>{html.escape(it["title"])}</span></a></li>')
+    old = sec[sec.index('<ul class="ncards">'): sec.index("</ul>") + 5]
+    return sec.replace(old, f'<ul class="ncards">{li}</ul>')
+
+def about_dl():
+    """ABOUT US に置く会社の基本情報（OUTLINE から。原本に二重に書かない）。"""
+    pick = dict(OUTLINE)
+    dl = "".join(f"<div><dt>{k}</dt><dd>{pick[k].split('<br>')[0]}</dd></div>"
+                 for k in ("会社名", "代表者", "本社所在地", "許可"))
+    return f'<dl class="about-dl">{dl}</dl>'
 
 def strip_sec_head(frag):
     """下層ページでは、節の見出し（英字ラベル・見出し・導入文）を取り除く。
@@ -568,13 +536,16 @@ def build_plan(out_dir, src_name, key=""):
     head, header, hero, cta, footer, note, secs = parts(src_name, key)
     tail = fix_links(cta) + fix_links(footer) + note
 
-    # トップ：何の会社か（FV・信頼・特徴）→ 人材 → 支援 → 流れ → 連携 → 会社
-    #        → グループ事業 → お知らせ → FAQ。保育とお知らせは後半に控えめに置く。
+    # トップ：FV・信頼の帯 → INTRODUCTION → 強み → GLOBAL NETWORK → 人材 → 支援 → 流れ
+    #        → ABOUT US → お知らせ。FAQ は下層（faq.html）だけに置く。
     tops = digest(secs)
-    body = fix_links(hero) + fix_links(secs["features"])
-    for sec in ("visas", "support", "flow", "partners", "company"):
+    body = fix_links(hero)
+    for sec in ("intro", "strengths", "network"):
+        body += fix_links(secs[sec])
+    for sec in ("visas", "support", "flow"):
         body += fix_links(tops[sec])
-    body += fix_links(secs["groupbiz"]) + fix_links(fill_news(secs["news"])) + fix_links(secs["faq"])
+    body += fix_links(secs["aboutus"].replace("<!--ABOUT_DL-->", about_dl())) + fix_links(fill_news(secs["news"]))
+    body = '<div class="top">\n' + body + '</div>\n'
     (out_dir / "index.html").write_text(
         shell(head, header, tail, body, "index.html", "外国人材の受入れ支援"), encoding="utf-8")
 
@@ -604,7 +575,7 @@ def group_section():
     """グループの事業。旧サイトの h1 と事業内容に、児童福祉の記載があった。
     このサイトは外国人材に絞る方針だが、**落とすのではなく紹介にとどめ、
     詳細はそれぞれのサイトへ渡す**（原則リニューアルをベースにするため）。
-    トップの「グループ事業」（原本の groupbiz）から、ここ（#group）へ案内する。"""
+    トップの ABOUT US（原本の aboutus）から、ここ（#group）へ案内する。"""
     cards = [
         ("かみのて保育園", "こども家庭庁所管 企業主導型保育事業",
          "2022年7月開園。外国にルーツのあるお子さまをお預かりしています。",
