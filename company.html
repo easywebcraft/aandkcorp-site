@@ -56,10 +56,15 @@ header{position:sticky; top:0; z-index:70; background:#fff; border-bottom:1px so
 .hdr .co img{height:34px; width:auto}
 .gnavs{margin-left:auto; display:flex; align-self:stretch}
 .gnav{display:flex}
-.gnav a{display:flex; align-items:center; text-decoration:none; padding:0 16px; font-size:14.5px; font-weight:600;
-  white-space:nowrap; border-bottom:3px solid transparent; border-top:3px solid transparent}
-.gnav a:hover{color:var(--navy); border-bottom-color:var(--gold)}
-.gnav a.on{color:var(--navy); border-bottom-color:var(--gold)}
+/* 下線は文字幅ぴったりで、文字のすぐ下に引く（2026-10-18。ヘッダーの下端・文字より広い線だと不自然、とのご指摘）。
+   マウスを乗せると左から伸びる。いま見ているページは引いたまま */
+.gnav a{position:relative; display:flex; align-items:center; text-decoration:none; padding:0 16px; font-size:14.5px; font-weight:600;
+  white-space:nowrap}
+.gnav a::after{content:""; position:absolute; left:16px; right:16px; top:calc(50% + 15px); height:2px; background:var(--gold);
+  transform:scaleX(0); transform-origin:left center; transition:transform .3s cubic-bezier(.22,.61,.36,1)}
+.gnav a:hover, .gnav a.on{color:var(--navy)}
+.gnav a:hover::after, .gnav a.on::after{transform:scaleX(1)}
+@media (prefers-reduced-motion:reduce){ .gnav a::after{transition:none} }
 .pill{flex:none; display:inline-flex; align-items:center; background:var(--navy); color:#fff; margin-left:8px;
   text-decoration:none; padding:9px 22px; border-radius:999px; font-size:13.5px; font-weight:700;
   white-space:nowrap; min-height:44px}
