@@ -613,6 +613,12 @@ def build_plan(out_dir, src_name, key=""):
             shell(head, header, tail, '<div class="sub">' + ph + fix_links(frag) + extra + "</div>",
                   out, ttl), encoding="utf-8")
 
+    # 企業情報も専用の組み方（2026-10-18 改善案）。最後のお問い合わせの見出しもこのページ向けに
+    cp_tail = tail.replace('<h2><span>外国人材の受入れについて</span><br><span>まずはお気軽にご相談ください</span></h2>',
+                           '<h2><span>人と企業の未来をつなぐ</span><br><span>新しい可能性をご一緒に</span></h2>', 1)
+    assert cp_tail != tail
+    (out_dir / "company.html").write_text(
+        shell(head, header, cp_tail, company_body(secs), "company.html", "企業情報"), encoding="utf-8")
     # グループ・提携機関も専用の組み方（2026-10-18 改善案）。最後のお問い合わせの見出しもこのページ向けに
     pn_tail = tail.replace('<h2><span>外国人材の受入れについて</span><br><span>まずはお気軽にご相談ください</span></h2>',
                            '<h2><span>国境を越えた人材採用を</span><br><span>信頼できるパートナーと</span></h2>', 1)
@@ -1150,6 +1156,118 @@ def partners_body(secs):
             '<div class="more-r" style="text-align:left"><a class="txt-link" href="news.html">お知らせを見る <span aria-hidden="true">→</span></a></div></div>'
             '</div></section>\n')
     return '<div class="top sp pn">\n' + out + '</div>\n'
+
+
+# ============ 企業情報ページ（2026-10-18 改善案） ============
+# 会社概要は OUTLINE、考え方は原本の #company、グループの事業と沿革はお知らせ（news.json）にある事実から。
+# ★代表ごあいさつ・設立年月・資本金は、お客さまから届くまで載せない。
+CP_HIST = [
+    ("2019年6月", "出入国在留管理庁長官から、登録支援機関の登録通知書が届く"),
+    ("2019年9月", "トラスト江南協同組合と業務提携"),
+    ("2019年12月", "可児今渡事務所（可児市今渡1149-1）を開設"),
+    ("2021年8月", "ブリッジング協同組合を設立（愛知県知事の許可）"),
+    ("2022年7月", "企業主導型保育事業「かみのて保育園」を開園"),
+    ("2022年10月", "フィリピンの送り出し機関、プロデンシャルエンプロイメントエージェンシーと契約"),
+    ("2023年10月", "小規模認可保育園「かみのて今渡保育園」と、児童発達支援・放課後等デイサービス「かみのてKIDS」を開園"),
+    ("2025年6月", "「かみのてKIDS」が新築の建物へ移転し、受け入れ人数を増やす"),
+]
+CP_SV = '<svg viewBox="0 0 24 24" aria-hidden="true">{}</svg>'
+CP_NAV = [("cp-phil", "企業理念", SUP_ICON["04"]),
+          ("cp-group", "グループの事業", SUP_ICON["08"]),
+          ("cp-prof", "会社概要", SUP_ICON["01"]),
+          ("cp-hist", "沿革", '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'),
+          ("cp-acc", "アクセス", '<path d="M12 21s-7-4.5-7-11a7 7 0 0 1 14 0c0 6.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>')]
+
+
+def _gmap(addr):
+    from urllib.parse import quote
+    return "https://www.google.com/maps/search/?api=1&query=" + quote(addr)
+
+
+def company_body(secs):
+    about = re.search(r'<div class="about">\s*<p>(.*?)</p>', secs["company"], re.S).group(1)
+    about = re.sub(r"</?strong>", "", about)
+    out = ('<div class="sp-hero"><div class="sp-hero-t">'
+           '<div class="sp-crumb"><a href="index.html">ホーム</a> ／ 企業情報</div>'
+           '<span class="sp-en">ABOUT A and K</span>'
+           '<p class="sp-k">企業情報</p>'
+           '<h1><span>世界と地域をつなぎ</span><br><span>人と社会の未来を育む</span></h1>'
+           '<p class="lead">外国人材の受入れ支援から、保育・児童福祉の事業まで。'
+           'A and K は人と人とのつながりを大切に、外国人の住民の方が地域の一員として暮らしていける社会づくりに取り組んでいます。</p>'
+           '<a class="btn gold" href="#cp-prof">会社概要を見る <span aria-hidden="true">→</span></a></div>'
+           '<figure class="sp-hero-ph"><img src="img/news/20231002-3.jpeg" alt="かみのて今渡保育園の開園の日、建物の前で">'
+           '<figcaption>2023年10月 かみのて今渡保育園の開園</figcaption></figure></div>\n')
+    nav = "".join(f'<li><a href="#{i}">{CP_SV.format(svg)}{t}</a></li>' for i, t, svg in CP_NAV)
+    out += f'<nav class="cp-nav" aria-label="このページの目次"><div class="wrap"><ul>{nav}</ul></div></nav>\n'
+
+    out += ('<section class="cp-sec" id="cp-phil"><div class="wrap cp-phil"><div class="cp-phil-t">'
+            '<div class="sec-head"><span class="en">OUR PHILOSOPHY</span><h2><span>人と人をつなぎ</span><br><span>誰もが自分らしく</span><span>暮らせる社会へ</span></h2></div>'
+            f'<p>{about}</p></div>'
+            '<p class="cp-phil-en" aria-hidden="true">Connecting<br>people<br><em>creating</em><br>the future</p>'
+            '</div></section>\n')
+
+    ic = lambda k: '<svg viewBox="0 0 24 24">' + SUP_ICON[k] + '</svg>'
+    out += ('<section class="cp-biz"><div class="wrap">'
+            '<div class="sec-head"><span class="en">OUR BUSINESS</span><h2>人材・保育・福祉<br>3つの領域から地域を支える</h2></div>'
+            '<ul class="why3">'
+            f'<li><span class="ic" aria-hidden="true">{ic("08")}</span><span class="k">HUMAN RESOURCES</span><h3>外国人材の受入れ支援</h3>'
+            '<p>人材のご紹介・入国の手続き・生活の支援・就労後の面談（登録支援機関）</p></li>'
+            f'<li><span class="ic" aria-hidden="true">{ic("03")}</span><span class="k">CHILDCARE</span><h3>保育事業</h3>'
+            '<p>企業主導型保育園・小規模認可保育園・一時預かり</p></li>'
+            f'<li><span class="ic" aria-hidden="true">{ic("04")}</span><span class="k">CHILD DEVELOPMENT</span><h3>児童福祉事業</h3>'
+            '<p>児童発達支援・放課後等デイサービス</p></li>'
+            '</ul></div></section>\n')
+
+    out += ('<section class="cp-sec" id="cp-group"><div class="wrap">'
+            '<div class="sec-head"><span class="en">GROUP BUSINESS</span><h2>グループの事業</h2></div>'
+            '<div class="cp-gb" id="group">'
+            '<div><figure><img src="img/news/20231002-1.jpeg" alt="かみのて今渡保育園のオープニングセレモニーの様子" loading="lazy">'
+            '<figcaption>2023年10月 かみのて今渡保育園のオープニングセレモニー</figcaption></figure>'
+            '<div class="cp-gb-b"><div class="tn-head"><span class="tn-n">01</span><div><span class="tn-en">CHILDCARE</span><h3 class="t">保育事業</h3></div></div>'
+            '<ul><li><b>かみのて保育園</b><small>こども家庭庁所管 企業主導型保育事業</small>'
+            '<span>2022年7月開園。外国にルーツのあるお子さまをお預かりしています。</span>'
+            '<a href="https://www.kaminote-hoikuen.com/" target="_blank" rel="noopener">サイトを見る →</a></li>'
+            '<li><b>かみのて今渡保育園</b><small>可児市 小規模認可保育園</small>'
+            '<span>2023年10月開園。可児市の待機児童の解消と、地域の子育て支援に取り組んでいます。</span></li>'
+            '<li><b>一時預かり事業</b><span>新社屋の2階で、一時預かりも行っています。</span></li></ul></div></div>'
+            '<div><div class="tn-panel" aria-hidden="true"><span class="num">02</span>'
+            '<span class="big">Child<br><em>Development</em></span><span class="meta">児童発達支援・放課後等デイサービス</span></div>'
+            '<div class="cp-gb-b"><div class="tn-head"><span class="tn-n">02</span><div><span class="tn-en">CHILD DEVELOPMENT</span>'
+            '<h3 class="t">児童発達支援・放課後等デイサービス</h3></div></div>'
+            '<ul><li><b>かみのてKIDS</b><span>2023年10月開園。2025年6月に新築の建物へ移転し、受け入れ人数を増やしました。'
+            '支援が必要な外国籍のお子さまも、通訳を通じて療育しています。</span></li>'
+            '<li><b>かみのてSMILE</b><small>児童発達支援・放課後等デイサービス</small></li></ul></div></div>'
+            '</div></div></section>\n')
+
+    half = (len(OUTLINE) + 1) // 2
+    t1 = "".join(f"<tr><th>{k}</th><td>{v}</td></tr>" for k, v in OUTLINE[:half])
+    t2 = "".join(f"<tr><th>{k}</th><td>{v}</td></tr>" for k, v in OUTLINE[half:])
+    out += ('<section class="cp-sec alt" id="cp-prof"><div class="wrap">'
+            '<div class="sec-head"><span class="en">COMPANY PROFILE</span><h2>会社概要</h2></div>'
+            f'<div class="cp-prof"><table class="outline">{t1}</table><table class="outline">{t2}</table></div>'
+            '</div></section>\n')
+
+    li = "".join(f"<li><time>{d}</time><span>{t}</span></li>" for d, t in CP_HIST)
+    out += ('<section class="cp-sec" id="cp-hist"><div class="wrap pn-hist"><div>'
+            '<p class="pn-hist-en" aria-hidden="true">Our<br><em>History</em></p>'
+            '<div class="sec-head"><span class="en">OUR HISTORY</span><h2>沿革</h2></div></div>'
+            f'<div><ol class="pn-tl">{li}</ol>'
+            '<p class="pn-tl-note">※旧サイトのお知らせに掲載した内容から作成しています。</p></div>'
+            '</div></section>\n')
+
+    hq = "岐阜県可児市今渡3-11"
+    br = "岐阜県可児市今渡1149-1"
+    pin = ic("03")
+    out += ('<section class="cp-sec alt" id="cp-acc"><div class="wrap">'
+            '<div class="sec-head"><span class="en">ACCESS</span><h2>アクセス</h2></div><div class="cp-acc">'
+            f'<div><span class="ic" aria-hidden="true">{pin}</span><div><h3>本社</h3><p>〒509-0207 {hq}</p>'
+            '<p>Tel 0574-66-3511／Fax 0574-66-7311</p>'
+            f'<a class="btn line" href="{_gmap(hq)}" target="_blank" rel="noopener">Google マップで見る <span aria-hidden="true">→</span></a></div></div>'
+            f'<div><span class="ic" aria-hidden="true">{pin}</span><div><h3>可児今渡事務所</h3><p>〒509-0207 {br} 2F</p>'
+            '<p>Tel・Fax 0574-50-5048</p><p>名鉄 日本ライン今渡駅から徒歩10分</p>'
+            f'<a class="btn line" href="{_gmap(br)}" target="_blank" rel="noopener">Google マップで見る <span aria-hidden="true">→</span></a></div></div>'
+            '</div></div></section>\n')
+    return '<div class="top sp cp">\n' + out + '</div>\n'
 
 
 def group_section():

@@ -933,6 +933,64 @@ footer a:hover{color:#fff; text-decoration:underline}
   .pn .tn-catch{font-size:16.5px}
 }
 
+/* ===== 企業情報ページ（2026-10-18 改善案。build.py の company_body が組む） =====
+   FV → ページ内の目次 → 企業理念 → 3つの事業（紺）→ グループの事業 → 会社概要 → 沿革 → アクセス。
+   ★代表ごあいさつは、正式な文章とお写真が届くまで載せない（README の必須項目）。 */
+.cp-nav{background:#fff; border-bottom:1px solid var(--line)}
+.cp-nav ul{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(5,1fr)}
+.cp-nav a{display:flex; align-items:center; justify-content:center; gap:10px; padding:20px 10px; border-left:1px solid var(--line);
+  text-decoration:none; font-size:14.5px; font-weight:700; color:var(--ink); transition:background-color .2s}
+.cp-nav li:first-child a{border-left:0}
+.cp-nav a:hover{background:var(--blue-s)}
+.cp-nav svg{width:20px; height:20px; fill:none; stroke:var(--gold-d); stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round}
+.top section.cp-sec{scroll-margin-top:76px}
+.cp-phil{display:grid; grid-template-columns:1.1fr .9fr; gap:56px; align-items:center}
+.cp-phil-t p{margin:0 0 14px; font-size:15.5px; line-height:2.05}
+.cp-phil-en{margin:0; font-family:var(--en); font-weight:500; font-size:clamp(36px,4.4vw,60px); line-height:1.1; letter-spacing:.06em; color:#b9c4cf}
+.cp-phil-en em{font-style:italic; color:var(--gold)}
+.top section.cp-biz{background:radial-gradient(ellipse 70% 80% at 25% 40%,#1b4468 0%,var(--navy) 60%); color:#fff}
+.top .cp-biz .sec-head .en{color:var(--gold-l)}
+.top .cp-biz .sec-head h2{color:#fff}
+.cp-biz .why3 li{padding-bottom:8px}
+.cp-biz .why3 .k{display:block; margin-top:14px; font-family:var(--en); font-weight:600; font-size:13px; letter-spacing:.2em; color:var(--gold-l)}
+.cp-biz .why3 h3{margin-top:4px}
+.cp-gb{display:grid; grid-template-columns:1fr 1fr; gap:28px}
+.cp-gb > div{display:flex; flex-direction:column; background:var(--panel)}
+.cp-gb figure{margin:0}
+.cp-gb figure img{width:100%; aspect-ratio:16/9; object-fit:cover; filter:saturate(.9)}
+.cp-gb figcaption{padding:8px 24px 0; font-size:12px; color:var(--muted)}
+.cp-gb .tn-panel{aspect-ratio:16/9; padding:28px 32px}
+.cp-gb-b{padding:24px 28px 30px}
+.cp-gb-b .tn-head{gap:14px}
+.cp-gb-b .tn-n{font-size:46px}
+.cp-gb-b h3.t{margin:2px 0 0; font-size:21px; color:var(--ink)}
+.cp-gb-b ul{list-style:none; margin:18px 0 0; padding:0; border-top:1px solid var(--line)}
+.cp-gb-b li{padding:14px 0; border-bottom:1px solid var(--line)}
+.cp-gb-b li b{display:block; font-size:16px; color:var(--ink)}
+.cp-gb-b li small{display:block; margin-top:2px; font-size:12.5px; font-weight:700; color:var(--blue)}
+.cp-gb-b li span{display:block; margin-top:4px; font-size:14px; line-height:1.8}
+.cp-gb-b li a{display:inline-block; margin-top:6px; font-size:13.5px; font-weight:700; color:var(--blue); text-decoration:none}
+.cp-prof{display:grid; grid-template-columns:1fr 1fr; gap:0 48px}
+.cp-prof .outline{margin-top:0}
+.cp-acc{display:grid; grid-template-columns:1fr 1fr; gap:28px}
+.cp-acc > div{display:flex; gap:20px; padding:28px 30px; background:#fff; border:1px solid var(--line); border-top:3px solid var(--navy)}
+.cp-acc .ic{flex:none}
+.cp-acc h3{margin:0 0 6px; font-size:18px; color:var(--ink)}
+.cp-acc p{margin:0 0 4px; font-size:14.5px; line-height:1.8}
+.cp-acc .btn{margin-top:14px}
+@media (max-width:1000px){
+  .cp-nav ul{grid-template-columns:repeat(3,1fr)}
+  .cp-nav li:nth-child(4) a{border-left:0}
+  .cp-nav li:nth-child(n+4) a{border-top:1px solid var(--line)}
+  .cp-phil, .cp-gb, .cp-prof, .cp-acc{grid-template-columns:1fr; gap:24px}
+}
+@media (max-width:760px){
+  .cp-nav a{padding:14px 4px; font-size:12.5px; gap:0}
+  .cp-nav svg{display:none}
+  .cp-gb-b{padding:20px 20px 24px}
+  .cp-acc > div{padding:22px 20px; flex-direction:column; gap:10px}
+}
+
 /* ---- 下層ページの見出し（build.py が差し込む） ---- */
 .page-head{padding:44px 0 40px; background:var(--panel); border-bottom:1px solid var(--line-s)}
 .page-head .en{color:var(--blue); font-size:11px; font-weight:700; letter-spacing:.18em; display:block; margin-bottom:8px}
@@ -1150,21 +1208,20 @@ setTimeout(function(){
   </div>
 </header>
 
-<div class="sub"><div class="crumb"><div class="wrap"><a href="index.html">ホーム</a> ／ 企業情報</div></div>
-<div class="page-head"><div class="wrap"><span class="en">COMPANY</span><h1>企業情報</h1><p>会社の概要と、グループの事業をご紹介します。</p></div></div>
-<section class="alt" id="company">
-  <div class="wrap">
-    
-    <div class="about">
-      <p>弊社はグループで保育園と児童発達支援・放課後等デイサービスも運営し、外国にルーツのあるお子さまをお預かりしてきました。<strong>外国人の住民の方が地域の一員として暮らしていけるよう、多文化共生社会に貢献していきます。</strong></p>
-    </div>
-  </div>
-</section>
-
-<section><div class="wrap"><div class="sec-head"><span class="en">COMPANY PROFILE</span><h2>会社概要</h2></div><table class="outline"><tr><th>会社名</th><td>株式会社 A and K</td></tr><tr><th>本社所在地</th><td>〒509-0207 岐阜県可児市今渡3-11<br>Tel 0574-66-3511／Fax 0574-66-7311</td></tr><tr><th>可児今渡事務所</th><td>〒509-0207 岐阜県可児市今渡1149-1 2F<br>Tel・Fax 0574-50-5048</td></tr><tr><th>代表者</th><td>代表取締役　兼松 厚志</td></tr><tr><th>E-mail</th><td><a href="mailto:info@aandkcorp.com">info@aandkcorp.com</a></td></tr><tr><th>営業時間</th><td>9:00〜18:00</td></tr><tr><th>定休日</th><td>土曜日、日曜日</td></tr><tr><th>許可</th><td>登録支援機関 登録番号 19登-000975</td></tr><tr><th>事業内容</th><td>・技能実習生の紹介及び手続き代行業務<br>・外国人留学生の紹介業務<br>・特定技能登録支援機関<br>・外国籍児童の保育園経営<br>・内閣府所管企業主導型保育園経営<br>・認可保育園経営<br>・児童発達支援事業・放課後デイサービス事業</td></tr><tr><th>取引銀行</th><td>岐阜商工信用組合 可児支店<br>十六銀行 西可児支店<br>東濃信用金庫 西可児支店</td></tr><tr><th>顧問</th><td>高橋法律事務所<br>各務税理士事務所<br>NAKA社会保険労務士事務所</td></tr></table></div></section><section class="gsec" id="group"><div class="wrap"><div class="sec-head"><span class="en">GROUP</span><h2>グループの事業</h2><p>外国人材の受入れ支援のほか、保育園と児童発達支援・放課後等デイサービスを運営しています。</p></div><div class="gcards"><div class="gcard"><h3>かみのて保育園</h3><div class="gtag">こども家庭庁所管 企業主導型保育事業</div><p>2022年7月開園。外国にルーツのあるお子さまをお預かりしています。</p><p style="margin-top:8px"><a href="https://www.kaminote-hoikuen.com/" target="_blank" rel="noopener">サイトを見る</a></p></div><div class="gcard"><h3>かみのて今渡保育園</h3><div class="gtag">可児市 小規模認可保育園</div><p>2023年10月開園。可児市の待機児童の解消と、地域の子育て支援に取り組んでいます。</p></div><div class="gcard"><h3>かみのてKIDS・かみのてSMILE</h3><div class="gtag">児童発達支援・放課後等デイサービス</div><p>2025年6月にかみのてKIDSが新築移転し、受け入れ人数を増やしました。</p></div><div class="gcard"><h3>一時預かり事業</h3><p>新社屋の2階で、一時預かりも行っています。</p></div></div></div></section></div><div class="cta" id="contact">
+<div class="top sp cp">
+<div class="sp-hero"><div class="sp-hero-t"><div class="sp-crumb"><a href="index.html">ホーム</a> ／ 企業情報</div><span class="sp-en">ABOUT A and K</span><p class="sp-k">企業情報</p><h1><span>世界と地域をつなぎ</span><br><span>人と社会の未来を育む</span></h1><p class="lead">外国人材の受入れ支援から、保育・児童福祉の事業まで。A and K は人と人とのつながりを大切に、外国人の住民の方が地域の一員として暮らしていける社会づくりに取り組んでいます。</p><a class="btn gold" href="#cp-prof">会社概要を見る <span aria-hidden="true">→</span></a></div><figure class="sp-hero-ph"><img src="img/news/20231002-3.jpeg" alt="かみのて今渡保育園の開園の日、建物の前で"><figcaption>2023年10月 かみのて今渡保育園の開園</figcaption></figure></div>
+<nav class="cp-nav" aria-label="このページの目次"><div class="wrap"><ul><li><a href="#cp-phil"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5C6.5 4.5 9.5 4.5 12 6c2.5-1.5 5.5-1.5 8-.5V19c-2.5-1-5.5-1-8 .5-2.5-1.5-5.5-1.5-8-.5z"/><path d="M12 6v13.5"/></svg>企業理念</a></li><li><a href="#cp-group"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="8" r="3"/><circle cx="16.5" cy="9" r="2.5"/><path d="M2.5 20c.5-3.5 2.8-5.5 5.5-5.5s5 2 5.5 5.5M14 14.6c3.2-.4 6 1.5 6.5 5.4"/></svg>グループの事業</a></li><li><a href="#cp-prof"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M9.5 11h6M9.5 14.5h6M9.5 18h4"/></svg>会社概要</a></li><li><a href="#cp-hist"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>沿革</a></li><li><a href="#cp-acc"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.5-7-11a7 7 0 0 1 14 0c0 6.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>アクセス</a></li></ul></div></nav>
+<section class="cp-sec" id="cp-phil"><div class="wrap cp-phil"><div class="cp-phil-t"><div class="sec-head"><span class="en">OUR PHILOSOPHY</span><h2><span>人と人をつなぎ</span><br><span>誰もが自分らしく</span><span>暮らせる社会へ</span></h2></div><p>弊社はグループで保育園と児童発達支援・放課後等デイサービスも運営し、外国にルーツのあるお子さまをお預かりしてきました。外国人の住民の方が地域の一員として暮らしていけるよう、多文化共生社会に貢献していきます。</p></div><p class="cp-phil-en" aria-hidden="true">Connecting<br>people<br><em>creating</em><br>the future</p></div></section>
+<section class="cp-biz"><div class="wrap"><div class="sec-head"><span class="en">OUR BUSINESS</span><h2>人材・保育・福祉<br>3つの領域から地域を支える</h2></div><ul class="why3"><li><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="8" cy="8" r="3"/><circle cx="16.5" cy="9" r="2.5"/><path d="M2.5 20c.5-3.5 2.8-5.5 5.5-5.5s5 2 5.5 5.5M14 14.6c3.2-.4 6 1.5 6.5 5.4"/></svg></span><span class="k">HUMAN RESOURCES</span><h3>外国人材の受入れ支援</h3><p>人材のご紹介・入国の手続き・生活の支援・就労後の面談（登録支援機関）</p></li><li><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3.5 11L12 4l8.5 7"/><path d="M5.5 9.5V20h13V9.5M10 20v-5.5h4V20"/></svg></span><span class="k">CHILDCARE</span><h3>保育事業</h3><p>企業主導型保育園・小規模認可保育園・一時預かり</p></li><li><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5.5C6.5 4.5 9.5 4.5 12 6c2.5-1.5 5.5-1.5 8-.5V19c-2.5-1-5.5-1-8 .5-2.5-1.5-5.5-1.5-8-.5z"/><path d="M12 6v13.5"/></svg></span><span class="k">CHILD DEVELOPMENT</span><h3>児童福祉事業</h3><p>児童発達支援・放課後等デイサービス</p></li></ul></div></section>
+<section class="cp-sec" id="cp-group"><div class="wrap"><div class="sec-head"><span class="en">GROUP BUSINESS</span><h2>グループの事業</h2></div><div class="cp-gb" id="group"><div><figure><img src="img/news/20231002-1.jpeg" alt="かみのて今渡保育園のオープニングセレモニーの様子" loading="lazy"><figcaption>2023年10月 かみのて今渡保育園のオープニングセレモニー</figcaption></figure><div class="cp-gb-b"><div class="tn-head"><span class="tn-n">01</span><div><span class="tn-en">CHILDCARE</span><h3 class="t">保育事業</h3></div></div><ul><li><b>かみのて保育園</b><small>こども家庭庁所管 企業主導型保育事業</small><span>2022年7月開園。外国にルーツのあるお子さまをお預かりしています。</span><a href="https://www.kaminote-hoikuen.com/" target="_blank" rel="noopener">サイトを見る →</a></li><li><b>かみのて今渡保育園</b><small>可児市 小規模認可保育園</small><span>2023年10月開園。可児市の待機児童の解消と、地域の子育て支援に取り組んでいます。</span></li><li><b>一時預かり事業</b><span>新社屋の2階で、一時預かりも行っています。</span></li></ul></div></div><div><div class="tn-panel" aria-hidden="true"><span class="num">02</span><span class="big">Child<br><em>Development</em></span><span class="meta">児童発達支援・放課後等デイサービス</span></div><div class="cp-gb-b"><div class="tn-head"><span class="tn-n">02</span><div><span class="tn-en">CHILD DEVELOPMENT</span><h3 class="t">児童発達支援・放課後等デイサービス</h3></div></div><ul><li><b>かみのてKIDS</b><span>2023年10月開園。2025年6月に新築の建物へ移転し、受け入れ人数を増やしました。支援が必要な外国籍のお子さまも、通訳を通じて療育しています。</span></li><li><b>かみのてSMILE</b><small>児童発達支援・放課後等デイサービス</small></li></ul></div></div></div></div></section>
+<section class="cp-sec alt" id="cp-prof"><div class="wrap"><div class="sec-head"><span class="en">COMPANY PROFILE</span><h2>会社概要</h2></div><div class="cp-prof"><table class="outline"><tr><th>会社名</th><td>株式会社 A and K</td></tr><tr><th>本社所在地</th><td>〒509-0207 岐阜県可児市今渡3-11<br>Tel 0574-66-3511／Fax 0574-66-7311</td></tr><tr><th>可児今渡事務所</th><td>〒509-0207 岐阜県可児市今渡1149-1 2F<br>Tel・Fax 0574-50-5048</td></tr><tr><th>代表者</th><td>代表取締役　兼松 厚志</td></tr><tr><th>E-mail</th><td><a href="mailto:info@aandkcorp.com">info@aandkcorp.com</a></td></tr><tr><th>営業時間</th><td>9:00〜18:00</td></tr></table><table class="outline"><tr><th>定休日</th><td>土曜日、日曜日</td></tr><tr><th>許可</th><td>登録支援機関 登録番号 19登-000975</td></tr><tr><th>事業内容</th><td>・技能実習生の紹介及び手続き代行業務<br>・外国人留学生の紹介業務<br>・特定技能登録支援機関<br>・外国籍児童の保育園経営<br>・内閣府所管企業主導型保育園経営<br>・認可保育園経営<br>・児童発達支援事業・放課後デイサービス事業</td></tr><tr><th>取引銀行</th><td>岐阜商工信用組合 可児支店<br>十六銀行 西可児支店<br>東濃信用金庫 西可児支店</td></tr><tr><th>顧問</th><td>高橋法律事務所<br>各務税理士事務所<br>NAKA社会保険労務士事務所</td></tr></table></div></div></section>
+<section class="cp-sec" id="cp-hist"><div class="wrap pn-hist"><div><p class="pn-hist-en" aria-hidden="true">Our<br><em>History</em></p><div class="sec-head"><span class="en">OUR HISTORY</span><h2>沿革</h2></div></div><div><ol class="pn-tl"><li><time>2019年6月</time><span>出入国在留管理庁長官から、登録支援機関の登録通知書が届く</span></li><li><time>2019年9月</time><span>トラスト江南協同組合と業務提携</span></li><li><time>2019年12月</time><span>可児今渡事務所（可児市今渡1149-1）を開設</span></li><li><time>2021年8月</time><span>ブリッジング協同組合を設立（愛知県知事の許可）</span></li><li><time>2022年7月</time><span>企業主導型保育事業「かみのて保育園」を開園</span></li><li><time>2022年10月</time><span>フィリピンの送り出し機関、プロデンシャルエンプロイメントエージェンシーと契約</span></li><li><time>2023年10月</time><span>小規模認可保育園「かみのて今渡保育園」と、児童発達支援・放課後等デイサービス「かみのてKIDS」を開園</span></li><li><time>2025年6月</time><span>「かみのてKIDS」が新築の建物へ移転し、受け入れ人数を増やす</span></li></ol><p class="pn-tl-note">※旧サイトのお知らせに掲載した内容から作成しています。</p></div></div></section>
+<section class="cp-sec alt" id="cp-acc"><div class="wrap"><div class="sec-head"><span class="en">ACCESS</span><h2>アクセス</h2></div><div class="cp-acc"><div><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3.5 11L12 4l8.5 7"/><path d="M5.5 9.5V20h13V9.5M10 20v-5.5h4V20"/></svg></span><div><h3>本社</h3><p>〒509-0207 岐阜県可児市今渡3-11</p><p>Tel 0574-66-3511／Fax 0574-66-7311</p><a class="btn line" href="https://www.google.com/maps/search/?api=1&query=%E5%B2%90%E9%98%9C%E7%9C%8C%E5%8F%AF%E5%85%90%E5%B8%82%E4%BB%8A%E6%B8%A13-11" target="_blank" rel="noopener">Google マップで見る <span aria-hidden="true">→</span></a></div></div><div><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3.5 11L12 4l8.5 7"/><path d="M5.5 9.5V20h13V9.5M10 20v-5.5h4V20"/></svg></span><div><h3>可児今渡事務所</h3><p>〒509-0207 岐阜県可児市今渡1149-1 2F</p><p>Tel・Fax 0574-50-5048</p><p>名鉄 日本ライン今渡駅から徒歩10分</p><a class="btn line" href="https://www.google.com/maps/search/?api=1&query=%E5%B2%90%E9%98%9C%E7%9C%8C%E5%8F%AF%E5%85%90%E5%B8%82%E4%BB%8A%E6%B8%A11149-1" target="_blank" rel="noopener">Google マップで見る <span aria-hidden="true">→</span></a></div></div></div></div></section>
+</div>
+<div class="cta" id="contact">
   <div class="wrap">
     <span class="en">CONTACT</span>
-    <h2><span>外国人材の受入れについて</span><br><span>まずはお気軽にご相談ください</span></h2>
+    <h2><span>人と企業の未来をつなぐ</span><br><span>新しい可能性をご一緒に</span></h2>
     <p>制度のご説明から、受入れに関するご相談まで。<br>企業さまの状況に合わせてご案内します。ご相談・お見積りは無料です。</p>
     <a class="btn btn-lg" href="contact.html">外国人材の受入れについて相談する <i aria-hidden="true">→</i></a>
     <div class="cta-sub">

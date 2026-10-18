@@ -932,6 +932,64 @@ footer a:hover{color:#fff; text-decoration:underline}
   .pn-name{font-size:clamp(19px,5.6vw,24px)}
   .pn .tn-catch{font-size:16.5px}
 }
+
+/* ===== 企業情報ページ（2026-10-18 改善案。build.py の company_body が組む） =====
+   FV → ページ内の目次 → 企業理念 → 3つの事業（紺）→ グループの事業 → 会社概要 → 沿革 → アクセス。
+   ★代表ごあいさつは、正式な文章とお写真が届くまで載せない（README の必須項目）。 */
+.cp-nav{background:#fff; border-bottom:1px solid var(--line)}
+.cp-nav ul{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(5,1fr)}
+.cp-nav a{display:flex; align-items:center; justify-content:center; gap:10px; padding:20px 10px; border-left:1px solid var(--line);
+  text-decoration:none; font-size:14.5px; font-weight:700; color:var(--ink); transition:background-color .2s}
+.cp-nav li:first-child a{border-left:0}
+.cp-nav a:hover{background:var(--blue-s)}
+.cp-nav svg{width:20px; height:20px; fill:none; stroke:var(--gold-d); stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round}
+.top section.cp-sec{scroll-margin-top:76px}
+.cp-phil{display:grid; grid-template-columns:1.1fr .9fr; gap:56px; align-items:center}
+.cp-phil-t p{margin:0 0 14px; font-size:15.5px; line-height:2.05}
+.cp-phil-en{margin:0; font-family:var(--en); font-weight:500; font-size:clamp(36px,4.4vw,60px); line-height:1.1; letter-spacing:.06em; color:#b9c4cf}
+.cp-phil-en em{font-style:italic; color:var(--gold)}
+.top section.cp-biz{background:radial-gradient(ellipse 70% 80% at 25% 40%,#1b4468 0%,var(--navy) 60%); color:#fff}
+.top .cp-biz .sec-head .en{color:var(--gold-l)}
+.top .cp-biz .sec-head h2{color:#fff}
+.cp-biz .why3 li{padding-bottom:8px}
+.cp-biz .why3 .k{display:block; margin-top:14px; font-family:var(--en); font-weight:600; font-size:13px; letter-spacing:.2em; color:var(--gold-l)}
+.cp-biz .why3 h3{margin-top:4px}
+.cp-gb{display:grid; grid-template-columns:1fr 1fr; gap:28px}
+.cp-gb > div{display:flex; flex-direction:column; background:var(--panel)}
+.cp-gb figure{margin:0}
+.cp-gb figure img{width:100%; aspect-ratio:16/9; object-fit:cover; filter:saturate(.9)}
+.cp-gb figcaption{padding:8px 24px 0; font-size:12px; color:var(--muted)}
+.cp-gb .tn-panel{aspect-ratio:16/9; padding:28px 32px}
+.cp-gb-b{padding:24px 28px 30px}
+.cp-gb-b .tn-head{gap:14px}
+.cp-gb-b .tn-n{font-size:46px}
+.cp-gb-b h3.t{margin:2px 0 0; font-size:21px; color:var(--ink)}
+.cp-gb-b ul{list-style:none; margin:18px 0 0; padding:0; border-top:1px solid var(--line)}
+.cp-gb-b li{padding:14px 0; border-bottom:1px solid var(--line)}
+.cp-gb-b li b{display:block; font-size:16px; color:var(--ink)}
+.cp-gb-b li small{display:block; margin-top:2px; font-size:12.5px; font-weight:700; color:var(--blue)}
+.cp-gb-b li span{display:block; margin-top:4px; font-size:14px; line-height:1.8}
+.cp-gb-b li a{display:inline-block; margin-top:6px; font-size:13.5px; font-weight:700; color:var(--blue); text-decoration:none}
+.cp-prof{display:grid; grid-template-columns:1fr 1fr; gap:0 48px}
+.cp-prof .outline{margin-top:0}
+.cp-acc{display:grid; grid-template-columns:1fr 1fr; gap:28px}
+.cp-acc > div{display:flex; gap:20px; padding:28px 30px; background:#fff; border:1px solid var(--line); border-top:3px solid var(--navy)}
+.cp-acc .ic{flex:none}
+.cp-acc h3{margin:0 0 6px; font-size:18px; color:var(--ink)}
+.cp-acc p{margin:0 0 4px; font-size:14.5px; line-height:1.8}
+.cp-acc .btn{margin-top:14px}
+@media (max-width:1000px){
+  .cp-nav ul{grid-template-columns:repeat(3,1fr)}
+  .cp-nav li:nth-child(4) a{border-left:0}
+  .cp-nav li:nth-child(n+4) a{border-top:1px solid var(--line)}
+  .cp-phil, .cp-gb, .cp-prof, .cp-acc{grid-template-columns:1fr; gap:24px}
+}
+@media (max-width:760px){
+  .cp-nav a{padding:14px 4px; font-size:12.5px; gap:0}
+  .cp-nav svg{display:none}
+  .cp-gb-b{padding:20px 20px 24px}
+  .cp-acc > div{padding:22px 20px; flex-direction:column; gap:10px}
+}
 </style>
 </head>
 <body>
