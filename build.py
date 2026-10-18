@@ -9,11 +9,13 @@
 とどめ、中身の説明は下層ページで行う。原本の文章はどちらにも書かず、
 下層ページ用の原文から digest() が抜き出して要約を組み立てる。
 
-トップの並び（2026-10-18 改善案その2。「何を頼めるか」と具体的なサービスを先に）:
-  FV → 信頼の帯 → 人材 → 選ばれる3つの理由 → 現地での取り組み → 支援 → 流れ
-  → よくあるご質問 → 会社・グループ（ABOUT US）→ お知らせ → お問い合わせ
-  reasons / field / aboutus / news はトップだけの節。人材・支援・流れは
-  下層ページ用の原文から digest() が要約を作る。トップは <div class="top"> で包む。
+トップの並び（2026-10-18 保育・児童福祉を主役に組み直し。松本さん「保育園事業をメインに。
+かみのて保育園と放課後デイを運営する会社なので」）:
+  FV → 事業の要点の帯 → 運営する施設（CARE から）→ 会社（ABOUT US）
+  → 外国人材の受入れ支援（紺の帯。下層4ページへ案内）→ お知らせ → お問い合わせ
+  外国人材支援は2本目の事業として残す。下層4ページ（人材・支援・流れ・提携機関）と FAQ はそのまま。
+  施設の詳しい情報は各施設のサイトに任せ、ここでは紹介と連絡先までにする（情報を二重に持たない）。
+  aboutus / news はトップだけの節。トップは <div class="top"> で包む。
 
 出力:
   index.html    トップ（各節の要約＋「詳しく見る」）
@@ -21,6 +23,7 @@
   support.html  登録支援機関としての支援
   flow.html     受入れまでの流れ
   partners.html 自社グループと提携機関
+  childcare.html 保育・児童福祉の事業（施設の紹介と連絡先。CARE から）
   company.html  企業情報（代表ごあいさつ＋会社概要）
   faq.html      よくあるご質問
   news.html     過去のお知らせ（src/news.json から。旧サイトの全24件）
@@ -68,10 +71,108 @@ PAGES = {
 TOP_EN = {"visas": "OUR SERVICES", "support": "SUPPORT", "flow": "PROCESS"}
 # ★トップでは節見出しのすぐ下に説明文を置かない（松本さんのご指示）。説明は下層ページで。
 
-# メニューの並び（左3つ／ロゴ／右3つ）
-NAV_L = [("service.html", "人材紹介"), ("support.html", "支援内容"), ("flow.html", "受入れの流れ")]
-# お問い合わせはヘッダー上段右端のボタン1つにする（上下で重複していた）
-NAV_R = [("partners.html", "提携機関"), ("company.html", "企業情報")]
+# メニューの並び。お問い合わせはヘッダー右端のボタン1つにする（上下で重複していた）
+# 「外国人材支援」は小メニューに4ページをまとめる（HR_PAGES）。
+NAV_L = [("childcare.html", "保育・児童福祉"), ("service.html", "外国人材支援")]
+NAV_R = [("company.html", "企業情報"), ("news.html", "お知らせ")]
+HR_PAGES = [("service.html", "ご紹介できる人材"), ("support.html", "支援内容"), ("flow.html", "受入れの流れ"),
+            ("partners.html", "グループ・提携機関"), ("faq.html", "よくあるご質問")]
+
+# ============ 運営する施設（2026-10-18） ============
+# 出典は かみのての現行サイト（~/kaminote-design/DATA.md、2026-08-02 取得）と、このサイトの お知らせ（news.json）。
+# ★時間・定員・料金は変わりやすく、各施設のサイトと二重になるので載せない。名前・種別・開設・所在地・電話まで。
+# ★かみのての新しい2サイト（保育園／放課後等デイ）が独自ドメインで公開されたら、URL をそちらに替える。
+#   今は、全施設が載っている今のサイトへ案内する（旧 www.kaminote-hoikuen.com はハイフン付きで開けなかった）。
+KAMINOTE_URL = "https://www.kaminotehoikuen.com/"
+CARE_GROUPS = [
+    ("nursery", "CHILDCARE", "保育事業", "img/care/yard.jpg", "砂場とすべり台のある園庭"),
+    ("dev", "CHILD DEVELOPMENT", "児童発達支援・放課後等デイサービス", "img/care/craft.jpg", "画用紙とクレヨンが広がる工作の机"),
+]
+CARE = [
+    {"grp": "nursery", "id": "f-kaminote", "kind": "企業主導型保育園", "name": "かみのて保育園", "since": "2022年7月開園",
+     "desc": "こども家庭庁所管の企業主導型保育事業です。看護師が常駐し、園内で病児保育も行っています。",
+     "addr": "岐阜県可児市今渡3番5", "tel": "0574-50-1211", "url": KAMINOTE_URL},
+    {"grp": "nursery", "id": "f-imawatari", "kind": "小規模認可保育園（可児市）", "name": "かみのて今渡保育園", "since": "2023年10月開園",
+     "desc": "可児市の待機児童の解消と、地域の子育て支援に取り組んでいます。入園のお申し込みは可児市役所の保育課です。一時預かりも行っています。",
+     "addr": "岐阜県可児市今渡3-11", "tel": "0574-66-3512", "url": KAMINOTE_URL},
+    {"grp": "nursery", "id": "f-hog", "kind": "認可外保育園", "name": "ハンズオブガッド今渡保育園", "since": "HANDS OF GOD KINDERGARTEN",
+     "desc": "フィリピン・ブラジル・ベトナム・ペルーなどにルーツをもつお子さまが通う保育園です。年少・年中は英語、年長は日本語のレッスンがあります。",
+     "addr": "岐阜県可児市今渡1149-1", "tel": "0574-66-3511", "url": KAMINOTE_URL},
+    {"grp": "dev", "id": "f-kids", "kind": "児童発達支援・放課後等デイサービス", "name": "かみのてKIDS", "since": "2023年10月開所／2025年6月 新築移転",
+     "desc": "通訳スタッフがいて、支援が必要な外国籍のお子さまも通訳を通じて療育しています。",
+     "addr": "岐阜県可児市土田2569-2", "tel": "0574-66-3513", "url": KAMINOTE_URL},
+    {"grp": "dev", "id": "f-smile", "kind": "児童発達支援・放課後等デイサービス", "name": "かみのてSMILE", "since": "",
+     "desc": "かみのてKIDSと同じ支援プログラムで、お子さま一人ひとりの成長を支えています。",
+     "addr": "岐阜県可児市今渡2452-1", "tel": "0574-66-3513", "url": KAMINOTE_URL},
+]
+# 外国人材のページの最後のお問い合わせは、外国人材向けの見出し・ボタンにする（原本は全ページ共通の文言）
+CTA_BASE_H2 = '<h2><span>ご質問・ご相談は</span><br><span>お気軽にお問い合わせください</span></h2>'
+CTA_HR = [(CTA_BASE_H2, '<h2><span>外国人材の受入れについて</span><br><span>まずはお気軽にご相談ください</span></h2>'),
+          ('<p>保育園・児童発達支援・放課後等デイサービスのご利用は、各施設でもご案内しています。<br>会社へのお問い合わせ、外国人材の受入れのご相談も承ります。</p>',
+           '<p>制度のご説明から、受入れに関するご相談まで。<br>企業さまの状況に合わせてご案内します。ご相談・お見積りは無料です。</p>'),
+          ('<a class="btn btn-lg" href="contact.html">お問い合わせ <i aria-hidden="true">→</i></a>',
+           '<a class="btn btn-lg" href="contact.html">外国人材の受入れについて相談する <i aria-hidden="true">→</i></a>')]
+
+
+def cta_swap(tail, pairs):
+    for a, b in pairs:
+        assert a in tail, a[:40]
+        tail = tail.replace(a, b, 1)
+    return tail
+
+
+def fac_cards(grp, detail=False):
+    """施設のカード。detail=True で所在地・電話も出す（保育・児童福祉の事業ページ）。"""
+    out = ""
+    for f in CARE:
+        if f["grp"] != grp:
+            continue
+        since = f'<span class="since">{f["since"]}</span>' if f["since"] else ""
+        dl = ""
+        if detail:
+            tel = f["tel"].replace("-", "")
+            dl = (f'<dl><dt>所在地</dt><dd>{f["addr"]}</dd>'
+                  f'<dt>電話</dt><dd><a href="tel:{tel}">{f["tel"]}</a></dd></dl>')
+        go = (f'<a class="go" href="{f["url"]}" target="_blank" rel="noopener">施設のサイトを見る <span aria-hidden="true">→</span></a>'
+              if detail else
+              f'<a class="go" href="childcare.html#{f["id"]}">詳しく見る <span aria-hidden="true">→</span></a>')
+        out += (f'<li class="fac" id="{f["id"] if detail else ""}"><span class="kind">{f["kind"]}</span><h3>{f["name"]}</h3>{since}'
+                f'<p>{f["desc"]}</p>{dl}{go}</li>').replace(' id=""', "")
+    return f'<ul class="fac-cards">{out}</ul>'
+
+
+def fac_groups(detail=False):
+    out = ""
+    for grp, en, ttl, img, alt in CARE_GROUPS:
+        out += (f'<div class="fac-grp" id="g-{grp}"><figure class="fac-ph"><img src="{img}" alt="{alt}" loading="lazy">'
+                f'<figcaption><span class="k">{en}</span><b>{ttl}</b></figcaption></figure>'
+                f'{fac_cards(grp, detail)}</div>')
+    return out
+
+
+def facilities_section():
+    """トップの「運営する施設」。名前・種別・一言だけ。連絡先は childcare.html。"""
+    return ('<section id="facilities"><div class="wrap">'
+            '<div class="sec-head"><span class="en">OUR FACILITIES</span><h2>運営する施設</h2></div>'
+            + fac_groups() +
+            '<div class="more-r"><a class="txt-link" href="childcare.html">保育・児童福祉の事業を詳しく見る <span aria-hidden="true">→</span></a></div>'
+            '</div></section>\n\n')
+
+
+def hr_band():
+    """トップの「外国人材の受入れ支援」。2本目の事業として、下層4ページへの入口だけ置く。"""
+    links = [("service.html", "01", "ご紹介できる人材", "特定技能・技能実習など5つの人材カテゴリー"),
+             ("support.html", "02", "支援内容", "登録支援機関として、入国前から就労後まで"),
+             ("flow.html", "03", "受入れの流れ", "ご相談から就労開始まで、5つのステップ"),
+             ("partners.html", "04", "グループ・提携機関", "自社の監理団体と、フィリピン・ベトナムの送り出し機関")]
+    li = "".join(f'<li><a href="{h}"><span class="n">{n}</span><b>{t}</b><small>{d}</small>'
+                 f'<span class="go">詳しく見る →</span></a></li>' for h, n, t, d in links)
+    return ('<section class="hrb" id="hr"><div class="wrap hrb-grid"><div>'
+            '<div class="sec-head"><span class="en">HUMAN RESOURCES</span><h2>外国人材の受入れ支援</h2></div>'
+            '<p class="hrb-lead">企業さまの外国人材の採用を、人材のご紹介から入国の手続き、生活の支援、就労後の面談まで一貫してお引き受けしています。</p>'
+            '<p class="hrb-reg">登録支援機関　登録番号 19登-000975</p><br>'
+            '<a class="btn gold" href="contact.html">外国人材の受入れについて相談する</a></div>'
+            f'<ul class="hrb-links">{li}</ul></div></section>\n\n')
 
 # 節id → 出力ファイル。原本のアンカーをページへの参照に張り替えるのに使う
 ANCHOR = {sec: out for out, (sec, *_ ) in PAGES.items()}
@@ -400,10 +501,10 @@ OUTLINE = [
     ("営業時間", "9:00〜18:00"),
     ("定休日", "土曜日、日曜日"),
     ("許可", "登録支援機関 登録番号 19登-000975"),
-    ("事業内容", "・技能実習生の紹介及び手続き代行業務<br>・外国人留学生の紹介業務<br>"
-                 "・特定技能登録支援機関<br>・外国籍児童の保育園経営<br>"
-                 "・内閣府所管企業主導型保育園経営<br>・認可保育園経営<br>"
-                 "・児童発達支援事業・放課後デイサービス事業"),
+    ("事業内容", "・内閣府所管企業主導型保育園経営<br>・認可保育園経営<br>・外国籍児童の保育園経営<br>"
+                 "・児童発達支援事業・放課後デイサービス事業<br>"
+                 "・技能実習生の紹介及び手続き代行業務<br>・外国人留学生の紹介業務<br>"
+                 "・特定技能登録支援機関"),
     ("取引銀行", "岐阜商工信用組合 可児支店<br>十六銀行 西可児支店<br>東濃信用金庫 西可児支店"),
     ("顧問", "高橋法律事務所<br>各務税理士事務所<br>NAKA社会保険労務士事務所"),
 ]
@@ -536,12 +637,18 @@ def div_block(frag, marker):
 
 
 def nav_html(current):
-    """メニュー。いま見ているページには印を付ける。"""
+    """メニュー。いま見ているページには印を付ける。外国人材支援は4ページ＋FAQの小メニュー付き。"""
+    hr = [h for h, _ in HR_PAGES]
     def col(items):
         out = []
         for href, label in items:
-            on = ' class="on"' if href == current else ""
-            out.append(f'<a href="{href}"{on}>{label}</a>')
+            on = ' class="on"' if href == current or (href == "service.html" and current in hr) else ""
+            a = f'<a href="{href}"{on}>{label}</a>'
+            if href == "service.html":
+                sub = "".join(f'<a href="{h}"{" class=" + chr(34) + "on" + chr(34) if h == current else ""}>{t}</a>'
+                              for h, t in HR_PAGES)
+                a = f'<div class="gdrop">{a}<div class="gdrop-m">{sub}</div></div>'
+            out.append(a)
         return '<nav class="gnav">' + "".join(out) + "</nav>"
     return col(NAV_L), col(NAV_R)
 
@@ -583,21 +690,18 @@ def build_plan(out_dir, src_name, key=""):
     head, header, hero, cta, footer, note, secs = parts(src_name, key)
     tail = fix_links(cta) + fix_links(footer) + note
 
-    # トップ：FV・信頼の帯 → 人材 → 選ばれる3つの理由 → 現地での取り組み → 支援 → 流れ
-    #        → よくあるご質問 → 会社・グループ → お知らせ
-    tops = digest(secs)
-    body = fix_links(hero) + fix_links(tops["visas"])
-    for sec in ("reasons", "field"):
-        body += fix_links(secs[sec])
-    for sec in ("support", "flow"):
-        body += fix_links(tops[sec])
-    # FAQ はトップでは見出しのすぐ下の説明文を外す（下層ではページ見出しの説明に使う）
-    faq = re.sub(r"(<h2>.*?</h2>)\s*<p>.*?</p>", r"\1", secs["faq"], count=1, flags=re.S)
-    body += fix_links(faq)
-    body += fix_links(secs["aboutus"].replace("<!--ABOUT_DL-->", about_dl())) + fix_links(fill_news(secs["news"]))
+    # 外国人材のページ（4ページ＋FAQ）は、最後のお問い合わせを外国人材向けにする
+    hr_tail = cta_swap(tail, CTA_HR)
+
+    # トップ：FV・事業の要点の帯 → 運営する施設 → 会社（ABOUT US）→ 外国人材の受入れ支援 → お知らせ
+    body = fix_links(hero) + facilities_section()
+    body += fix_links(secs["aboutus"].replace("<!--ABOUT_DL-->", about_dl())) + hr_band()
+    body += fix_links(fill_news(secs["news"]))
     body = '<div class="top">\n' + body + '</div>\n'
     (out_dir / "index.html").write_text(
-        shell(head, header, tail, body, "index.html", "外国人材の受入れ支援"), encoding="utf-8")
+        shell(head, header, tail, body, "index.html", "保育園・児童発達支援・放課後等デイサービスの運営"), encoding="utf-8")
+    (out_dir / "childcare.html").write_text(
+        shell(head, header, tail, childcare_body(), "childcare.html", "保育・児童福祉の事業"), encoding="utf-8")
 
     for out, (sec, _menu, ttl, en, desc) in PAGES.items():
         frag = secs[sec]
@@ -610,30 +714,29 @@ def build_plan(out_dir, src_name, key=""):
               f'<p>{lead}</p></div></div>\n')
         extra = (outline_table() + group_section()) if out == "company.html" else ""
         (out_dir / out).write_text(
-            shell(head, header, tail, '<div class="sub">' + ph + fix_links(frag) + extra + "</div>",
+            shell(head, header, hr_tail if out in [h for h, _ in HR_PAGES] else tail,
+                  '<div class="sub">' + ph + fix_links(frag) + extra + "</div>",
                   out, ttl), encoding="utf-8")
 
-    # 企業情報も専用の組み方（2026-10-18 改善案）。最後のお問い合わせの見出しもこのページ向けに
-    cp_tail = tail.replace('<h2><span>外国人材の受入れについて</span><br><span>まずはお気軽にご相談ください</span></h2>',
-                           '<h2><span>人と企業の未来をつなぐ</span><br><span>新しい可能性をご一緒に</span></h2>', 1)
-    assert cp_tail != tail
+    # 企業情報も専用の組み方（2026-10-18 改善案）
+    cp_tail = tail   # 企業情報は全ページ共通の文言のまま（会社と保育・外国人材の両方の窓口なので）
     (out_dir / "company.html").write_text(
         shell(head, header, cp_tail, company_body(secs), "company.html", "企業情報"), encoding="utf-8")
     # グループ・提携機関も専用の組み方（2026-10-18 改善案）。最後のお問い合わせの見出しもこのページ向けに
-    pn_tail = tail.replace('<h2><span>外国人材の受入れについて</span><br><span>まずはお気軽にご相談ください</span></h2>',
+    pn_tail = hr_tail.replace(CTA_HR[0][1],
                            '<h2><span>国境を越えた人材採用を</span><br><span>信頼できるパートナーと</span></h2>', 1)
-    assert pn_tail != tail
+    assert pn_tail != hr_tail
     (out_dir / "partners.html").write_text(
         shell(head, header, pn_tail, partners_body(secs), "partners.html", "自社グループと提携機関"), encoding="utf-8")
     # 受入れの流れも専用の組み方（2026-10-18 改善案）で上書きする
     (out_dir / "flow.html").write_text(
-        shell(head, header, tail, flow_body(secs), "flow.html", "受入れまでの流れ"), encoding="utf-8")
+        shell(head, header, hr_tail, flow_body(secs), "flow.html", "受入れまでの流れ"), encoding="utf-8")
     # 人材紹介も専用の組み方（2026-10-18 改善案）で上書きする
     (out_dir / "service.html").write_text(
-        shell(head, header, tail, service_body(secs), "service.html", "ご紹介できる人材"), encoding="utf-8")
+        shell(head, header, hr_tail, service_body(secs), "service.html", "ご紹介できる人材"), encoding="utf-8")
     # 支援内容は専用の組み方（2026-10-18 改善案）で上書きする
     (out_dir / "support.html").write_text(
-        shell(head, header, tail, support_body(secs), "support.html", "登録支援機関としての支援"), encoding="utf-8")
+        shell(head, header, hr_tail, support_body(secs), "support.html", "登録支援機関としての支援"), encoding="utf-8")
 
     (out_dir / "news.html").write_text(
         shell(head, header, tail, news_body(), "news.html", "過去のお知らせ"), encoding="utf-8")
@@ -1192,7 +1295,7 @@ def company_body(secs):
            '<span class="sp-en">ABOUT A and K</span>'
            '<p class="sp-k">企業情報</p>'
            '<h1><span>世界と地域をつなぎ</span><br><span>人と社会の未来を育む</span></h1>'
-           '<p class="lead">外国人材の受入れ支援から、保育・児童福祉の事業まで。'
+           '<p class="lead">保育園と児童発達支援・放課後等デイサービスの運営から、外国人材の受入れ支援まで。'
            'A and K は人と人とのつながりを大切に、外国人の住民の方が地域の一員として暮らしていける社会づくりに取り組んでいます。</p>'
            '<a class="btn gold" href="#cp-prof">会社概要を見る <span aria-hidden="true">→</span></a></div>'
            '<figure class="sp-hero-ph"><img src="img/news/20231002-3.jpeg" alt="かみのて今渡保育園の開園の日、建物の前で">'
@@ -1208,14 +1311,14 @@ def company_body(secs):
 
     ic = lambda k: '<svg viewBox="0 0 24 24">' + SUP_ICON[k] + '</svg>'
     out += ('<section class="cp-biz"><div class="wrap">'
-            '<div class="sec-head"><span class="en">OUR BUSINESS</span><h2>人材・保育・福祉<br>3つの領域から地域を支える</h2></div>'
+            '<div class="sec-head"><span class="en">OUR BUSINESS</span><h2>保育・福祉・人材<br>3つの領域から地域を支える</h2></div>'
             '<ul class="why3">'
-            f'<li><span class="ic" aria-hidden="true">{ic("08")}</span><span class="k">HUMAN RESOURCES</span><h3>外国人材の受入れ支援</h3>'
-            '<p>人材のご紹介・入国の手続き・生活の支援・就労後の面談（登録支援機関）</p></li>'
             f'<li><span class="ic" aria-hidden="true">{ic("03")}</span><span class="k">CHILDCARE</span><h3>保育事業</h3>'
-            '<p>企業主導型保育園・小規模認可保育園・一時預かり</p></li>'
+            '<p>企業主導型保育園・小規模認可保育園・認可外保育園・一時預かり・病児保育</p></li>'
             f'<li><span class="ic" aria-hidden="true">{ic("04")}</span><span class="k">CHILD DEVELOPMENT</span><h3>児童福祉事業</h3>'
             '<p>児童発達支援・放課後等デイサービス</p></li>'
+            f'<li><span class="ic" aria-hidden="true">{ic("08")}</span><span class="k">HUMAN RESOURCES</span><h3>外国人材の受入れ支援</h3>'
+            '<p>人材のご紹介・入国の手続き・生活の支援・就労後の面談（登録支援機関）</p></li>'
             '</ul></div></section>\n')
 
     out += ('<section class="cp-sec" id="cp-group"><div class="wrap">'
@@ -1226,10 +1329,13 @@ def company_body(secs):
             '<div class="cp-gb-b"><div class="tn-head"><span class="tn-n">01</span><div><span class="tn-en">CHILDCARE</span><h3 class="t">保育事業</h3></div></div>'
             '<ul><li><b>かみのて保育園</b><small>こども家庭庁所管 企業主導型保育事業</small>'
             '<span>2022年7月開園。外国にルーツのあるお子さまをお預かりしています。</span>'
-            '<a href="https://www.kaminote-hoikuen.com/" target="_blank" rel="noopener">サイトを見る →</a></li>'
+            f'<a href="{KAMINOTE_URL}" target="_blank" rel="noopener">サイトを見る →</a></li>'
             '<li><b>かみのて今渡保育園</b><small>可児市 小規模認可保育園</small>'
             '<span>2023年10月開園。可児市の待機児童の解消と、地域の子育て支援に取り組んでいます。</span></li>'
-            '<li><b>一時預かり事業</b><span>新社屋の2階で、一時預かりも行っています。</span></li></ul></div></div>'
+            '<li><b>ハンズオブガッド今渡保育園</b><small>認可外保育園</small>'
+            '<span>フィリピン・ブラジル・ベトナム・ペルーなどにルーツをもつお子さまが通っています。</span></li>'
+            '<li><b>一時預かり事業</b><span>新社屋の2階で、一時預かりも行っています。</span></li></ul>'
+            '<p style="margin-top:14px"><a href="childcare.html">保育・児童福祉の事業を詳しく見る →</a></p></div></div>'
             '<div><div class="tn-panel" aria-hidden="true"><span class="num">02</span>'
             '<span class="big">Child<br><em>Development</em></span><span class="meta">児童発達支援・放課後等デイサービス</span></div>'
             '<div class="cp-gb-b"><div class="tn-head"><span class="tn-n">02</span><div><span class="tn-en">CHILD DEVELOPMENT</span>'
@@ -1278,7 +1384,7 @@ def group_section():
     cards = [
         ("かみのて保育園", "こども家庭庁所管 企業主導型保育事業",
          "2022年7月開園。外国にルーツのあるお子さまをお預かりしています。",
-         "https://www.kaminote-hoikuen.com/"),
+         KAMINOTE_URL),
         ("かみのて今渡保育園", "可児市 小規模認可保育園",
          "2023年10月開園。可児市の待機児童の解消と、地域の子育て支援に取り組んでいます。", None),
         ("かみのてKIDS・かみのてSMILE", "児童発達支援・放課後等デイサービス",
@@ -1347,10 +1453,40 @@ document.addEventListener('click', function (e) {
 """
 
 
+def childcare_body():
+    """保育・児童福祉の事業（2026-10-18）。施設の紹介と連絡先まで。くわしい情報は各施設のサイトへ。"""
+    out = ('<div class="sp-hero"><div class="sp-hero-t">'
+           '<div class="sp-crumb"><a href="index.html">ホーム</a> ／ 保育・児童福祉の事業</div>'
+           '<span class="sp-en">CHILDCARE &amp; CHILD DEVELOPMENT</span>'
+           '<p class="sp-k">保育・児童福祉の事業</p>'
+           '<h1><span>子どもたちが</span><br><span>安心して過ごせる</span><span>場所を</span></h1>'
+           '<p class="lead">岐阜県可児市で、3つの保育園と、児童発達支援・放課後等デイサービスの2つの事業所を運営しています。'
+           '外国にルーツのあるお子さまも、言葉の心配なく過ごせるよう外国語でもご案内しています。</p>'
+           '<a class="btn gold" href="#g-nursery">施設を見る <span aria-hidden="true">→</span></a></div>'
+           '<figure class="sp-hero-ph"><img src="img/care/entrance.jpg" alt="小さな靴と帽子が並ぶ保育園の玄関">'
+           '<figcaption>写真はイメージです</figcaption></figure></div>\n')
+    out += ('<section class="cp-sec" id="cc-fac"><div class="wrap">'
+            '<div class="sec-head"><span class="en">OUR FACILITIES</span><h2>運営する施設</h2></div>'
+            + fac_groups(detail=True) +
+            '<p class="cc-src">※開所時間・定員・利用料などは、各施設のサイトでご確認ください。'
+            'かみのて今渡保育園の入園のお申し込みは、可児市役所 保育課（0574-62-1111）です。</p>'
+            '</div></section>\n')
+    langs = [("ENGLISH", "英語"), ("TAGALOG", "タガログ語"), ("BISAYA", "ビサヤ語"), ("PORTUGUÊS", "ポルトガル語")]
+    li = "".join(f"<li><small>{e}</small>{j}</li>" for e, j in langs)
+    out += ('<section class="cp-sec alt" id="cc-ml"><div class="wrap">'
+            '<div class="sec-head"><span class="en">MULTILINGUAL</span><h2>外国語でのご案内</h2></div>'
+            f'<ul class="cc-ml">{li}</ul>'
+            '<p class="cc-note">可児市・美濃加茂市には、外国にルーツをもつご家族が多く暮らしています。'
+            'かみのてKIDSには通訳スタッフがいて、かみのて今渡保育園の一時預かりも4つの言葉でご案内できます。</p>'
+            '</div></section>\n')
+    return '<div class="top sp cp">\n' + out + '</div>\n'
+
+
 def contact_body():
     return ('<div class="crumb"><div class="wrap"><a href="index.html">ホーム</a> ／ お問い合わせ</div></div>\n'
             '<div class="page-head"><div class="wrap"><span class="en">CONTACT</span>'
-            '<h1>お問い合わせ</h1><p>ご相談・お見積りは無料です。制度の説明だけでも承ります。</p></div></div>\n'
+            '<h1>お問い合わせ</h1><p>会社へのお問い合わせ、外国人材の受入れのご相談はこちらへ。'
+            '保育園・児童発達支援・放課後等デイサービスのご利用は、各施設へ直接お問い合わせください。</p></div></div>\n'
             '<section><div class="wrap"><div class="contact-grid">'
             '<div class="contact-box"><h3>お電話でのお問い合わせ</h3>'
             '<div class="big">0574-66-3511</div>'
@@ -1358,8 +1494,10 @@ def contact_body():
             '<div class="contact-box"><h3>メールでのお問い合わせ</h3>'
             '<div class="big mail"><a href="mailto:info@aandkcorp.com" style="text-decoration:none">info@aandkcorp.com</a></div>'
             '<p>お問い合わせフォームは公開時にご用意します。<br>'
-            '職種・ご希望の人数・時期をお書き添えいただけると、ご案内がスムーズです。</p></div>'
-            '</div></div></section>\n')
+            '外国人材のご相談は、職種・ご希望の人数・時期をお書き添えいただけると、ご案内がスムーズです。</p></div>'
+            '</div></div></section>\n'
+            '<section class="alt"><div class="wrap"><div class="sec-head"><span class="en">FACILITIES</span><h2>各施設へのお問い合わせ</h2></div>'
+            + fac_groups(detail=True) + '</div></section>\n')
 
 
 def privacy_body():

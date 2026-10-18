@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow, noarchive">
 <title>企業情報｜株式会社 A and K</title>
-<meta name="description" content="技能実習・特定技能をはじめ、外国人材の採用から入国・定着支援まで一貫してサポートします。登録支援機関（登録番号 19登-000975）。岐阜県可児市。">
+<meta name="description" content="岐阜県可児市で、かみのて保育園・かみのて今渡保育園などの保育園と、児童発達支援・放課後等デイサービス（かみのてKIDS・かみのてSMILE）を運営しています。外国人材の受入れ支援（登録支援機関 19登-000975）も行っています。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- 欧文は Open Sans（参考にしたサイトと同じ）。大きな英字だけ Cormorant Garamond。和文はゴシックの端末書体に任せる。 -->
@@ -1065,6 +1065,80 @@ header.scrolled{box-shadow:0 6px 24px rgba(16,42,67,.08)}
   @keyframes fxGlow{from{transform:translateX(-12%)} to{transform:translateX(12%)}}
   .cta::before{animation:fxGlow 14s ease-in-out infinite alternate}
 }
+/* ===== 2026-10-18 保育・児童福祉を主役に組み直し ===== */
+/* メニューの「外国人材支援」は、マウスを乗せる・Tabで入ると4ページの小メニューが開く */
+.gdrop{position:relative; display:flex}
+.gdrop > a::before{content:""; position:absolute; right:3px; top:50%; width:5px; height:5px; margin-top:-4px;
+  border-right:1.5px solid currentColor; border-bottom:1.5px solid currentColor; transform:rotate(45deg); opacity:.6}
+.gdrop-m{display:none; position:absolute; left:0; top:calc(100% - 10px); z-index:80; min-width:230px; padding:8px 0;
+  background:#fff; border:1px solid var(--line); border-top:2px solid var(--gold); box-shadow:0 14px 34px rgba(20,40,60,.14)}
+.gdrop:hover .gdrop-m, .gdrop:focus-within .gdrop-m{display:block}
+.gnav .gdrop-m a{display:block; padding:10px 20px; font-size:14px; font-weight:600; line-height:1.5}
+.gnav .gdrop-m a::after{display:none}
+.gnav .gdrop-m a:hover, .gnav .gdrop-m a.on{background:var(--blue-s); color:var(--navy)}
+
+/* 運営する施設（トップ・保育・児童福祉の事業ページ） */
+.fac-grp{display:grid; grid-template-columns:minmax(0,4fr) minmax(0,8fr); gap:36px; align-items:stretch}
+.fac-grp + .fac-grp{margin-top:56px}
+.fac-ph{position:relative; margin:0; min-height:260px; overflow:hidden; border-radius:4px; background:var(--navy)}
+.fac-ph img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover}
+.fac-ph figcaption{position:absolute; left:0; right:0; bottom:0; padding:64px 24px 22px; color:#fff;
+  background:linear-gradient(180deg,rgba(16,42,67,0) 0%,rgba(16,42,67,.72) 45%,rgba(16,42,67,.92) 100%)}
+.top .about-r .abiz{grid-template-columns:1fr}
+.hero-en .ib{display:inline-block}
+.fac-ph .k{display:block; font-family:var(--en); font-weight:600; font-size:13px; letter-spacing:.22em; color:var(--gold-l)}
+.fac-ph b{display:block; margin-top:4px; font-size:20px; line-height:1.5}
+.fac-cards{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px}
+.fac{display:flex; flex-direction:column; background:#fff; border:1px solid var(--line); border-top:3px solid var(--gold);
+  border-radius:4px; padding:24px 24px 22px}
+.fac .kind{font-size:12.5px; font-weight:700; color:var(--blue)}
+.fac h3{margin:6px 0 2px; font-size:19px; line-height:1.5; color:var(--ink)}
+.fac .since{font-size:12.5px; color:var(--muted)}
+.fac p{margin:12px 0 0; font-size:14px; line-height:1.85; color:var(--text)}
+.fac dl{margin:14px 0 0; padding-top:12px; border-top:1px solid var(--line-s); font-size:13.5px; line-height:1.8;
+  display:grid; grid-template-columns:auto 1fr; gap:2px 12px}
+.fac dt{color:var(--muted)}
+.fac dd{margin:0; color:var(--ink)}
+.fac dd a{text-decoration:none}
+.fac .go{margin-top:auto; padding-top:16px; font-size:13.5px; font-weight:700; color:var(--blue-dd); text-decoration:none}
+.fac .go span{display:inline-block; transition:transform .2s}
+.fac .go:hover span{transform:translateX(4px)}
+
+/* トップの外国人材の受入れ支援（紺の帯。中身は下層4ページへ案内する） */
+.hrb{background:var(--navy); color:#fff; border:0}
+.hrb .sec-head{border-left-color:var(--gold)}
+.hrb .sec-head .en{color:var(--gold-l)}
+.hrb .sec-head h2{color:#fff}
+.hrb-grid{display:grid; grid-template-columns:minmax(0,5fr) minmax(0,7fr); gap:56px; align-items:start}
+.hrb-lead{margin:0 0 28px; font-size:15px; line-height:2; color:rgba(255,255,255,.86)}
+.hrb-reg{display:inline-block; margin:0 0 28px; padding:8px 16px; border:1px solid rgba(182,154,104,.6); font-size:13.5px; color:var(--gold-l)}
+.hrb-links{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:1fr 1fr; gap:1px; background:rgba(255,255,255,.14);
+  border:1px solid rgba(255,255,255,.14)}
+.hrb-links a{display:block; height:100%; padding:24px 26px; background:var(--navy); color:#fff; text-decoration:none; transition:background .2s}
+.hrb-links a:hover{background:#17375a}
+.hrb-links .n{font-family:var(--en); font-weight:600; font-size:13px; letter-spacing:.2em; color:var(--gold-l)}
+.hrb-links b{display:block; margin:6px 0 4px; font-size:17px}
+.hrb-links small{display:block; font-size:13px; line-height:1.7; color:rgba(255,255,255,.75)}
+.hrb-links .go{display:block; margin-top:10px; font-size:13px; font-weight:700; color:var(--gold-l)}
+
+/* 保育・児童福祉の事業ページ */
+.cc-ml{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; list-style:none; margin:0; padding:0}
+.cc-ml li{background:#fff; border:1px solid var(--line); border-radius:4px; padding:18px 20px; text-align:center; font-weight:700; color:var(--ink)}
+.cc-ml li small{display:block; font-family:var(--en); font-weight:600; font-size:12px; letter-spacing:.16em; color:var(--gold-d)}
+.cc-note{margin:20px 0 0; font-size:14px; line-height:1.9; color:var(--text)}
+.cc-src{margin:28px 0 0; font-size:12.5px; color:var(--muted)}
+
+@media (max-width:900px){
+  .fac-grp, .hrb-grid{grid-template-columns:1fr; gap:22px}
+  .fac-ph{min-height:200px}
+  .fac-grp + .fac-grp{margin-top:44px}
+  .cc-ml{grid-template-columns:1fr 1fr}
+}
+@media (max-width:600px){
+  .hrb-links{grid-template-columns:1fr}
+  .hrb-links a{padding:20px 22px}
+  .fac{padding:20px 20px 18px}
+}
 
 /* ---- 下層ページの見出し（build.py が差し込む） ---- */
 .page-head{padding:44px 0 40px; background:var(--panel); border-bottom:1px solid var(--line-s)}
@@ -1264,41 +1338,45 @@ setTimeout(function(){
   <div class="wrap hdr">
     <a class="co" href="index.html" aria-label="株式会社 A and K トップへ"><img src="img/logo.png" alt="株式会社 A and K"></a>
     <div class="gnavs">
-      <nav class="gnav"><a href="service.html">人材紹介</a><a href="support.html">支援内容</a><a href="flow.html">受入れの流れ</a></nav>
-      <nav class="gnav"><a href="partners.html">提携機関</a><a href="company.html" class="on">企業情報</a></nav>
+      <nav class="gnav"><a href="childcare.html">保育・児童福祉</a><div class="gdrop"><a href="service.html">外国人材支援</a><div class="gdrop-m"><a href="service.html">ご紹介できる人材</a><a href="support.html">支援内容</a><a href="flow.html">受入れの流れ</a><a href="partners.html">グループ・提携機関</a><a href="faq.html">よくあるご質問</a></div></div></nav>
+      <nav class="gnav"><a href="company.html" class="on">企業情報</a><a href="news.html">お知らせ</a></nav>
     </div>
     <a class="pill" href="contact.html">お問い合わせ</a>
     <button class="hamburger" type="button" id="menu-btn"
             aria-label="メニューを開く" aria-expanded="false" aria-controls="mnav">☰</button>
     <nav class="mnav" id="mnav">
-      <a href="service.html">ご紹介できる人材</a>
-      <a href="support.html">支援内容</a>
-      <a href="flow.html">受入れの流れ</a>
-      <a href="partners.html">グループ・提携機関</a>
+      <a href="index.html">ホーム</a>
+      <a href="childcare.html">保育・児童福祉の事業</a>
       <a href="company.html">企業情報</a>
-      <a href="faq.html">よくあるご質問</a>
       <a href="news.html">お知らせ</a>
-      <a href="contact.html">お問い合わせ</a>
+      <div class="grp"><div class="grp-t">外国人材の受入れ支援</div>
+        <a href="service.html">ご紹介できる人材</a>
+        <a href="support.html">支援内容</a>
+        <a href="flow.html">受入れの流れ</a>
+        <a href="partners.html">グループ・提携機関</a>
+        <a href="faq.html">よくあるご質問</a>
+      </div>
+      <div class="grp"><a href="contact.html">お問い合わせ</a></div>
     </nav>
   </div>
 </header>
 
 <div class="top sp cp">
-<div class="sp-hero"><div class="sp-hero-t"><div class="sp-crumb"><a href="index.html">ホーム</a> ／ 企業情報</div><span class="sp-en">ABOUT A and K</span><p class="sp-k">企業情報</p><h1><span>世界と地域をつなぎ</span><br><span>人と社会の未来を育む</span></h1><p class="lead">外国人材の受入れ支援から、保育・児童福祉の事業まで。A and K は人と人とのつながりを大切に、外国人の住民の方が地域の一員として暮らしていける社会づくりに取り組んでいます。</p><a class="btn gold" href="#cp-prof">会社概要を見る <span aria-hidden="true">→</span></a></div><figure class="sp-hero-ph"><img src="img/news/20231002-3.jpeg" alt="かみのて今渡保育園の開園の日、建物の前で"><figcaption>2023年10月 かみのて今渡保育園の開園</figcaption></figure></div>
+<div class="sp-hero"><div class="sp-hero-t"><div class="sp-crumb"><a href="index.html">ホーム</a> ／ 企業情報</div><span class="sp-en">ABOUT A and K</span><p class="sp-k">企業情報</p><h1><span>世界と地域をつなぎ</span><br><span>人と社会の未来を育む</span></h1><p class="lead">保育園と児童発達支援・放課後等デイサービスの運営から、外国人材の受入れ支援まで。A and K は人と人とのつながりを大切に、外国人の住民の方が地域の一員として暮らしていける社会づくりに取り組んでいます。</p><a class="btn gold" href="#cp-prof">会社概要を見る <span aria-hidden="true">→</span></a></div><figure class="sp-hero-ph"><img src="img/news/20231002-3.jpeg" alt="かみのて今渡保育園の開園の日、建物の前で"><figcaption>2023年10月 かみのて今渡保育園の開園</figcaption></figure></div>
 <nav class="cp-nav" aria-label="このページの目次"><div class="wrap"><ul><li><a href="#cp-phil"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5C6.5 4.5 9.5 4.5 12 6c2.5-1.5 5.5-1.5 8-.5V19c-2.5-1-5.5-1-8 .5-2.5-1.5-5.5-1.5-8-.5z"/><path d="M12 6v13.5"/></svg>企業理念</a></li><li><a href="#cp-group"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="8" r="3"/><circle cx="16.5" cy="9" r="2.5"/><path d="M2.5 20c.5-3.5 2.8-5.5 5.5-5.5s5 2 5.5 5.5M14 14.6c3.2-.4 6 1.5 6.5 5.4"/></svg>グループの事業</a></li><li><a href="#cp-prof"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M9.5 11h6M9.5 14.5h6M9.5 18h4"/></svg>会社概要</a></li><li><a href="#cp-hist"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>沿革</a></li><li><a href="#cp-acc"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.5-7-11a7 7 0 0 1 14 0c0 6.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>アクセス</a></li></ul></div></nav>
-<section class="cp-sec" id="cp-phil"><div class="wrap cp-phil"><div class="cp-phil-t"><div class="sec-head"><span class="en">OUR PHILOSOPHY</span><h2><span>人と人をつなぎ</span><br><span>誰もが自分らしく</span><span>暮らせる社会へ</span></h2></div><p>弊社はグループで保育園と児童発達支援・放課後等デイサービスも運営し、外国にルーツのあるお子さまをお預かりしてきました。外国人の住民の方が地域の一員として暮らしていけるよう、多文化共生社会に貢献していきます。</p></div><p class="cp-phil-en" aria-hidden="true">Connecting<br>people<br><em>creating</em><br>the future</p></div></section>
-<section class="cp-biz"><div class="wrap"><div class="sec-head"><span class="en">OUR BUSINESS</span><h2>人材・保育・福祉<br>3つの領域から地域を支える</h2></div><ul class="why3"><li><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="8" cy="8" r="3"/><circle cx="16.5" cy="9" r="2.5"/><path d="M2.5 20c.5-3.5 2.8-5.5 5.5-5.5s5 2 5.5 5.5M14 14.6c3.2-.4 6 1.5 6.5 5.4"/></svg></span><span class="k">HUMAN RESOURCES</span><h3>外国人材の受入れ支援</h3><p>人材のご紹介・入国の手続き・生活の支援・就労後の面談（登録支援機関）</p></li><li><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3.5 11L12 4l8.5 7"/><path d="M5.5 9.5V20h13V9.5M10 20v-5.5h4V20"/></svg></span><span class="k">CHILDCARE</span><h3>保育事業</h3><p>企業主導型保育園・小規模認可保育園・一時預かり</p></li><li><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5.5C6.5 4.5 9.5 4.5 12 6c2.5-1.5 5.5-1.5 8-.5V19c-2.5-1-5.5-1-8 .5-2.5-1.5-5.5-1.5-8-.5z"/><path d="M12 6v13.5"/></svg></span><span class="k">CHILD DEVELOPMENT</span><h3>児童福祉事業</h3><p>児童発達支援・放課後等デイサービス</p></li></ul></div></section>
-<section class="cp-sec" id="cp-group"><div class="wrap"><div class="sec-head"><span class="en">GROUP BUSINESS</span><h2>グループの事業</h2></div><div class="cp-gb" id="group"><div><figure><img src="img/news/20231002-1.jpeg" alt="かみのて今渡保育園のオープニングセレモニーの様子" loading="lazy"><figcaption>2023年10月 かみのて今渡保育園のオープニングセレモニー</figcaption></figure><div class="cp-gb-b"><div class="tn-head"><span class="tn-n">01</span><div><span class="tn-en">CHILDCARE</span><h3 class="t">保育事業</h3></div></div><ul><li><b>かみのて保育園</b><small>こども家庭庁所管 企業主導型保育事業</small><span>2022年7月開園。外国にルーツのあるお子さまをお預かりしています。</span><a href="https://www.kaminote-hoikuen.com/" target="_blank" rel="noopener">サイトを見る →</a></li><li><b>かみのて今渡保育園</b><small>可児市 小規模認可保育園</small><span>2023年10月開園。可児市の待機児童の解消と、地域の子育て支援に取り組んでいます。</span></li><li><b>一時預かり事業</b><span>新社屋の2階で、一時預かりも行っています。</span></li></ul></div></div><div><div class="tn-panel" aria-hidden="true"><span class="num">02</span><span class="big">Child<br><em>Development</em></span><span class="meta">児童発達支援・放課後等デイサービス</span></div><div class="cp-gb-b"><div class="tn-head"><span class="tn-n">02</span><div><span class="tn-en">CHILD DEVELOPMENT</span><h3 class="t">児童発達支援・放課後等デイサービス</h3></div></div><ul><li><b>かみのてKIDS</b><span>2023年10月開園。2025年6月に新築の建物へ移転し、受け入れ人数を増やしました。支援が必要な外国籍のお子さまも、通訳を通じて療育しています。</span></li><li><b>かみのてSMILE</b><small>児童発達支援・放課後等デイサービス</small></li></ul></div></div></div></div></section>
-<section class="cp-sec alt" id="cp-prof"><div class="wrap"><div class="sec-head"><span class="en">COMPANY PROFILE</span><h2>会社概要</h2></div><div class="cp-prof"><table class="outline"><tr><th>会社名</th><td>株式会社 A and K</td></tr><tr><th>本社所在地</th><td>〒509-0207 岐阜県可児市今渡3-11<br>Tel 0574-66-3511／Fax 0574-66-7311</td></tr><tr><th>可児今渡事務所</th><td>〒509-0207 岐阜県可児市今渡1149-1 2F<br>Tel・Fax 0574-50-5048</td></tr><tr><th>代表者</th><td>代表取締役　兼松 厚志</td></tr><tr><th>E-mail</th><td><a href="mailto:info@aandkcorp.com">info@aandkcorp.com</a></td></tr><tr><th>営業時間</th><td>9:00〜18:00</td></tr></table><table class="outline"><tr><th>定休日</th><td>土曜日、日曜日</td></tr><tr><th>許可</th><td>登録支援機関 登録番号 19登-000975</td></tr><tr><th>事業内容</th><td>・技能実習生の紹介及び手続き代行業務<br>・外国人留学生の紹介業務<br>・特定技能登録支援機関<br>・外国籍児童の保育園経営<br>・内閣府所管企業主導型保育園経営<br>・認可保育園経営<br>・児童発達支援事業・放課後デイサービス事業</td></tr><tr><th>取引銀行</th><td>岐阜商工信用組合 可児支店<br>十六銀行 西可児支店<br>東濃信用金庫 西可児支店</td></tr><tr><th>顧問</th><td>高橋法律事務所<br>各務税理士事務所<br>NAKA社会保険労務士事務所</td></tr></table></div></div></section>
+<section class="cp-sec" id="cp-phil"><div class="wrap cp-phil"><div class="cp-phil-t"><div class="sec-head"><span class="en">OUR PHILOSOPHY</span><h2><span>人と人をつなぎ</span><br><span>誰もが自分らしく</span><span>暮らせる社会へ</span></h2></div><p>弊社は岐阜県可児市で保育園と児童発達支援・放課後等デイサービスを運営し、外国にルーツのあるお子さまもお預かりしてきました。あわせて外国人材の受入れ支援を行い、外国人の住民の方が地域の一員として暮らしていけるよう、多文化共生社会に貢献していきます。</p></div><p class="cp-phil-en" aria-hidden="true">Connecting<br>people<br><em>creating</em><br>the future</p></div></section>
+<section class="cp-biz"><div class="wrap"><div class="sec-head"><span class="en">OUR BUSINESS</span><h2>保育・福祉・人材<br>3つの領域から地域を支える</h2></div><ul class="why3"><li><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3.5 11L12 4l8.5 7"/><path d="M5.5 9.5V20h13V9.5M10 20v-5.5h4V20"/></svg></span><span class="k">CHILDCARE</span><h3>保育事業</h3><p>企業主導型保育園・小規模認可保育園・認可外保育園・一時預かり・病児保育</p></li><li><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5.5C6.5 4.5 9.5 4.5 12 6c2.5-1.5 5.5-1.5 8-.5V19c-2.5-1-5.5-1-8 .5-2.5-1.5-5.5-1.5-8-.5z"/><path d="M12 6v13.5"/></svg></span><span class="k">CHILD DEVELOPMENT</span><h3>児童福祉事業</h3><p>児童発達支援・放課後等デイサービス</p></li><li><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="8" cy="8" r="3"/><circle cx="16.5" cy="9" r="2.5"/><path d="M2.5 20c.5-3.5 2.8-5.5 5.5-5.5s5 2 5.5 5.5M14 14.6c3.2-.4 6 1.5 6.5 5.4"/></svg></span><span class="k">HUMAN RESOURCES</span><h3>外国人材の受入れ支援</h3><p>人材のご紹介・入国の手続き・生活の支援・就労後の面談（登録支援機関）</p></li></ul></div></section>
+<section class="cp-sec" id="cp-group"><div class="wrap"><div class="sec-head"><span class="en">GROUP BUSINESS</span><h2>グループの事業</h2></div><div class="cp-gb" id="group"><div><figure><img src="img/news/20231002-1.jpeg" alt="かみのて今渡保育園のオープニングセレモニーの様子" loading="lazy"><figcaption>2023年10月 かみのて今渡保育園のオープニングセレモニー</figcaption></figure><div class="cp-gb-b"><div class="tn-head"><span class="tn-n">01</span><div><span class="tn-en">CHILDCARE</span><h3 class="t">保育事業</h3></div></div><ul><li><b>かみのて保育園</b><small>こども家庭庁所管 企業主導型保育事業</small><span>2022年7月開園。外国にルーツのあるお子さまをお預かりしています。</span><a href="https://www.kaminotehoikuen.com/" target="_blank" rel="noopener">サイトを見る →</a></li><li><b>かみのて今渡保育園</b><small>可児市 小規模認可保育園</small><span>2023年10月開園。可児市の待機児童の解消と、地域の子育て支援に取り組んでいます。</span></li><li><b>ハンズオブガッド今渡保育園</b><small>認可外保育園</small><span>フィリピン・ブラジル・ベトナム・ペルーなどにルーツをもつお子さまが通っています。</span></li><li><b>一時預かり事業</b><span>新社屋の2階で、一時預かりも行っています。</span></li></ul><p style="margin-top:14px"><a href="childcare.html">保育・児童福祉の事業を詳しく見る →</a></p></div></div><div><div class="tn-panel" aria-hidden="true"><span class="num">02</span><span class="big">Child<br><em>Development</em></span><span class="meta">児童発達支援・放課後等デイサービス</span></div><div class="cp-gb-b"><div class="tn-head"><span class="tn-n">02</span><div><span class="tn-en">CHILD DEVELOPMENT</span><h3 class="t">児童発達支援・放課後等デイサービス</h3></div></div><ul><li><b>かみのてKIDS</b><span>2023年10月開園。2025年6月に新築の建物へ移転し、受け入れ人数を増やしました。支援が必要な外国籍のお子さまも、通訳を通じて療育しています。</span></li><li><b>かみのてSMILE</b><small>児童発達支援・放課後等デイサービス</small></li></ul></div></div></div></div></section>
+<section class="cp-sec alt" id="cp-prof"><div class="wrap"><div class="sec-head"><span class="en">COMPANY PROFILE</span><h2>会社概要</h2></div><div class="cp-prof"><table class="outline"><tr><th>会社名</th><td>株式会社 A and K</td></tr><tr><th>本社所在地</th><td>〒509-0207 岐阜県可児市今渡3-11<br>Tel 0574-66-3511／Fax 0574-66-7311</td></tr><tr><th>可児今渡事務所</th><td>〒509-0207 岐阜県可児市今渡1149-1 2F<br>Tel・Fax 0574-50-5048</td></tr><tr><th>代表者</th><td>代表取締役　兼松 厚志</td></tr><tr><th>E-mail</th><td><a href="mailto:info@aandkcorp.com">info@aandkcorp.com</a></td></tr><tr><th>営業時間</th><td>9:00〜18:00</td></tr></table><table class="outline"><tr><th>定休日</th><td>土曜日、日曜日</td></tr><tr><th>許可</th><td>登録支援機関 登録番号 19登-000975</td></tr><tr><th>事業内容</th><td>・内閣府所管企業主導型保育園経営<br>・認可保育園経営<br>・外国籍児童の保育園経営<br>・児童発達支援事業・放課後デイサービス事業<br>・技能実習生の紹介及び手続き代行業務<br>・外国人留学生の紹介業務<br>・特定技能登録支援機関</td></tr><tr><th>取引銀行</th><td>岐阜商工信用組合 可児支店<br>十六銀行 西可児支店<br>東濃信用金庫 西可児支店</td></tr><tr><th>顧問</th><td>高橋法律事務所<br>各務税理士事務所<br>NAKA社会保険労務士事務所</td></tr></table></div></div></section>
 <section class="cp-sec" id="cp-hist"><div class="wrap pn-hist"><div><p class="pn-hist-en" aria-hidden="true">Our<br><em>History</em></p><div class="sec-head"><span class="en">OUR HISTORY</span><h2>沿革</h2></div></div><div><ol class="pn-tl"><li><time>2019年6月</time><span>出入国在留管理庁長官から、登録支援機関の登録通知書が届く</span></li><li><time>2019年9月</time><span>トラスト江南協同組合と業務提携</span></li><li><time>2019年12月</time><span>可児今渡事務所（可児市今渡1149-1）を開設</span></li><li><time>2021年8月</time><span>ブリッジング協同組合を設立（愛知県知事の許可）</span></li><li><time>2022年7月</time><span>企業主導型保育事業「かみのて保育園」を開園</span></li><li><time>2022年10月</time><span>フィリピンの送り出し機関、プロデンシャルエンプロイメントエージェンシーと契約</span></li><li><time>2023年10月</time><span>小規模認可保育園「かみのて今渡保育園」と、児童発達支援・放課後等デイサービス「かみのてKIDS」を開園</span></li><li><time>2025年6月</time><span>「かみのてKIDS」が新築の建物へ移転し、受け入れ人数を増やす</span></li></ol><p class="pn-tl-note">※旧サイトのお知らせに掲載した内容から作成しています。</p></div></div></section>
 <section class="cp-sec alt" id="cp-acc"><div class="wrap"><div class="sec-head"><span class="en">ACCESS</span><h2>アクセス</h2></div><div class="cp-acc"><div><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3.5 11L12 4l8.5 7"/><path d="M5.5 9.5V20h13V9.5M10 20v-5.5h4V20"/></svg></span><div><h3>本社</h3><p>〒509-0207 岐阜県可児市今渡3-11</p><p>Tel 0574-66-3511／Fax 0574-66-7311</p><a class="btn line" href="https://www.google.com/maps/search/?api=1&query=%E5%B2%90%E9%98%9C%E7%9C%8C%E5%8F%AF%E5%85%90%E5%B8%82%E4%BB%8A%E6%B8%A13-11" target="_blank" rel="noopener">Google マップで見る <span aria-hidden="true">→</span></a></div></div><div><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3.5 11L12 4l8.5 7"/><path d="M5.5 9.5V20h13V9.5M10 20v-5.5h4V20"/></svg></span><div><h3>可児今渡事務所</h3><p>〒509-0207 岐阜県可児市今渡1149-1 2F</p><p>Tel・Fax 0574-50-5048</p><p>名鉄 日本ライン今渡駅から徒歩10分</p><a class="btn line" href="https://www.google.com/maps/search/?api=1&query=%E5%B2%90%E9%98%9C%E7%9C%8C%E5%8F%AF%E5%85%90%E5%B8%82%E4%BB%8A%E6%B8%A11149-1" target="_blank" rel="noopener">Google マップで見る <span aria-hidden="true">→</span></a></div></div></div></div></section>
 </div>
 <div class="cta" id="contact">
   <div class="wrap">
     <span class="en">CONTACT</span>
-    <h2><span>人と企業の未来をつなぐ</span><br><span>新しい可能性をご一緒に</span></h2>
-    <p>制度のご説明から、受入れに関するご相談まで。<br>企業さまの状況に合わせてご案内します。ご相談・お見積りは無料です。</p>
-    <a class="btn btn-lg" href="contact.html">外国人材の受入れについて相談する <i aria-hidden="true">→</i></a>
+    <h2><span>ご質問・ご相談は</span><br><span>お気軽にお問い合わせください</span></h2>
+    <p>保育園・児童発達支援・放課後等デイサービスのご利用は、各施設でもご案内しています。<br>会社へのお問い合わせ、外国人材の受入れのご相談も承ります。</p>
+    <a class="btn btn-lg" href="contact.html">お問い合わせ <i aria-hidden="true">→</i></a>
     <div class="cta-sub">
       <a class="cw" href="tel:0574663511"><span class="cw-k">お電話で</span><b>0574-66-3511</b><small>平日 9:00〜18:00（土日休）</small></a>
       <a class="cw" href="mailto:info@aandkcorp.com"><span class="cw-k">メールで</span><b class="mail">info@aandkcorp.com</b><small>24時間受付</small></a>
@@ -1317,9 +1395,10 @@ setTimeout(function(){
         <p style="margin:0">可児今渡事務所<br>〒509-0207 岐阜県可児市今渡1149-1 2F<br>Tel・Fax 0574-50-5048</p>
       </div>
       <div>
-        <h4>サービス</h4>
+        <h4>事業</h4>
         <ul>
-          <li><a href="service.html">ご紹介できる人材</a></li>
+          <li><a href="childcare.html">保育・児童福祉の事業</a></li>
+          <li><a href="service.html">外国人材のご紹介</a></li>
           <li><a href="support.html">支援内容</a></li>
           <li><a href="flow.html">受入れの流れ</a></li>
           <li><a href="partners.html">グループ・提携機関</a></li>

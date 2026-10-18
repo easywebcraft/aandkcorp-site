@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow, noarchive">
 <title>よくあるご質問｜株式会社 A and K</title>
-<meta name="description" content="技能実習・特定技能をはじめ、外国人材の採用から入国・定着支援まで一貫してサポートします。登録支援機関（登録番号 19登-000975）。岐阜県可児市。">
+<meta name="description" content="岐阜県可児市で、かみのて保育園・かみのて今渡保育園などの保育園と、児童発達支援・放課後等デイサービス（かみのてKIDS・かみのてSMILE）を運営しています。外国人材の受入れ支援（登録支援機関 19登-000975）も行っています。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- 欧文は Open Sans（参考にしたサイトと同じ）。大きな英字だけ Cormorant Garamond。和文はゴシックの端末書体に任せる。 -->
@@ -1065,6 +1065,80 @@ header.scrolled{box-shadow:0 6px 24px rgba(16,42,67,.08)}
   @keyframes fxGlow{from{transform:translateX(-12%)} to{transform:translateX(12%)}}
   .cta::before{animation:fxGlow 14s ease-in-out infinite alternate}
 }
+/* ===== 2026-10-18 保育・児童福祉を主役に組み直し ===== */
+/* メニューの「外国人材支援」は、マウスを乗せる・Tabで入ると4ページの小メニューが開く */
+.gdrop{position:relative; display:flex}
+.gdrop > a::before{content:""; position:absolute; right:3px; top:50%; width:5px; height:5px; margin-top:-4px;
+  border-right:1.5px solid currentColor; border-bottom:1.5px solid currentColor; transform:rotate(45deg); opacity:.6}
+.gdrop-m{display:none; position:absolute; left:0; top:calc(100% - 10px); z-index:80; min-width:230px; padding:8px 0;
+  background:#fff; border:1px solid var(--line); border-top:2px solid var(--gold); box-shadow:0 14px 34px rgba(20,40,60,.14)}
+.gdrop:hover .gdrop-m, .gdrop:focus-within .gdrop-m{display:block}
+.gnav .gdrop-m a{display:block; padding:10px 20px; font-size:14px; font-weight:600; line-height:1.5}
+.gnav .gdrop-m a::after{display:none}
+.gnav .gdrop-m a:hover, .gnav .gdrop-m a.on{background:var(--blue-s); color:var(--navy)}
+
+/* 運営する施設（トップ・保育・児童福祉の事業ページ） */
+.fac-grp{display:grid; grid-template-columns:minmax(0,4fr) minmax(0,8fr); gap:36px; align-items:stretch}
+.fac-grp + .fac-grp{margin-top:56px}
+.fac-ph{position:relative; margin:0; min-height:260px; overflow:hidden; border-radius:4px; background:var(--navy)}
+.fac-ph img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover}
+.fac-ph figcaption{position:absolute; left:0; right:0; bottom:0; padding:64px 24px 22px; color:#fff;
+  background:linear-gradient(180deg,rgba(16,42,67,0) 0%,rgba(16,42,67,.72) 45%,rgba(16,42,67,.92) 100%)}
+.top .about-r .abiz{grid-template-columns:1fr}
+.hero-en .ib{display:inline-block}
+.fac-ph .k{display:block; font-family:var(--en); font-weight:600; font-size:13px; letter-spacing:.22em; color:var(--gold-l)}
+.fac-ph b{display:block; margin-top:4px; font-size:20px; line-height:1.5}
+.fac-cards{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px}
+.fac{display:flex; flex-direction:column; background:#fff; border:1px solid var(--line); border-top:3px solid var(--gold);
+  border-radius:4px; padding:24px 24px 22px}
+.fac .kind{font-size:12.5px; font-weight:700; color:var(--blue)}
+.fac h3{margin:6px 0 2px; font-size:19px; line-height:1.5; color:var(--ink)}
+.fac .since{font-size:12.5px; color:var(--muted)}
+.fac p{margin:12px 0 0; font-size:14px; line-height:1.85; color:var(--text)}
+.fac dl{margin:14px 0 0; padding-top:12px; border-top:1px solid var(--line-s); font-size:13.5px; line-height:1.8;
+  display:grid; grid-template-columns:auto 1fr; gap:2px 12px}
+.fac dt{color:var(--muted)}
+.fac dd{margin:0; color:var(--ink)}
+.fac dd a{text-decoration:none}
+.fac .go{margin-top:auto; padding-top:16px; font-size:13.5px; font-weight:700; color:var(--blue-dd); text-decoration:none}
+.fac .go span{display:inline-block; transition:transform .2s}
+.fac .go:hover span{transform:translateX(4px)}
+
+/* トップの外国人材の受入れ支援（紺の帯。中身は下層4ページへ案内する） */
+.hrb{background:var(--navy); color:#fff; border:0}
+.hrb .sec-head{border-left-color:var(--gold)}
+.hrb .sec-head .en{color:var(--gold-l)}
+.hrb .sec-head h2{color:#fff}
+.hrb-grid{display:grid; grid-template-columns:minmax(0,5fr) minmax(0,7fr); gap:56px; align-items:start}
+.hrb-lead{margin:0 0 28px; font-size:15px; line-height:2; color:rgba(255,255,255,.86)}
+.hrb-reg{display:inline-block; margin:0 0 28px; padding:8px 16px; border:1px solid rgba(182,154,104,.6); font-size:13.5px; color:var(--gold-l)}
+.hrb-links{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:1fr 1fr; gap:1px; background:rgba(255,255,255,.14);
+  border:1px solid rgba(255,255,255,.14)}
+.hrb-links a{display:block; height:100%; padding:24px 26px; background:var(--navy); color:#fff; text-decoration:none; transition:background .2s}
+.hrb-links a:hover{background:#17375a}
+.hrb-links .n{font-family:var(--en); font-weight:600; font-size:13px; letter-spacing:.2em; color:var(--gold-l)}
+.hrb-links b{display:block; margin:6px 0 4px; font-size:17px}
+.hrb-links small{display:block; font-size:13px; line-height:1.7; color:rgba(255,255,255,.75)}
+.hrb-links .go{display:block; margin-top:10px; font-size:13px; font-weight:700; color:var(--gold-l)}
+
+/* 保育・児童福祉の事業ページ */
+.cc-ml{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; list-style:none; margin:0; padding:0}
+.cc-ml li{background:#fff; border:1px solid var(--line); border-radius:4px; padding:18px 20px; text-align:center; font-weight:700; color:var(--ink)}
+.cc-ml li small{display:block; font-family:var(--en); font-weight:600; font-size:12px; letter-spacing:.16em; color:var(--gold-d)}
+.cc-note{margin:20px 0 0; font-size:14px; line-height:1.9; color:var(--text)}
+.cc-src{margin:28px 0 0; font-size:12.5px; color:var(--muted)}
+
+@media (max-width:900px){
+  .fac-grp, .hrb-grid{grid-template-columns:1fr; gap:22px}
+  .fac-ph{min-height:200px}
+  .fac-grp + .fac-grp{margin-top:44px}
+  .cc-ml{grid-template-columns:1fr 1fr}
+}
+@media (max-width:600px){
+  .hrb-links{grid-template-columns:1fr}
+  .hrb-links a{padding:20px 22px}
+  .fac{padding:20px 20px 18px}
+}
 
 /* ---- 下層ページの見出し（build.py が差し込む） ---- */
 .page-head{padding:44px 0 40px; background:var(--panel); border-bottom:1px solid var(--line-s)}
@@ -1264,21 +1338,25 @@ setTimeout(function(){
   <div class="wrap hdr">
     <a class="co" href="index.html" aria-label="株式会社 A and K トップへ"><img src="img/logo.png" alt="株式会社 A and K"></a>
     <div class="gnavs">
-      <nav class="gnav"><a href="service.html">人材紹介</a><a href="support.html">支援内容</a><a href="flow.html">受入れの流れ</a></nav>
-      <nav class="gnav"><a href="partners.html">提携機関</a><a href="company.html">企業情報</a></nav>
+      <nav class="gnav"><a href="childcare.html">保育・児童福祉</a><div class="gdrop"><a href="service.html" class="on">外国人材支援</a><div class="gdrop-m"><a href="service.html">ご紹介できる人材</a><a href="support.html">支援内容</a><a href="flow.html">受入れの流れ</a><a href="partners.html">グループ・提携機関</a><a href="faq.html" class="on">よくあるご質問</a></div></div></nav>
+      <nav class="gnav"><a href="company.html">企業情報</a><a href="news.html">お知らせ</a></nav>
     </div>
     <a class="pill" href="contact.html">お問い合わせ</a>
     <button class="hamburger" type="button" id="menu-btn"
             aria-label="メニューを開く" aria-expanded="false" aria-controls="mnav">☰</button>
     <nav class="mnav" id="mnav">
-      <a href="service.html">ご紹介できる人材</a>
-      <a href="support.html">支援内容</a>
-      <a href="flow.html">受入れの流れ</a>
-      <a href="partners.html">グループ・提携機関</a>
+      <a href="index.html">ホーム</a>
+      <a href="childcare.html">保育・児童福祉の事業</a>
       <a href="company.html">企業情報</a>
-      <a href="faq.html">よくあるご質問</a>
       <a href="news.html">お知らせ</a>
-      <a href="contact.html">お問い合わせ</a>
+      <div class="grp"><div class="grp-t">外国人材の受入れ支援</div>
+        <a href="service.html">ご紹介できる人材</a>
+        <a href="support.html">支援内容</a>
+        <a href="flow.html">受入れの流れ</a>
+        <a href="partners.html">グループ・提携機関</a>
+        <a href="faq.html">よくあるご質問</a>
+      </div>
+      <div class="grp"><a href="contact.html">お問い合わせ</a></div>
     </nav>
   </div>
 </header>
@@ -1346,9 +1424,10 @@ setTimeout(function(){
         <p style="margin:0">可児今渡事務所<br>〒509-0207 岐阜県可児市今渡1149-1 2F<br>Tel・Fax 0574-50-5048</p>
       </div>
       <div>
-        <h4>サービス</h4>
+        <h4>事業</h4>
         <ul>
-          <li><a href="service.html">ご紹介できる人材</a></li>
+          <li><a href="childcare.html">保育・児童福祉の事業</a></li>
+          <li><a href="service.html">外国人材のご紹介</a></li>
           <li><a href="support.html">支援内容</a></li>
           <li><a href="flow.html">受入れの流れ</a></li>
           <li><a href="partners.html">グループ・提携機関</a></li>

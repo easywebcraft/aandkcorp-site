@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow, noarchive">
-<title>株式会社 A and K｜外国人材の受入れ支援</title>
-<meta name="description" content="技能実習・特定技能をはじめ、外国人材の採用から入国・定着支援まで一貫してサポートします。登録支援機関（登録番号 19登-000975）。岐阜県可児市。">
+<title>株式会社 A and K｜保育園・児童発達支援・放課後等デイサービスの運営</title>
+<meta name="description" content="岐阜県可児市で、かみのて保育園・かみのて今渡保育園などの保育園と、児童発達支援・放課後等デイサービス（かみのてKIDS・かみのてSMILE）を運営しています。外国人材の受入れ支援（登録支援機関 19登-000975）も行っています。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- 欧文は Open Sans（参考にしたサイトと同じ）。大きな英字だけ Cormorant Garamond。和文はゴシックの端末書体に任せる。 -->
@@ -1065,6 +1065,80 @@ header.scrolled{box-shadow:0 6px 24px rgba(16,42,67,.08)}
   @keyframes fxGlow{from{transform:translateX(-12%)} to{transform:translateX(12%)}}
   .cta::before{animation:fxGlow 14s ease-in-out infinite alternate}
 }
+/* ===== 2026-10-18 保育・児童福祉を主役に組み直し ===== */
+/* メニューの「外国人材支援」は、マウスを乗せる・Tabで入ると4ページの小メニューが開く */
+.gdrop{position:relative; display:flex}
+.gdrop > a::before{content:""; position:absolute; right:3px; top:50%; width:5px; height:5px; margin-top:-4px;
+  border-right:1.5px solid currentColor; border-bottom:1.5px solid currentColor; transform:rotate(45deg); opacity:.6}
+.gdrop-m{display:none; position:absolute; left:0; top:calc(100% - 10px); z-index:80; min-width:230px; padding:8px 0;
+  background:#fff; border:1px solid var(--line); border-top:2px solid var(--gold); box-shadow:0 14px 34px rgba(20,40,60,.14)}
+.gdrop:hover .gdrop-m, .gdrop:focus-within .gdrop-m{display:block}
+.gnav .gdrop-m a{display:block; padding:10px 20px; font-size:14px; font-weight:600; line-height:1.5}
+.gnav .gdrop-m a::after{display:none}
+.gnav .gdrop-m a:hover, .gnav .gdrop-m a.on{background:var(--blue-s); color:var(--navy)}
+
+/* 運営する施設（トップ・保育・児童福祉の事業ページ） */
+.fac-grp{display:grid; grid-template-columns:minmax(0,4fr) minmax(0,8fr); gap:36px; align-items:stretch}
+.fac-grp + .fac-grp{margin-top:56px}
+.fac-ph{position:relative; margin:0; min-height:260px; overflow:hidden; border-radius:4px; background:var(--navy)}
+.fac-ph img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover}
+.fac-ph figcaption{position:absolute; left:0; right:0; bottom:0; padding:64px 24px 22px; color:#fff;
+  background:linear-gradient(180deg,rgba(16,42,67,0) 0%,rgba(16,42,67,.72) 45%,rgba(16,42,67,.92) 100%)}
+.top .about-r .abiz{grid-template-columns:1fr}
+.hero-en .ib{display:inline-block}
+.fac-ph .k{display:block; font-family:var(--en); font-weight:600; font-size:13px; letter-spacing:.22em; color:var(--gold-l)}
+.fac-ph b{display:block; margin-top:4px; font-size:20px; line-height:1.5}
+.fac-cards{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px}
+.fac{display:flex; flex-direction:column; background:#fff; border:1px solid var(--line); border-top:3px solid var(--gold);
+  border-radius:4px; padding:24px 24px 22px}
+.fac .kind{font-size:12.5px; font-weight:700; color:var(--blue)}
+.fac h3{margin:6px 0 2px; font-size:19px; line-height:1.5; color:var(--ink)}
+.fac .since{font-size:12.5px; color:var(--muted)}
+.fac p{margin:12px 0 0; font-size:14px; line-height:1.85; color:var(--text)}
+.fac dl{margin:14px 0 0; padding-top:12px; border-top:1px solid var(--line-s); font-size:13.5px; line-height:1.8;
+  display:grid; grid-template-columns:auto 1fr; gap:2px 12px}
+.fac dt{color:var(--muted)}
+.fac dd{margin:0; color:var(--ink)}
+.fac dd a{text-decoration:none}
+.fac .go{margin-top:auto; padding-top:16px; font-size:13.5px; font-weight:700; color:var(--blue-dd); text-decoration:none}
+.fac .go span{display:inline-block; transition:transform .2s}
+.fac .go:hover span{transform:translateX(4px)}
+
+/* トップの外国人材の受入れ支援（紺の帯。中身は下層4ページへ案内する） */
+.hrb{background:var(--navy); color:#fff; border:0}
+.hrb .sec-head{border-left-color:var(--gold)}
+.hrb .sec-head .en{color:var(--gold-l)}
+.hrb .sec-head h2{color:#fff}
+.hrb-grid{display:grid; grid-template-columns:minmax(0,5fr) minmax(0,7fr); gap:56px; align-items:start}
+.hrb-lead{margin:0 0 28px; font-size:15px; line-height:2; color:rgba(255,255,255,.86)}
+.hrb-reg{display:inline-block; margin:0 0 28px; padding:8px 16px; border:1px solid rgba(182,154,104,.6); font-size:13.5px; color:var(--gold-l)}
+.hrb-links{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:1fr 1fr; gap:1px; background:rgba(255,255,255,.14);
+  border:1px solid rgba(255,255,255,.14)}
+.hrb-links a{display:block; height:100%; padding:24px 26px; background:var(--navy); color:#fff; text-decoration:none; transition:background .2s}
+.hrb-links a:hover{background:#17375a}
+.hrb-links .n{font-family:var(--en); font-weight:600; font-size:13px; letter-spacing:.2em; color:var(--gold-l)}
+.hrb-links b{display:block; margin:6px 0 4px; font-size:17px}
+.hrb-links small{display:block; font-size:13px; line-height:1.7; color:rgba(255,255,255,.75)}
+.hrb-links .go{display:block; margin-top:10px; font-size:13px; font-weight:700; color:var(--gold-l)}
+
+/* 保育・児童福祉の事業ページ */
+.cc-ml{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; list-style:none; margin:0; padding:0}
+.cc-ml li{background:#fff; border:1px solid var(--line); border-radius:4px; padding:18px 20px; text-align:center; font-weight:700; color:var(--ink)}
+.cc-ml li small{display:block; font-family:var(--en); font-weight:600; font-size:12px; letter-spacing:.16em; color:var(--gold-d)}
+.cc-note{margin:20px 0 0; font-size:14px; line-height:1.9; color:var(--text)}
+.cc-src{margin:28px 0 0; font-size:12.5px; color:var(--muted)}
+
+@media (max-width:900px){
+  .fac-grp, .hrb-grid{grid-template-columns:1fr; gap:22px}
+  .fac-ph{min-height:200px}
+  .fac-grp + .fac-grp{margin-top:44px}
+  .cc-ml{grid-template-columns:1fr 1fr}
+}
+@media (max-width:600px){
+  .hrb-links{grid-template-columns:1fr}
+  .hrb-links a{padding:20px 22px}
+  .fac{padding:20px 20px 18px}
+}
 </style>
 </head>
 <body>
@@ -1087,28 +1161,33 @@ header.scrolled{box-shadow:0 6px 24px rgba(16,42,67,.08)}
     <button class="hamburger" type="button" id="menu-btn"
             aria-label="メニューを開く" aria-expanded="false" aria-controls="mnav">☰</button>
     <nav class="mnav" id="mnav">
-      <a href="#visas">ご紹介できる人材</a>
-      <a href="#support">支援内容</a>
-      <a href="#flow">受入れの流れ</a>
-      <a href="#partners">グループ・提携機関</a>
+      <a href="index.html">ホーム</a>
+      <a href="childcare.html">保育・児童福祉の事業</a>
       <a href="#company">企業情報</a>
-      <a href="#faq">よくあるご質問</a>
       <a href="news.html">お知らせ</a>
-      <a href="#contact">お問い合わせ</a>
+      <div class="grp"><div class="grp-t">外国人材の受入れ支援</div>
+        <a href="#visas">ご紹介できる人材</a>
+        <a href="#support">支援内容</a>
+        <a href="#flow">受入れの流れ</a>
+        <a href="#partners">グループ・提携機関</a>
+        <a href="#faq">よくあるご質問</a>
+      </div>
+      <div class="grp"><a href="#contact">お問い合わせ</a></div>
     </nav>
   </div>
 </header>
 
-<!-- ===== 01 ファーストビュー（2026-10-18 トップ改善案。写真全面＋左に紺） ===== -->
+<!-- ===== 01 ファーストビュー（2026-10-18 保育・児童福祉を主役に組み直し。写真全面＋左に紺）
+     ★写真は人の写っていない仮の写真（かみのて保育園サイトと同じもの）。園の実際の写真が届いたら差し替える ===== -->
 <div class="hero">
-  <div class="bg"><img src="img/hero-sky.jpg" alt="青空と雲"></div>
+  <div class="bg"><img src="img/care/room.jpg" alt="木の机といすが並ぶ、明るい保育室"></div>
   <div class="hero-copy">
     <div class="wrap">
-      <p class="hero-en">外国人材の採用・受入れ支援</p>
-      <h1><span>国境を越え</span><br><span>企業の未来をつなぐ</span></h1>
-      <p class="lead">外国人材の採用から受入れ、定着まで。<br>海外の提携機関とのネットワークを活かし、<br>企業と人材の持続的な成長を支えます。</p>
+      <p class="hero-en"><span><span class="ib">保育園・児童発達支援・</span><span class="ib">放課後等デイサービス</span></span></p>
+      <h1><span>子どもたちの毎日を</span><br><span>地域とともに育む</span></h1>
+      <p class="lead">岐阜県可児市で、保育園と<br>児童発達支援・放課後等デイサービスを運営しています。<br>外国にルーツのあるお子さまも、安心して過ごせる場所を。</p>
       <div class="hero-actions">
-        <a class="btn gold" href="#contact">外国人材の採用を相談する</a>
+        <a class="btn gold" href="#facilities">運営する施設を見る</a>
         <a class="txt-link light" href="#aboutus">A and Kについて知る <span aria-hidden="true">→</span></a>
       </div>
     </div>
@@ -1116,53 +1195,17 @@ header.scrolled{box-shadow:0 6px 24px rgba(16,42,67,.08)}
   <a class="scroll" href="#trust" aria-label="下へスクロール"><span>SCROLL</span><i aria-hidden="true"></i></a>
 </div>
 
-<!-- ===== 02 信頼情報（紺の帯） ===== -->
+<!-- ===== 02 事業の要点（紺の帯）。数は運営する施設の数。外国人材の帯は下層ページ（build.py）が自前で出す ===== -->
 <div class="trust" id="trust">
   <div class="wrap trust-grid">
-    <div class="tc"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2"/><path d="M5.8 16c.6-1.4 1.8-2 3.2-2s2.6.6 3.2 2M14.5 10h4M14.5 13.5h4"/></svg></span>
-      <div class="tc-body"><span class="tc-en">REGISTERED</span><span class="tc-k">登録支援機関</span><b>登録番号 19登-000975</b></div></div>
-    <div class="tc"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V8.5L12 4l7 4.5V21M9.5 21v-4.5h5V21M9 11.5h.01M12 11.5h.01M15 11.5h.01"/></svg></span>
-      <div class="tc-body"><span class="tc-en">GROUP NETWORK</span><span class="tc-k">グループ内の監理団体</span><b>ブリッジング協同組合</b></div></div>
+    <div class="tc"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7M5 9.5V20h14V9.5M10 20v-5h4v5"/></svg></span>
+      <div class="tc-body"><span class="tc-en">CHILDCARE</span><span class="tc-k">保育園</span><b>3園＋一時預かり・病児保育</b></div></div>
+    <div class="tc"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="3"/><path d="M6 21v-3a6 6 0 0 1 12 0v3M4 12.5l2.5 2M20 12.5l-2.5 2"/></svg></span>
+      <div class="tc-body"><span class="tc-en">CHILD DEVELOPMENT</span><span class="tc-k">児童発達支援・放課後等デイサービス</span><b>かみのてKIDS・かみのてSMILE</b></div></div>
     <div class="tc"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.4 2.5 3.6 5.5 3.6 9s-1.2 6.5-3.6 9c-2.4-2.5-3.6-5.5-3.6-9S9.6 5.5 12 3z"/></svg></span>
-      <div class="tc-body"><span class="tc-en">INTERNATIONAL</span><span class="tc-k">海外提携ネットワーク</span><b>フィリピン・ベトナム</b></div></div>
+      <div class="tc-body"><span class="tc-en">MULTILINGUAL</span><span class="tc-k">外国語でのご案内</span><b>英語・タガログ語・ビサヤ語・ポルトガル語</b></div></div>
   </div>
 </div>
-
-<!-- ===== 03 選ばれる3つの理由（トップだけ。短く。提携機関の詳しい説明は partners.html に任せる） ===== -->
-<section class="alt reasons" id="reasons">
-  <div class="wrap">
-    <div class="sec-head"><span class="en">WHY A and K</span><h2>選ばれる3つの理由</h2></div>
-    <ol class="rsn">
-      <li class="rs"><span class="rs-n">01</span><h3>5つの人材カテゴリーに対応</h3>
-        <p>職種・人数・時期をお伺いし、企業さまに合う在留資格をご提案します。どの制度が合うか分からない段階からご相談いただけます。</p></li>
-      <li class="rs"><span class="rs-n">02</span><h3>採用から定着まで一貫して支援</h3>
-        <p>登録支援機関として、入国前の説明から住まい・生活の手続き、就労後の定期的な面談までお引き受けします。</p></li>
-      <li class="rs"><span class="rs-n">03</span><h3>自社グループと海外の提携機関</h3>
-        <p>グループ内の監理団体と、フィリピン・ベトナムの送り出し機関が連携。フィリピンでは企業さまご自身が現地で面接することもできます。</p>
-        <a class="txt-link" href="#partners">提携機関を見る <span aria-hidden="true">→</span></a></li>
-    </ol>
-  </div>
-</section>
-
-<!-- ===== 04 現地での取り組み（トップだけ）
-     ★導入事例の代わりに、旧サイトのお知らせにある事実だけを書く。お客さまの事例（課題→支援→その後）は
-       掲載のご了承と内容が届いてから足す。 ===== -->
-<section class="field" id="field">
-  <div class="wrap">
-    <div class="sec-head"><span class="en">IN THE FIELD</span><h2>現地での取り組み</h2></div>
-    <ul class="fcards">
-      <li><a href="news.html#n20200122"><figure><img src="img/news/20200122-1.jpg" alt="ベトナムでの実習生の面接の様子" loading="lazy"></figure>
-        <div class="fc-b"><span class="fc-k">2020年1月　ベトナム</span><h3>企業さまと現地で面接</h3>
-        <p>内装工事の会社の社長さまとベトナムを訪れ、実習生の面接を行いました。2名を採用し、現地で3か月の日本語研修を受けてから来日する流れです。</p></div></a></li>
-      <li><a href="news.html#n20221108"><figure><img src="img/news/20221108-2.jpeg" alt="フィリピン出張で現地の教室を訪ねたときの様子" loading="lazy"></figure>
-        <div class="fc-b"><span class="fc-k">2022年10月　フィリピン</span><h3>送り出し機関と契約</h3>
-        <p>フィリピンに出張し、送り出し機関「プロデンシャルエンプロイメント」と契約しました。現地で企業さまご自身が面接を行うこともできます。</p></div></a></li>
-      <li><a href="news.html#n20190725"><figure><img src="img/news/20190725-3.jpg" alt="フィリピンの送り出し機関を訪問したときの様子" loading="lazy"></figure>
-        <div class="fc-b"><span class="fc-k">2019年7月　フィリピン</span><h3>視察に同行</h3>
-        <p>日本から視察に来られた方々と、フィリピンの送り出し機関を訪問しました。日本行きが決まった若者が日本語の勉強に取り組む様子を見ていただきました。</p></div></a></li>
-    </ul>
-  </div>
-</section>
 
 <!-- ===== 05 ご紹介できる人材（下層 service.html の本文。トップには名前と .sum だけを出す） ===== -->
 <section class="alt" id="visas">
@@ -1306,26 +1349,26 @@ header.scrolled{box-shadow:0 6px 24px rgba(16,42,67,.08)}
       <h2>会社について</h2>
     </div>
     <div class="about">
-      <p>弊社はグループで保育園と児童発達支援・放課後等デイサービスも運営し、外国にルーツのあるお子さまをお預かりしてきました。<strong>外国人の住民の方が地域の一員として暮らしていけるよう、多文化共生社会に貢献していきます。</strong></p>
+      <p>弊社は岐阜県可児市で保育園と児童発達支援・放課後等デイサービスを運営し、外国にルーツのあるお子さまもお預かりしてきました。あわせて外国人材の受入れ支援を行い、<strong>外国人の住民の方が地域の一員として暮らしていけるよう、多文化共生社会に貢献していきます。</strong></p>
     </div>
   </div>
 </section>
 
-<!-- ===== 09 ABOUT US（トップだけ。会社の考え方とグループ事業。会社の基本情報は build.py が OUTLINE から差し込む） ===== -->
+<!-- ===== 09 ABOUT US（トップだけ。会社の考え方と3つの事業。会社の基本情報は build.py が OUTLINE から差し込む） ===== -->
 <section id="aboutus">
   <div class="wrap about-grid">
     <div class="about-l">
-      <div class="sec-head"><span class="en">ABOUT US</span><h2>地域と世界をつなぐ<br>身近なパートナー</h2></div>
-      <p class="about-msg"><strong><span>人をつなぎ、企業を支え、</span><span>地域とともに歩む。</span></strong>弊社はグループで保育園と児童発達支援・放課後等デイサービスも運営し、外国にルーツのあるお子さまをお預かりしてきました。外国人の住民の方が地域の一員として暮らしていけるよう、多文化共生社会に貢献していきます。</p>
-      <a class="txt-link" href="#company">企業情報を見る <span aria-hidden="true">→</span></a>
+      <div class="sec-head"><span class="en">ABOUT US</span><h2>子どもと家族の<br>身近な存在として</h2></div>
+      <p class="about-msg"><strong><span>子どもを育み、人をつなぎ、</span><span>地域とともに歩む。</span></strong>弊社は岐阜県可児市で保育園と児童発達支援・放課後等デイサービスを運営し、外国にルーツのあるお子さまもお預かりしてきました。あわせて外国人材の受入れ支援を行い、外国人の住民の方が地域の一員として暮らしていけるよう、多文化共生社会に貢献していきます。</p>
     </div>
     <div class="about-r">
       <!--ABOUT_DL-->
       <div class="abiz">
-        <div class="ab"><span class="ab-k">保育</span><b>かみのて保育園／かみのて今渡保育園</b><small>一時預かり事業も行っています。</small></div>
+        <div class="ab"><span class="ab-k">保育</span><b>かみのて保育園／かみのて今渡保育園／ハンズオブガッド今渡保育園</b><small>一時預かり・病児保育も行っています。</small></div>
         <div class="ab"><span class="ab-k">児童発達支援・放課後等デイサービス</span><b>かみのてKIDS／かみのてSMILE</b></div>
+        <div class="ab"><span class="ab-k">外国人材の受入れ支援</span><b>人材のご紹介・登録支援機関としての支援</b></div>
       </div>
-      <div class="more-r"><a class="txt-link" href="company.html#group">グループの事業を詳しく見る <span aria-hidden="true">→</span></a></div>
+      <div class="more-r"><a class="txt-link" href="#company">企業情報を見る <span aria-hidden="true">→</span></a></div>
     </div>
   </div>
 </section>
@@ -1386,9 +1429,9 @@ header.scrolled{box-shadow:0 6px 24px rgba(16,42,67,.08)}
 <div class="cta" id="contact">
   <div class="wrap">
     <span class="en">CONTACT</span>
-    <h2><span>外国人材の受入れについて</span><br><span>まずはお気軽にご相談ください</span></h2>
-    <p>制度のご説明から、受入れに関するご相談まで。<br>企業さまの状況に合わせてご案内します。ご相談・お見積りは無料です。</p>
-    <a class="btn btn-lg" href="contact.html">外国人材の受入れについて相談する <i aria-hidden="true">→</i></a>
+    <h2><span>ご質問・ご相談は</span><br><span>お気軽にお問い合わせください</span></h2>
+    <p>保育園・児童発達支援・放課後等デイサービスのご利用は、各施設でもご案内しています。<br>会社へのお問い合わせ、外国人材の受入れのご相談も承ります。</p>
+    <a class="btn btn-lg" href="contact.html">お問い合わせ <i aria-hidden="true">→</i></a>
     <div class="cta-sub">
       <a class="cw" href="tel:0574663511"><span class="cw-k">お電話で</span><b>0574-66-3511</b><small>平日 9:00〜18:00（土日休）</small></a>
       <a class="cw" href="mailto:info@aandkcorp.com"><span class="cw-k">メールで</span><b class="mail">info@aandkcorp.com</b><small>24時間受付</small></a>
@@ -1407,9 +1450,10 @@ header.scrolled{box-shadow:0 6px 24px rgba(16,42,67,.08)}
         <p style="margin:0">可児今渡事務所<br>〒509-0207 岐阜県可児市今渡1149-1 2F<br>Tel・Fax 0574-50-5048</p>
       </div>
       <div>
-        <h4>サービス</h4>
+        <h4>事業</h4>
         <ul>
-          <li><a href="#visas">ご紹介できる人材</a></li>
+          <li><a href="childcare.html">保育・児童福祉の事業</a></li>
+          <li><a href="#visas">外国人材のご紹介</a></li>
           <li><a href="#support">支援内容</a></li>
           <li><a href="#flow">受入れの流れ</a></li>
           <li><a href="#partners">グループ・提携機関</a></li>
