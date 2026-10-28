@@ -1315,7 +1315,9 @@ header.scrolled{box-shadow:0 6px 24px rgba(16,42,67,.08)}
 .nbody p:last-child{margin-bottom:0}
 .ngal{display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
   gap:12px; margin-top:18px}
-.ngal img{width:100%; height:170px; object-fit:cover}
+/* 2026-10-29 写真は切らずに全体を見せる（cover で頭や人が切れていた）。
+   枠は 4:3 にそろえ、縦長・横長は余白（淡い地）で収める */
+.ngal img{width:100%; height:auto; aspect-ratio:4/3; object-fit:contain; background:var(--panel)}
 /* 2026-10-28 R17：開閉式。見出しの行（日付・分類・見出し）を押すと本文と写真が開く */
 details.nitem{display:block; padding:0}
 .nitem summary{display:grid; grid-template-columns:140px minmax(0,1fr) 28px; gap:34px; align-items:start;
