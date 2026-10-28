@@ -10,9 +10,10 @@
 下層ページ用の原文から digest() が抜き出して要約を組み立てる。
 
 トップの並び（2026-10-18 保育・児童福祉を主役に組み直し。松本さん「保育園事業をメインに。
-かみのて保育園と放課後デイを運営する会社なので」）:
-  FV → 事業の要点の帯 → 運営する施設（CARE から）→ 会社（ABOUT US）
-  → 外国人材の受入れ支援（紺の帯。下層4ページへ案内）→ お知らせ → お問い合わせ
+かみのて保育園と放課後デイを運営する会社なので」。2026-10-28 改善 R01・R02 で FV を会社全体の紹介＋入口2つにし、並びを変えた）:
+  FV（保育園・児童福祉施設をお探しの方／外国人材の採用をお考えの企業さま）→ 事業の要点の帯
+  → 運営する施設（CARE から）→ 外国人材の受入れ支援（紺の帯。下層4ページへ案内）
+  → A and K について（理念だけ）→ お知らせ → お問い合わせ
   外国人材支援は2本目の事業として残す。下層4ページ（人材・支援・流れ・提携機関）と FAQ はそのまま。
   施設の詳しい情報は各施設のサイトに任せ、ここでは紹介と連絡先までにする（情報を二重に持たない）。
   aboutus / news はトップだけの節。トップは <div class="top"> で包む。
@@ -122,40 +123,61 @@ def cta_swap(tail, pairs):
     return tail
 
 
-def fac_cards(grp, detail=False):
-    """施設のカード。detail=True で所在地・電話も出す（保育・児童福祉の事業ページ）。"""
+def fac_tel(f):
+    """電話は押しやすいボタンの形にする（2026-10-28 R04。文字だけだと押せる高さが18pxしかなかった）。"""
+    tel = f["tel"].replace("-", "")
+    return f'<a class="fac-tel" href="tel:{tel}"><span class="k">電話</span>{f["tel"]}</a>'
+
+
+def fac_site(f):
+    return f'<a class="go" href="{f["url"]}" target="_blank" rel="noopener">施設のサイトを見る <span aria-hidden="true">→</span></a>'
+
+
+def fac_cards(grp, mode="top"):
+    """施設のカード（2026-10-28 R03・R04・R06 で3つの形に分けた）。
+      top    … トップ。種別・施設名・電話・施設サイトだけ（説明・開園年は保育ページに）
+      detail … 保育・児童福祉の事業ページ。施設名 → 種別 → 開園 → 説明 → 所在地 → 電話 → 施設サイト
+      list   … お問い合わせページ。施設名・種別・電話・施設サイトの一覧（説明・写真は保育ページに）"""
     out = ""
     for f in CARE:
         if f["grp"] != grp:
             continue
-        since = f'<span class="since">{f["since"]}</span>' if f["since"] else ""
-        dl = ""
-        if detail:
-            tel = f["tel"].replace("-", "")
-            dl = (f'<dl><dt>所在地</dt><dd>{f["addr"]}</dd>'
-                  f'<dt>電話</dt><dd><a href="tel:{tel}">{f["tel"]}</a></dd></dl>')
-        go = (f'<a class="go" href="{f["url"]}" target="_blank" rel="noopener">施設のサイトを見る <span aria-hidden="true">→</span></a>'
-              if detail else
-              f'<a class="go" href="childcare.html#{f["id"]}">詳しく見る <span aria-hidden="true">→</span></a>')
-        out += (f'<li class="fac" id="{f["id"] if detail else ""}"><span class="kind">{f["kind"]}</span><h3>{f["name"]}</h3>{since}'
-                f'<p>{f["desc"]}</p>{dl}{go}</li>').replace(' id=""', "")
-    return f'<ul class="fac-cards">{out}</ul>'
+        kind = f'<span class="kind">{f["kind"]}</span>'
+        name = f'<h3>{f["name"]}</h3>'
+        if mode == "detail":
+            since = f'<span class="since">{f["since"]}</span>' if f["since"] else ""
+            out += (f'<li class="fac" id="{f["id"]}">{name}{kind}{since}<p>{f["desc"]}</p>'
+                    f'<dl><dt>所在地</dt><dd>{f["addr"]}</dd></dl>'
+                    f'<div class="fac-act">{fac_tel(f)}{fac_site(f)}</div></li>')
+        elif mode == "list":
+            out += (f'<li class="fac-row"><div class="fac-row-n">{name}{kind}</div>'
+                    f'<div class="fac-act">{fac_tel(f)}{fac_site(f)}</div></li>')
+        else:
+            out += f'<li class="fac">{kind}{name}<div class="fac-act">{fac_tel(f)}{fac_site(f)}</div></li>'
+    cls = "fac-list" if mode == "list" else f"fac-cards is-{mode}"
+    return f'<ul class="{cls}">{out}</ul>'
 
 
-def fac_groups(detail=False):
+def fac_groups(mode="top"):
+    """施設の2つのまとまり（保育事業／児童発達支援・放課後等デイサービス）。
+    2026-10-28 R03・R04：大きな写真を横に置くとカードが細くなるので、写真は見出しの帯にしてカードを横幅いっぱいに並べる。
+    お問い合わせ（list）は写真を出さない。"""
     out = ""
     for grp, en, ttl, img, alt in CARE_GROUPS:
-        out += (f'<div class="fac-grp" id="g-{grp}"><figure class="fac-ph"><img src="{img}" alt="{alt}" loading="lazy">'
-                f'<figcaption><span class="k">{en}</span><b>{ttl}</b></figcaption></figure>'
-                f'{fac_cards(grp, detail)}</div>')
+        if mode == "list":
+            head = f'<h3 class="fac-gh"><span class="k">{en}</span>{ttl}</h3>'
+        else:
+            head = (f'<figure class="fac-ph"><img src="{img}" alt="{alt}" loading="lazy">'
+                    f'<figcaption><span class="k">{en}</span><b>{ttl}</b></figcaption></figure>')
+        out += f'<div class="fac-grp is-{mode}" id="g-{grp}">{head}{fac_cards(grp, mode)}</div>'
     return out
 
 
 def facilities_section():
-    """トップの「運営する施設」。名前・種別・一言だけ。連絡先は childcare.html。"""
+    """トップの「運営する施設」。種別・名前・電話・施設サイトだけ。説明は childcare.html。"""
     return ('<section id="facilities"><div class="wrap">'
             '<div class="sec-head"><span class="en">OUR FACILITIES</span><h2>運営する施設</h2></div>'
-            + fac_groups() +
+            + fac_groups("top") +
             '<div class="more-r"><a class="txt-link" href="childcare.html">保育・児童福祉の事業を詳しく見る <span aria-hidden="true">→</span></a></div>'
             '</div></section>\n\n')
 
@@ -224,6 +246,21 @@ EXTRA_CSS = """
 .ngal{display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
   gap:12px; margin-top:18px}
 .ngal img{width:100%; height:170px; object-fit:cover}
+/* 2026-10-28 R17：開閉式。見出しの行（日付・分類・見出し）を押すと本文と写真が開く */
+details.nitem{display:block; padding:0}
+.nitem summary{display:grid; grid-template-columns:140px minmax(0,1fr) 28px; gap:34px; align-items:start;
+  padding:24px 4px; cursor:pointer; list-style:none}
+.nitem summary::-webkit-details-marker{display:none}
+.nitem summary::after{content:"+"; justify-self:end; font-size:22px; line-height:1.3; color:var(--gold-d)}
+.nitem[open] summary::after{content:"−"}
+.nitem summary:hover .nttl{color:var(--blue)}
+.nitem summary:focus-visible{outline:2px solid var(--gold); outline-offset:2px}
+.nttl{font-size:16px; font-weight:600; line-height:1.8; letter-spacing:.04em; color:var(--ink); transition:color .2s}
+.nitem .nbody{padding:0 4px 30px calc(140px + 34px)}
+.nitem .nbody p:first-child{font-family:inherit; font-size:14.5px; letter-spacing:.02em; line-height:inherit; margin-bottom:10px}
+.nbody a{overflow-wrap:anywhere}
+/* お問い合わせ：会社の電話番号を押してかけられる（R06） */
+.contact-box .big a{display:inline-block; min-height:44px; color:inherit; text-decoration:none}
 
 /* ---- 会社概要の表 ---- */
 .outline{width:100%; border-collapse:collapse; margin-top:56px; font-size:14px}
@@ -260,7 +297,11 @@ EXTRA_CSS = """
 .pp-contact p{margin:0; line-height:1.9}
 
 @media (max-width:760px){
-  .nitem{grid-template-columns:1fr; gap:10px; padding:24px 0}
+  .nitem summary{grid-template-columns:minmax(0,1fr) 24px; gap:6px 12px; padding:20px 0}
+  .nitem summary time{grid-column:1}
+  .nitem summary .nttl{grid-column:1; font-size:15px}
+  .nitem summary::after{grid-column:2; grid-row:1 / span 2; align-self:center}
+  .nitem .nbody{padding:0 0 24px}
   .nlist{padding:32px 0 56px}
   .outline th{width:auto; display:block; border-bottom:none; padding-bottom:0}
   .outline td{display:block; padding-top:4px}
@@ -619,9 +660,8 @@ def news_items():
 
 def fill_news(sec):
     """お知らせの節を、分類ごとの最新1件（計3件）で埋める。
-    ★news.json の見出しは旧サイトの1行目で、語の途中で切れているものがある。本文をつなげて3行で切る。最新3件だけだと保育の話が並び、
-    主事業の外国人材支援が見えなくなるため（2026-10-18 改善案）。
-    日付・見出し・1枚目の写真だけを出し、リンクは一覧の該当記事の位置へ。"""
+    最新3件だけだと保育の話が並び、主事業の外国人材支援が見えなくなるため（2026-10-18 改善案）。
+    日付・分類・見出しだけを出し、リンクは一覧の該当記事の位置へ（2026-10-28 R19。見出しは R18 で文の切れ目まで直した）。"""
     items, picked = news_items(), []
     for c, _n in NEWS_CATS:
         it = next((x for x in items if x["cat"] == c), None)
@@ -630,20 +670,12 @@ def fill_news(sec):
     picked.sort(key=lambda x: x["date"], reverse=True)
     li = ""
     for it in picked:
-        img = (f'<img src="img/news/{it["images"][0]}" alt="" loading="lazy">' if it["images"]
-               else '<img src="img/logo-mark.jpg" alt="" loading="lazy" style="object-fit:contain">')
+        # 2026-10-28 R19：日付・分類・見出しだけにする（本文の抜き出しと写真はやめる。本文は一覧で開いて読む）
         cat = f'<em class="ncat c-{it["cat"]}">{it["cat_name"]}</em>'
-        li += (f'<li><a href="news.html#{it["anchor"]}"><figure>{img}</figure><time>{it["date"]}{cat}</time>'
-               f'<span>{html.escape(it["title"] + "".join(it["body"]))}</span></a></li>')
+        li += (f'<li><a href="news.html#{it["anchor"]}"><time>{it["date"]}{cat}</time>'
+               f'<span>{html.escape(it["title"])}</span></a></li>')
     old = sec[sec.index('<ul class="ncards">'): sec.index("</ul>") + 5]
     return sec.replace(old, f'<ul class="ncards">{li}</ul>')
-
-def about_dl():
-    """ABOUT US に置く会社の基本情報（OUTLINE から。原本に二重に書かない）。"""
-    pick = dict(OUTLINE)
-    dl = "".join(f"<div><dt>{k}</dt><dd>{pick[k].split('<br>')[0]}</dd></div>"
-                 for k in ("会社名", "代表者", "本社所在地", "許可"))
-    return f'<dl class="about-dl">{dl}</dl>'
 
 def strip_sec_head(frag):
     """下層ページでは、節の見出し（英字ラベル・見出し・導入文）を取り除く。
@@ -731,15 +763,20 @@ def build_plan(out_dir, src_name, key=""):
     # 外国人材のページ（4ページ＋FAQ）は、最後のお問い合わせを外国人材向けにする
     hr_tail = cta_swap(tail, CTA_HR)
 
-    # トップ：FV・事業の要点の帯 → 運営する施設 → 会社（ABOUT US）→ 外国人材の受入れ支援 → お知らせ
-    body = fix_links(hero) + facilities_section()
-    body += fix_links(secs["aboutus"].replace("<!--ABOUT_DL-->", about_dl())) + hr_band()
+    # トップ：FV（入口2つ）・事業の要点の帯 → 運営する施設 → 外国人材の受入れ支援 → A and K について → お知らせ
+    # （2026-10-28 R02。ABOUT US は理念だけにし、会社概要の表と事業一覧は企業情報ページとフッターに任せる）
+    body = fix_links(hero) + facilities_section() + hr_band()
+    body += fix_links(secs["aboutus"])
     body += fix_links(fill_news(secs["news"]))
     body = '<div class="top">\n' + body + '</div>\n'
     (out_dir / "index.html").write_text(
         shell(head, header, tail, body, "index.html", "保育園・児童発達支援・放課後等デイサービスの運営"), encoding="utf-8")
+    # 保育ページの最後は、各施設の連絡先へ案内する（2026-10-28 R07）。会社の窓口（電話・メール）は下に小さく残る
+    cc_tail = cta_swap(tail, [(CTA_BASE_H2, '<h2>各施設の連絡先</h2>'),
+                              ('<a class="btn btn-lg" href="contact.html">お問い合わせ <i aria-hidden="true">→</i></a>',
+                               '<a class="btn btn-lg" href="contact.html#c-care">各施設の連絡先を見る <i aria-hidden="true">→</i></a>')])
     (out_dir / "childcare.html").write_text(
-        shell(head, header, tail, childcare_body(), "childcare.html", "保育・児童福祉の事業"), encoding="utf-8")
+        shell(head, header, cc_tail, childcare_body(), "childcare.html", "保育・児童福祉の事業"), encoding="utf-8")
 
     for out, (sec, _menu, ttl, en, desc) in PAGES.items():
         frag = secs[sec]
@@ -859,6 +896,8 @@ def support_body(secs):
         ic = _SV.format(SUP_ICON[STL_ICON[i]])
         li += (f'<li><a href="#step{i}"><div class="stl-top"><span class="stl-n">{i:02d}</span><span class="stl-ic">{ic}</span></div>'
                f'<span class="stl-en">{SUP_EN.get(en, en)}</span><b>{h3}</b><small>{p}</small><em>{len(items)}項目</em></a></li>')
+    out += page_nav([(f"step{i}", g[1], SUP_ICON[STL_ICON[i]]) for i, g in enumerate(groups, 1)]
+                    + [("sp-faq", "よくあるご質問", SUP_ICON["06"])])
     out += ('<section id="total"><div class="wrap">'
             '<div class="sec-head"><span class="en">TOTAL SUPPORT</span><h2>受入れから定着まで<br>安心をつなぐ3つのステップ</h2></div>'
             f'<ol class="stl">{li}</ol></div></section>\n')
@@ -895,7 +934,7 @@ def support_body(secs):
 
     qs = "".join(f'<details><summary>{q}</summary><div class="a"><p style="margin:0">{a}</p></div></details>'
                  for q, a in SUP_FAQ)
-    out += ('<section class="faq"><div class="wrap">'
+    out += ('<section class="faq" id="sp-faq"><div class="wrap">'
             '<div class="sec-head"><span class="en">FAQ</span><h2>よくあるご質問</h2></div>'
             f'<div class="faq-list">{qs}</div>'
             '<div class="more-r"><a class="txt-link" href="faq.html">すべてのご質問を見る <span aria-hidden="true">→</span></a></div>'
@@ -956,10 +995,19 @@ def service_body(secs):
            '<div class="sp-reg"><div class="wrap"><span class="en">REGISTERED SUPPORT ORGANIZATION</span>'
            '<b>登録支援機関　登録番号 19登-000975</b></div></div>\n')
 
-    jump = "".join(f'<li><a href="#{i}"><span>{n}</span>{t}</a></li>' for i, n, t, _s, _d in vs)
+    # 比較表を冒頭の説明のすぐあとに置く（2026-10-28 R11）。読む人が自分に合うカテゴリーを先に選び、
+    # 表の行から詳しい説明へ飛べるようにする。前の5つの列（tn-jump）は表と役割が重なるので外した
+    rows = "".join(f'<tr><th scope="row"><a href="#{i}"><span>{n}</span>{t}</a></th><td data-k="主な検討シーン">{TN_CMP[i]}</td>'
+                   f'<td class="a" data-k="A and K の対応">{sm}</td></tr>' for i, n, t, sm, _d in vs)
     out += ('<section class="tn-intro"><div class="wrap">'
             '<div class="sec-head"><span class="en">OUR TALENT</span><h2>企業のニーズに合わせた<br>5つの人材カテゴリー</h2></div>'
-            f'<ol class="tn-jump">{jump}</ol></div></section>\n')
+            '<table class="cmp"><thead><tr><th scope="col">人材カテゴリー</th><th scope="col">主な検討シーン</th>'
+            f'<th scope="col">A and K の対応</th></tr></thead><tbody>{rows}</tbody></table>'
+            '<p class="cmp-note">※実際に採用できる職種や働き方は、在留資格・許可の内容・制度の要件によって異なります。</p>'
+            '<div class="cmp-cta"><div><b>自社に合う制度が分からなくても、ご安心ください。</b>'
+            '<p>採用したい職種・人数・時期などをお伺いし、企業さまの状況に合った人材採用をご提案します。</p></div>'
+            '<a class="btn" href="contact.html">自社に合う人材について相談する <span aria-hidden="true">→</span></a></div>'
+            '</div></section>\n')
 
     def head(v):
         i, n, t, _s, _d = v
@@ -1001,19 +1049,6 @@ def service_body(secs):
         li += (f'<li id="{i}"><span class="tn-n">{n}</span><span class="tn-en">{TN_EN[i]}</span><h3>{t}</h3>'
                f'<p class="sum">{sm}</p><p>{d}</p></li>')
     out += f'<section class="tn-more"><div class="wrap"><ul class="tn3">{li}</ul></div></section>\n'
-
-    # 比較
-    rows = "".join(f'<tr><th scope="row"><span>{n}</span>{t}</th><td data-k="主な検討シーン">{TN_CMP[i]}</td>'
-                   f'<td class="a" data-k="A and K の対応">{sm}</td></tr>' for i, n, t, sm, _d in vs)
-    out += ('<section class="alt"><div class="wrap">'
-            '<div class="sec-head"><span class="en">FIND YOUR TALENT</span><h2>企業のニーズに合わせて<br>合う人材を</h2></div>'
-            '<table class="cmp"><thead><tr><th scope="col">人材カテゴリー</th><th scope="col">主な検討シーン</th>'
-            f'<th scope="col">A and K の対応</th></tr></thead><tbody>{rows}</tbody></table>'
-            '<p class="cmp-note">※実際に採用できる職種や働き方は、在留資格・許可の内容・制度の要件によって異なります。</p>'
-            '<div class="cmp-cta"><div><b>自社に合う制度が分からなくても、ご安心ください。</b>'
-            '<p>採用したい職種・人数・時期などをお伺いし、企業さまの状況に合った人材採用をご提案します。</p></div>'
-            '<a class="btn" href="contact.html">自社に合う人材について相談する <span aria-hidden="true">→</span></a></div>'
-            '</div></section>\n')
 
     # GLOBAL RECRUITMENT NETWORK
     p1, p2 = TN_PHOTO["net1"], TN_PHOTO["net2"]
@@ -1101,10 +1136,11 @@ def flow_body(secs):
             '<span class="tc-k">ご相談・お見積り</span><b>無料</b></div></div>'
             '</div></div>\n')
 
+    # 5段階の図には期間を出さない（2026-10-28 R13）。期間は、上の帯（全体の目安と注意書き）と各ステップの説明に残る
     li = ""
-    for (n, t, _p, _k, d), k in zip(st, FL_ICON):
+    for (n, t, _p, _k, _d), k in zip(st, FL_ICON):
         li += (f'<li><a href="#fstep{int(n)}"><span class="o"><span class="stl-n">{n}</span><span class="stl-ic">{_SV.format(SUP_ICON[k])}</span></span>'
-               f'<b>{t}</b><small>{d}</small></a></li>')
+               f'<b>{t}</b></a></li>')
     out += ('<section><div class="wrap"><div class="sec-head"><span class="en">FIVE STEPS</span><h2>ご相談から就労開始まで</h2></div>'
             f'<ol class="fl-ov">{li}</ol></div></section>\n')
 
@@ -1208,6 +1244,11 @@ def partners_body(secs):
            '<figure><img src="img/news/20190725-3.jpg" alt="フィリピンの送り出し機関を訪問したときの様子"><figcaption>2019年7月 フィリピン</figcaption></figure>'
            '<figure><img src="img/news/20200122-1.jpg" alt="ベトナムでの実習生の面接の様子"><figcaption>2020年1月 ベトナム</figcaption></figure>'
            '</div></div>\n')
+    # ページ内の目次（2026-10-28 R10）。見出しは、このページのボタン・リンク・機関名の言葉から
+    globe = '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.4 2.5 3.6 5.5 3.6 9s-1.2 6.5-3.6 9c-2.4-2.5-3.6-5.5-3.6-9S9.6 5.5 12 3z"/>'
+    out += page_nav([("pn-network", "ネットワーク", globe), ("pn-group", "国内の連携体制", SUP_ICON["05"]),
+                     ("pn-ph", "フィリピンの提携機関", SUP_ICON["02"]), ("pn-vn", "ベトナムの提携機関", SUP_ICON["02"]),
+                     ("pn-jp", "トラスト江南協同組合", SUP_ICON["08"])])
 
     out += ('<section id="pn-network"><div class="wrap"><div class="pn-net"><div class="pn-net-t">'
             '<div class="sec-head"><span class="en">GLOBAL NETWORK</span><h2>アジアと日本をつなぐ<br>確かなネットワーク</h2></div>'
@@ -1313,11 +1354,21 @@ CP_HIST = [
     ("2025年6月", "「かみのてKIDS」が新築の建物へ移転し、受け入れ人数を増やす"),
 ]
 CP_SV = '<svg viewBox="0 0 24 24" aria-hidden="true">{}</svg>'
+# 2026-10-28 R14：ページの並び（理念 → 会社概要 → 事業 → 沿革 → アクセス）に合わせた。
+# ★「グループの事業」は保育ページと書いてあることが少し違う（一時預かりの「新社屋の2階で」など）ので、外さずに残している
 CP_NAV = [("cp-phil", "企業理念", SUP_ICON["04"]),
-          ("cp-group", "グループの事業", SUP_ICON["08"]),
           ("cp-prof", "会社概要", SUP_ICON["01"]),
+          ("cp-group", "グループの事業", SUP_ICON["08"]),
           ("cp-hist", "沿革", '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'),
           ("cp-acc", "アクセス", '<path d="M12 21s-7-4.5-7-11a7 7 0 0 1 14 0c0 6.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>')]
+
+
+def page_nav(items):
+    """ページ内の目次（企業情報の目次と同じ形）。items は (飛び先id, 見出し, アイコンのsvgの中身)。
+    2026-10-28 R10：支援内容・提携機関にも同じ目次を置く。見出しはページにある言葉を使う。"""
+    nav = "".join(f'<li><a href="#{i}">{CP_SV.format(svg)}{t}</a></li>' for i, t, svg in items)
+    return (f'<nav class="cp-nav" aria-label="このページの目次" style="--n:{len(items)}">'
+            f'<div class="wrap"><ul>{nav}</ul></div></nav>\n')
 
 
 def _gmap(addr):
@@ -1338,13 +1389,21 @@ def company_body(secs):
            '<a class="btn gold" href="#cp-prof">会社概要を見る <span aria-hidden="true">→</span></a></div>'
            '<figure class="sp-hero-ph"><img src="img/news/20231002-3.jpeg" alt="かみのて今渡保育園の開園の日、建物の前で">'
            '<figcaption>2023年10月 かみのて今渡保育園の開園</figcaption></figure></div>\n')
-    nav = "".join(f'<li><a href="#{i}">{CP_SV.format(svg)}{t}</a></li>' for i, t, svg in CP_NAV)
-    out += f'<nav class="cp-nav" aria-label="このページの目次"><div class="wrap"><ul>{nav}</ul></div></nav>\n'
+    out += page_nav(CP_NAV)
 
     out += ('<section class="cp-sec" id="cp-phil"><div class="wrap cp-phil"><div class="cp-phil-t">'
             '<div class="sec-head"><span class="en">OUR PHILOSOPHY</span><h2><span>人と人をつなぎ</span><br><span>誰もが自分らしく</span><span>暮らせる社会へ</span></h2></div>'
             f'<p>{about}</p></div>'
             '<p class="cp-phil-en" aria-hidden="true">Connecting<br>people<br><em>creating</em><br>the future</p>'
+            '</div></section>\n')
+
+    # 理念のすぐあとに会社概要（2026-10-28 R14：理念 → 会社概要 → 事業概要 → 沿革 → アクセス）
+    half = (len(OUTLINE) + 1) // 2
+    t1 = "".join(f"<tr><th>{k}</th><td>{v}</td></tr>" for k, v in OUTLINE[:half])
+    t2 = "".join(f"<tr><th>{k}</th><td>{v}</td></tr>" for k, v in OUTLINE[half:])
+    out += ('<section class="cp-sec alt" id="cp-prof"><div class="wrap">'
+            '<div class="sec-head"><span class="en">COMPANY PROFILE</span><h2>会社概要</h2></div>'
+            f'<div class="cp-prof"><table class="outline">{t1}</table><table class="outline">{t2}</table></div>'
             '</div></section>\n')
 
     ic = lambda k: '<svg viewBox="0 0 24 24">' + SUP_ICON[k] + '</svg>'
@@ -1383,14 +1442,6 @@ def company_body(secs):
             '<li><b>かみのてSMILE</b><small>児童発達支援・放課後等デイサービス</small></li></ul>'
             f'<p style="margin-top:14px"><a href="{DAY_URL}" target="_blank" rel="noopener">放課後等デイのサイトを見る →</a></p></div></div>'
             '</div></div></section>\n')
-
-    half = (len(OUTLINE) + 1) // 2
-    t1 = "".join(f"<tr><th>{k}</th><td>{v}</td></tr>" for k, v in OUTLINE[:half])
-    t2 = "".join(f"<tr><th>{k}</th><td>{v}</td></tr>" for k, v in OUTLINE[half:])
-    out += ('<section class="cp-sec alt" id="cp-prof"><div class="wrap">'
-            '<div class="sec-head"><span class="en">COMPANY PROFILE</span><h2>会社概要</h2></div>'
-            f'<div class="cp-prof"><table class="outline">{t1}</table><table class="outline">{t2}</table></div>'
-            '</div></section>\n')
 
     li = "".join(f"<li><time>{d}</time><span>{t}</span></li>" for d, t in CP_HIST)
     out += ('<section class="cp-sec" id="cp-hist"><div class="wrap pn-hist"><div>'
@@ -1455,18 +1506,32 @@ def outline_table():
             f'<table class="outline">{tr}</table></div></section>')
 
 
+def linkify(text):
+    """本文中の URL を押せるリンクにする（2026-10-28 R18）。
+    ★旧保育園サイト（kaminote-hoikuen.com）は今は開けないので、文字のまま残す。"""
+    def rep(m):
+        u = m.group(0)
+        if "kaminote-hoikuen" in u:
+            return u
+        return f'<a href="{u}" target="_blank" rel="noopener">{u}</a>'
+    return re.sub(r"https?://[\w./%?=&#~+-]+", rep, text)
+
+
 def news_body():
+    """過去のお知らせ（2026-10-28 R17：開閉式）。日付・分類・見出しの一覧にして、押すと本文と写真が開く。
+    記事の位置（news.html#n20250602 など）は変えない。その位置で来たときは、その記事を開いて見せる（NEWS_FILTER_JS）。"""
     items = news_items()
     arts = []
     for it in items:
-        body = "".join(f"<p>{html.escape(l)}</p>" for l in ([it["title"]] + it["body"]) if l)
+        body = "".join(f"<p>{linkify(html.escape(l))}</p>" for l in it["body"] if l)
         gal = ""
         if it["images"]:
             gal = '<div class="ngal">' + "".join(
                 f'<img src="img/news/{n}" alt="" loading="lazy">' for n in it["images"]) + "</div>"
-        arts.append(f'      <article class="nitem" id="{it["anchor"]}" data-cat="{it["cat"]}"><time>{it["date"]}'
+        arts.append(f'      <details class="nitem" id="{it["anchor"]}" data-cat="{it["cat"]}"><summary><time>{it["date"]}'
                     f'<em class="ncat c-{it["cat"]}">{it["cat_name"]}</em></time>'
-                    f'<div class="nbody">{body}{gal}</div></article>')
+                    f'<span class="nttl">{html.escape(it["title"])}</span></summary>'
+                    f'<div class="nbody">{body}{gal}</div></details>')
     btns = '<button type="button" class="on" data-cat="">すべて</button>' + "".join(
         f'<button type="button" data-cat="{c}">{n}</button>' for c, n in NEWS_CATS)
     filt = (f'<div class="nfilter" role="group" aria-label="分類で絞り込む">{btns}</div>\n'
@@ -1488,6 +1553,19 @@ document.addEventListener('click', function (e) {
     it.hidden = !!c && it.getAttribute('data-cat') !== c;
   });
 });
+// 記事の位置（#n20250602 など）で来たときは、その記事を開いて見せる（トップのお知らせ・以前のリンクから）
+function openNews() {
+  var id = decodeURIComponent(location.hash.slice(1));
+  var el = id && document.getElementById(id);
+  if (el && el.tagName === 'DETAILS') {
+    el.open = true;
+    el.classList.add('on');                            // 開いたときの動きを待たずに見せる
+    setTimeout(function () { el.scrollIntoView(); }, 0);
+  }
+}
+// この処理は一覧より前に書かれているので、記事が読み込まれてから動かす
+if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', openNews); } else { openNews(); }
+window.addEventListener('hashchange', openNews);
 </script>
 """
 
@@ -1506,7 +1584,7 @@ def childcare_body():
            '<figcaption>写真はイメージです</figcaption></figure></div>\n')
     out += ('<section class="cp-sec" id="cc-fac"><div class="wrap">'
             '<div class="sec-head"><span class="en">OUR FACILITIES</span><h2>運営する施設</h2></div>'
-            + fac_groups(detail=True) +
+            + fac_groups("detail") +
             '<p class="cc-src">※開所時間・定員・利用料などは、各施設のサイトでご確認ください。'
             'かみのて今渡保育園の入園のお申し込みは、可児市役所 保育課（0574-62-1111）です。</p>'
             '</div></section>\n')
@@ -1522,21 +1600,26 @@ def childcare_body():
 
 
 def contact_body():
+    """お問い合わせ（2026-10-28 R06）。上で「会社・外国人材支援」と「保育園・児童福祉施設」の2つの窓口に分ける。
+    会社の電話番号は押してかけられるように。施設は名前・種別・電話・施設サイトの一覧にする（説明と写真は保育ページに）。"""
     return ('<div class="crumb"><div class="wrap"><a href="index.html">ホーム</a> ／ お問い合わせ</div></div>\n'
             '<div class="page-head"><div class="wrap"><span class="en">CONTACT</span>'
             '<h1>お問い合わせ</h1><p>会社へのお問い合わせ、外国人材の受入れのご相談はこちらへ。'
-            '保育園・児童発達支援・放課後等デイサービスのご利用は、各施設へ直接お問い合わせください。</p></div></div>\n'
-            '<section><div class="wrap"><div class="contact-grid">'
+            '保育園・児童発達支援・放課後等デイサービスのご利用は、各施設へ直接お問い合わせください。</p>'
+            '<ul class="ct-jump"><li><a href="#c-co">会社・外国人材支援</a></li>'
+            '<li><a href="#c-care">保育園・児童福祉施設</a></li></ul></div></div>\n'
+            '<section id="c-co"><div class="wrap"><div class="sec-head"><span class="en">COMPANY</span><h2>会社・外国人材支援</h2></div>'
+            '<div class="contact-grid">'
             '<div class="contact-box"><h3>お電話でのお問い合わせ</h3>'
-            '<div class="big">0574-66-3511</div>'
+            '<div class="big"><a href="tel:0574663511">0574-66-3511</a></div>'
             '<p>平日 9:00〜18:00（土曜日・日曜日を除く）</p></div>'
             '<div class="contact-box"><h3>メールでのお問い合わせ</h3>'
             '<div class="big mail"><a href="mailto:info@aandkcorp.com" style="text-decoration:none">info@aandkcorp.com</a></div>'
             '<p>お問い合わせフォームは公開時にご用意します。<br>'
             '外国人材のご相談は、職種・ご希望の人数・時期をお書き添えいただけると、ご案内がスムーズです。</p></div>'
             '</div></div></section>\n'
-            '<section class="alt"><div class="wrap"><div class="sec-head"><span class="en">FACILITIES</span><h2>各施設へのお問い合わせ</h2></div>'
-            + fac_groups(detail=True) + '</div></section>\n')
+            '<section class="alt" id="c-care"><div class="wrap"><div class="sec-head"><span class="en">FACILITIES</span><h2>保育園・児童福祉施設</h2></div>'
+            + fac_groups("list") + '</div></section>\n')
 
 
 def privacy_body():

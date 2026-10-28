@@ -1138,6 +1138,139 @@ header.scrolled{box-shadow:0 6px 24px rgba(16,42,67,.08)}
   .hrb-links a{padding:20px 22px}
   .fac{padding:20px 20px 18px}
 }
+
+/* ===================================================================
+   2026-10-28 改善（承認された R01〜R14・R17〜R19）。上の指定をここで上書きする
+   =================================================================== */
+/* R01 トップの一番上：入口を2つ並べる。1つ目は金（いちばん押してほしい）、2つ目は白の枠線 */
+.hero-entry{display:flex; flex-wrap:wrap; gap:12px 14px}
+.hero-entry .btn{display:inline-flex; align-items:center; justify-content:center; gap:10px}
+.btn.line-w{background:transparent; border-color:rgba(255,255,255,.75); color:#fff}
+.btn.line-w:hover{background:rgba(255,255,255,.12); border-color:#fff}
+.hero-actions{align-items:center}
+@media (max-width:760px){
+  /* 入口2つが最初の画面に入るよう、高さを画面いっぱいにしない */
+  .hero{min-height:0}
+  .hero-copy{padding:34px 0 72px}
+  .hero-copy .lead{margin-bottom:26px; font-size:14.5px; line-height:1.95}
+  .hero-entry{width:100%}
+  .hero-entry .btn{width:100%; padding:15px 16px}
+  /* 「人と社会の未来を育む」が1行に収まる大きさに（「む」だけが次の行に落ちていた） */
+  .hero-copy h1{font-size:clamp(25px,7.2vw,32px)}
+  /* 画面いっぱいの高さではなくなったので、下の「SCROLL」は出さない（リンクと重なるため） */
+  .hero .scroll{display:none}
+}
+@media (max-width:360px){ .hero-entry .btn{padding:14px 8px; font-size:13.5px; gap:6px} }
+
+/* R02 A and K について：理念だけの1段組 */
+.top #aboutus .about-grid{grid-template-columns:minmax(0,820px)}
+.top #aboutus .more-r{text-align:left; margin-top:26px}
+
+/* R03・R04 施設カード：写真は見出しの帯にし、カードを等幅で横いっぱいに並べる */
+.fac-grp{display:block; scroll-margin-top:90px}
+.fac-grp + .fac-grp{margin-top:48px}
+.fac-grp .fac-ph{min-height:0; height:132px; margin-bottom:16px}
+.fac-grp.is-detail .fac-ph{height:190px}
+.fac-grp .fac-ph figcaption{top:0; bottom:0; display:flex; flex-direction:column; justify-content:center; padding:0 28px;
+  background:linear-gradient(90deg,rgba(16,42,67,.92) 0%,rgba(16,42,67,.6) 42%,rgba(16,42,67,0) 78%)}
+.fac-grp .fac-cards{grid-template-columns:repeat(3,minmax(0,1fr))}
+.fac h3{white-space:normal; word-break:keep-all; overflow-wrap:anywhere}
+.fac-cards.is-detail .fac h3{margin:0 0 4px}
+.fac-cards.is-detail .fac .kind{display:block}
+.fac-act{display:flex; flex-wrap:wrap; align-items:center; gap:8px 14px; margin-top:auto; padding-top:16px}
+.fac-cards.is-top .fac-act{padding-top:14px}
+.fac-tel{display:inline-flex; align-items:center; gap:8px; min-height:44px; padding:6px 14px; border:1px solid var(--line); border-radius:4px;
+  background:#fff; color:var(--navy); font-size:15px; font-weight:700; letter-spacing:.02em; text-decoration:none; white-space:nowrap}
+.fac-tel .k{font-size:11.5px; font-weight:700; color:var(--muted)}
+.fac-tel:hover{border-color:var(--gold)}
+.fac .go, .fac-row .go{display:inline-flex; align-items:center; min-height:44px; margin-top:0; padding-top:0; font-size:13.5px; font-weight:700;
+  color:var(--blue-dd); text-decoration:none}
+@media (max-width:900px){ .fac-grp .fac-cards{grid-template-columns:repeat(2,minmax(0,1fr))} }
+@media (max-width:600px){
+  .fac-grp .fac-cards{grid-template-columns:1fr}
+  .fac-grp .fac-ph{height:110px}
+  .fac-grp.is-detail .fac-ph{height:150px}
+  .fac-grp .fac-ph figcaption{padding:0 20px}
+}
+
+/* R05 ページ内リンクで飛んだ先の見出しが、上の固定メニューに隠れないように */
+#trust, #c-co, #c-care{scroll-margin-top:76px}
+
+/* R06 お問い合わせ：上で窓口を2つに分け、施設は一覧にする */
+.ct-jump{list-style:none; display:flex; flex-wrap:wrap; gap:10px; margin:22px 0 0; padding:0}
+.ct-jump a{display:inline-flex; align-items:center; min-height:44px; padding:0 20px; border:1px solid var(--line); border-radius:2px;
+  background:#fff; color:var(--navy); font-size:14px; font-weight:700; text-decoration:none}
+.ct-jump a::after{content:"↓"; margin-left:8px; color:var(--gold-d)}
+.ct-jump a:hover{border-color:var(--gold)}
+.fac-grp.is-list + .fac-grp.is-list{margin-top:36px}
+.fac-gh{margin:0 0 12px; font-size:17px; line-height:1.5; color:var(--ink)}
+.fac-gh .k{display:block; font-family:var(--en); font-weight:600; font-size:12.5px; letter-spacing:.2em; color:var(--gold-d)}
+.fac-list{list-style:none; margin:0; padding:0; background:#fff; border:1px solid var(--line); border-radius:4px}
+.fac-row{display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px 24px; padding:16px 22px}
+.fac-row + .fac-row{border-top:1px solid var(--line)}
+.fac-row h3{margin:0; font-size:17px; line-height:1.5; color:var(--ink)}
+.fac-row .kind{display:block; margin-top:2px; font-size:12.5px; font-weight:700; color:var(--blue)}
+.fac-row .fac-act{margin:0; padding:0}
+@media (max-width:600px){ .fac-row{padding:16px 18px} }
+
+/* R08・R09 下層ページの冒頭：高さを抑え、日本語のページ名を主に、英語は補助に */
+.sp-hero{min-height:0; grid-template-columns:54fr 46fr}
+.sp-hero-t{padding-top:26px; padding-bottom:34px}
+.sp-crumb{margin-bottom:18px}
+.sp-en{font-size:11.5px; letter-spacing:.22em}
+.sp-k{order:0; margin:4px 0 0; font-size:clamp(20px,1.8vw,24px); font-weight:700; color:#fff; letter-spacing:.06em; line-height:1.5}
+.sp-hero h1{margin:10px 0 14px; font-size:clamp(22px,2.3vw,32px); line-height:1.5; color:rgba(255,255,255,.92)}
+.sp-hero .lead{max-width:44em; margin-bottom:20px; font-size:14.5px; line-height:1.85}
+.sp-hero-ph{min-height:260px}
+/* 段の中の英語の大見出しは、日本語の見出しより小さく */
+.tn-panel .big{font-size:clamp(24px,2.4vw,34px)}
+.pn-hist-en{font-size:clamp(28px,2.8vw,40px)}
+.cp-phil-en{font-size:clamp(22px,2.4vw,32px)}
+@media (max-width:900px){
+  .sp-hero{grid-template-columns:1fr}
+  .sp-hero-t{padding:20px 20px 26px}
+  .sp-crumb{margin-bottom:10px}
+  .sp-hero h1{margin:8px 0 10px; font-size:22px}
+  .sp-hero .lead{margin-bottom:18px; font-size:14px; line-height:1.8}
+  .sp-hero-ph{min-height:0; height:160px}
+  .pn-collage{grid-template-rows:96px 64px; min-height:0}
+  .pn-collage figure{min-height:0}
+}
+
+/* R10 ページ内の目次（企業情報と同じ形）。項目の数（--n）で列を決める */
+.cp-nav ul{grid-template-columns:repeat(var(--n,5),minmax(0,1fr))}
+@media (max-width:1000px){
+  .cp-nav[style*="--n:4"] ul{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cp-nav[style*="--n:4"] li:nth-child(odd) a{border-left:0}
+  .cp-nav[style*="--n:4"] li:nth-child(3) a{border-left:0}
+  .cp-nav[style*="--n:4"] li:nth-child(4) a{border-left:1px solid var(--line)}
+  .cp-nav[style*="--n:4"] li:nth-child(n+3) a{border-top:1px solid var(--line)}
+}
+
+/* R11 外国人材紹介：比較表の人材名から、詳しい説明へ飛べる */
+.cmp tbody th a{color:inherit; text-decoration:none}
+.cmp tbody th a:hover{color:var(--blue)}
+.cmp tbody th a::after{content:" →"; font-size:13px; color:var(--gold-d)}
+.tn-intro .cmp{margin-top:8px}
+
+/* R12 支援内容：段階（STEP）は色付きの札、項目の通し番号は小さな丸で見分ける */
+.sp-step-n{display:inline-flex; align-items:baseline; gap:4px; padding:4px 14px 5px; border-radius:2px; background:var(--gold); color:#fff}
+.sp-step-n b{margin-left:4px; font-size:28px; color:#fff; vertical-align:0}
+.sp-s2 .sp-step-n{background:var(--blue)}
+.sp-s3 .sp-step-n{background:var(--navy)}
+.stl li:nth-child(2) .stl-n{background:var(--blue)}
+.stl li:nth-child(3) .stl-n{background:var(--navy)}
+.si-n{display:inline-flex; align-items:center; justify-content:center; width:32px; height:32px; margin-top:1px; border:1px solid var(--line);
+  border-radius:50%; font-family:var(--en); font-size:14px; font-weight:600; line-height:1; color:var(--muted)}
+.sitems li{grid-template-columns:36px 40px 1fr}
+@media (max-width:760px){
+  .si-n{width:28px; height:28px; font-size:13px}
+  .sitems li{grid-template-columns:30px 34px 1fr}
+  .sp-step-n b{font-size:24px}
+}
+
+/* R19 トップのお知らせ：日付・分類・見出しだけ */
+.ncards span{padding:8px 24px 24px; font-size:15px; font-weight:600}
 </style>
 </head>
 <body>
@@ -1181,11 +1314,16 @@ header.scrolled{box-shadow:0 6px 24px rgba(16,42,67,.08)}
   <div class="bg"><img src="img/hero-sky.jpg" alt="青空と雲"></div>
   <div class="hero-copy">
     <div class="wrap">
-      <p class="hero-en">外国人材の採用・受入れ支援</p>
-      <h1><span>国境を越え</span><br><span>企業の未来をつなぐ</span></h1>
-      <p class="lead">外国人材の採用から受入れ、定着まで。<br>海外の提携機関とのネットワークを活かし、<br>企業と人材の持続的な成長を支えます。</p>
+      <!-- 2026-10-28 改善 R01（A案）：会社全体を紹介し、訪れた人ごとの入口を2つ並べる。
+           見出しと説明文は企業情報ページの冒頭（build.py company_body）の文をそのまま使う（新しい文は書かない） -->
+      <p class="hero-en">株式会社 A and K</p>
+      <h1><span>世界と地域をつなぎ</span><br><span>人と社会の未来を育む</span></h1>
+      <p class="lead">保育園と児童発達支援・放課後等デイサービスの運営から、外国人材の受入れ支援まで。<br>A and K は人と人とのつながりを大切に、外国人の住民の方が地域の一員として暮らしていける社会づくりに取り組んでいます。</p>
       <div class="hero-actions">
-        <a class="btn gold" href="#contact">外国人材の採用を相談する</a>
+        <div class="hero-entry">
+          <a class="btn gold" href="childcare.html">保育園・児童福祉施設をお探しの方 <span aria-hidden="true">→</span></a>
+          <a class="btn line-w" href="service.html">外国人材の採用をお考えの企業さま <span aria-hidden="true">→</span></a>
+        </div>
         <a class="txt-link light" href="#aboutus">A and Kについて知る <span aria-hidden="true">→</span></a>
       </div>
     </div>
@@ -1355,17 +1493,11 @@ header.scrolled{box-shadow:0 6px 24px rgba(16,42,67,.08)}
 <!-- ===== 09 ABOUT US（トップだけ。会社の考え方と3つの事業。会社の基本情報は build.py が OUTLINE から差し込む） ===== -->
 <section id="aboutus">
   <div class="wrap about-grid">
+    <!-- 2026-10-28 改善 R02：トップは理念だけにする。会社概要の表（会社名・代表者・所在地・許可）と事業の一覧は、
+         企業情報ページ（会社概要・3つの事業）とフッターに載っているので、トップからは外した -->
     <div class="about-l">
       <div class="sec-head"><span class="en">ABOUT US</span><h2>子どもと家族の<br>身近な存在として</h2></div>
       <p class="about-msg"><strong><span>子どもを育み、人をつなぎ、</span><span>地域とともに歩む。</span></strong>弊社は岐阜県可児市で保育園と児童発達支援・放課後等デイサービスを運営し、外国にルーツのあるお子さまもお預かりしてきました。あわせて外国人材の受入れ支援を行い、外国人の住民の方が地域の一員として暮らしていけるよう、多文化共生社会に貢献していきます。</p>
-    </div>
-    <div class="about-r">
-      <!--ABOUT_DL-->
-      <div class="abiz">
-        <div class="ab"><span class="ab-k">保育</span><b>かみのて保育園／かみのて今渡保育園／ハンズオブガッド保育園</b><small>一時預かり・病児保育も行っています。</small></div>
-        <div class="ab"><span class="ab-k">児童発達支援・放課後等デイサービス</span><b>かみのてKIDS／かみのてSMILE</b></div>
-        <div class="ab"><span class="ab-k">外国人材の受入れ支援</span><b>人材のご紹介・登録支援機関としての支援</b></div>
-      </div>
       <div class="more-r"><a class="txt-link" href="#company">企業情報を見る <span aria-hidden="true">→</span></a></div>
     </div>
   </div>

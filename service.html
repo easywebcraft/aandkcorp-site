@@ -1139,6 +1139,139 @@ header.scrolled{box-shadow:0 6px 24px rgba(16,42,67,.08)}
   .fac{padding:20px 20px 18px}
 }
 
+/* ===================================================================
+   2026-10-28 改善（承認された R01〜R14・R17〜R19）。上の指定をここで上書きする
+   =================================================================== */
+/* R01 トップの一番上：入口を2つ並べる。1つ目は金（いちばん押してほしい）、2つ目は白の枠線 */
+.hero-entry{display:flex; flex-wrap:wrap; gap:12px 14px}
+.hero-entry .btn{display:inline-flex; align-items:center; justify-content:center; gap:10px}
+.btn.line-w{background:transparent; border-color:rgba(255,255,255,.75); color:#fff}
+.btn.line-w:hover{background:rgba(255,255,255,.12); border-color:#fff}
+.hero-actions{align-items:center}
+@media (max-width:760px){
+  /* 入口2つが最初の画面に入るよう、高さを画面いっぱいにしない */
+  .hero{min-height:0}
+  .hero-copy{padding:34px 0 72px}
+  .hero-copy .lead{margin-bottom:26px; font-size:14.5px; line-height:1.95}
+  .hero-entry{width:100%}
+  .hero-entry .btn{width:100%; padding:15px 16px}
+  /* 「人と社会の未来を育む」が1行に収まる大きさに（「む」だけが次の行に落ちていた） */
+  .hero-copy h1{font-size:clamp(25px,7.2vw,32px)}
+  /* 画面いっぱいの高さではなくなったので、下の「SCROLL」は出さない（リンクと重なるため） */
+  .hero .scroll{display:none}
+}
+@media (max-width:360px){ .hero-entry .btn{padding:14px 8px; font-size:13.5px; gap:6px} }
+
+/* R02 A and K について：理念だけの1段組 */
+.top #aboutus .about-grid{grid-template-columns:minmax(0,820px)}
+.top #aboutus .more-r{text-align:left; margin-top:26px}
+
+/* R03・R04 施設カード：写真は見出しの帯にし、カードを等幅で横いっぱいに並べる */
+.fac-grp{display:block; scroll-margin-top:90px}
+.fac-grp + .fac-grp{margin-top:48px}
+.fac-grp .fac-ph{min-height:0; height:132px; margin-bottom:16px}
+.fac-grp.is-detail .fac-ph{height:190px}
+.fac-grp .fac-ph figcaption{top:0; bottom:0; display:flex; flex-direction:column; justify-content:center; padding:0 28px;
+  background:linear-gradient(90deg,rgba(16,42,67,.92) 0%,rgba(16,42,67,.6) 42%,rgba(16,42,67,0) 78%)}
+.fac-grp .fac-cards{grid-template-columns:repeat(3,minmax(0,1fr))}
+.fac h3{white-space:normal; word-break:keep-all; overflow-wrap:anywhere}
+.fac-cards.is-detail .fac h3{margin:0 0 4px}
+.fac-cards.is-detail .fac .kind{display:block}
+.fac-act{display:flex; flex-wrap:wrap; align-items:center; gap:8px 14px; margin-top:auto; padding-top:16px}
+.fac-cards.is-top .fac-act{padding-top:14px}
+.fac-tel{display:inline-flex; align-items:center; gap:8px; min-height:44px; padding:6px 14px; border:1px solid var(--line); border-radius:4px;
+  background:#fff; color:var(--navy); font-size:15px; font-weight:700; letter-spacing:.02em; text-decoration:none; white-space:nowrap}
+.fac-tel .k{font-size:11.5px; font-weight:700; color:var(--muted)}
+.fac-tel:hover{border-color:var(--gold)}
+.fac .go, .fac-row .go{display:inline-flex; align-items:center; min-height:44px; margin-top:0; padding-top:0; font-size:13.5px; font-weight:700;
+  color:var(--blue-dd); text-decoration:none}
+@media (max-width:900px){ .fac-grp .fac-cards{grid-template-columns:repeat(2,minmax(0,1fr))} }
+@media (max-width:600px){
+  .fac-grp .fac-cards{grid-template-columns:1fr}
+  .fac-grp .fac-ph{height:110px}
+  .fac-grp.is-detail .fac-ph{height:150px}
+  .fac-grp .fac-ph figcaption{padding:0 20px}
+}
+
+/* R05 ページ内リンクで飛んだ先の見出しが、上の固定メニューに隠れないように */
+#trust, #c-co, #c-care{scroll-margin-top:76px}
+
+/* R06 お問い合わせ：上で窓口を2つに分け、施設は一覧にする */
+.ct-jump{list-style:none; display:flex; flex-wrap:wrap; gap:10px; margin:22px 0 0; padding:0}
+.ct-jump a{display:inline-flex; align-items:center; min-height:44px; padding:0 20px; border:1px solid var(--line); border-radius:2px;
+  background:#fff; color:var(--navy); font-size:14px; font-weight:700; text-decoration:none}
+.ct-jump a::after{content:"↓"; margin-left:8px; color:var(--gold-d)}
+.ct-jump a:hover{border-color:var(--gold)}
+.fac-grp.is-list + .fac-grp.is-list{margin-top:36px}
+.fac-gh{margin:0 0 12px; font-size:17px; line-height:1.5; color:var(--ink)}
+.fac-gh .k{display:block; font-family:var(--en); font-weight:600; font-size:12.5px; letter-spacing:.2em; color:var(--gold-d)}
+.fac-list{list-style:none; margin:0; padding:0; background:#fff; border:1px solid var(--line); border-radius:4px}
+.fac-row{display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px 24px; padding:16px 22px}
+.fac-row + .fac-row{border-top:1px solid var(--line)}
+.fac-row h3{margin:0; font-size:17px; line-height:1.5; color:var(--ink)}
+.fac-row .kind{display:block; margin-top:2px; font-size:12.5px; font-weight:700; color:var(--blue)}
+.fac-row .fac-act{margin:0; padding:0}
+@media (max-width:600px){ .fac-row{padding:16px 18px} }
+
+/* R08・R09 下層ページの冒頭：高さを抑え、日本語のページ名を主に、英語は補助に */
+.sp-hero{min-height:0; grid-template-columns:54fr 46fr}
+.sp-hero-t{padding-top:26px; padding-bottom:34px}
+.sp-crumb{margin-bottom:18px}
+.sp-en{font-size:11.5px; letter-spacing:.22em}
+.sp-k{order:0; margin:4px 0 0; font-size:clamp(20px,1.8vw,24px); font-weight:700; color:#fff; letter-spacing:.06em; line-height:1.5}
+.sp-hero h1{margin:10px 0 14px; font-size:clamp(22px,2.3vw,32px); line-height:1.5; color:rgba(255,255,255,.92)}
+.sp-hero .lead{max-width:44em; margin-bottom:20px; font-size:14.5px; line-height:1.85}
+.sp-hero-ph{min-height:260px}
+/* 段の中の英語の大見出しは、日本語の見出しより小さく */
+.tn-panel .big{font-size:clamp(24px,2.4vw,34px)}
+.pn-hist-en{font-size:clamp(28px,2.8vw,40px)}
+.cp-phil-en{font-size:clamp(22px,2.4vw,32px)}
+@media (max-width:900px){
+  .sp-hero{grid-template-columns:1fr}
+  .sp-hero-t{padding:20px 20px 26px}
+  .sp-crumb{margin-bottom:10px}
+  .sp-hero h1{margin:8px 0 10px; font-size:22px}
+  .sp-hero .lead{margin-bottom:18px; font-size:14px; line-height:1.8}
+  .sp-hero-ph{min-height:0; height:160px}
+  .pn-collage{grid-template-rows:96px 64px; min-height:0}
+  .pn-collage figure{min-height:0}
+}
+
+/* R10 ページ内の目次（企業情報と同じ形）。項目の数（--n）で列を決める */
+.cp-nav ul{grid-template-columns:repeat(var(--n,5),minmax(0,1fr))}
+@media (max-width:1000px){
+  .cp-nav[style*="--n:4"] ul{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cp-nav[style*="--n:4"] li:nth-child(odd) a{border-left:0}
+  .cp-nav[style*="--n:4"] li:nth-child(3) a{border-left:0}
+  .cp-nav[style*="--n:4"] li:nth-child(4) a{border-left:1px solid var(--line)}
+  .cp-nav[style*="--n:4"] li:nth-child(n+3) a{border-top:1px solid var(--line)}
+}
+
+/* R11 外国人材紹介：比較表の人材名から、詳しい説明へ飛べる */
+.cmp tbody th a{color:inherit; text-decoration:none}
+.cmp tbody th a:hover{color:var(--blue)}
+.cmp tbody th a::after{content:" →"; font-size:13px; color:var(--gold-d)}
+.tn-intro .cmp{margin-top:8px}
+
+/* R12 支援内容：段階（STEP）は色付きの札、項目の通し番号は小さな丸で見分ける */
+.sp-step-n{display:inline-flex; align-items:baseline; gap:4px; padding:4px 14px 5px; border-radius:2px; background:var(--gold); color:#fff}
+.sp-step-n b{margin-left:4px; font-size:28px; color:#fff; vertical-align:0}
+.sp-s2 .sp-step-n{background:var(--blue)}
+.sp-s3 .sp-step-n{background:var(--navy)}
+.stl li:nth-child(2) .stl-n{background:var(--blue)}
+.stl li:nth-child(3) .stl-n{background:var(--navy)}
+.si-n{display:inline-flex; align-items:center; justify-content:center; width:32px; height:32px; margin-top:1px; border:1px solid var(--line);
+  border-radius:50%; font-family:var(--en); font-size:14px; font-weight:600; line-height:1; color:var(--muted)}
+.sitems li{grid-template-columns:36px 40px 1fr}
+@media (max-width:760px){
+  .si-n{width:28px; height:28px; font-size:13px}
+  .sitems li{grid-template-columns:30px 34px 1fr}
+  .sp-step-n b{font-size:24px}
+}
+
+/* R19 トップのお知らせ：日付・分類・見出しだけ */
+.ncards span{padding:8px 24px 24px; font-size:15px; font-weight:600}
+
 /* ---- 下層ページの見出し（build.py が差し込む） ---- */
 .page-head{padding:44px 0 40px; background:var(--panel); border-bottom:1px solid var(--line-s)}
 .page-head .en{color:var(--blue); font-size:11px; font-weight:700; letter-spacing:.18em; display:block; margin-bottom:8px}
@@ -1183,6 +1316,21 @@ header.scrolled{box-shadow:0 6px 24px rgba(16,42,67,.08)}
 .ngal{display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
   gap:12px; margin-top:18px}
 .ngal img{width:100%; height:170px; object-fit:cover}
+/* 2026-10-28 R17：開閉式。見出しの行（日付・分類・見出し）を押すと本文と写真が開く */
+details.nitem{display:block; padding:0}
+.nitem summary{display:grid; grid-template-columns:140px minmax(0,1fr) 28px; gap:34px; align-items:start;
+  padding:24px 4px; cursor:pointer; list-style:none}
+.nitem summary::-webkit-details-marker{display:none}
+.nitem summary::after{content:"+"; justify-self:end; font-size:22px; line-height:1.3; color:var(--gold-d)}
+.nitem[open] summary::after{content:"−"}
+.nitem summary:hover .nttl{color:var(--blue)}
+.nitem summary:focus-visible{outline:2px solid var(--gold); outline-offset:2px}
+.nttl{font-size:16px; font-weight:600; line-height:1.8; letter-spacing:.04em; color:var(--ink); transition:color .2s}
+.nitem .nbody{padding:0 4px 30px calc(140px + 34px)}
+.nitem .nbody p:first-child{font-family:inherit; font-size:14.5px; letter-spacing:.02em; line-height:inherit; margin-bottom:10px}
+.nbody a{overflow-wrap:anywhere}
+/* お問い合わせ：会社の電話番号を押してかけられる（R06） */
+.contact-box .big a{display:inline-block; min-height:44px; color:inherit; text-decoration:none}
 
 /* ---- 会社概要の表 ---- */
 .outline{width:100%; border-collapse:collapse; margin-top:56px; font-size:14px}
@@ -1219,7 +1367,11 @@ header.scrolled{box-shadow:0 6px 24px rgba(16,42,67,.08)}
 .pp-contact p{margin:0; line-height:1.9}
 
 @media (max-width:760px){
-  .nitem{grid-template-columns:1fr; gap:10px; padding:24px 0}
+  .nitem summary{grid-template-columns:minmax(0,1fr) 24px; gap:6px 12px; padding:20px 0}
+  .nitem summary time{grid-column:1}
+  .nitem summary .nttl{grid-column:1; font-size:15px}
+  .nitem summary::after{grid-column:2; grid-row:1 / span 2; align-self:center}
+  .nitem .nbody{padding:0 0 24px}
   .nlist{padding:32px 0 56px}
   .outline th{width:auto; display:block; border-bottom:none; padding-bottom:0}
   .outline td{display:block; padding-top:4px}
@@ -1400,11 +1552,10 @@ setTimeout(function(){
 <div class="top sp tn">
 <div class="sp-hero"><div class="sp-hero-t"><div class="sp-crumb"><a href="index.html">ホーム</a> ／ ご紹介できる人材</div><span class="sp-en">GLOBAL TALENT SOLUTIONS</span><p class="sp-k">ご紹介できる人材</p><h1><span>世界の可能性を</span><br><span>企業の新しい力に</span></h1><p class="lead">特定技能、技能実習、高度人材など、幅広い外国人材の採用をサポート。A and K は、企業の事業内容や採用ニーズに合わせた人材との出会いを支援します。</p><a class="btn gold" href="contact.html">人材のご相談をする <span aria-hidden="true">→</span></a></div><figure class="sp-hero-ph"><img src="img/news/20190315-1.jpg" alt="フィリピンの職業訓練庁（TESDA）を訪問したときの様子"><figcaption>2019年 フィリピンの職業訓練庁（TESDA）にて</figcaption></figure></div>
 <div class="sp-reg"><div class="wrap"><span class="en">REGISTERED SUPPORT ORGANIZATION</span><b>登録支援機関　登録番号 19登-000975</b></div></div>
-<section class="tn-intro"><div class="wrap"><div class="sec-head"><span class="en">OUR TALENT</span><h2>企業のニーズに合わせた<br>5つの人材カテゴリー</h2></div><ol class="tn-jump"><li><a href="#v-tokutei"><span>01</span>特定技能</a></li><li><a href="#v-ginou"><span>02</span>技能実習</a></li><li><a href="#v-ryugaku"><span>03</span>留学生</a></li><li><a href="#v-kodo"><span>04</span>高度人材</a></li><li><a href="#v-nikkei"><span>05</span>日系人・定住者</a></li></ol></div></section>
+<section class="tn-intro"><div class="wrap"><div class="sec-head"><span class="en">OUR TALENT</span><h2>企業のニーズに合わせた<br>5つの人材カテゴリー</h2></div><table class="cmp"><thead><tr><th scope="col">人材カテゴリー</th><th scope="col">主な検討シーン</th><th scope="col">A and K の対応</th></tr></thead><tbody><tr><th scope="row"><a href="#v-tokutei"><span>01</span>特定技能</a></th><td data-k="主な検討シーン">国が定める分野で、一定の技能と日本語の力を持つ人材を採用したい</td><td class="a" data-k="A and K の対応">受入れ後に必要な支援までお引き受け</td></tr><tr><th scope="row"><a href="#v-ginou"><span>02</span>技能実習</a></th><td data-k="主な検討シーン">技能の習得を目的とした受入れ（実習）を検討したい</td><td class="a" data-k="A and K の対応">自社グループの監理団体を通じてご紹介</td></tr><tr><th scope="row"><a href="#v-ryugaku"><span>03</span>留学生</a></th><td data-k="主な検討シーン">資格外活動の範囲でのアルバイトや、特定技能への資格変更による採用を検討したい</td><td class="a" data-k="A and K の対応">特定技能への資格変更にも対応</td></tr><tr><th scope="row"><a href="#v-kodo"><span>04</span>高度人材</a></th><td data-k="主な検討シーン">専門的な知識や技術を持つ人材を、職種に合わせて採用したい</td><td class="a" data-k="A and K の対応">職種と勤務内容に合わせてご紹介</td></tr><tr><th scope="row"><a href="#v-nikkei"><span>05</span>日系人・定住者</a></th><td data-k="主な検討シーン">就労に制限のない、国内に住む人材を採用したい</td><td class="a" data-k="A and K の対応">就労に制限がなく、すぐに働ける</td></tr></tbody></table><p class="cmp-note">※実際に採用できる職種や働き方は、在留資格・許可の内容・制度の要件によって異なります。</p><div class="cmp-cta"><div><b>自社に合う制度が分からなくても、ご安心ください。</b><p>採用したい職種・人数・時期などをお伺いし、企業さまの状況に合った人材採用をご提案します。</p></div><a class="btn" href="contact.html">自社に合う人材について相談する <span aria-hidden="true">→</span></a></div></div></section>
 <section class="tn-big" id="v-tokutei"><div class="wrap tn-big-in"><div class="tn-vis tn-panel" aria-hidden="true"><span class="num">01</span><span class="big">Specified<br><em>Skilled</em> Worker</span><span class="meta">登録支援機関　登録番号 19登-000975</span></div><div class="tn-body"><div class="tn-head"><span class="tn-n">01</span><div><span class="tn-en">SPECIFIED SKILLED WORKER</span><h2>特定技能</h2></div></div><h3 class="tn-catch">現場を支える新たな力を</h3><p>特定技能は、国が定める分野で、一定の技能と日本語の力を持つ外国人材が働くための在留資格です。登録支援機関として、受入れ後に義務づけられた支援も含めてお引き受けします。</p><ul class="checks"><li>受入れ後に義務づけられた支援（10項目）の実施をお引き受け</li><li>特定技能試験に合格した留学生の、特定技能への資格変更にも対応</li><li>介護人材のご紹介にも力を入れています</li></ul><a class="btn line" href="support.html">受入れ後の支援について詳しく見る <span aria-hidden="true">→</span></a></div></div></section>
 <section class="tn-big rev alt" id="v-ginou"><div class="wrap tn-big-in"><figure class="tn-vis"><img src="img/hero-trainees.jpg" alt="提携する送り出し機関での日本語授業の様子" loading="lazy"><figcaption>提携する送り出し機関での日本語授業</figcaption></figure><div class="tn-body"><div class="tn-head"><span class="tn-n">02</span><div><span class="tn-en">TECHNICAL INTERN TRAINING</span><h2>技能実習</h2></div></div><h3 class="tn-catch">人材の育成を通じて未来につなぐ</h3><p>自社グループの監理団体を通じ、現地で選考した実習生をご紹介します。手続きの代行と、<strong>フィリピン国内での出国手続き</strong>までお手伝いします。</p><p class="tn-note"><b>育成就労制度への移行</b><br>技能実習制度は、2027年4月1日から育成就労制度へ移行する予定です。</p><ul class="checks"><li>ブリッジング協同組合<small>（自社グループの監理団体）</small></li><li>フィリピン・ベトナムの送り出し機関と提携</li></ul><a class="btn line" href="partners.html">グループ・提携機関を見る <span aria-hidden="true">→</span></a></div></div></section>
 <section class="tn-more"><div class="wrap"><ul class="tn3"><li id="v-ryugaku"><span class="tn-n">03</span><span class="tn-en">INTERNATIONAL STUDENTS</span><h3>留学生</h3><p class="sum">特定技能への資格変更にも対応</p><p>資格外活動の許可を得た留学生のご紹介。<strong>特定技能試験に合格した留学生を、特定技能ビザへ資格変更してご紹介する</strong>こともできます。</p></li><li id="v-kodo"><span class="tn-n">04</span><span class="tn-en">PROFESSIONAL TALENT</span><h3>高度人材</h3><p class="sum">職種と勤務内容に合わせてご紹介</p><p>専門的な知識や技術を持つ人材を、職種と勤務内容に合わせてご紹介します。</p></li><li id="v-nikkei"><span class="tn-n">05</span><span class="tn-en">RESIDENT TALENT</span><h3>日系人・定住者</h3><p class="sum">就労に制限がなく、すぐに働ける</p><p>就労に制限のない在留資格をお持ちの方のご紹介。すぐに働いていただけます。</p></li></ul></div></section>
-<section class="alt"><div class="wrap"><div class="sec-head"><span class="en">FIND YOUR TALENT</span><h2>企業のニーズに合わせて<br>合う人材を</h2></div><table class="cmp"><thead><tr><th scope="col">人材カテゴリー</th><th scope="col">主な検討シーン</th><th scope="col">A and K の対応</th></tr></thead><tbody><tr><th scope="row"><span>01</span>特定技能</th><td data-k="主な検討シーン">国が定める分野で、一定の技能と日本語の力を持つ人材を採用したい</td><td class="a" data-k="A and K の対応">受入れ後に必要な支援までお引き受け</td></tr><tr><th scope="row"><span>02</span>技能実習</th><td data-k="主な検討シーン">技能の習得を目的とした受入れ（実習）を検討したい</td><td class="a" data-k="A and K の対応">自社グループの監理団体を通じてご紹介</td></tr><tr><th scope="row"><span>03</span>留学生</th><td data-k="主な検討シーン">資格外活動の範囲でのアルバイトや、特定技能への資格変更による採用を検討したい</td><td class="a" data-k="A and K の対応">特定技能への資格変更にも対応</td></tr><tr><th scope="row"><span>04</span>高度人材</th><td data-k="主な検討シーン">専門的な知識や技術を持つ人材を、職種に合わせて採用したい</td><td class="a" data-k="A and K の対応">職種と勤務内容に合わせてご紹介</td></tr><tr><th scope="row"><span>05</span>日系人・定住者</th><td data-k="主な検討シーン">就労に制限のない、国内に住む人材を採用したい</td><td class="a" data-k="A and K の対応">就労に制限がなく、すぐに働ける</td></tr></tbody></table><p class="cmp-note">※実際に採用できる職種や働き方は、在留資格・許可の内容・制度の要件によって異なります。</p><div class="cmp-cta"><div><b>自社に合う制度が分からなくても、ご安心ください。</b><p>採用したい職種・人数・時期などをお伺いし、企業さまの状況に合った人材採用をご提案します。</p></div><a class="btn" href="contact.html">自社に合う人材について相談する <span aria-hidden="true">→</span></a></div></div></section>
 <section class="tn-net"><div class="wrap tn-net-in"><div class="tn-net-t"><div class="sec-head"><span class="en">GLOBAL RECRUITMENT NETWORK</span><h2>世界とつながり<br>人材の可能性を広げる</h2></div><p>グループ内の監理団体と、フィリピン・ベトナムの送り出し機関が連携しています。フィリピンでは、企業さまご自身が現地で面接を行うこともできます。</p><ul class="tn-net-l"><li><span>JAPAN</span>ブリッジング協同組合（自社グループ）</li><li><span>PHILIPPINES</span>プロデンシャルエンプロイメント</li><li><span>VIETNAM</span>POLIMEX 国際人材株式会社</li></ul><a class="txt-link" href="partners.html">海外ネットワークを見る <span aria-hidden="true">→</span></a></div><div class="tn-ph2"><figure><img src="img/news/20200122-1.jpg" alt="ベトナムでの実習生の面接の様子" loading="lazy"><figcaption>2020年 ベトナムでの面接</figcaption></figure><figure><img src="img/news/20191011-1.jpg" alt="フィリピン出張で現地の若者と" loading="lazy"><figcaption>2019年 フィリピン出張にて</figcaption></figure></div></div></section>
 <section class="tn-why"><div class="wrap"><div class="sec-head"><span class="en">WHY A and K</span><h2>人材との出会いから<br>その先の定着まで</h2></div><ul class="why3 light"><li><span class="wn">01</span><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3.5 20c0-3.2 2.5-5.8 5.5-5.8s5.5 2.6 5.5 5.8"/><circle cx="17" cy="9" r="2.4"/><path d="M16.2 14.3c2.6.4 4.3 2.8 4.3 5.7"/></svg></span><h3>幅広い人材への対応</h3><p>特定技能・技能実習・留学生・高度人材・日系人／定住者の5つに対応。合う制度選びからご一緒します。</p></li><li><span class="wn">02</span><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.4 2.5 3.6 5.5 3.6 9s-1.2 6.5-3.6 9c-2.4-2.5-3.6-5.5-3.6-9S9.6 5.5 12 3z"/></svg></span><h3>国内外との連携</h3><p>自社グループの監理団体と、フィリピン・ベトナムの送り出し機関とのネットワークがあります。</p></li><li><span class="wn">03</span><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V8.5L12 4l7 4.5V21M9.5 21v-4.5h5V21M9 11.5h.01M12 11.5h.01M15 11.5h.01"/></svg></span><h3>受入れ後までの支援</h3><p>登録支援機関として、入国前の説明から就労後の定期的な面談まで支援を続けます。</p></li></ul></div></section>
 <section class="tn-proc"><div class="wrap"><div class="tn-proc-in"><div><div class="sec-head"><span class="en">RECRUITMENT PROCESS</span><h2><span>ご相談から採用まで</span><br><span>安心して進められるように</span></h2></div><p class="tn-proc-f">ご相談から就労開始まで <b>約5〜6か月</b>（海外の送り出し機関を通じて採用する場合の目安）</p></div><a class="btn gold" href="flow.html">受入れまでの流れを見る <span aria-hidden="true">→</span></a></div></div></section>
