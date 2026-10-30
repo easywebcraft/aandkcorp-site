@@ -1626,17 +1626,18 @@ def contact_body():
 
 def privacy_body():
     """旧サイトのプライバシーポリシー（src/old/policy.txt。2026-10-03 取得）をそのまま引き継ぐ。
+    2026-10-30 ７（保育・児童福祉の事業）と８（ホームページからのお問い合わせ）を足し、窓口を９にした。
     ★旧サイトの問い合わせ窓口の住所は「〒509-0255 岐阜県可児市光陽台2-87」で、今の本社（今渡3-11）と違う。
       窓口は本社の連絡先にしてあるので、お客さまに確認すること（README の「確認すること」）。"""
     lines = [l for l in (SRC / "old" / "policy.txt").read_text(encoding="utf-8").splitlines() if l.strip()]
     start = lines.index("プライバシーポリシー（個人情報保護方針）") + 1
-    end = next(i for i, l in enumerate(lines) if l.startswith("７．"))
+    end = next(i for i, l in enumerate(lines) if l.startswith("９．"))
     out, ul = [], []
     def flush():
         if ul:
             out.append("<ul>" + "".join(f"<li>{html.escape(x)}</li>" for x in ul) + "</ul>")
             ul.clear()
-    for l in lines[start:end + 2]:                     # 「７．お問い合わせ窓口」と、その説明文まで
+    for l in lines[start:end + 2]:                     # 「９．お問い合わせ窓口」と、その説明文まで
         if l.startswith("・"):
             ul.append(l[1:]); continue
         flush()
